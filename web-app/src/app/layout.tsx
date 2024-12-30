@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Geist, Geist_Mono, Lexend, Schoolbell } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -11,6 +11,17 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
+  subsets: ['latin']
+});
+
+const schoolbell = Schoolbell({
+  weight: '400',
+  variable: '--font-schoolbell',
+  subsets: ['latin']
+});
+
+const lexend = Lexend({
+  variable: '--font-lexend',
   subsets: ['latin']
 });
 
@@ -26,7 +37,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} ${schoolbell.variable} ${lexend.variable} antialiased`}
+      >
         <Header />
         {children}
         <Footer />
