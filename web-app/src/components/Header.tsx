@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import Icon from '@mdi/react';
+import { mdiCart } from '@mdi/js';
 
 export default function Header() {
   return (
@@ -8,8 +10,12 @@ export default function Header() {
       <p>Shop</p>
       {/* <div className='flex px-2 rounded-full bg-gray-200 text-black'>
         <input type="search" placeholder='Search' className='p-0 bg-gray-200 border-none rounded'/>
-      </div> */}
-      <input type="text" placeholder='Search' className='px-2 rounded-full bg-gray-200 text-black'/>
+        </div> */}
+      <div className='flex'>
+        <input type="text" placeholder='Search' className='px-2 rounded-full bg-gray-200 text-black'/>
+        <Icon path={mdiCart} size={1} />
+        <Image src={'/logos/blank-profile-pic.png'} alt='Profile' width={500} height={500} className='w-16 border' />
+      </div>
     </header>
   );
 }
