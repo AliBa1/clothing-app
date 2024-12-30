@@ -1,20 +1,30 @@
 import Image from 'next/image';
 import Icon from '@mdi/react';
-import { mdiCart } from '@mdi/js';
+import { mdiAccount, mdiCart, mdiHeartOutline, mdiMagnify } from '@mdi/js';
+import Link from 'next/link';
 
 export default function Header() {
   return (
-    <header className='w-full flex border justify-between p-4'>
-      <Image src={'/logos/example-logo-long.png'} alt='Logo' width={500} height={500} className='w-24' />
-      <p>Shop</p>
-      <p>Shop</p>
-      {/* <div className='flex px-2 rounded-full bg-gray-200 text-black'>
-        <input type="search" placeholder='Search' className='p-0 bg-gray-200 border-none rounded'/>
-        </div> */}
-      <div className='flex'>
-        <input type="text" placeholder='Search' className='px-2 rounded-full bg-gray-200 text-black'/>
-        <Icon path={mdiCart} size={1} />
-        <Image src={'/logos/blank-profile-pic.png'} alt='Profile' width={500} height={500} className='w-16 border' />
+    <header className='sticky top-0 flex justify-between items-center px-8 py-2'>
+      <div className='flex gap-8'>
+        <Link href="/">Shop</Link>
+        <Link href="/">Popular</Link>
+        <Link href="/">Feed</Link>
+      </div>
+
+
+      <Link href="/">
+        <h4>SiTENAMË</h4>
+      </Link>
+
+      <div className='flex gap-8'>
+        <Icon path={mdiMagnify} size={1} />
+        <Icon path={mdiHeartOutline} size={1} />
+        <Icon path={mdiAccount} size={1} />
+        <div className='relative'>
+          <Icon path={mdiCart} size={1} />
+          <div className='absolute -top-1 -right-1 bg-accent rounded-full p-1 text-center text-xs'></div>
+        </div>
       </div>
     </header>
   );
