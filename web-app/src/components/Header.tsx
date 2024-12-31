@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function Header() {
   return (
-    <header className='sticky top-0 flex justify-between items-center px-8 py-2'>
+    <header className='sticky top-0 z-10 bg-background flex justify-between items-center px-8 py-2'>
       <div className='flex gap-8'>
         <Link href="/">Shop</Link>
         <Link href="/">Popular</Link>
