@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --text: #040316;
+  --background: #fbfbfe;
+  --primary: #000000;
+  --secondary: #ffffff;
+  --accent: #edde0c;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #eae9fc;
+    --background: #010104;
+    --primary: #ffffff;
+    --secondary: #000000;
+    --accent: #f3e412;
+  }
+}
+
+body {
+  color: var(--primary);
+  background: var(--background);
+}
+
+@layer base {
+  main {
+    @apply min-h-screen flex flex-col items-center;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading;
+  }
+  body {
+    @apply font-body;
+  }
+  h1 {
+    @apply text-5xl;
+  }
+  h2 {
+    @apply text-4xl;
+  }
+  h3 {
+    @apply text-3xl;
+  }
+  h4 {
+    @apply text-2xl;
+  }
+  h5 {
+    @apply text-xl;
+  }
+  h6 {
+    @apply text-xl;
+  }
+}
