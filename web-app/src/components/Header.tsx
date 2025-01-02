@@ -47,10 +47,12 @@ export default function Header() {
 //
 //
 // Header Dropdown
-{/* <div className='hidden group-hover:flex hover:flex gap-8 absolute -left-8 top-10 px-8 border-y py-2' style={{ width: "calc(100vw - 1rem)" }}>
+{
+  /* <div className='hidden group-hover:flex hover:flex gap-8 absolute -left-8 top-10 px-8 border-y py-2' style={{ width: "calc(100vw - 1rem)" }}>
 <p>Hoodies</p>
 <p>Shirts</p>
 <p>Pants</p>
 <p>Shorts</p>
 <p>Shoes</p>
-</div> */}
+</div> */
+}
