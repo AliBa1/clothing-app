@@ -1,19 +1,22 @@
+'use client';
 import Image from 'next/image';
 import Icon from '@mdi/react';
 import { mdiAccount, mdiCart, mdiHeartOutline, mdiMagnify } from '@mdi/js';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function Header() {
+  const pathname = usePathname();
   return (
     <header className='sticky top-0 z-10 bg-background flex justify-between items-center px-8 py-2'>
       <nav className='flex gap-8'>
-        <Link href='/' className='hover:underline decoration-accent'>
+        <Link href='/shop' className={`hover:underline decoration-accent ${pathname === '/shop' ? 'text-accent' : ''}`}>
           Shop
         </Link>
-        <Link href='/' className='hover:underline decoration-accent'>
+        <Link href='/' className={`hover:underline decoration-accent ${pathname === '/popular' ? 'text-accent' : ''}`}>
           Popular
         </Link>
-        <Link href='/' className='hover:underline decoration-accent'>
+        <Link href='/' className={`hover:underline decoration-accent ${pathname === '/feed' ? 'text-accent' : ''}`}>
           Feed
         </Link>
       </nav>

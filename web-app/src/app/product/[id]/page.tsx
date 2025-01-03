@@ -13,8 +13,8 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
   const [selectedSize, setSelectedSize] = useState<string>('');
 
   function discountedPrice(price: number, discount: Discount): number {
-    if (discount.type === 'fixed') {
-      return price - (price * discount.amount) / 100;
+    if (discount.type === 'percent') {
+      return Math.round(price - (price * discount.amount) / 100);
     } else {
       return price - discount.amount;
     }
