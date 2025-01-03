@@ -59,3 +59,9 @@ body {
     @apply text-xl;
   }
 }
+
+@layer components {
+  .btn-square {
+    @apply border border-primary rounded w-12 h-12 bg-secondary text-primary
+  }
+}
