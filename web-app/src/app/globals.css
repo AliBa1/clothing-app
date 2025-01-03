@@ -7,7 +7,7 @@
   --background: #fbfbfe;
   --primary: #000000;
   --secondary: #ffffff;
-  --accent: #edde0c;
+  --accent: #ddcf00;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -62,6 +62,9 @@ body {
 
 @layer components {
   .btn-square {
-    @apply border border-primary rounded w-12 h-12 bg-secondary text-primary
+    @apply border border-primary rounded h-12 bg-secondary text-primary px-2 disabled:bg-gray-500 disabled:text-gray-600 disabled:border-gray-600 disabled:border-2;
+  }
+  .img-button {
+    @apply rounded h-24 w-24 bg-primary text-primary aspect-square object-cover;
   }
 }

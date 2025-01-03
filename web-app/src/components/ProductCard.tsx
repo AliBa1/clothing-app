@@ -10,7 +10,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <Link href={`/product/${product.id}`} className='block rounded-3xl group'>
       <Image
-        src={product.coverImg}
+        src={product.colors[0].coverImg}
         alt={product.name}
         height={1280}
         width={1024}
@@ -19,9 +19,9 @@ export default function ProductCard({ product }: ProductCardProps) {
         className='aspect-[4/5] w-96 rounded object-cover object-center'
       />
 
-      <div className='py-2 group-hover:underline decoration-accent'>
+      <div className='py-2 group-hover:underline decoration-accent max-w-96'>
         <h6>{product.name}</h6>
-        <h6>${product.price}</h6>
+        <h6>${product.colors[0].price}</h6>
       </div>
     </Link>
   );

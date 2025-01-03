@@ -1,13 +1,24 @@
 'use client';
 
-import { mockProducts } from '@/interfaces/products';
+import { ColorVariant, Discount, mockProducts } from '@/interfaces/products';
 import Image from 'next/image';
 import { use, useState } from 'react';
 
 export default function ProductPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
-  const product = mockProducts.find((p) => p.id === Number(id));
+  const product = mockProducts.find((p) => p.id === id);
+  const [selectedColor, setSelectedColor] = useState<ColorVariant>(
+    product?.colors[0] || { colorName: '', price: 1, coverImg: '', sizes: [] }
+  );
   const [selectedSize, setSelectedSize] = useState<string>('');
+
+  function discountedPrice(price: number, discount: Discount): number {
+    if (discount.type === 'fixed') {
+      return price - (price * discount.amount) / 100;
+    } else {
+      return price - discount.amount;
+    }
+  }
 
   return (
     <main className='flex-row'>
@@ -29,21 +40,46 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
           <p className='text-xl px-4'>{product?.brand.name}</p>
         </div>
         <p className='text-2xl font-bold'>{product?.name}</p>
-        <p className='text-2xl font-bold'>${product?.price}</p>
+        {selectedColor.discount ? (
+          <p className='text-2xl font-bold'>
+            ${discountedPrice(selectedColor.price, selectedColor.discount)}{' '}
+            <span className='line-through'>${selectedColor.price}</span>
+          </p>
+        ) : (
+          <p className='text-2xl font-bold'>${selectedColor.price}</p>
+        )}
         <br></br>
         <div className='text-xl mb-4'>
-          <p>Color </p>
+          <p>
+            Color &middot; <span className='text-accent'>{selectedColor.colorName}</span>
+          </p>
+          <div className='flex flex-wrap gap-4 mt-2'>
+            {product?.colors.map((c) => (
+              <Image
+                key={c.colorName}
+                alt={c.colorName}
+                width={500}
+                height={500}
+                src={c.coverImg}
+                className={`img-button ${selectedColor === c && 'border-4 border-accent'}`}
+                onClick={() => setSelectedColor(c)}
+              />
+            ))}
+          </div>
         </div>
         <div className='text-xl'>
-          <p>Size</p>
-          <div className='flex flex-wrap gap-4'>
-            {product?.variants.map((v) => (
+          <p>
+            Size &middot; <span className='text-accent'>{selectedSize}</span>
+          </p>
+          <div className='flex flex-wrap gap-4 mt-2'>
+            {selectedColor.sizes.map((s) => (
               <button
-                key={`${v.size}-${v.color}`}
-                className={`btn-square ${selectedSize === v.size && 'bg-primary text-secondary'}`}
-                onClick={() => setSelectedSize(v.size)}
+                key={s.size}
+                className={`btn-square ${selectedSize === s.size && 'bg-primary text-secondary'}`}
+                onClick={() => setSelectedSize(s.size)}
+                disabled={s.quantity === 0 ? true : false}
               >
-                {v.size}
+                {s.size}
               </button>
             ))}
           </div>

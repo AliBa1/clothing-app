@@ -8,7 +8,7 @@ export default function Shop() {
     <main>
       <div className='grid grid-cols-3 gap-4'>
         {mockProducts.map((product) => (
-          <ProductCard key={product.name} product={product} />
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
     </main>
