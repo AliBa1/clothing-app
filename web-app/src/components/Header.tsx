@@ -8,7 +8,7 @@ import { mdiAccount, mdiCart, mdiHeartOutline, mdiMagnify } from '@mdi/js';
 export default function Header() {
   const pathname = usePathname();
   return (
-    <header className='sticky top-0 z-10 bg-background flex justify-between items-center px-8 py-2'>
+    <header className='sticky top-0 z-10 bg-background grid grid-cols-3 items-center px-8 py-2'>
       <nav className='flex gap-8'>
         <Link href='/shop' className={`hover:underline decoration-accent ${pathname === '/shop' ? 'text-accent' : ''}`}>
           Shop
@@ -21,11 +21,11 @@ export default function Header() {
         </Link>
       </nav>
 
-      <Link href='/'>
+      <Link href='/' className='place-items-center'>
         <h6>SiTENAMË</h6>
       </Link>
 
-      <div className='flex gap-8'>
+      <div className='flex gap-8 place-content-end'>
         <button aria-label='Search' title='Search'>
           <Icon path={mdiMagnify} size={1} />
         </button>
@@ -36,12 +36,12 @@ export default function Header() {
           <Icon path={mdiAccount} size={1} />
         </button>
 
-        <div className='relative'>
-          <button aria-label='Cart' title='Cart'>
+        <button aria-label='Cart' title='Cart'>
+          <div className='relative'>
             <Icon path={mdiCart} size={1} />
-          </button>
-          <div className='absolute -top-1 -right-1 bg-accent rounded-full p-1 text-center text-xs' />
-        </div>
+            <div className='absolute -top-1 -right-1 bg-accent rounded-full p-1 text-center text-xs' />
+          </div>
+        </button>
       </div>
     </header>
   );
