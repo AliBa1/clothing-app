@@ -1,6 +1,7 @@
 'use client';
 
 import { ColorVariant, Discount, mockProducts } from '@/interfaces/products';
+import { discountedPrice } from '@/utils/helperFunctions';
 import Image from 'next/image';
 import { use, useState } from 'react';
 
@@ -11,14 +12,6 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
     product?.colors[0] || { colorName: '', price: 1, coverImg: '', sizes: [] }
   );
   const [selectedSize, setSelectedSize] = useState<string>('');
-
-  function discountedPrice(price: number, discount: Discount): number {
-    if (discount.type === 'percent') {
-      return Math.round(price - (price * discount.amount) / 100);
-    } else {
-      return price - discount.amount;
-    }
-  }
 
   return (
     <main className='flex-row'>
