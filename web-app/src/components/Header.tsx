@@ -1,9 +1,9 @@
 'use client';
 import Image from 'next/image';
-import Icon from '@mdi/react';
-import { mdiAccount, mdiCart, mdiHeartOutline, mdiMagnify } from '@mdi/js';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Icon from '@mdi/react';
+import { mdiAccount, mdiCart, mdiHeartOutline, mdiMagnify } from '@mdi/js';
 
 export default function Header() {
   const pathname = usePathname();
@@ -26,12 +26,21 @@ export default function Header() {
       </Link>
 
       <div className='flex gap-8'>
-        <Icon className='cursor-pointer peer' path={mdiMagnify} size={1} title={'Search'} />
-        <Icon className='cursor-pointer peer' path={mdiHeartOutline} size={1} title={'Saved'} />
-        <Icon className='cursor-pointer peer' path={mdiAccount} size={1} title={'Account'} />
+        <button aria-label='Search' title='Search'>
+          <Icon path={mdiMagnify} size={1} />
+        </button>
+        <button aria-label='Saved' title='Saved'>
+          <Icon path={mdiHeartOutline} size={1} />
+        </button>
+        <button aria-label='Account' title='Account'>
+          <Icon path={mdiAccount} size={1} />
+        </button>
+
         <div className='relative'>
-          <Icon className='cursor-pointer peer' path={mdiCart} size={1} title={'Cart'} />
-          <div className='absolute -top-1 -right-1 bg-accent rounded-full p-1 text-center text-xs'></div>
+          <button aria-label='Cart' title='Cart'>
+            <Icon path={mdiCart} size={1} />
+          </button>
+          <div className='absolute -top-1 -right-1 bg-accent rounded-full p-1 text-center text-xs' />
         </div>
       </div>
     </header>
