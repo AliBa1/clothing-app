@@ -7,7 +7,7 @@
   --background: #fbfbfe;
   --primary: #000000;
   --secondary: #ffffff;
-  --accent: #edde0c;
+  --accent: #ddcf00;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -57,5 +57,20 @@ body {
   }
   h6 {
     @apply text-xl;
+  }
+}
+
+@layer components {
+  .btn-square {
+    @apply border border-primary rounded bg-secondary text-primary px-2 disabled:bg-gray-500 disabled:text-gray-600 disabled:border-gray-600 disabled:border-2;
+  }
+  .primary-btn {
+    @apply text-xl rounded-xl bg-primary enabled:hover:opacity-90 text-secondary px-8 disabled:opacity-25;
+  }
+  .secondary-btn {
+    @apply text-xl rounded-xl border border-primary enabled:hover:border-2 px-8 disabled:opacity-25;
+  }
+  .img-button {
+    @apply rounded h-24 w-24 bg-primary text-primary aspect-square object-cover;
   }
 }
