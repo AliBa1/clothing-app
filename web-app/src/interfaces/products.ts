@@ -1,162 +1,14 @@
 import { Brand, mockBrands } from '@/interfaces/brands';
 
-// interface Variant {
-//   size: string;
-//   color: string;
-//   quantity: number;
-// }
-
-// export interface Product {
-//   id: number;
-//   brand: Brand;
-//   name: string;
-//   price: number;
-//   coverImg: string;
-//   variants: Variant[];
-// }
-
-// export const mockProducts: Product[] = [
-//   {
-//     id: 1,
-//     brand: mockBrands[0],
-//     name: 'Puffer Jacket',
-//     price: 120,
-//     coverImg: '/mock/cover/puff_jacket_example.png',
-//     variants: [
-//       { size: 'S', color: 'Black', quantity: 120 },
-//       { size: 'M', color: 'Black', quantity: 120 },
-//       { size: 'L', color: 'Black', quantity: 120 }
-//     ]
-//   },
-//   {
-//     id: 2,
-//     brand: mockBrands[4],
-//     name: 'Statement Hoodie',
-//     price: 60,
-//     coverImg: '/mock/cover/hoodie_example.jpeg',
-//     variants: [
-//       { size: 'S', color: 'Black', quantity: 120 },
-//       { size: 'M', color: 'Black', quantity: 120 },
-//       { size: 'L', color: 'Black', quantity: 120 }
-//     ]
-//   },
-//   {
-//     id: 3,
-//     brand: mockBrands[5],
-//     name: 'Blank Sweatsuit',
-//     price: 110,
-//     coverImg: '/mock/cover/blank_sweatsuit.jpeg',
-//     variants: [
-//       { size: 'S', color: 'Black', quantity: 120 },
-//       { size: 'M', color: 'Black', quantity: 120 },
-//       { size: 'L', color: 'Black', quantity: 120 },
-//       { size: 'S', color: 'Green', quantity: 60 },
-//       { size: 'M', color: 'Green', quantity: 60 },
-//       { size: 'L', color: 'Green', quantity: 60 }
-//     ]
-//   },
-//   {
-//     id: 4,
-//     brand: mockBrands[5],
-//     name: 'Perfect T-shirt',
-//     price: 35,
-//     coverImg: '/mock/cover/blank_tee.png',
-//     variants: [
-//       { size: 'S', color: 'Black', quantity: 120 },
-//       { size: 'M', color: 'Black', quantity: 120 },
-//       { size: 'L', color: 'Black', quantity: 120 },
-//       { size: 'S', color: 'White', quantity: 120 },
-//       { size: 'M', color: 'White', quantity: 120 },
-//       { size: 'L', color: 'White', quantity: 120 },
-//       { size: 'S', color: 'Blue', quantity: 120 },
-//       { size: 'M', color: 'Blue', quantity: 120 },
-//       { size: 'L', color: 'Blue', quantity: 120 }
-//     ]
-//   },
-//   {
-//     id: 5,
-//     brand: mockBrands[1],
-//     name: 'Cargo Pants',
-//     price: 90,
-//     coverImg: '/mock/cover/cargo_pants.jpg',
-//     variants: [
-//       { size: 'XS', color: 'Black', quantity: 120 },
-//       { size: 'S', color: 'Black', quantity: 120 },
-//       { size: 'M', color: 'Black', quantity: 120 },
-//       { size: 'L', color: 'Black', quantity: 120 },
-//       { size: 'XL', color: 'Black', quantity: 120 },
-//       { size: 'XXL', color: 'Black', quantity: 120 }
-//     ]
-//   },
-//   {
-//     id: 6,
-//     brand: mockBrands[1],
-//     name: 'Cargo Shorts',
-//     price: 70,
-//     coverImg: '/mock/cover/cargo_shorts.png',
-//     variants: [
-//       { size: 'S', color: 'Black', quantity: 120 },
-//       { size: 'M', color: 'Black', quantity: 120 },
-//       { size: 'L', color: 'Black', quantity: 120 },
-//       { size: 'XL', color: 'Black', quantity: 120 }
-//     ]
-//   },
-//   {
-//     id: 7,
-//     brand: mockBrands[3],
-//     name: 'Hunter Hoodie',
-//     price: 90,
-//     coverImg: '/mock/cover/hunter_hoodie.jpg',
-//     variants: [
-//       { size: 'S', color: 'Black', quantity: 120 },
-//       { size: 'M', color: 'Black', quantity: 120 },
-//       { size: 'L', color: 'Black', quantity: 120 }
-//     ]
-//   },
-//   {
-//     id: 8,
-//     brand: mockBrands[2],
-//     name: 'Nike Oversized Tech Pants',
-//     price: 135,
-//     coverImg: '/mock/cover/nike_oversize_pants.png',
-//     variants: [
-//       { size: 'S', color: 'Black', quantity: 120 },
-//       { size: 'M', color: 'Black', quantity: 120 },
-//       { size: 'L', color: 'Black', quantity: 120 }
-//     ]
-//   },
-//   {
-//     id: 9,
-//     brand: mockBrands[2],
-//     name: 'Nike Tech Jacket',
-//     price: 135,
-//     coverImg: '/mock/cover/nike_tech_hoodie.png',
-//     variants: [
-//       { size: 'S', color: 'Black', quantity: 120 },
-//       { size: 'M', color: 'Black', quantity: 120 },
-//       { size: 'L', color: 'Black', quantity: 120 }
-//     ]
-//   },
-//   {
-//     id: 10,
-//     brand: mockBrands[1],
-//     name: 'Parachute Pants',
-//     price: 90,
-//     coverImg: '/mock/cover/parachute_pants.png',
-//     variants: [
-//       { size: 'S', color: 'Black', quantity: 120 },
-//       { size: 'M', color: 'Black', quantity: 120 },
-//       { size: 'L', color: 'Black', quantity: 120 }
-//     ]
-//   }
-// ];
-
-// NEW STRUCTURE
 export interface Product {
   id: string;
   name: string;
   brand: Brand;
   description?: string;
+  shipping?: string;
+  returns?: string;
+  colorNotes?: string;
+  sizeNotes?: string;
   colors: ColorVariant[];
 }
 
@@ -184,6 +36,7 @@ export const mockProducts: Product[] = [
     name: 'LIGHTWEIGHT BUCKLE PUFFER JACKET',
     brand: mockBrands[0],
     description: 'Puffer jacket in a lightweight fabric with intergrated buckle collar closure',
+    sizeNotes: 'Size up for oversized fit',
     colors: [
       {
         colorName: 'Black',
@@ -208,6 +61,10 @@ export const mockProducts: Product[] = [
     name: 'STMT Hoodie',
     brand: mockBrands[4],
     description: '100% COTTON FLEECE\n PUFFPRINT AND SCREENPRINT COMBO',
+    shipping: 'Free shipping on orders over $50',
+    returns:
+      'All purchases and sales are final. No returns or size changes after shipment. If you receive the wrong size or wrong product, we are more than happy to help.',
+    sizeNotes: 'Runs small so size down',
     colors: [
       {
         colorName: 'Black',
@@ -218,7 +75,7 @@ export const mockProducts: Product[] = [
         },
         coverImg: '/mock/cover/stmt-hoodie-black.png',
         sizes: [
-          { size: 'XS', quantity: 0 },
+          { size: 'XS', quantity: 123 },
           { size: 'S', quantity: 4324 },
           { size: 'M', quantity: 123 },
           { size: 'L', quantity: 123 },
@@ -365,6 +222,8 @@ export const mockProducts: Product[] = [
     id: '4',
     name: 'Perfect T-shirt',
     brand: mockBrands[5],
+    colorNotes: 'Light Gray-ish even though it appears to be white',
+    sizeNotes: 'Size up for looser fit',
     colors: [
       {
         colorName: 'Gray',
@@ -419,7 +278,7 @@ export const mockProducts: Product[] = [
     name: 'Runner Heavyweight Hunter Hoodie',
     brand: mockBrands[3],
     description:
-      '20 Oz 100% Cotton Fleece\nGarment Dyed-Vintage Black\nSeams Flowing Across Hoodie\nBoxy Fit (Choose your regular size or size up for an oversized fit)\nBig Ass Hood\nTwo Way YKK Zipper',
+      '- 20 Oz 100% Cotton Fleece\n- Garment Dyed-Vintage Black\n- Seams Flowing Across Hoodie\n- Boxy Fit (Choose your regular size or size up for an oversized fit)\n- Big Ass Hood\n- Two Way YKK Zipper',
     colors: [
       {
         colorName: 'Black',
