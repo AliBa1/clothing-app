@@ -58,7 +58,7 @@ export default function ProductPage({ params }: { params: Promise<{ id: string }
                 width={500}
                 height={500}
                 src={c.coverImg}
-                className={`img-button ${selectedColor === c && 'border-4 border-accent'}`}
+                className={`img-button bg-gray-300 ${selectedColor === c && 'border-4 border-accent'}`}
                 onClick={() => {
                   setSelectedColor(c);
                   if (
