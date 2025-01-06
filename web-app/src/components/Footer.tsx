@@ -1,8 +1,6 @@
-
-
 export default function Footer() {
   return (
-    <footer className="w-full flex">
+    <footer className='w-full flex'>
       <p>Footer</p>
       <p>Footer</p>
       <p>Footer</p>
@@ -10,5 +8,5 @@ export default function Footer() {
       <p>Footer</p>
       <p>Footer</p>
     </footer>
-  )
+  );
 }

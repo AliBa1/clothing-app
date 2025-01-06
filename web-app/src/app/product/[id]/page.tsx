@@ -1,8 +1,8 @@
 'use client';
 
-import { ColorVariant, Discount, mockProducts } from '@/interfaces/products';
+import { ColorVariant, mockProducts } from '@/interfaces/products';
 import { discountedPrice } from '@/utils/helperFunctions';
-import { mdiHeartBoxOutline, mdiHeartOutline } from '@mdi/js';
+import { mdiHeartOutline } from '@mdi/js';
 import Icon from '@mdi/react';
 import Image from 'next/image';
 import { use, useState } from 'react';

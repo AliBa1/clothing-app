@@ -25,8 +25,14 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* <h6>${product.colors[0].price}</h6> */}
         {product.colors[0].discount ? (
           <h6>
-            ${discountedPrice(product.colors[0].price, product.colors[0].discount)}{' '}
-            <span className='line-through text-accent'>${product.colors[0].price}</span>
+            $
+            {discountedPrice(
+              product.colors[0].price,
+              product.colors[0].discount
+            )}{' '}
+            <span className='line-through text-accent'>
+              ${product.colors[0].price}
+            </span>
           </h6>
         ) : (
           <h6>${product.colors[0].price}</h6>

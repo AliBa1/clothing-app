@@ -1,6 +1,6 @@
-import { Discount } from "@/interfaces/products";
+import { Discount } from '@/interfaces/products';
 
-export  function discountedPrice(price: number, discount: Discount): number {
+export function discountedPrice(price: number, discount: Discount): number {
   if (discount.type === 'percent') {
     return Math.round(price - (price * discount.amount) / 100);
   } else {

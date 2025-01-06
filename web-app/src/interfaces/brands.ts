@@ -10,5 +10,9 @@ export const mockBrands = [
   { id: 3, name: 'Nike', logo: '/mock/logos/nike_logo.jpg' },
   { id: 4, name: 'RICH USI', logo: '/mock/logos/richusi_logo.png' },
   { id: 5, name: 'Statment', logo: '/mock/logos/statement_logo.png' },
-  { id: 6, name: 'Thirteen Studios', logo: '/mock/logos/thirteen_studios_logo.png' }
+  {
+    id: 6,
+    name: 'Thirteen Studios',
+    logo: '/mock/logos/thirteen_studios_logo.png'
+  }
 ];

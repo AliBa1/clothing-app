@@ -35,7 +35,8 @@ export const mockProducts: Product[] = [
     id: '1',
     name: 'LIGHTWEIGHT BUCKLE PUFFER JACKET',
     brand: mockBrands[0],
-    description: 'Puffer jacket in a lightweight fabric with intergrated buckle collar closure',
+    description:
+      'Puffer jacket in a lightweight fabric with intergrated buckle collar closure',
     sizeNotes: 'Size up for oversized fit',
     colors: [
       {
