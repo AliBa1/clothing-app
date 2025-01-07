@@ -1,5 +1,6 @@
 'use client';
 
+import ImageCarousel from '@/components/ImageCarousel';
 import { ColorVariant, mockProducts } from '@/interfaces/products';
 import { discountedPrice } from '@/utils/helperFunctions';
 import { mdiHeartOutline } from '@mdi/js';
@@ -15,21 +16,22 @@ export default function ProductPage({
   const { id } = use(params);
   const product = mockProducts.find((p) => p.id === id);
   const [selectedColor, setSelectedColor] = useState<ColorVariant>(
-    product?.colors[0] || { colorName: '', price: 1, images: {cover: ''}, sizes: [] }
+    product?.colors[0] || {
+      colorName: '',
+      price: 1,
+      images: { cover: '' },
+      sizes: []
+    }
   );
   const [selectedSize, setSelectedSize] = useState<string>('');
+  const allImages = selectedColor.images.additional
+    ? [selectedColor.images.cover].concat(selectedColor.images.additional)
+    : [selectedColor.images.cover];
 
   return (
     <main className='flex-row'>
       <div className='flex flex-col items-center w-1/2 h-full px-4'>
-        <Image
-          src={selectedColor.images.cover || ''}
-          alt={selectedColor.images.cover || 'Loading Image'}
-          height={1280}
-          width={1024}
-          style={{ backgroundColor: 'lightgray' }}
-          className='aspect-[4/5] rounded object-cover object-center'
-        />
+        <ImageCarousel images={allImages} alt={product?.name} />
       </div>
       <div className='flex flex-col w-1/2 h-full px-8'>
         <div className='flex items-center'>

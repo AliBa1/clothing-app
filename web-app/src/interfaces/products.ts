@@ -80,7 +80,8 @@ export const mockProducts: Product[] = [
           amount: 25
         },
         images: {
-          cover: '/mock/cover/stmt-hoodie-black.png'
+          cover: '/mock/cover/stmt-hoodie-black.png',
+          additional: ['/mock/additional/stmt-size-chart.png']
         },
         sizes: [
           { size: 'XS', quantity: 123 },

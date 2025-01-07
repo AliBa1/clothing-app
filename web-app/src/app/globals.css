@@ -64,6 +64,9 @@ body {
   .btn-square {
     @apply border border-primary rounded bg-secondary text-primary px-2 disabled:bg-gray-500 disabled:text-gray-600 disabled:border-gray-600 disabled:border-2;
   }
+  .btn-circle {
+    @apply border border-primary rounded-full bg-secondary text-primary p-1 disabled:bg-gray-500 disabled:text-gray-600 disabled:border-gray-600 disabled:border-2;
+  }
   .primary-btn {
     @apply text-xl rounded-xl bg-primary enabled:hover:opacity-90 text-secondary px-8 disabled:opacity-25;
   }
