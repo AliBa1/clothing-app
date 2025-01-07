@@ -11,7 +11,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <Link href={`/product/${product.id}`} className='block rounded-3xl group'>
       <Image
-        src={product.colors[0].coverImg}
+        src={product.colors[0].images.cover}
         alt={product.name}
         height={1280}
         width={1024}
