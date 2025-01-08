@@ -51,7 +51,7 @@ export default function ProductPage({
           <p className='text-base md:text-xl px-4'>{product?.brand.name}</p>
         </div>
         {/* <p className='text-2xl font-bold'>{product?.name}</p> */}
-        <h3 className='text-center md:text-start text-xl md:text-3xl'>{product?.name}</h3>
+        <h3 className='text-center md:text-start text-2xl md:text-3xl'>{product?.name}</h3>
         {selectedColor.discount ? (
           <h3 className='text-center md:text-start text-xl md:text-3xl'>
             ${discountedPrice(selectedColor.price, selectedColor.discount)}{' '}
@@ -60,7 +60,7 @@ export default function ProductPage({
             </span>
           </h3>
         ) : (
-          <h3 className='text-center md:text-start text-xl md:text-3xl'>${selectedColor.price}</h3>
+          <h3 className='text-center md:text-start text-2xl md:text-3xl'>${selectedColor.price}</h3>
         )}
         <br></br>
         <div className='text-base md:text-xl mb-4'>
