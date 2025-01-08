@@ -20,7 +20,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         className='aspect-[4/5] w-96 rounded object-cover object-center'
       />
 
-      <div className='flex items-center w-full mt-2'>
+      <div className='flex items-center w-full mt-2 mb-2 md:mb-0'>
         {product && (
           <Image
             src={product.brand.logo}
@@ -30,11 +30,11 @@ export default function ProductCard({ product }: ProductCardProps) {
             loading='lazy'
             style={{ backgroundColor: 'white' }}
             // className='aspect-square h-16 w-16 rounded-full border'
-            className='aspect-square h-8 w-8 rounded-full border'
+            className='aspect-square h-4 w-4 md:h-8 md:w-8 rounded-full border'
           />
         )}
         {/* link to brand page vvvvvvv */}
-        <p className='text-base px-2'>{product?.brand.name}</p>
+        <p className='text-sm md:text-base px-2'>{product?.brand.name}</p>
       </div>
 
       <div className='group-hover:underline decoration-accent text-base md:text-xl font-heading'>

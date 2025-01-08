@@ -27,7 +27,7 @@ body {
 
 @layer base {
   main {
-    @apply min-h-screen flex flex-col items-center;
+    @apply min-h-screen flex flex-col items-center px-2;
   }
   h1,
   h2,
