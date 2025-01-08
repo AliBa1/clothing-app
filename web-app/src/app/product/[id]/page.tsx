@@ -30,7 +30,7 @@ export default function ProductPage({
 
   return (
     <div className='min-h-screen flex flex-col md:flex-row items-center gap-4 md:gap-0'>
-      <div className='flex flex-col items-center w-full md:w-1/2 px-4'>
+      <div className='flex flex-col self-start w-full md:w-1/2 px-4'>
         <ImageCarousel images={allImages} alt={product?.name} />
       </div>
       <div className='flex flex-col w-full md:w-1/2 h-auto md:h-full px-8'>
