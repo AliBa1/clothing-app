@@ -42,14 +42,14 @@ export default function ImageCarousel({ images, alt }: CarouselProps) {
             onClick={() => setImgIndex(imgIndex - 1)}
             disabled={imgIndex === 0}
           >
-            <Icon path={mdiChevronLeft} size={1} />
+            <Icon path={mdiChevronLeft} size={1.5} />
           </button>
           <button
             className='btn-circle'
             onClick={() => setImgIndex(imgIndex + 1)}
             disabled={imgIndex === images.length - 1}
           >
-            <Icon path={mdiChevronRight} size={1} />
+            <Icon path={mdiChevronRight} size={1.5} />
           </button>
         </div>
         <div>
@@ -57,7 +57,7 @@ export default function ImageCarousel({ images, alt }: CarouselProps) {
             <button key={index} onClick={() => setImgIndex(index)}>
               <Icon
                 path={index === imgIndex ? mdiCircle : mdiCircleOutline}
-                size={1}
+                size={1.5}
               />
             </button>
           ))}
