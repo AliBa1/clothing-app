@@ -2,13 +2,13 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Icon from '@mdi/react';
-import { mdiAccount, mdiCart, mdiHeartOutline, mdiMagnify } from '@mdi/js';
+import { mdiAccount, mdiCart, mdiHeartOutline, mdiMagnify, mdiMenu } from '@mdi/js';
 
 export default function Header() {
   const pathname = usePathname();
   return (
-    <header className='sticky top-0 z-10 bg-background grid grid-cols-3 items-center px-8 py-2'>
-      <nav className='flex gap-8'>
+    <header className='sticky top-0 z-10 bg-background grid grid-cols-2 md:grid-cols-3 items-center px-4 md:px-8 py-2'>
+      <nav className='hidden md:flex gap-8'>
         <Link
           href='/shop'
           className={`hover:underline decoration-accent ${
@@ -35,15 +35,15 @@ export default function Header() {
         </Link>
       </nav>
 
-      <Link href='/' className='place-items-center'>
+      <Link href='/' className='md:place-items-center'>
         <h6>SiTENAMË</h6>
       </Link>
 
-      <div className='flex gap-8 place-content-end'>
+      <div className='flex gap-2 md:gap-8 place-content-end'>
         <button aria-label='Search' title='Search'>
           <Icon path={mdiMagnify} size={1} />
         </button>
-        <button aria-label='Saved' title='Saved'>
+        <button aria-label='Saved' title='Saved' className='hidden md:block'>
           <Icon path={mdiHeartOutline} size={1} />
         </button>
         <button aria-label='Account' title='Account'>
@@ -55,6 +55,10 @@ export default function Header() {
             <Icon path={mdiCart} size={1} />
             <div className='absolute -top-1 -right-1 bg-accent rounded-full p-1 text-center text-xs' />
           </div>
+        </button>
+
+        <button aria-label='Menu' title='Menu' className='block md:hidden'>
+          <Icon path={mdiMenu} size={1} />
         </button>
       </div>
     </header>
