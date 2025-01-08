@@ -20,11 +20,28 @@ export default function ProductCard({ product }: ProductCardProps) {
         className='aspect-[4/5] w-96 rounded object-cover object-center'
       />
 
-      <div className='py-2 group-hover:underline decoration-accent max-w-96'>
-        <h6>{product.name}</h6>
+      <div className='flex items-center w-full mt-2'>
+        {product && (
+          <Image
+            src={product.brand.logo}
+            alt={product.brand.name}
+            height={500}
+            width={500}
+            loading='lazy'
+            style={{ backgroundColor: 'white' }}
+            // className='aspect-square h-16 w-16 rounded-full border'
+            className='aspect-square h-8 w-8 rounded-full border'
+          />
+        )}
+        {/* link to brand page vvvvvvv */}
+        <p className='text-base px-2'>{product?.brand.name}</p>
+      </div>
+
+      <div className='group-hover:underline decoration-accent text-base md:text-xl font-heading'>
+        <p>{product.name}</p>
         {/* <h6>${product.colors[0].price}</h6> */}
         {product.colors[0].discount ? (
-          <h6>
+          <p>
             $
             {discountedPrice(
               product.colors[0].price,
@@ -33,9 +50,9 @@ export default function ProductCard({ product }: ProductCardProps) {
             <span className='line-through text-accent'>
               ${product.colors[0].price}
             </span>
-          </h6>
+          </p>
         ) : (
-          <h6>${product.colors[0].price}</h6>
+          <p>${product.colors[0].price}</p>
         )}
       </div>
     </Link>
