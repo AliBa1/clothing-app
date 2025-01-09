@@ -71,7 +71,7 @@ body {
     @apply text-xl rounded-xl bg-primary enabled:hover:opacity-90 text-secondary px-8 disabled:opacity-25;
   }
   .secondary-btn {
-    @apply text-xl rounded-xl border border-primary enabled:hover:border-2 px-8 disabled:opacity-25;
+    @apply text-xl rounded-xl border border-primary enabled:hover:opacity-90 px-8 disabled:opacity-25;
   }
   .img-button {
     @apply rounded h-24 w-24 bg-primary text-primary aspect-square object-cover;
