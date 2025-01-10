@@ -14,7 +14,7 @@ interface CarouselProps {
 }
 
 export default function ImageCarousel({ images, alt }: CarouselProps) {
-  const [imgIndex, setImgIndex] = useState(0);
+  const [imgIndex, setImgIndex] = useState<number>(0);
   useEffect(() => {
     setImgIndex(0);
   }, [images]);
