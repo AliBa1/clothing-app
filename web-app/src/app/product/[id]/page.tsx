@@ -29,12 +29,13 @@ export default function ProductPage({
     : [selectedColor.images.cover];
 
   return (
-    <div className='min-h-screen flex flex-col md:flex-row items-start gap-4 md:gap-0'>
+    // <div className='min-h-screen flex flex-col md:flex-row items-start gap-4 md:gap-0'>
+    <main className='md:flex-row items-start gap-4 md:gap-0 mt-8'>
       <div className='flex flex-col md:sticky md:top-16 w-full md:w-1/2 px-4 items-center'>
         <ImageCarousel images={allImages} alt={product?.name} />
       </div>
-      <div className='flex flex-col w-full md:w-1/2 h-auto md:h-full px-8'>
-        <div className='flex items-center'>
+      <div className='flex flex-col w-full md:w-1/2 h-auto md:h-full px-2 md:px-8'>
+        <div className='flex items-center justify-center md:justify-normal'>
           {product && (
             <Image
               src={product.brand.logo}
@@ -151,6 +152,7 @@ export default function ProductPage({
           </div>
         )}
       </div>
-    </div>
+    </main>
+    // </div>
   );
 }
