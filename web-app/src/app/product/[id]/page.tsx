@@ -30,7 +30,7 @@ export default function ProductPage({
 
   return (
     <div className='min-h-screen flex flex-col md:flex-row items-start gap-4 md:gap-0'>
-      <div className='flex flex-col md:sticky md:top-16 w-full md:w-1/2 px-4'>
+      <div className='flex flex-col md:sticky md:top-16 w-full md:w-1/2 px-4 items-center'>
         <ImageCarousel images={allImages} alt={product?.name} />
       </div>
       <div className='flex flex-col w-full md:w-1/2 h-auto md:h-full px-8'>
@@ -43,14 +43,12 @@ export default function ProductPage({
               width={500}
               loading='lazy'
               style={{ backgroundColor: 'white' }}
-              // className='aspect-square h-16 w-16 rounded-full border'
               className='aspect-square h-8 w-8 md:h-16 md:w-16 rounded-full border'
             />
           )}
           {/* link to brand page vvvvvvv */}
           <p className='text-base md:text-xl px-4'>{product?.brand.name}</p>
         </div>
-        {/* <p className='text-2xl font-bold'>{product?.name}</p> */}
         <h3 className='text-center md:text-start text-2xl md:text-3xl'>{product?.name}</h3>
         {selectedColor.discount ? (
           <h3 className='text-center md:text-start text-xl md:text-3xl'>
