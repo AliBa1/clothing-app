@@ -54,6 +54,7 @@ export default function Header() {
           <div className='relative'>
             <Icon path={mdiCart} size={1} />
             <div className='absolute -top-1 -right-1 bg-accent rounded-full p-1 text-center text-xs' />
+            <div className='absolute -top-1 -right-1 bg-accent rounded-full p-1 text-center text-xs animate-ping' />
           </div>
         </button>
 

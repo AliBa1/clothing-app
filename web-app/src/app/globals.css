@@ -92,7 +92,7 @@ body {
     @apply text-base md:text-xl whitespace-nowrap rounded-xl bg-primary enabled:hover:opacity-90 text-secondary px-2 md:px-8 disabled:opacity-25;
   }
   .secondary-btn {
-    @apply text-base md:text-xl whitespace-nowrap rounded-xl border border-primary enabled:hover:opacity-90 px-2 md:px-8 disabled:opacity-25;
+    @apply text-base md:text-xl whitespace-nowrap rounded-xl border border-black enabled:hover:opacity-90 px-2 md:px-8 disabled:opacity-25;
   }
   .accent-btn {
     @apply text-base md:text-xl whitespace-nowrap rounded-xl bg-accent text-black enabled:hover:opacity-90 px-4 md:px-8 disabled:opacity-25;
