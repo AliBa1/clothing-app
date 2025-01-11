@@ -16,7 +16,10 @@ export interface ColorVariant {
   colorName: string;
   price: number;
   discount?: Discount;
-  coverImg: string;
+  images: {
+    cover: string;
+    additional?: string[];
+  };
   sizes: SizeVariant[];
 }
 
@@ -35,7 +38,8 @@ export const mockProducts: Product[] = [
     id: '1',
     name: 'LIGHTWEIGHT BUCKLE PUFFER JACKET',
     brand: mockBrands[0],
-    description: 'Puffer jacket in a lightweight fabric with intergrated buckle collar closure',
+    description:
+      'Puffer jacket in a lightweight fabric with intergrated buckle collar closure',
     sizeNotes: 'Size up for oversized fit',
     colors: [
       {
@@ -45,7 +49,9 @@ export const mockProducts: Product[] = [
           type: 'percent',
           amount: 10
         },
-        coverImg: '/mock/cover/puff_jacket_example.png',
+        images: {
+          cover: '/mock/cover/puff_jacket_example.png'
+        },
         sizes: [
           { size: 'XS', quantity: 0 },
           { size: 'S', quantity: 123 },
@@ -73,7 +79,10 @@ export const mockProducts: Product[] = [
           type: 'percent',
           amount: 25
         },
-        coverImg: '/mock/cover/stmt-hoodie-black.png',
+        images: {
+          cover: '/mock/cover/stmt-hoodie-black.png',
+          additional: ['/mock/additional/stmt-size-chart.png']
+        },
         sizes: [
           { size: 'XS', quantity: 123 },
           { size: 'S', quantity: 4324 },
@@ -90,7 +99,9 @@ export const mockProducts: Product[] = [
           type: 'percent',
           amount: 25
         },
-        coverImg: '/mock/cover/stmt-hoodie-sky-blue.png',
+        images: {
+          cover: '/mock/cover/stmt-hoodie-sky-blue.png'
+        },
         sizes: [
           { size: 'S', quantity: 120 },
           { size: 'M', quantity: 120 },
@@ -104,7 +115,7 @@ export const mockProducts: Product[] = [
           type: 'percent',
           amount: 25
         },
-        coverImg: '/mock/cover/stmt-hoodie-grey.png',
+        images: { cover: '/mock/cover/stmt-hoodie-grey.png' },
         sizes: [
           { size: 'S', quantity: 120 },
           { size: 'M', quantity: 120 },
@@ -118,7 +129,7 @@ export const mockProducts: Product[] = [
           type: 'percent',
           amount: 25
         },
-        coverImg: '/mock/cover/stmt-hoodie-purple.png',
+        images: { cover: '/mock/cover/stmt-hoodie-purple.png' },
         sizes: [
           { size: 'S', quantity: 120 },
           { size: 'M', quantity: 120 },
@@ -139,7 +150,7 @@ export const mockProducts: Product[] = [
           type: 'fixed',
           amount: 50
         },
-        coverImg: '/mock/cover/sweatsuit-black.png',
+        images: { cover: '/mock/cover/sweatsuit-black.png' },
         sizes: [
           { size: 'S', quantity: 120 },
           { size: 'M', quantity: 120 },
@@ -153,7 +164,7 @@ export const mockProducts: Product[] = [
           type: 'fixed',
           amount: 50
         },
-        coverImg: '/mock/cover/sweatsuit-green.png',
+        images: { cover: '/mock/cover/sweatsuit-green.png' },
         sizes: [
           { size: 'S', quantity: 120 },
           { size: 'M', quantity: 120 },
@@ -167,7 +178,7 @@ export const mockProducts: Product[] = [
           type: 'fixed',
           amount: 50
         },
-        coverImg: '/mock/cover/sweatsuit-brown.png',
+        images: { cover: '/mock/cover/sweatsuit-brown.png' },
         sizes: [
           { size: 'S', quantity: 120 },
           { size: 'M', quantity: 120 },
@@ -181,7 +192,7 @@ export const mockProducts: Product[] = [
           type: 'fixed',
           amount: 50
         },
-        coverImg: '/mock/cover/sweatsuit-charcoal.png',
+        images: { cover: '/mock/cover/sweatsuit-charcoal.png' },
         sizes: [
           { size: 'S', quantity: 120 },
           { size: 'M', quantity: 120 },
@@ -195,7 +206,7 @@ export const mockProducts: Product[] = [
           type: 'fixed',
           amount: 50
         },
-        coverImg: '/mock/cover/sweatsuit-blue.png',
+        images: { cover: '/mock/cover/sweatsuit-blue.png' },
         sizes: [
           { size: 'S', quantity: 120 },
           { size: 'M', quantity: 120 },
@@ -209,7 +220,7 @@ export const mockProducts: Product[] = [
           type: 'fixed',
           amount: 50
         },
-        coverImg: '/mock/cover/sweatsuit-white.png',
+        images: { cover: '/mock/cover/sweatsuit-white.png' },
         sizes: [
           { size: 'S', quantity: 120 },
           { size: 'M', quantity: 120 },
@@ -228,7 +239,7 @@ export const mockProducts: Product[] = [
       {
         colorName: 'Gray',
         price: 35,
-        coverImg: '/mock/cover/blank_tee.png',
+        images: { cover: '/mock/cover/blank_tee.png' },
         sizes: [
           { size: 'S', quantity: 120 },
           { size: 'M', quantity: 120 },
@@ -245,7 +256,7 @@ export const mockProducts: Product[] = [
       {
         colorName: 'Black',
         price: 50,
-        coverImg: '/mock/cover/cargo_pants.jpg',
+        images: { cover: '/mock/cover/cargo_pants.jpg' },
         sizes: [
           { size: 'S', quantity: 189 },
           { size: 'M', quantity: 412 },
@@ -263,7 +274,7 @@ export const mockProducts: Product[] = [
       {
         colorName: 'Black',
         price: 45,
-        coverImg: '/mock/cover/cargo_shorts.png',
+        images: { cover: '/mock/cover/cargo_shorts.png' },
         sizes: [
           { size: 'S', quantity: 189 },
           { size: 'M', quantity: 412 },
@@ -287,7 +298,7 @@ export const mockProducts: Product[] = [
           type: 'fixed',
           amount: 55
         },
-        coverImg: '/mock/cover/hunter_hoodie.jpg',
+        images: { cover: '/mock/cover/hunter_hoodie.jpg' },
         sizes: [
           { size: 'S', quantity: 124 },
           { size: 'M', quantity: 124 },
@@ -307,7 +318,7 @@ export const mockProducts: Product[] = [
       {
         colorName: 'Black',
         price: 135,
-        coverImg: '/mock/cover/tech-pants-black.png',
+        images: { cover: '/mock/cover/tech-pants-black.png' },
         sizes: [
           { size: 'XS', quantity: 0 },
           { size: 'S', quantity: 0 },
@@ -321,7 +332,7 @@ export const mockProducts: Product[] = [
       {
         colorName: 'Beige',
         price: 135,
-        coverImg: '/mock/cover/tech-pants-beige.png',
+        images: { cover: '/mock/cover/tech-pants-beige.png' },
         sizes: [
           { size: 'XS', quantity: 324235 },
           { size: 'S', quantity: 25234 },
@@ -335,7 +346,7 @@ export const mockProducts: Product[] = [
       {
         colorName: 'Iron Ore',
         price: 135,
-        coverImg: '/mock/cover/tech-pants-iron-ore.png',
+        images: { cover: '/mock/cover/tech-pants-iron-ore.png' },
         sizes: [
           { size: 'XS', quantity: 324235 },
           { size: 'S', quantity: 25234 },
@@ -356,7 +367,7 @@ export const mockProducts: Product[] = [
       {
         colorName: 'Black',
         price: 135,
-        coverImg: '/mock/cover/nike_tech_hoodie.png',
+        images: { cover: '/mock/cover/nike_tech_hoodie.png' },
         sizes: [
           { size: 'XS', quantity: 124143 },
           { size: 'S', quantity: 12314 },
@@ -377,7 +388,7 @@ export const mockProducts: Product[] = [
       {
         colorName: 'Black',
         price: 90,
-        coverImg: '/mock/cover/parachute_pants.png',
+        images: { cover: '/mock/cover/parachute_pants.png' },
         sizes: [
           { size: 'S', quantity: 123 },
           { size: 'M', quantity: 24 },

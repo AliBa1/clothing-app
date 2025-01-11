@@ -2,21 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* :root {
   --text: #040316;
   --background: #fbfbfe;
   --primary: #000000;
   --secondary: #ffffff;
   --accent: #ddcf00;
-}
+} */
+/* --accent: #968ee8; */
 
-@media (prefers-color-scheme: dark) {
+
+/* @media (prefers-color-scheme: dark) {
   :root {
     --text: #eae9fc;
     --background: #010104;
     --primary: #ffffff;
     --secondary: #000000;
-    --accent: #f3e412;
+    --accent: #968ee8;
+  }
+} */
+/* --accent: #f3e412; */
+
+:root {
+  --text: #040316;
+  --background: #dce2e4;
+  --primary: #464F51;
+  --secondary: #ffffff;
+  --accent: #D68FD6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #ffffff;
+    --background: #26292a;
+    --primary: #E6EFE9;
+    --secondary: #000000;
+    --accent: #D68FD6;
   }
 }
 
@@ -27,7 +48,7 @@ body {
 
 @layer base {
   main {
-    @apply min-h-screen flex flex-col items-center;
+    @apply min-h-screen flex flex-col items-center px-2;
   }
   h1,
   h2,
@@ -62,15 +83,21 @@ body {
 
 @layer components {
   .btn-square {
-    @apply border border-primary rounded bg-secondary text-primary px-2 disabled:bg-gray-500 disabled:text-gray-600 disabled:border-gray-600 disabled:border-2;
+    @apply border border-primary rounded bg-secondary text-text px-2 disabled:bg-gray-500 disabled:text-gray-600 disabled:border-gray-600 disabled:border-2;
+  }
+  .btn-circle {
+    @apply border border-primary rounded-full bg-secondary text-text p-1 disabled:bg-gray-500 disabled:text-gray-600 disabled:border-gray-600 disabled:border-2;
   }
   .primary-btn {
-    @apply text-xl rounded-xl bg-primary enabled:hover:opacity-90 text-secondary px-8 disabled:opacity-25;
+    @apply text-base md:text-xl whitespace-nowrap rounded-xl bg-primary enabled:hover:opacity-90 text-secondary px-2 md:px-8 disabled:opacity-25;
   }
   .secondary-btn {
-    @apply text-xl rounded-xl border border-primary enabled:hover:border-2 px-8 disabled:opacity-25;
+    @apply text-base md:text-xl whitespace-nowrap rounded-xl border border-black enabled:hover:opacity-90 px-2 md:px-8 disabled:opacity-25;
+  }
+  .accent-btn {
+    @apply text-base md:text-xl whitespace-nowrap rounded-xl bg-accent text-black enabled:hover:opacity-90 px-4 md:px-8 disabled:opacity-25;
   }
   .img-button {
-    @apply rounded h-24 w-24 bg-primary text-primary aspect-square object-cover;
+    @apply rounded h-24 w-24 bg-primary text-text aspect-square object-cover;
   }
 }
