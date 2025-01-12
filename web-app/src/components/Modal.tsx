@@ -16,7 +16,7 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
       onClick={onClose}
     >
       <div
-        className='bg-white rounded-lg p-4'
+        className='bg-white rounded-lg p-4 h-full w-full md:h-auto md:w-auto'
         onClick={(e) => e.stopPropagation()}
       >
         <div className='flex justify-end'>
