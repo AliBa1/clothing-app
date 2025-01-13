@@ -67,7 +67,7 @@ test.describe('size', () => {
   }) => {
     await page.getByRole('link', { name: 'Shop', exact: true }).click();
     await page
-      .getByRole('link', { name: 'STMT Hoodie STMT Hoodie $58 $' })
+      .getByRole('link', { name: 'STMT Hoodie $58 $' })
       .click();
     await page.getByRole('button', { name: 'XL', exact: true }).click();
     await page.getByRole('img', { name: 'Grey' }).click();

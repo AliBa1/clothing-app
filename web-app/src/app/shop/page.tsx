@@ -1,17 +1,25 @@
 'use client';
 import Modal from '@/components/Modal';
 import ProductCard from '@/components/ProductCard';
+import {
+  Filters,
+  mockDefaultFilters,
+  SortOption,
+  sortOptions
+} from '@/interfaces/filters';
 import { mockProducts } from '@/interfaces/products';
 import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
 import Icon from '@mdi/react';
 import { useRef, useState } from 'react';
+import Form from 'next/form';
 
 interface OpenFilters {
   sort: boolean;
   type: boolean;
+  gender: boolean;
   fit: boolean;
-  sizes: boolean;
-  color: boolean;
+  stock: boolean;
+  price: boolean;
 }
 
 export default function Shop() {
@@ -20,18 +28,16 @@ export default function Shop() {
   const [showScrollRight, setShowScrollRight] = useState<boolean>(false);
   const [filterModalOpen, setFilterModalOpen] = useState<boolean>(false);
 
-  // const [filters, setFilters] = useState<Filters>({
-  //   sort: "default",
+  const [filters, setFilters] = useState<Filters>(mockDefaultFilters);
 
-  // })
   // windows in filters modal
-  // **CHANGE TO NEW FILTERS**
   const [filtersOpen, setFiltersOpen] = useState<OpenFilters>({
     sort: false,
     type: false,
+    gender: false,
     fit: false,
-    sizes: false,
-    color: false
+    stock: false,
+    price: false
   });
 
   const updateScrollButtons = () => {
@@ -103,7 +109,8 @@ export default function Shop() {
       </div>
 
       <Modal isOpen={filterModalOpen} onClose={() => setFilterModalOpen(false)}>
-        <div className='w-full md:w-96 flex flex-col'>
+        {/* <div className='w-full md:w-96 flex flex-col'> */}
+        <Form action={''} className='w-full md:w-96 flex flex-col'>
           <h4>Filters</h4>
           <button
             className='w-full flex justify-between p-4 border-t'
@@ -111,7 +118,9 @@ export default function Shop() {
               setFiltersOpen({ ...filtersOpen, sort: !filtersOpen.sort })
             }
           >
-            Sort{' '}
+            <p>
+              Sort: <span className='text-accent'>{filters.sort.label}</span>
+            </p>
             <Icon
               path={filtersOpen.sort ? mdiChevronUp : mdiChevronDown}
               size={1}
@@ -119,13 +128,49 @@ export default function Shop() {
           </button>
           <div
             className={`${
-              filtersOpen.sort ? 'max-h-96 px-8 pb-4 gap-4' : 'max-h-0'
+              filtersOpen.sort ? 'max-h-96 px-4 pb-4 gap-4' : 'max-h-0'
             } overflow-hidden transition-all duration-300 flex-col`}
           >
-            <p>Default</p>
+            <fieldset>
+              {sortOptions.map((s) => (
+                <div key={s.value}>
+                  <input
+                    type='radio'
+                    id={`sort-${s.value}`}
+                    name='sort'
+                    className='hidden'
+                    value={s.value}
+                    checked={filters.sort.value === s.value}
+                    onChange={() => {
+                      setFilters({ ...filters, sort: s });
+                      setFiltersOpen({ ...filtersOpen, sort: false });
+                    }}
+                  />
+                  <label
+                    htmlFor={`sort-${s.value}`}
+                    className='cursor-pointer hover:text-accent'
+                  >
+                    {s.label}
+                  </label>
+                </div>
+              ))}
+            </fieldset>
+
+            {/* <select
+              id='sort-options'
+              className='w-full border'
+              value={filters.sort.value}
+              onChange={(e) => setFilters({...filters, sort: {label: e.target.options[e.target.selectedIndex].text, value: e.target.value as SortOption['value']}})}
+            >
+              {sortOptions.map(s => (
+                <option key={s.value} value={s.value}>{s.label}</option>
+              ))}
+            </select> */}
+
+            {/* <p>Default</p>
             <p>Most Popular</p>
             <p>Price: Low to High</p>
-            <p>Price: High to Low</p>
+            <p>Price: High to Low</p> */}
           </div>
           <button className='w-full flex justify-between p-4 border-t'>
             Type <Icon path={mdiChevronDown} size={1} />
@@ -141,9 +186,16 @@ export default function Shop() {
           </button>
           <div className='w-full flex gap-4'>
             <button className='secondary-btn flex-grow'>Clear All</button>
-            <button className='accent-btn flex-grow'>Apply</button>
+            <button
+              type='submit'
+              className='accent-btn flex-grow'
+              onClick={() => setFilterModalOpen(false)}
+            >
+              Apply
+            </button>
           </div>
-        </div>
+        </Form>
+        {/* </div> */}
       </Modal>
     </main>
   );

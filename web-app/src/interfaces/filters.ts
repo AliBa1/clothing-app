@@ -1,13 +1,133 @@
 import { Category, CategoryOption, Subcategory } from './categories';
 
+export interface SortOption {
+  label: string;
+  value: 'default' | 'new' | 'popular' | 'lowToHighPrice' | 'highToLowPrice';
+}
+
+interface GenderOption {
+  label: string;
+  value: 'any' | 'men' | 'women' | 'unisex' | 'kids';
+}
+
+interface FitOption {
+  label: string;
+  value: 'skinny' | 'slim' | 'regular' | 'relaxed' | 'oversized' | 'boxy';
+}
+
+interface StockOption {
+  label: string;
+  value: 'inStock' | 'preOrder' | 'lowStock';
+}
+
 export interface Filters {
   category?: Category;
   subCategory?: Subcategory;
   types?: CategoryOption[];
-  sort: 'default' | 'new' | 'popular' | 'lowToHighPrice' | 'highToLowPrice';
-  gender: 'mens' | 'womens' | 'unisex' | 'kids';
-  fit?: 'skinny' | 'slim' | 'regular' | 'relaxed' | 'oversized' | 'boxy';
-  stock?: 'inStock' | 'preOrder' | 'lowStock';
+  sort: SortOption;
+  gender: GenderOption;
+  fit?: FitOption;
+  stock?: StockOption;
   minPrice?: number;
   maxPrice?: number;
 }
+
+export const sortOptions: SortOption[] = [
+  {
+    label: 'Default',
+    value: 'default'
+  },
+  {
+    label: 'New',
+    value: 'new'
+  },
+  {
+    label: 'Popular',
+    value: 'popular'
+  },
+  {
+    label: 'Price: Low to High',
+    value: 'lowToHighPrice'
+  },
+  {
+    label: 'Price: High to Low',
+    value: 'highToLowPrice'
+  }
+];
+
+export const genderOptions: GenderOption[] = [
+  {
+    label: 'Any',
+    value: 'any'
+  },
+  {
+    label: 'Men',
+    value: 'men'
+  },
+  {
+    label: 'Women',
+    value: 'women'
+  },
+  {
+    label: 'Unisex',
+    value: 'unisex'
+  },
+  {
+    label: 'Kids',
+    value: 'kids'
+  }
+];
+
+export const fitOptions: FitOption[] = [
+  {
+    label: 'Boxy',
+    value: 'boxy'
+  },
+  {
+    label: 'Oversized',
+    value: 'oversized'
+  },
+  {
+    label: 'Regular',
+    value: 'regular'
+  },
+  {
+    label: 'Relaxed',
+    value: 'relaxed'
+  },
+  {
+    label: 'Skinny',
+    value: 'skinny'
+  },
+  {
+    label: 'Slim',
+    value: 'slim'
+  }
+];
+
+export const stockOptions: StockOption[] = [
+  {
+    label: 'In Stock',
+    value: 'inStock'
+  },
+  {
+    label: 'Low Stock',
+    value: 'lowStock'
+  },
+  {
+    label: 'Pre-Order',
+    value: 'preOrder'
+  }
+];
+
+export const mockDefaultFilters: Filters = {
+  category: undefined,
+  subCategory: undefined,
+  types: [],
+  sort: sortOptions[0],
+  gender: genderOptions[0],
+  fit: undefined,
+  stock: undefined,
+  minPrice: undefined,
+  maxPrice: undefined
+};
