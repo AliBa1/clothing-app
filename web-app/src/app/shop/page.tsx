@@ -3,8 +3,8 @@ import Modal from '@/components/Modal';
 import ProductCard from '@/components/ProductCard';
 import {
   Filters,
+  genderOptions,
   mockDefaultFilters,
-  SortOption,
   sortOptions
 } from '@/interfaces/filters';
 import { mockProducts } from '@/interfaces/products';
@@ -12,6 +12,7 @@ import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
 import Icon from '@mdi/react';
 import { useRef, useState } from 'react';
 import Form from 'next/form';
+import { useSearchParams } from 'next/navigation';
 
 interface OpenFilters {
   sort: boolean;
@@ -28,7 +29,20 @@ export default function Shop() {
   const [showScrollRight, setShowScrollRight] = useState<boolean>(false);
   const [filterModalOpen, setFilterModalOpen] = useState<boolean>(false);
 
-  const [filters, setFilters] = useState<Filters>(mockDefaultFilters);
+  const filterParams = useSearchParams();
+  const [filters, setFilters] = useState<Filters>({
+    category: undefined,
+    subCategory: undefined,
+    types: [],
+    sort:
+      sortOptions.find((s) => s.value === filterParams.get('sort')) ||
+      sortOptions[0],
+    gender: genderOptions[0],
+    fit: undefined,
+    stock: undefined,
+    minPrice: undefined,
+    maxPrice: undefined
+  });
 
   // windows in filters modal
   const [filtersOpen, setFiltersOpen] = useState<OpenFilters>({
@@ -110,9 +124,14 @@ export default function Shop() {
 
       <Modal isOpen={filterModalOpen} onClose={() => setFilterModalOpen(false)}>
         {/* <div className='w-full md:w-96 flex flex-col'> */}
-        <Form action={''} className='w-full md:w-96 flex flex-col'>
+        <Form
+          action={''}
+          className='w-full md:w-96 flex flex-col'
+          onSubmit={() => setFilterModalOpen(false)}
+        >
           <h4>Filters</h4>
           <button
+            type='button'
             className='w-full flex justify-between p-4 border-t'
             onClick={() =>
               setFiltersOpen({ ...filtersOpen, sort: !filtersOpen.sort })
@@ -155,23 +174,55 @@ export default function Shop() {
                 </div>
               ))}
             </fieldset>
-
-            {/* <select
-              id='sort-options'
-              className='w-full border'
-              value={filters.sort.value}
-              onChange={(e) => setFilters({...filters, sort: {label: e.target.options[e.target.selectedIndex].text, value: e.target.value as SortOption['value']}})}
-            >
-              {sortOptions.map(s => (
-                <option key={s.value} value={s.value}>{s.label}</option>
-              ))}
-            </select> */}
-
-            {/* <p>Default</p>
-            <p>Most Popular</p>
-            <p>Price: Low to High</p>
-            <p>Price: High to Low</p> */}
           </div>
+
+          <button
+            type='button'
+            className='w-full flex justify-between p-4 border-t'
+            onClick={() =>
+              setFiltersOpen({ ...filtersOpen, gender: !filtersOpen.gender })
+            }
+          >
+            <p>
+              Gender:{' '}
+              <span className='text-accent'>{filters.gender.label}</span>
+            </p>
+            <Icon
+              path={filtersOpen.gender ? mdiChevronUp : mdiChevronDown}
+              size={1}
+            />
+          </button>
+          <div
+            className={`${
+              filtersOpen.gender ? 'max-h-96 px-4 pb-4 gap-4' : 'max-h-0'
+            } overflow-hidden transition-all duration-300 flex-col`}
+          >
+            <fieldset>
+              {genderOptions.map((g) => (
+                <div key={g.value}>
+                  <input
+                    type='radio'
+                    id={`gender-${g.value}`}
+                    name='gender'
+                    className='hidden'
+                    value={g.value}
+                    checked={filters.gender.value === g.value}
+                    onChange={() => {
+                      setFilters({ ...filters, gender: g });
+                      setFiltersOpen({ ...filtersOpen, gender: false });
+                    }}
+                  />
+                  <label
+                    htmlFor={`gender-${g.value}`}
+                    className='cursor-pointer hover:text-accent'
+                  >
+                    {g.label}
+                  </label>
+                </div>
+              ))}
+            </fieldset>
+          </div>
+
           <button className='w-full flex justify-between p-4 border-t'>
             Type <Icon path={mdiChevronDown} size={1} />
           </button>
@@ -184,13 +235,12 @@ export default function Shop() {
           <button className='w-full flex justify-between p-4 border-t'>
             Color <Icon path={mdiChevronDown} size={1} />
           </button>
+
           <div className='w-full flex gap-4'>
-            <button className='secondary-btn flex-grow'>Clear All</button>
-            <button
-              type='submit'
-              className='accent-btn flex-grow'
-              onClick={() => setFilterModalOpen(false)}
-            >
+            <button type='button' className='secondary-btn flex-grow'>
+              Clear All
+            </button>
+            <button type='submit' className='accent-btn flex-grow'>
               Apply
             </button>
           </div>
