@@ -1,12 +1,7 @@
 'use client';
 import Modal from '@/components/Modal';
 import ProductCard from '@/components/ProductCard';
-import {
-  Filters,
-  genderOptions,
-  mockDefaultFilters,
-  sortOptions
-} from '@/interfaces/filters';
+import { Filters, genderOptions, sortOptions } from '@/interfaces/filters';
 import { mockProducts } from '@/interfaces/products';
 import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
 import Icon from '@mdi/react';
@@ -122,7 +117,20 @@ export default function Shop() {
         ))}
       </div>
 
-      <Modal isOpen={filterModalOpen} onClose={() => setFilterModalOpen(false)}>
+      <Modal
+        isOpen={filterModalOpen}
+        onClose={() => {
+          setFilterModalOpen(false);
+          setFiltersOpen({
+            sort: false,
+            type: false,
+            gender: false,
+            fit: false,
+            stock: false,
+            price: false
+          });
+        }}
+      >
         {/* <div className='w-full md:w-96 flex flex-col'> */}
         <Form
           action={''}
@@ -130,6 +138,7 @@ export default function Shop() {
           onSubmit={() => setFilterModalOpen(false)}
         >
           <h4>Filters</h4>
+
           <button
             type='button'
             className='w-full flex justify-between p-4 border-t'
