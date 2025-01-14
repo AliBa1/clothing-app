@@ -5,19 +5,19 @@ export interface SortOption {
   value: 'default' | 'new' | 'popular' | 'lowToHighPrice' | 'highToLowPrice';
 }
 
-interface GenderOption {
+export interface GenderOption {
   label: string;
   value: 'any' | 'men' | 'women' | 'unisex' | 'kids';
 }
 
-interface FitOption {
+export interface FitOption {
   label: string;
   value: 'skinny' | 'slim' | 'regular' | 'relaxed' | 'oversized' | 'boxy';
 }
 
-interface StockOption {
+export interface InventoryOption {
   label: string;
-  value: 'inStock' | 'preOrder' | 'lowStock';
+  value: 'any' | 'readyToShip' | 'outOfStock' | 'preOrder' | 'lowStock';
 }
 
 export interface Filters {
@@ -27,7 +27,7 @@ export interface Filters {
   sort: SortOption;
   gender: GenderOption;
   fit?: FitOption;
-  stock?: StockOption;
+  inventory: InventoryOption;
   minPrice?: number;
   maxPrice?: number;
 }
@@ -105,19 +105,27 @@ export const fitOptions: FitOption[] = [
   }
 ];
 
-export const stockOptions: StockOption[] = [
+export const inventoryOptions: InventoryOption[] = [
   {
-    label: 'In Stock',
-    value: 'inStock'
+    label: 'Any',
+    value: 'any'
+  },
+  {
+    label: 'Ready to Ship',
+    value: 'readyToShip'
+  },
+  {
+    label: 'Pre-Order',
+    value: 'preOrder'
   },
   {
     label: 'Low Stock',
     value: 'lowStock'
   },
   {
-    label: 'Pre-Order',
-    value: 'preOrder'
-  }
+    label: 'Out of Stock',
+    value: 'outOfStock'
+  },
 ];
 
 export const mockDefaultFilters: Filters = {
@@ -127,7 +135,7 @@ export const mockDefaultFilters: Filters = {
   sort: sortOptions[0],
   gender: genderOptions[0],
   fit: undefined,
-  stock: undefined,
+  inventory: undefined,
   minPrice: undefined,
   maxPrice: undefined
 };

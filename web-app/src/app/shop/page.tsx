@@ -1,20 +1,29 @@
 'use client';
 import Modal from '@/components/Modal';
 import ProductCard from '@/components/ProductCard';
-import { Filters, genderOptions, sortOptions } from '@/interfaces/filters';
+import {
+  Filters,
+  GenderOption,
+  genderOptions,
+  InventoryOption,
+  inventoryOptions,
+  SortOption,
+  sortOptions
+} from '@/interfaces/filters';
 import { mockProducts } from '@/interfaces/products';
-import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
+import { mdiChevronDown } from '@mdi/js';
 import Icon from '@mdi/react';
 import { useRef, useState } from 'react';
 import Form from 'next/form';
 import { useSearchParams } from 'next/navigation';
+import DropdownRadio from '@/components/DropdownRadio';
 
 interface OpenFilters {
   sort: boolean;
-  type: boolean;
   gender: boolean;
+  type: boolean;
   fit: boolean;
-  stock: boolean;
+  inventory: boolean;
   price: boolean;
 }
 
@@ -32,9 +41,13 @@ export default function Shop() {
     sort:
       sortOptions.find((s) => s.value === filterParams.get('sort')) ||
       sortOptions[0],
-    gender: genderOptions[0],
+    gender:
+      genderOptions.find((g) => g.value === filterParams.get('gender')) ||
+      genderOptions[0],
+    inventory:
+      inventoryOptions.find((g) => g.value === filterParams.get('inventory')) ||
+      inventoryOptions[0],
     fit: undefined,
-    stock: undefined,
     minPrice: undefined,
     maxPrice: undefined
   });
@@ -42,10 +55,10 @@ export default function Shop() {
   // windows in filters modal
   const [filtersOpen, setFiltersOpen] = useState<OpenFilters>({
     sort: false,
-    type: false,
     gender: false,
+    type: false,
     fit: false,
-    stock: false,
+    inventory: false,
     price: false
   });
 
@@ -78,6 +91,7 @@ export default function Shop() {
   return (
     <main>
       {/* <div className='sticky top-16 mb-4 flex w-full justify-center gap-4 py-4 bg-background shadow'> */}
+      {/* make into it's own component? vvvvvvvvvvv */}
       <div className='sticky top-16 mb-4 flex justify-between gap-8 p-2 bg-background shadow w-full'>
         {showScrollLeft && (
           <button onClick={scrollLeft} className='mt-2 border'>
@@ -126,7 +140,7 @@ export default function Shop() {
             type: false,
             gender: false,
             fit: false,
-            stock: false,
+            inventory: false,
             price: false
           });
         }}
@@ -134,103 +148,58 @@ export default function Shop() {
         {/* <div className='w-full md:w-96 flex flex-col'> */}
         <Form
           action={''}
-          className='w-full md:w-96 flex flex-col'
+          className='w-full md:w-96 flex flex-col h-full'
           onSubmit={() => setFilterModalOpen(false)}
         >
           <h4>Filters</h4>
-
-          <button
-            type='button'
-            className='w-full flex justify-between p-4 border-t'
-            onClick={() =>
+          <DropdownRadio
+            name='Sort'
+            selected={filters.sort}
+            options={sortOptions}
+            isOpen={filtersOpen.sort}
+            onOpen={() =>
               setFiltersOpen({ ...filtersOpen, sort: !filtersOpen.sort })
             }
-          >
-            <p>
-              Sort: <span className='text-accent'>{filters.sort.label}</span>
-            </p>
-            <Icon
-              path={filtersOpen.sort ? mdiChevronUp : mdiChevronDown}
-              size={1}
-            />
-          </button>
-          <div
-            className={`${
-              filtersOpen.sort ? 'max-h-96 px-4 pb-4 gap-4' : 'max-h-0'
-            } overflow-hidden transition-all duration-300 flex-col`}
-          >
-            <fieldset>
-              {sortOptions.map((s) => (
-                <div key={s.value}>
-                  <input
-                    type='radio'
-                    id={`sort-${s.value}`}
-                    name='sort'
-                    className='hidden'
-                    value={s.value}
-                    checked={filters.sort.value === s.value}
-                    onChange={() => {
-                      setFilters({ ...filters, sort: s });
-                      setFiltersOpen({ ...filtersOpen, sort: false });
-                    }}
-                  />
-                  <label
-                    htmlFor={`sort-${s.value}`}
-                    className='cursor-pointer hover:text-accent'
-                  >
-                    {s.label}
-                  </label>
-                </div>
-              ))}
-            </fieldset>
-          </div>
-
-          <button
-            type='button'
-            className='w-full flex justify-between p-4 border-t'
-            onClick={() =>
+            onClose={() => {
+              setFiltersOpen({ ...filtersOpen, sort: false });
+            }}
+            onSelect={(s) => {
+              setFilters({ ...filters, sort: s as SortOption });
+            }}
+          />
+          <DropdownRadio
+            name='Gender'
+            selected={filters.gender}
+            options={genderOptions}
+            isOpen={filtersOpen.gender}
+            onOpen={() =>
               setFiltersOpen({ ...filtersOpen, gender: !filtersOpen.gender })
             }
-          >
-            <p>
-              Gender:{' '}
-              <span className='text-accent'>{filters.gender.label}</span>
-            </p>
-            <Icon
-              path={filtersOpen.gender ? mdiChevronUp : mdiChevronDown}
-              size={1}
-            />
-          </button>
-          <div
-            className={`${
-              filtersOpen.gender ? 'max-h-96 px-4 pb-4 gap-4' : 'max-h-0'
-            } overflow-hidden transition-all duration-300 flex-col`}
-          >
-            <fieldset>
-              {genderOptions.map((g) => (
-                <div key={g.value}>
-                  <input
-                    type='radio'
-                    id={`gender-${g.value}`}
-                    name='gender'
-                    className='hidden'
-                    value={g.value}
-                    checked={filters.gender.value === g.value}
-                    onChange={() => {
-                      setFilters({ ...filters, gender: g });
-                      setFiltersOpen({ ...filtersOpen, gender: false });
-                    }}
-                  />
-                  <label
-                    htmlFor={`gender-${g.value}`}
-                    className='cursor-pointer hover:text-accent'
-                  >
-                    {g.label}
-                  </label>
-                </div>
-              ))}
-            </fieldset>
-          </div>
+            onClose={() => {
+              setFiltersOpen({ ...filtersOpen, gender: false });
+            }}
+            onSelect={(g) => {
+              setFilters({ ...filters, gender: g as GenderOption });
+            }}
+          />
+          <DropdownRadio
+            name='Inventory'
+            selected={filters.inventory}
+            options={inventoryOptions}
+            isOpen={filtersOpen.inventory}
+            onOpen={() =>
+              setFiltersOpen({
+                ...filtersOpen,
+                inventory: !filtersOpen.inventory
+              })
+            }
+            onClose={() => {
+              setFiltersOpen({ ...filtersOpen, inventory: false });
+            }}
+            onSelect={(i) => {
+              setFilters({ ...filters, inventory: i as InventoryOption });
+            }}
+          />
 
           <button className='w-full flex justify-between p-4 border-t'>
             Type <Icon path={mdiChevronDown} size={1} />
@@ -244,9 +213,24 @@ export default function Shop() {
           <button className='w-full flex justify-between p-4 border-t'>
             Color <Icon path={mdiChevronDown} size={1} />
           </button>
-
-          <div className='w-full flex gap-4'>
-            <button type='button' className='secondary-btn flex-grow'>
+          <div className='w-full flex gap-4 sticky bottom-0 bg-white mt-auto'>
+            <button
+              type='button'
+              className='secondary-btn flex-grow'
+              onClick={() =>
+                setFilters({
+                  category: undefined,
+                  subCategory: undefined,
+                  types: [],
+                  sort: sortOptions[0],
+                  gender: genderOptions[0],
+                  inventory: inventoryOptions[0],
+                  fit: undefined,
+                  minPrice: undefined,
+                  maxPrice: undefined
+                })
+              }
+            >
               Clear All
             </button>
             <button type='submit' className='accent-btn flex-grow'>
