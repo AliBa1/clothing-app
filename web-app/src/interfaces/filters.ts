@@ -135,7 +135,7 @@ export const mockDefaultFilters: Filters = {
   sort: sortOptions[0],
   gender: genderOptions[0],
   fit: undefined,
-  inventory: undefined,
+  inventory: inventoryOptions[0],
   minPrice: undefined,
   maxPrice: undefined
 };
