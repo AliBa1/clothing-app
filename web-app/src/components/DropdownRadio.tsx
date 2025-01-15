@@ -1,10 +1,6 @@
+import { LabelValue } from '@/interfaces/filters';
 import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
 import Icon from '@mdi/react';
-
-interface LabelValue {
-  label: string;
-  value: string;
-}
 
 interface DropdownProps {
   name: string;

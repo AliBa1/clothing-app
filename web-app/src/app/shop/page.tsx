@@ -3,15 +3,18 @@ import Modal from '@/components/Modal';
 import ProductCard from '@/components/ProductCard';
 import {
   Filters,
+  FitOption,
+  fitOptions,
   GenderOption,
   genderOptions,
   InventoryOption,
   inventoryOptions,
+  LabelValue,
   SortOption,
   sortOptions
 } from '@/interfaces/filters';
 import { mockProducts } from '@/interfaces/products';
-import { mdiChevronDown } from '@mdi/js';
+import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
 import Icon from '@mdi/react';
 import { useRef, useState } from 'react';
 import Form from 'next/form';
@@ -29,8 +32,8 @@ interface OpenFilters {
 
 export default function Shop() {
   const scrollDivRef = useRef<HTMLDivElement | null>(null);
-  const [showScrollLeft, setShowScrollLeft] = useState<boolean>(false);
-  const [showScrollRight, setShowScrollRight] = useState<boolean>(false);
+  // const [showScrollLeft, setShowScrollLeft] = useState<boolean>(false);
+  // const [showScrollRight, setShowScrollRight] = useState<boolean>(false);
   const [filterModalOpen, setFilterModalOpen] = useState<boolean>(false);
 
   const filterParams = useSearchParams();
@@ -38,6 +41,9 @@ export default function Shop() {
     category: undefined,
     subCategory: undefined,
     types: [],
+    // sort:
+    //   sortOptions.find((s) => s.value === filterParams.get('sort')) ||
+    //   sortOptions[0],
     sort:
       sortOptions.find((s) => s.value === filterParams.get('sort')) ||
       sortOptions[0],
@@ -47,7 +53,7 @@ export default function Shop() {
     inventory:
       inventoryOptions.find((g) => g.value === filterParams.get('inventory')) ||
       inventoryOptions[0],
-    fit: undefined,
+    fit: [],
     minPrice: undefined,
     maxPrice: undefined
   });
@@ -62,47 +68,58 @@ export default function Shop() {
     price: false
   });
 
-  const updateScrollButtons = () => {
-    if (scrollDivRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollDivRef.current;
-      setShowScrollLeft(scrollLeft > 0);
-      console.log(scrollLeft, clientWidth, scrollWidth);
-      setShowScrollRight(scrollLeft + clientWidth < scrollWidth - 10);
-    }
-  };
+  // const updateScrollButtons = () => {
+  //   if (scrollDivRef.current) {
+  //     const { scrollLeft, scrollWidth, clientWidth } = scrollDivRef.current;
+  //     setShowScrollLeft(scrollLeft > 0);
+  //     setShowScrollRight(scrollLeft + clientWidth < scrollWidth - 10);
+  //   }
+  // };
 
-  const scrollLeft = () => {
-    if (scrollDivRef.current) {
-      scrollDivRef.current.scrollTo({
-        left: -200,
-        behavior: 'smooth'
+  // const scrollLeft = () => {
+  //   if (scrollDivRef.current) {
+  //     scrollDivRef.current.scrollTo({
+  //       left: -200,
+  //       behavior: 'smooth'
+  //     });
+  //   }
+  // };
+
+  // const scrollRight = () => {
+  //   if (scrollDivRef.current) {
+  //     scrollDivRef.current.scrollTo({
+  //       left: scrollDivRef.current.scrollWidth,
+  //       behavior: 'smooth'
+  //     });
+  //   }
+  // };
+
+  function onCheckboxChange(option: FitOption, checked: boolean) {
+    if (checked) {
+      setFilters({ ...filters, fit: [...(filters.fit || []), option] });
+    } else {
+      setFilters({
+        ...filters,
+        fit: filters.fit?.filter((f) => f.value !== option.value) || []
       });
     }
-  };
+  }
 
-  const scrollRight = () => {
-    if (scrollDivRef.current) {
-      scrollDivRef.current.scrollTo({
-        left: scrollDivRef.current.scrollWidth,
-        behavior: 'smooth'
-      });
-    }
-  };
   return (
     <main>
       {/* <div className='sticky top-16 mb-4 flex w-full justify-center gap-4 py-4 bg-background shadow'> */}
       {/* make into it's own component? vvvvvvvvvvv */}
-      <div className='sticky top-16 mb-4 flex justify-between gap-8 p-2 bg-background shadow w-full'>
-        {showScrollLeft && (
+      <div className='sticky top-16 mb-4 flex flex-col md:flex-row justify-between gap-2 md:gap-8 p-2 bg-background shadow w-full'>
+        {/* {showScrollLeft && (
           <button onClick={scrollLeft} className='mt-2 border'>
             Scroll Left
           </button>
-        )}
+        )} */}
         <div
           ref={scrollDivRef}
-          className='flex overflow-x-scroll items-center gap-8 text-xl text-nowrap pb-2'
+          className='flex overflow-x-scroll items-center gap-8 text-nowrap pb-2 font-light'
           style={{ scrollbarWidth: 'none' }}
-          onScroll={updateScrollButtons}
+          // onScroll={updateScrollButtons}
         >
           <button className='text-accent'>All</button>
           <button>Hats</button>
@@ -113,19 +130,19 @@ export default function Shop() {
           <button>Jeans</button>
           <button>Accessories</button>
         </div>
-        {showScrollRight && (
+        {/* {showScrollRight && (
           <button onClick={scrollRight} className='mt-2'>
             Scroll Right
           </button>
-        )}
+        )} */}
         <button
-          className='secondary-btn border-primary'
+          className='secondary-btn border-primary text-base py-2 font-light'
           onClick={() => setFilterModalOpen(true)}
         >
           Filters
         </button>
       </div>
-      <div className='grid grid-cols-3 lg:grid-cols-4 gap-4'>
+      <div className='grid grid-cols-3 lg:grid-cols-4 gap-4 px-2'>
         {mockProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
@@ -201,18 +218,49 @@ export default function Shop() {
             }}
           />
 
-          <button className='w-full flex justify-between p-4 border-t'>
-            Type <Icon path={mdiChevronDown} size={1} />
+          <button
+            type='button'
+            className='w-full flex justify-between p-4 border-t'
+            onClick={() =>
+              setFiltersOpen({ ...filtersOpen, fit: !filtersOpen.fit })
+            }
+          >
+            Fit{' '}
+            <Icon
+              path={filtersOpen.fit ? mdiChevronUp : mdiChevronDown}
+              size={1}
+            />
           </button>
-          <button className='w-full flex justify-between p-4 border-t'>
-            Fit <Icon path={mdiChevronDown} size={1} />
-          </button>
-          <button className='w-full flex justify-between p-4 border-t'>
-            Size <Icon path={mdiChevronDown} size={1} />
-          </button>
-          <button className='w-full flex justify-between p-4 border-t'>
-            Color <Icon path={mdiChevronDown} size={1} />
-          </button>
+          <div
+            className={`${
+              filtersOpen.fit ? 'max-h-96 px-4 pb-8 md:pb-4 gap-4' : 'max-h-0'
+            } overflow-hidden transition-all duration-300 flex-col`}
+          >
+            <fieldset>
+              {fitOptions.map((f) => (
+                <div key={f.value} className='flex items-center'>
+                  <input
+                    type='checkbox'
+                    className='appearance-none h-4 mr-2 w-4 border border-secondary rounded checked:bg-accent checked:border-secondary focus:outline-none focus:ring-2 focus:ring-blue-300'
+                    id={`fit-${f.value}`}
+                    name='fit'
+                    value={f.value}
+                    checked={filters.fit && filters.fit.includes(f)}
+                    onChange={(e) => onCheckboxChange(f, e.target.checked)}
+                  />
+                  <label
+                    htmlFor={`fit-${f.value}`}
+                    className='cursor-pointer hover:text-accent'
+                  >
+                    {f.label}
+                  </label>
+                </div>
+              ))}
+            </fieldset>
+          </div>
+
+          <div className='w-full border-t'></div>
+
           <div className='w-full flex gap-4 sticky bottom-0 bg-white mt-auto'>
             <button
               type='button'
@@ -225,7 +273,7 @@ export default function Shop() {
                   sort: sortOptions[0],
                   gender: genderOptions[0],
                   inventory: inventoryOptions[0],
-                  fit: undefined,
+                  fit: [],
                   minPrice: undefined,
                   maxPrice: undefined
                 })

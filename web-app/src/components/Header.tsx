@@ -7,7 +7,7 @@ import { mdiAccount, mdiCart, mdiHeartOutline, mdiMagnify, mdiMenu } from '@mdi/
 export default function Header() {
   const pathname = usePathname();
   return (
-    <header className='sticky top-0 z-10 h-16 bg-background grid grid-cols-2 md:grid-cols-3 items-center px-4 md:px-8 py-2'>
+    <header className='sticky top-0 z-10 h-16 bg-background grid grid-cols-2 md:grid-cols-3 items-center px-4 md:px-8 py-2 border-b shadow-2xl'>
       <nav className='hidden md:flex gap-8'>
         <Link
           href='/shop'

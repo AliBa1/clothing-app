@@ -15,9 +15,9 @@ export default function ProductCard({ product }: ProductCardProps) {
         alt={product.name}
         height={1280}
         width={1024}
-        loading='lazy'
         style={{ backgroundColor: 'white' }}
         className='aspect-[4/5] w-96 rounded object-cover object-center'
+        priority
       />
 
       <div className='flex items-center w-full mt-2 mb-2 md:mb-0'>

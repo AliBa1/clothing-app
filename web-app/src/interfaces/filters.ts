@@ -1,5 +1,10 @@
 import { Category, CategoryOption, Subcategory } from './categories';
 
+export interface LabelValue {
+  label: string;
+  value: string;
+}
+
 export interface SortOption {
   label: string;
   value: 'default' | 'new' | 'popular' | 'lowToHighPrice' | 'highToLowPrice';
@@ -26,7 +31,7 @@ export interface Filters {
   types?: CategoryOption[];
   sort: SortOption;
   gender: GenderOption;
-  fit?: FitOption;
+  fit: FitOption[];
   inventory: InventoryOption;
   minPrice?: number;
   maxPrice?: number;
@@ -134,7 +139,7 @@ export const mockDefaultFilters: Filters = {
   types: [],
   sort: sortOptions[0],
   gender: genderOptions[0],
-  fit: undefined,
+  fit: [],
   inventory: inventoryOptions[0],
   minPrice: undefined,
   maxPrice: undefined
