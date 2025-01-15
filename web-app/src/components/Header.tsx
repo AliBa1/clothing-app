@@ -36,7 +36,7 @@ export default function Header() {
       </nav>
 
       <Link href='/' className='md:place-items-center'>
-        <h6>SiTENAMË</h6>
+        <h6>FLEA</h6>
       </Link>
 
       <div className='flex gap-2 md:gap-8 place-content-end'>

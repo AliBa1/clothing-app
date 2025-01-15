@@ -50,7 +50,9 @@ export default function ProductPage({
           {/* link to brand page vvvvvvv */}
           <p className='text-base md:text-xl px-4'>{product?.brand.name}</p>
         </div>
-        <h3 className='text-center md:text-start text-2xl md:text-3xl'>{product?.name}</h3>
+        <h3 className='text-center md:text-start text-2xl md:text-3xl'>
+          {product?.name}
+        </h3>
         {selectedColor.discount ? (
           <h3 className='text-center md:text-start text-xl md:text-3xl'>
             ${discountedPrice(selectedColor.price, selectedColor.discount)}{' '}
@@ -59,7 +61,9 @@ export default function ProductPage({
             </span>
           </h3>
         ) : (
-          <h3 className='text-center md:text-start text-2xl md:text-3xl'>${selectedColor.price}</h3>
+          <h3 className='text-center md:text-start text-2xl md:text-3xl'>
+            ${selectedColor.price}
+          </h3>
         )}
         <br></br>
         <div className='text-base md:text-xl mb-4'>
@@ -72,15 +76,8 @@ export default function ProductPage({
           )}
           <div className='flex flex-wrap gap-4 mt-2'>
             {product?.colors.map((c) => (
-              <Image
+              <button
                 key={c.colorName}
-                alt={c.colorName}
-                width={500}
-                height={500}
-                src={c.images.cover}
-                className={`img-button bg-gray-300 ${
-                  selectedColor === c && 'border-4 border-accent'
-                }`}
                 onClick={() => {
                   setSelectedColor(c);
                   if (
@@ -91,7 +88,17 @@ export default function ProductPage({
                     setSelectedSize('');
                   }
                 }}
-              />
+              >
+                <Image
+                  alt={c.colorName}
+                  width={500}
+                  height={500}
+                  src={c.images.cover}
+                  className={`img-button bg-gray-300 ${
+                    selectedColor === c && 'border-4 border-accent'
+                  }`}
+                />
+              </button>
             ))}
           </div>
         </div>
@@ -119,7 +126,9 @@ export default function ProductPage({
         </div>
         <br></br>
         <div className='flex flex-col gap-4'>
-          <button className='primary-btn h-12 md:h-16 w-full'>Add to Cart</button>
+          <button className='primary-btn h-12 md:h-16 w-full'>
+            Add to Cart
+          </button>
           <button className='secondary-btn h-12 md:h-16 w-full flex flex-nowrap items-center justify-center gap-2'>
             Save <Icon path={mdiHeartOutline} size={1.5} />
           </button>
