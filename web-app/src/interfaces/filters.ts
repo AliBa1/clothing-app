@@ -1,9 +1,5 @@
-import { Category, CategoryOption, Subcategory } from './categories';
-
-export interface LabelValue {
-  label: string;
-  value: string;
-}
+import { Category, Subcategory } from './categories';
+import { LabelValue } from './other';
 
 export interface SortOption {
   label: string;
@@ -25,10 +21,13 @@ export interface InventoryOption {
   value: 'any' | 'readyToShip' | 'outOfStock' | 'preOrder' | 'lowStock';
 }
 
+/**
+ * Filters that can be selected by users to specifiy what they see on shop page
+ */
 export interface Filters {
   category?: Category;
   subCategory?: Subcategory;
-  types?: CategoryOption[];
+  types?: LabelValue[];
   sort: SortOption;
   gender: GenderOption;
   fit: FitOption[];
@@ -37,6 +36,9 @@ export interface Filters {
   maxPrice: number;
 }
 
+/**
+ * Options user has to sort all items by when viewing
+ */
 export const sortOptions: SortOption[] = [
   {
     label: 'Default',
@@ -60,6 +62,9 @@ export const sortOptions: SortOption[] = [
   }
 ];
 
+/**
+ * Options user has to sort all genders by when viewing
+ */
 export const genderOptions: GenderOption[] = [
   {
     label: 'Any',
@@ -83,6 +88,9 @@ export const genderOptions: GenderOption[] = [
   }
 ];
 
+/**
+ * Options user has to sort how item fits when viewing
+ */
 export const fitOptions: FitOption[] = [
   {
     label: 'Boxy',
@@ -110,6 +118,9 @@ export const fitOptions: FitOption[] = [
   }
 ];
 
+/**
+ * Options user has to sort all items by inventory when viewing
+ */
 export const inventoryOptions: InventoryOption[] = [
   {
     label: 'Any',
@@ -133,6 +144,9 @@ export const inventoryOptions: InventoryOption[] = [
   }
 ];
 
+/**
+ * Default filters before changed or when cleared
+ */
 export const mockDefaultFilters: Filters = {
   category: undefined,
   subCategory: undefined,

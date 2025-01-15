@@ -6,7 +6,9 @@ import Link from 'next/link';
 interface ProductCardProps {
   product: Product;
 }
-
+/**
+ * Product displayed with brand, name, and price. Takes user to product page if clicked.
+ */
 export default function ProductCard({ product }: ProductCardProps) {
   return (
     <Link href={`/product/${product.id}`} className='block rounded-3xl group'>
@@ -54,7 +56,9 @@ export default function ProductCard({ product }: ProductCardProps) {
         ) : (
           <p>${product.colors[0].price}</p>
         )}
-        <p className='text-sm md:text-base'>{product?.colors.length > 1 && 'Multiple colors availible'}</p>
+        <p className='text-sm md:text-base'>
+          {product?.colors.length > 1 && 'Multiple colors availible'}
+        </p>
       </div>
     </Link>
   );

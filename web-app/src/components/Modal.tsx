@@ -8,6 +8,9 @@ interface ModalProps {
   children: React.ReactNode;
 }
 
+/**
+ * Use to show consistent modal when needed. Resposive for web and mobile.
+ */
 export default function Modal({ isOpen, onClose, children }: ModalProps) {
   const [isVisible, setIsVisible] = useState(isOpen);
   const [modalAnimation, setModalAnimation] = useState('');

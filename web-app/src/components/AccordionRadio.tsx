@@ -1,4 +1,4 @@
-import { LabelValue } from '@/interfaces/filters';
+import { LabelValue } from '@/interfaces/other';
 import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
 import Icon from '@mdi/react';
 
@@ -12,6 +12,9 @@ interface DropdownProps {
   onSelect: (o: LabelValue) => void;
 }
 
+/**
+ * Opens an accordion that allows users to select one item from a list of options
+ */
 export default function AccordionRadio({
   name,
   selected,

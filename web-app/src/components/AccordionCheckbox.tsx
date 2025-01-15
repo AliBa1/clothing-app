@@ -1,4 +1,4 @@
-import { LabelValue } from '@/interfaces/filters';
+import { LabelValue } from '@/interfaces/other';
 import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
 import Icon from '@mdi/react';
 
@@ -12,6 +12,9 @@ interface AccordionProps {
   onUnchecked: (o: LabelValue) => void;
 }
 
+/**
+ * Opens an accordion that allows users to select none, one, or many items to add or remove from array
+ */
 export default function AccordionCheckbox({
   name,
   selected,
@@ -21,6 +24,12 @@ export default function AccordionCheckbox({
   onChecked,
   onUnchecked
 }: AccordionProps) {
+  /**
+   * Runs function to add or remove option from selected
+   *
+   * @param option - The option that was checked or unchecked
+   * @param checked - If checked or unchecked
+   */
   function onCheckboxChange(option: LabelValue, checked: boolean) {
     if (checked) {
       onChecked(option);

@@ -1,5 +1,7 @@
 import { Brand, mockBrands } from '@/interfaces/brands';
-
+/**
+ * Product object for an item (clothing, accessory, etc.)
+ */
 export interface Product {
   id: string;
   name: string;
@@ -11,7 +13,9 @@ export interface Product {
   sizeNotes?: string;
   colors: ColorVariant[];
 }
-
+/**
+ * Version of a product with a specific color. Each product can have one or many ColorVariants
+ */
 export interface ColorVariant {
   colorName: string;
   price: number;
@@ -22,7 +26,9 @@ export interface ColorVariant {
   };
   sizes: SizeVariant[];
 }
-
+/**
+ * Size and quantity availible for each ColorVariant
+ */
 interface SizeVariant {
   size: string;
   quantity: number;
@@ -32,7 +38,9 @@ export interface Discount {
   type: 'fixed' | 'percent';
   amount: number;
 }
-
+/**
+ * Fake products to develop site with
+ */
 export const mockProducts: Product[] = [
   {
     id: '1',

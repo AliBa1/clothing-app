@@ -1,16 +1,13 @@
-export interface CategoryOption {
-  label: string; // Display name, e.g., "Graphic Tees"
-  value: string; // Internal value, e.g., "graphic_tees"
-}
+import { LabelValue } from './other';
 
 export interface Category {
-  category: CategoryOption;
+  category: LabelValue;
   subCategories: Subcategory[];
 }
 
 export interface Subcategory {
-  subcategory: CategoryOption;
-  types: CategoryOption[];
+  subcategory: LabelValue;
+  types: LabelValue[];
 }
 
 const tShirtSubcategory: Subcategory = {
@@ -216,6 +213,9 @@ const accessoriesCategory: Category = {
   ]
 };
 
+/**
+ * System to categoize items on the site.
+ */
 export const categories: Category[] = [
   topsCategory,
   bottomsCategory,
