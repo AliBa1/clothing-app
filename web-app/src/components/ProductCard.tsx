@@ -54,6 +54,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         ) : (
           <p>${product.colors[0].price}</p>
         )}
+        <p className='text-sm md:text-base'>{product?.colors.length > 1 && 'Multiple colors availible'}</p>
       </div>
     </Link>
   );
