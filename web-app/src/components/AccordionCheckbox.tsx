@@ -2,25 +2,32 @@ import { LabelValue } from '@/interfaces/filters';
 import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
 import Icon from '@mdi/react';
 
-interface DropdownProps {
+interface AccordionProps {
   name: string;
-  selected: LabelValue;
+  selected: LabelValue[];
   options: LabelValue[];
   isOpen: boolean;
   onOpen: () => void;
-  onClose: () => void;
-  onSelect: (o: LabelValue) => void;
+  onChecked: (o: LabelValue) => void;
+  onUnchecked: (o: LabelValue) => void;
 }
 
-export default function DropdownRadio({
+export default function AccordionCheckbox({
   name,
   selected,
   options,
   isOpen,
   onOpen,
-  onClose,
-  onSelect
-}: DropdownProps) {
+  onChecked,
+  onUnchecked
+}: AccordionProps) {
+  function onCheckboxChange(option: LabelValue, checked: boolean) {
+    if (checked) {
+      onChecked(option);
+    } else {
+      onUnchecked(option);
+    }
+  }
   return (
     <div>
       <button
@@ -28,8 +35,13 @@ export default function DropdownRadio({
         className='w-full flex justify-between p-4 border-t'
         onClick={onOpen}
       >
-        <p>
-          {name}: <span className='text-accent'>{selected.label}</span>
+        <p className='text-nowrap truncate'>
+          {name}
+          {selected.length > 0 && (
+            <span className='text-accent'>
+              : {selected.map((s) => s.label).join(', ')}
+            </span>
+          )}
         </p>
         <Icon path={isOpen ? mdiChevronUp : mdiChevronDown} size={1} />
       </button>
@@ -40,16 +52,15 @@ export default function DropdownRadio({
       >
         <fieldset>
           {options.map((o) => (
-            <div key={o.value}>
+            <div key={o.value} className='flex items-center'>
               <input
-                type='radio'
+                type='checkbox'
+                className='appearance-none h-4 mr-2 w-4 border border-secondary rounded checked:bg-accent checked:border-secondary focus:outline-none focus:ring-2 focus:ring-blue-300'
                 id={`${name.toLowerCase()}-${o.value}`}
-                name={name.toLowerCase()}
-                className='hidden'
+                name={`${name.toLowerCase()}`}
                 value={o.value}
-                checked={selected.value === o.value}
-                onChange={() => onSelect(o)}
-                onClick={onClose}
+                checked={selected.includes(o)}
+                onChange={(e) => onCheckboxChange(o, e.target.checked)}
               />
               <label
                 htmlFor={`${name.toLowerCase()}-${o.value}`}
