@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+// eslint-disable-next-line camelcase
 import { Geist, Geist_Mono, Lexend, Schoolbell } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
@@ -6,23 +7,27 @@ import Footer from '@/components/Footer';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
-  subsets: ['latin']
+  subsets: ['latin'],
+  preload: true,
 });
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
-  subsets: ['latin']
+  subsets: ['latin'],
+  preload: true,
 });
 
 const schoolbell = Schoolbell({
   weight: '400',
   variable: '--font-schoolbell',
-  subsets: ['latin']
+  subsets: ['latin'],
+  preload: true,
 });
 
 const lexend = Lexend({
   variable: '--font-lexend',
-  subsets: ['latin']
+  subsets: ['latin'],
+  preload: true,
 });
 
 export const metadata: Metadata = {

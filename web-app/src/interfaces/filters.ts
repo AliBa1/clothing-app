@@ -33,8 +33,8 @@ export interface Filters {
   gender: GenderOption;
   fit: FitOption[];
   inventory: InventoryOption;
-  minPrice?: number;
-  maxPrice?: number;
+  minPrice: number;
+  maxPrice: number;
 }
 
 export const sortOptions: SortOption[] = [
@@ -130,7 +130,7 @@ export const inventoryOptions: InventoryOption[] = [
   {
     label: 'Out of Stock',
     value: 'outOfStock'
-  },
+  }
 ];
 
 export const mockDefaultFilters: Filters = {
@@ -141,6 +141,6 @@ export const mockDefaultFilters: Filters = {
   gender: genderOptions[0],
   fit: [],
   inventory: inventoryOptions[0],
-  minPrice: undefined,
-  maxPrice: undefined
+  minPrice: 0,
+  maxPrice: 999999
 };

@@ -94,6 +94,7 @@ export default function ProductPage({
                   width={500}
                   height={500}
                   src={c.images.cover}
+                  style={{ backgroundColor: 'white' }}
                   className={`img-button bg-gray-300 ${
                     selectedColor === c && 'border-4 border-accent'
                   }`}

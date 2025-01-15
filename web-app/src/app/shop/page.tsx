@@ -9,6 +9,7 @@ import {
   genderOptions,
   InventoryOption,
   inventoryOptions,
+  mockDefaultFilters,
   SortOption,
   sortOptions
 } from '@/interfaces/filters';
@@ -18,6 +19,7 @@ import Form from 'next/form';
 import { useSearchParams } from 'next/navigation';
 import AccordionRadio from '@/components/AccordionRadio';
 import AccordionCheckbox from '@/components/AccordionCheckbox';
+import { categories } from '@/interfaces/categories';
 
 interface OpenFilters {
   sort: boolean;
@@ -29,28 +31,33 @@ interface OpenFilters {
 }
 
 export default function Shop() {
-  const [filterModalOpen, setFilterModalOpen] = useState<boolean>(false);
-
   const filterParams = useSearchParams();
+  const sortParams = filterParams.get('sort');
+  const genderParams = filterParams.get('gender');
+  const inventoryParams = filterParams.get('inventory');
+  const fitParams = filterParams.getAll('fit');
+
   const [filters, setFilters] = useState<Filters>({
-    category: undefined,
-    subCategory: undefined,
-    types: [],
+    category: mockDefaultFilters.category,
+    subCategory: mockDefaultFilters.subCategory,
+    types: mockDefaultFilters.types,
     sort:
-      sortOptions.find((s) => s.value === filterParams.get('sort')) ||
-      sortOptions[0],
+      sortOptions.find((s) => s.value === sortParams) ||
+      mockDefaultFilters.sort,
     gender:
-      genderOptions.find((g) => g.value === filterParams.get('gender')) ||
-      genderOptions[0],
+      genderOptions.find((g) => g.value === genderParams) ||
+      mockDefaultFilters.gender,
     inventory:
-      inventoryOptions.find((g) => g.value === filterParams.get('inventory')) ||
-      inventoryOptions[0],
-    fit: [],
-    minPrice: undefined,
-    maxPrice: undefined
+      inventoryOptions.find((g) => g.value === inventoryParams) ||
+      mockDefaultFilters.inventory,
+    fit:
+      fitOptions.filter((f) => fitParams.includes(f.value)) ||
+      mockDefaultFilters.fit,
+    minPrice: mockDefaultFilters.minPrice,
+    maxPrice: mockDefaultFilters.maxPrice
   });
 
-  // windows in filters modal
+  const [filterModalOpen, setFilterModalOpen] = useState<boolean>(false);
   const [filtersOpen, setFiltersOpen] = useState<OpenFilters>({
     sort: false,
     gender: false,
@@ -61,21 +68,16 @@ export default function Shop() {
   });
 
   return (
-    <main>
-      {/* make into it's own component? vvvvvvvvvvv */}
-      <div className='sticky top-16 mb-4 flex flex-col md:flex-row justify-between gap-2 md:gap-8 p-2 bg-background shadow w-full'>
+    <main className='px-0'>
+      <div className='sticky top-16 mb-4 flex flex-col md:flex-row justify-between gap-2 md:gap-8 py-2 px-4 md:px-8 bg-background shadow w-full'>
         <div
           className='flex overflow-x-scroll items-center gap-8 text-nowrap pb-2 font-light'
           style={{ scrollbarWidth: 'none' }}
         >
           <button className='text-accent'>All</button>
-          <button>Hats</button>
-          <button>Beanies</button>
-          <button>T-Shirts</button>
-          <button>Hoodies/Jackets</button>
-          <button>Pants</button>
-          <button>Jeans</button>
-          <button>Accessories</button>
+          {categories.map((c) => (
+            <button key={c.category.value}>{c.category.label}</button>
+          ))}
         </div>
         <button
           className='secondary-btn border-primary text-base py-2 font-light'
@@ -186,20 +188,8 @@ export default function Shop() {
           <div className='w-full flex gap-4 sticky bottom-0 bg-white mt-auto'>
             <button
               type='button'
-              className='secondary-btn flex-grow'
-              onClick={() =>
-                setFilters({
-                  category: undefined,
-                  subCategory: undefined,
-                  types: [],
-                  sort: sortOptions[0],
-                  gender: genderOptions[0],
-                  inventory: inventoryOptions[0],
-                  fit: [],
-                  minPrice: undefined,
-                  maxPrice: undefined
-                })
-              }
+              className='secondary-btn border-black flex-grow'
+              onClick={() => setFilters(mockDefaultFilters)}
             >
               Clear All
             </button>
