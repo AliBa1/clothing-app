@@ -6,6 +6,7 @@ import { discountedPrice } from '@/utils/helperFunctions';
 import { mdiHeartOutline } from '@mdi/js';
 import Icon from '@mdi/react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { use, useState } from 'react';
 
 export default function ProductPage({
@@ -14,6 +15,7 @@ export default function ProductPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = use(params);
+  const router = useRouter();
   const product = mockProducts.find((p) => p.id === id);
   const [selectedColor, setSelectedColor] = useState<ColorVariant>(
     product?.colors[0] || {
@@ -36,18 +38,25 @@ export default function ProductPage({
       <div className='flex flex-col w-full md:w-1/2 h-auto md:h-full px-2 md:px-8'>
         <div className='flex items-center justify-center md:justify-normal'>
           {product && (
-            <Image
-              src={product.brand.logo}
-              alt={product.brand.name}
-              height={500}
-              width={500}
-              loading='lazy'
-              style={{ backgroundColor: 'white' }}
-              className='aspect-square h-8 w-8 md:h-16 md:w-16 rounded-full border'
-            />
+            <>
+              <Image
+                src={product.brand.logo}
+                alt={product.brand.name}
+                height={500}
+                width={500}
+                loading='lazy'
+                style={{ backgroundColor: 'white' }}
+                className='aspect-square h-8 w-8 md:h-16 md:w-16 rounded-full border cursor-pointer peer'
+                onClick={() => router.push(`/brand/${product.brand.id}`)}
+              />
+              <p
+                className='text-base md:text-xl px-4 hover:underline peer-hover:underline cursor-pointer'
+                onClick={() => router.push(`/brand/${product.brand.id}`)}
+              >
+                {product.brand.name}
+              </p>
+            </>
           )}
-          {/* link to brand page vvvvvvv */}
-          <p className='text-base md:text-xl px-4'>{product?.brand.name}</p>
         </div>
         <h3 className='text-center md:text-start text-2xl md:text-3xl'>
           {product?.name}
