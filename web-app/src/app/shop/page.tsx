@@ -1,95 +1,203 @@
 'use client';
 import Modal from '@/components/Modal';
 import ProductCard from '@/components/ProductCard';
+import {
+  Filters,
+  FitOption,
+  fitOptions,
+  GenderOption,
+  genderOptions,
+  InventoryOption,
+  inventoryOptions,
+  mockDefaultFilters,
+  SortOption,
+  sortOptions
+} from '@/interfaces/filters';
 import { mockProducts } from '@/interfaces/products';
-import { mdiChevronDown } from '@mdi/js';
-import Icon from '@mdi/react';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
+import Form from 'next/form';
+import { useSearchParams } from 'next/navigation';
+import AccordionRadio from '@/components/AccordionRadio';
+import AccordionCheckbox from '@/components/AccordionCheckbox';
+import { categories } from '@/interfaces/categories';
+
+interface OpenFilters {
+  sort: boolean;
+  gender: boolean;
+  type: boolean;
+  fit: boolean;
+  inventory: boolean;
+  price: boolean;
+}
 
 export default function Shop() {
-  const scrollDivRef = useRef<HTMLDivElement | null>(null);
-  const [showScrollLeft, setShowScrollLeft] = useState<boolean>(false);
-  const [showScrollRight, setShowScrollRight] = useState<boolean>(false);
+  const filterParams = useSearchParams();
+  const sortParams = filterParams.get('sort');
+  const genderParams = filterParams.get('gender');
+  const inventoryParams = filterParams.get('inventory');
+  const fitParams = filterParams.getAll('fit');
+
+  const [filters, setFilters] = useState<Filters>({
+    category: mockDefaultFilters.category,
+    subCategory: mockDefaultFilters.subCategory,
+    types: mockDefaultFilters.types,
+    sort:
+      sortOptions.find((s) => s.value === sortParams) ||
+      mockDefaultFilters.sort,
+    gender:
+      genderOptions.find((g) => g.value === genderParams) ||
+      mockDefaultFilters.gender,
+    inventory:
+      inventoryOptions.find((g) => g.value === inventoryParams) ||
+      mockDefaultFilters.inventory,
+    fit:
+      fitOptions.filter((f) => fitParams.includes(f.value)) ||
+      mockDefaultFilters.fit,
+    minPrice: mockDefaultFilters.minPrice,
+    maxPrice: mockDefaultFilters.maxPrice
+  });
+
   const [filterModalOpen, setFilterModalOpen] = useState<boolean>(false);
+  const [filtersOpen, setFiltersOpen] = useState<OpenFilters>({
+    sort: false,
+    gender: false,
+    type: false,
+    fit: false,
+    inventory: false,
+    price: false
+  });
 
-  const updateScrollButtons = () => {
-    if (scrollDivRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollDivRef.current;
-      setShowScrollLeft(scrollLeft > 0);
-      console.log(scrollLeft, clientWidth, scrollWidth);
-      setShowScrollRight(scrollLeft + clientWidth < scrollWidth - 10);
-    }
-  };
-
-  const scrollLeft = () => {
-    if (scrollDivRef.current) {
-      scrollDivRef.current.scrollTo({
-        left: -200,
-        behavior: 'smooth'
-      });
-    }
-  };
-
-  const scrollRight = () => {
-    if (scrollDivRef.current) {
-      scrollDivRef.current.scrollTo({
-        left: scrollDivRef.current.scrollWidth,
-        behavior: 'smooth'
-      });
-    }
-  };
   return (
-    <main>
-      {/* <div className='sticky top-16 mb-4 flex w-full justify-center gap-4 py-4 bg-background shadow'> */}
-      <div className='sticky top-16 mb-4 flex justify-between gap-8 p-2 bg-background shadow w-full'>
-        {showScrollLeft && (
-          <button onClick={scrollLeft} className='mt-2 border'>
-            Scroll Left
-          </button>
-        )}
+    <main className='px-0'>
+      <div className='sticky top-16 mb-4 flex flex-col md:flex-row justify-between gap-2 md:gap-8 py-2 px-4 md:px-8 bg-background shadow w-full'>
         <div
-          ref={scrollDivRef}
-          className='flex overflow-x-scroll items-center gap-8 text-xl text-nowrap pb-2'
+          className='flex overflow-x-scroll items-center gap-8 text-nowrap pb-2 font-light'
           style={{ scrollbarWidth: 'none' }}
-          onScroll={updateScrollButtons}
         >
           <button className='text-accent'>All</button>
-          <button>Hats</button>
-          <button>Beanies</button>
-          <button>T-Shirts</button>
-          <button>Hoodies/Jackets</button>
-          <button>Pants</button>
-          <button>Jeans</button>
-          <button>Accessories</button>
+          {categories.map((c) => (
+            <button key={c.category.value}>{c.category.label}</button>
+          ))}
         </div>
-        {showScrollRight && (
-          <button onClick={scrollRight} className='mt-2'>
-            Scroll Right
-          </button>
-        )}
-        <button className='accent-btn' onClick={() => setFilterModalOpen(true)}>
+        <button
+          className='secondary-btn border-primary text-base py-2 font-light'
+          onClick={() => setFilterModalOpen(true)}
+        >
           Filters
         </button>
       </div>
-      <div className='grid grid-cols-3 lg:grid-cols-4 gap-4'>
+
+      <div className='grid grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8 px-2'>
         {mockProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.id} product={product} showBrand={true} />
         ))}
       </div>
 
-      <Modal isOpen={filterModalOpen} onClose={() => setFilterModalOpen(false)}>
-        <div className='w-96 flex flex-col'>
+      <Modal
+        isOpen={filterModalOpen}
+        onClose={() => {
+          setFilterModalOpen(false);
+          setFiltersOpen({
+            sort: false,
+            type: false,
+            gender: false,
+            fit: false,
+            inventory: false,
+            price: false
+          });
+        }}
+      >
+        <Form
+          action={''}
+          className='w-full md:w-96 flex flex-col h-full'
+          onSubmit={() => setFilterModalOpen(false)}
+        >
           <h4>Filters</h4>
-          <button className='w-full flex justify-between p-4 border-t'>Sort <Icon path={mdiChevronDown} size={1}/></button>
-          <button className='w-full flex justify-between p-4 border-t'>Type <Icon path={mdiChevronDown} size={1}/></button>
-          <button className='w-full flex justify-between p-4 border-t'>Fit <Icon path={mdiChevronDown} size={1}/></button>
-          <button className='w-full flex justify-between p-4 border-t'>Size <Icon path={mdiChevronDown} size={1}/></button>
-          <button className='w-full flex justify-between p-4 border-t'>Color <Icon path={mdiChevronDown} size={1}/></button>
-          <div className='w-full flex gap-4'>
-            <button className='secondary-btn'>Clear All</button>
-            <button className='accent-btn w-full'>Apply</button>
+          <AccordionRadio
+            name='Sort'
+            selected={filters.sort}
+            options={sortOptions}
+            isOpen={filtersOpen.sort}
+            onOpen={() =>
+              setFiltersOpen({ ...filtersOpen, sort: !filtersOpen.sort })
+            }
+            onClose={() => {
+              setFiltersOpen({ ...filtersOpen, sort: false });
+            }}
+            onSelect={(s) => {
+              setFilters({ ...filters, sort: s as SortOption });
+            }}
+          />
+          <AccordionRadio
+            name='Gender'
+            selected={filters.gender}
+            options={genderOptions}
+            isOpen={filtersOpen.gender}
+            onOpen={() =>
+              setFiltersOpen({ ...filtersOpen, gender: !filtersOpen.gender })
+            }
+            onClose={() => {
+              setFiltersOpen({ ...filtersOpen, gender: false });
+            }}
+            onSelect={(g) => {
+              setFilters({ ...filters, gender: g as GenderOption });
+            }}
+          />
+          <AccordionRadio
+            name='Inventory'
+            selected={filters.inventory}
+            options={inventoryOptions}
+            isOpen={filtersOpen.inventory}
+            onOpen={() =>
+              setFiltersOpen({
+                ...filtersOpen,
+                inventory: !filtersOpen.inventory
+              })
+            }
+            onClose={() => {
+              setFiltersOpen({ ...filtersOpen, inventory: false });
+            }}
+            onSelect={(i) => {
+              setFilters({ ...filters, inventory: i as InventoryOption });
+            }}
+          />
+          <AccordionCheckbox
+            name='Fit'
+            selected={filters.fit}
+            options={fitOptions}
+            isOpen={filtersOpen.fit}
+            onOpen={() =>
+              setFiltersOpen({ ...filtersOpen, fit: !filtersOpen.fit })
+            }
+            onChecked={(o) =>
+              setFilters({
+                ...filters,
+                fit: [...(filters.fit || []), o as FitOption]
+              })
+            }
+            onUnchecked={(o) =>
+              setFilters({
+                ...filters,
+                fit: filters.fit?.filter((f) => f.value !== o.value) || []
+              })
+            }
+          />
+
+          <div className='w-full border-t'></div>
+
+          <div className='w-full flex gap-4 sticky bottom-0 bg-white mt-auto'>
+            <button
+              type='button'
+              className='secondary-btn border-black flex-grow'
+              onClick={() => setFilters(mockDefaultFilters)}
+            >
+              Clear All
+            </button>
+            <button type='submit' className='accent-btn flex-grow'>
+              Apply
+            </button>
           </div>
-        </div>
+        </Form>
       </Modal>
     </main>
   );

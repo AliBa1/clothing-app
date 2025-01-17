@@ -27,11 +27,11 @@ export default function ImageCarousel({ images, alt }: CarouselProps) {
           alt={alt || 'Loading Product'}
           height={1280}
           width={1024}
-          loading='lazy'
-          style={{ backgroundColor: 'lightgray' }}
+          style={{ backgroundColor: 'white' }}
           className={`aspect-[4/5] rounded object-contain object-center ${
             !images[imgIndex] && 'object-fill'
           }`}
+          priority
         />
       }
 

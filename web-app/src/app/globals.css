@@ -11,7 +11,6 @@
 } */
 /* --accent: #968ee8; */
 
-
 /* @media (prefers-color-scheme: dark) {
   :root {
     --text: #eae9fc;
@@ -26,18 +25,18 @@
 :root {
   --text: #040316;
   --background: #dce2e4;
-  --primary: #464F51;
+  --primary: #464f51;
   --secondary: #ffffff;
-  --accent: #D68FD6;
+  --accent: #d68fd6;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --text: #ffffff;
     --background: #26292a;
-    --primary: #E6EFE9;
+    --primary: #e6efe9;
     --secondary: #000000;
-    --accent: #D68FD6;
+    --accent: #d68fd6;
   }
 }
 
@@ -89,15 +88,69 @@ body {
     @apply border border-primary rounded-full bg-secondary text-text p-1 disabled:bg-gray-500 disabled:text-gray-600 disabled:border-gray-600 disabled:border-2;
   }
   .primary-btn {
-    @apply text-base md:text-xl whitespace-nowrap rounded-xl bg-primary enabled:hover:opacity-90 text-secondary px-2 md:px-8 disabled:opacity-25;
+    @apply text-base md:text-xl whitespace-nowrap rounded-xl bg-primary enabled:hover:opacity-90 text-secondary px-2 md:px-8 disabled:opacity-25 py-2 md:py-0;
   }
   .secondary-btn {
-    @apply text-base md:text-xl whitespace-nowrap rounded-xl border border-black enabled:hover:opacity-90 px-2 md:px-8 disabled:opacity-25;
+    @apply text-base md:text-xl whitespace-nowrap rounded-xl border border-primary enabled:hover:opacity-90 px-2 md:px-8 disabled:opacity-25 py-2 md:py-0;
   }
   .accent-btn {
-    @apply text-base md:text-xl whitespace-nowrap rounded-xl bg-accent text-black enabled:hover:opacity-90 px-4 md:px-8 disabled:opacity-25;
+    @apply text-base md:text-xl whitespace-nowrap rounded-xl bg-accent text-black enabled:hover:opacity-90 px-2 md:px-8 disabled:opacity-25 py-2 md:py-0;
   }
   .img-button {
     @apply rounded h-24 w-24 bg-primary text-text aspect-square object-cover;
   }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutToRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.modal-slide-in {
+  animation: slideInFromRight 0.3s ease-out forwards;
+}
+
+.modal-slide-out {
+  animation: slideOutToRight 0.3s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.modal-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.modal-fade-out {
+  animation: fadeOut 0.3s ease-in forwards;
 }

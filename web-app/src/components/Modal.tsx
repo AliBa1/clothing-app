@@ -1,22 +1,64 @@
+// import { useEffect } from "react";
+
+import { useEffect, useState } from 'react';
+
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
 }
 
+/**
+ * Use to show consistent modal when needed. Resposive for web and mobile.
+ */
 export default function Modal({ isOpen, onClose, children }: ModalProps) {
-  if (!isOpen) {
+  const [isVisible, setIsVisible] = useState(isOpen);
+  const [modalAnimation, setModalAnimation] = useState('');
+  const [modalBgAnimation, setModalBgAnimation] = useState('');
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (isOpen) {
+      setIsVisible(true);
+      setModalAnimation('modal-slide-in');
+      setModalBgAnimation('modal-fade-in');
+    } else {
+      setModalAnimation('modal-slide-out');
+      setModalBgAnimation('modal-fade-out');
+      const timer = setTimeout(() => setIsVisible(false), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen]);
+
+  if (!isVisible) {
     return null;
   }
+
+  // if (!isOpen) {
+  //   return null;
+  // }
 
   return (
     <dialog
       aria-modal={true}
-      className='fixed inset-0 z-50 overflow-auto bg-black bg-opacity-50 flex items-center justify-center w-full h-full'
+      className={`flex items-center justify-center w-full h-full fixed inset-0 z-50 bg-black bg-opacity-50 ${modalBgAnimation}`}
+      // className='flex items-center justify-center w-full h-full fixed inset-0 z-50 bg-black bg-opacity-50'
       onClick={onClose}
     >
       <div
-        className='bg-white rounded-lg p-4'
+        className={`bg-white rounded-lg p-4 w-full h-full md:h-3/4 md:w-auto max-h-full overflow-y-auto flex flex-col ${modalAnimation}`}
+        // className='bg-white rounded-lg p-4 w-full h-full md:h-auto md:w-auto max-h-full overflow-y-auto'
         onClick={(e) => e.stopPropagation()}
       >
         <div className='flex justify-end'>
@@ -41,7 +83,7 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
             </svg>
           </button>
         </div>
-        <div className='m-2'>{children}</div>
+        <div className='flex-grow m-2'>{children}</div>
       </div>
     </dialog>
   );

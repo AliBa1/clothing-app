@@ -1,24 +1,37 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+## To Run (locally)
 
-First, run the development server:
+Make sure you have yarn installed if not installed it here [Yarn installation](https://classic.yarnpkg.com/en/docs/install)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Install all dependencys using this:
+```bash 
+yarn install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+To run development server:
+```bash
+yarn dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Run tests
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Run tests in terminal:
+```bash
+yarn test
+```
+
+Run tests with UI:
+```bash
+yarn test:ui
+```
+
+Create a test using the UI:
+```bash
+yarn test:create
+```
+
+Open http://localhost:3000 with your browser to see the result.
 
 ## Learn More
 
