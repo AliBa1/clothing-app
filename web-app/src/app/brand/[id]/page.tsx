@@ -3,6 +3,8 @@
 import ProductCard from '@/components/ProductCard';
 import { mockBrands } from '@/interfaces/brands';
 import { mockProducts } from '@/interfaces/products';
+import { mdiCheck, mdiPlus } from '@mdi/js';
+import Icon from '@mdi/react';
 import Image from 'next/image';
 import { use } from 'react';
 
@@ -27,10 +29,61 @@ export default function BrandPage({
           width={500}
           loading='lazy'
         />
-        <h3>{brand?.name}</h3>
-        <p className=''>This is the brand bio. We are a great brand founded in 1989. We offfer high quality and service.</p>
+        <h3 className='text-xl md:text-3xl'>{brand?.name}</h3>
+        <p className='whitespace-normal text-center text-sm md:text-base w-full md:w-1/2'>{brand?.bio}</p>
+        <div className='flex gap-8'>
+          {brand?.links.instagram && (
+            <a
+              href={brand.links.instagram}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <Image
+                src={'/social-media-icons/Instagram_Glyph_Gradient.png'}
+                alt='Instagram'
+                width={100}
+                height={100}
+                className='w-8 h-8 aspect-square'
+              />
+            </a>
+          )}
+
+          {brand?.links.youtube && (
+            <a
+              href={brand.links.youtube}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <Image
+                src={'/social-media-icons/YouTube Vector Icon.svg'}
+                alt='YouTube'
+                width={100}
+                height={100}
+                className='w-8 h-8 aspect-square'
+              />
+            </a>
+          )}
+
+          {brand?.links.tiktok && (
+            <a
+              href={brand.links.tiktok}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <Image
+                src={'/social-media-icons/TikTok_Icon_Black_Circle.png'}
+                alt='TikTok'
+                width={100}
+                height={100}
+                className='w-8 h-8 aspect-square'
+              />
+            </a>
+          )}
+        </div>
         <div className='flex gap-4 mt-8'>
-          <button className='primary-btn'>Follow</button>
+          {/* update to match if user is following or not */}
+          <button className='secondary-btn flex items-center gap-2'>Follow <Icon path={mdiPlus} size={1}/></button>
+          <button className='primary-btn flex items-center gap-2'>Following <Icon path={mdiCheck} size={1}/></button>
           <button className='primary-btn'>Contact</button>
         </div>
       </div>
