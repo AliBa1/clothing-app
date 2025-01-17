@@ -1,12 +1,13 @@
 'use client';
 
+import BrandLink from '@/components/BrandLink';
 import ImageCarousel from '@/components/ImageCarousel';
 import { ColorVariant, mockProducts } from '@/interfaces/products';
 import { discountedPrice } from '@/utils/helperFunctions';
 import { mdiHeartOutline } from '@mdi/js';
 import Icon from '@mdi/react';
 import Image from 'next/image';
-import { notFound, useRouter } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import { use, useState } from 'react';
 
 export default function ProductPage({
@@ -15,7 +16,7 @@ export default function ProductPage({
   params: Promise<{ productSlug: string, id: string }>;
 }) {
   const { productSlug, id } = use(params);
-  const router = useRouter();
+  // const router = useRouter();
   const product = mockProducts.find((p) => p.id === id);
   if (product === undefined || productSlug !== product.productSlug) {
     notFound();
@@ -41,24 +42,25 @@ export default function ProductPage({
       <div className='flex flex-col w-full md:w-1/2 h-auto md:h-full px-2 md:px-8'>
         <div className='flex items-center justify-center md:justify-normal'>
           {product && (
-            <>
-              <Image
-                src={product.brand.logo}
-                alt={product.brand.name}
-                height={500}
-                width={500}
-                loading='lazy'
-                style={{ backgroundColor: 'white' }}
-                className='aspect-square h-8 w-8 md:h-16 md:w-16 rounded-full border cursor-pointer peer'
-                onClick={() => router.push(`/${product.brand.handle}`)}
-              />
-              <p
-                className='text-base md:text-xl px-4 hover:underline peer-hover:underline cursor-pointer'
-                onClick={() => router.push(`/${product.brand.handle}`)}
-              >
-                {product.brand.name}
-              </p>
-            </>
+            // <>
+            //   <Image
+            //     src={product.brand.logo}
+            //     alt={product.brand.name}
+            //     height={500}
+            //     width={500}
+            //     loading='lazy'
+            //     style={{ backgroundColor: 'white' }}
+            //     className='aspect-square h-8 w-8 md:h-16 md:w-16 rounded-full border cursor-pointer peer'
+            //     onClick={() => router.push(`/${product.brand.handle}`)}
+            //   />
+            //   <p
+            //     className='text-base md:text-xl px-4 hover:underline peer-hover:underline cursor-pointer'
+            //     onClick={() => router.push(`/${product.brand.handle}`)}
+            //   >
+            //     {product.brand.name}
+            //   </p>
+            // </>
+            <BrandLink brand={product.brand} size={'big'} />
           )}
         </div>
         <h3 className='text-center md:text-start text-2xl md:text-3xl'>

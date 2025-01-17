@@ -26,7 +26,7 @@ export default function Header() {
           Popular
         </Link>
         <Link
-          href='/'
+          href='/feed'
           className={`hover:underline decoration-accent ${
             pathname === '/feed' ? 'text-accent' : ''
           }`}

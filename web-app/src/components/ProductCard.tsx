@@ -2,8 +2,9 @@ import { Product } from '@/interfaces/products';
 import { discountedPrice } from '@/utils/helperFunctions';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import BrandLink from './BrandLink';
 
 interface ProductCardProps {
   product: Product;
@@ -13,30 +14,13 @@ interface ProductCardProps {
  * Product displayed with brand, name, and price. Takes user to product page if clicked.
  */
 export default function ProductCard({ product, showBrand }: ProductCardProps) {
-  const router = useRouter();
+  // const router = useRouter();
   const [image, setImage] = useState(product.colors[0].images.cover);
   const [color, setColor] = useState(product.colors[0].colorName);
   return (
     <div className='block rounded-3xl text-center'>
       {showBrand && (
-        <div className='flex items-center w-full mb-2 text-nowrap'>
-          <Image
-            src={product.brand.logo}
-            alt={product.brand.name}
-            height={500}
-            width={500}
-            loading='lazy'
-            style={{ backgroundColor: 'white' }}
-            className='aspect-square h-4 w-4 md:h-8 md:w-8 rounded-full border cursor-pointer peer'
-            onClick={() => router.push(`/${product.brand.handle}`)}
-          />
-          <p
-            className='text-sm md:text-base px-2 truncate hover:underline cursor-pointer peer-hover:underline'
-            onClick={() => router.push(`/${product.brand.handle}`)}
-          >
-            {product?.brand.name}
-          </p>
-        </div>
+        <BrandLink brand={product.brand} size='normal'/>
       )}
 
       <Link
