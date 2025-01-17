@@ -54,7 +54,7 @@ export default function ProductCard({ product, showBrand }: ProductCardProps) {
           priority
         />
 
-        <div className='group-hover:underline decoration-accent text-base md:text-xl font-heading'>
+        <div className='group-hover:underline decoration-accent text-sm md:text-xl font-body md:font-heading'>
           <p>{product.name}</p>
           {product.colors[0].discount ? (
             <p>
@@ -70,14 +70,14 @@ export default function ProductCard({ product, showBrand }: ProductCardProps) {
           ) : (
             <p>${product.colors[0].price}</p>
           )}
-          {/* <p className='text-sm md:text-base'>
-            {product?.colors.length > 1 && 'Multiple colors availible'}
-          </p> */}
+          <p className='block md:hidden text-sm md:text-base italic font-light'>
+            {product?.colors.length > 1 && `${product.colors.length} Colors`}
+          </p>
         </div>
       </Link>
 
       {product?.colors.length > 1 && (
-        <div className='flex gap-1 justify-center'>
+        <div className='hidden md:flex gap-1 justify-center'>
           {product.colors.map((c) => (
             <button
               key={`${product.name}-${c.colorName}`}
