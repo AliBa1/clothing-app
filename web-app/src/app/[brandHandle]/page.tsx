@@ -6,16 +6,25 @@ import { mockProducts } from '@/interfaces/products';
 import { mdiCheck, mdiPlus } from '@mdi/js';
 import Icon from '@mdi/react';
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
 import { use } from 'react';
 
 export default function BrandPage({
   params
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ brandHandle: string }>;
 }) {
-  const { id } = use(params);
-  const brand = mockBrands.find((b) => b.id === id);
-  const products = mockProducts.filter((p) => p.brand.id === id);
+  const { brandHandle } = use(params);
+  const brand = mockBrands.find(
+    (b) => b.handle.toLowerCase() === brandHandle.toLowerCase()
+  );
+  const products = mockProducts.filter(
+    (p) => p.brand.handle.toLowerCase() === brandHandle.toLowerCase()
+  );
+
+  if (brand === undefined) {
+    notFound();
+  }
 
   return (
     <main>
@@ -30,7 +39,9 @@ export default function BrandPage({
           loading='lazy'
         />
         <h3 className='text-xl md:text-3xl'>{brand?.name}</h3>
-        <p className='whitespace-normal text-center text-sm md:text-base w-full md:w-1/2'>{brand?.bio}</p>
+        <p className='whitespace-normal text-center text-sm md:text-base w-full md:w-1/2'>
+          {brand?.bio}
+        </p>
         <div className='flex gap-8'>
           {brand?.links.instagram && (
             <a
@@ -82,8 +93,12 @@ export default function BrandPage({
         </div>
         <div className='flex gap-4 mt-8'>
           {/* update to match if user is following or not */}
-          <button className='secondary-btn flex items-center gap-2'>Follow <Icon path={mdiPlus} size={1}/></button>
-          <button className='primary-btn flex items-center gap-2'>Following <Icon path={mdiCheck} size={1}/></button>
+          <button className='secondary-btn flex items-center gap-2'>
+            Follow <Icon path={mdiPlus} size={1} />
+          </button>
+          <button className='primary-btn flex items-center gap-2'>
+            Following <Icon path={mdiCheck} size={1} />
+          </button>
           <button className='primary-btn'>Contact</button>
         </div>
       </div>

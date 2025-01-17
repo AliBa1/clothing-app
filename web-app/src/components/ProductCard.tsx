@@ -14,7 +14,6 @@ interface ProductCardProps {
 export default function ProductCard({ product, showBrand }: ProductCardProps) {
   const router = useRouter();
   return (
-    // <Link href={`/product/${product.id}`} className='block rounded-3xl group'>
     <div className='block rounded-3xl'>
       {showBrand && (
         <div className='flex items-center w-full mb-2 text-nowrap'>
@@ -26,18 +25,18 @@ export default function ProductCard({ product, showBrand }: ProductCardProps) {
             loading='lazy'
             style={{ backgroundColor: 'white' }}
             className='aspect-square h-4 w-4 md:h-8 md:w-8 rounded-full border cursor-pointer peer'
-            onClick={() => router.push(`/brand/${product.brand.id}`)}
+            onClick={() => router.push(`/${product.brand.handle}`)}
           />
           <p
             className='text-sm md:text-base px-2 truncate hover:underline cursor-pointer peer-hover:underline'
-            onClick={() => router.push(`/brand/${product.brand.id}`)}
+            onClick={() => router.push(`/${product.brand.handle}`)}
           >
             {product?.brand.name}
           </p>
         </div>
       )}
 
-      <Link href={`/product/${product.id}`} className='group'>
+      <Link href={`/product/${product.productSlug}/${product.id}`} className='group'>
         <Image
           src={product.colors[0].images.cover}
           alt={product.name}
@@ -69,7 +68,6 @@ export default function ProductCard({ product, showBrand }: ProductCardProps) {
           </p>
         </div>
       </Link>
-      {/* </Link> */}
     </div>
   );
 }

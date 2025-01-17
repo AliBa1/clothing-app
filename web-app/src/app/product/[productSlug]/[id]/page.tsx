@@ -6,17 +6,20 @@ import { discountedPrice } from '@/utils/helperFunctions';
 import { mdiHeartOutline } from '@mdi/js';
 import Icon from '@mdi/react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { notFound, useRouter } from 'next/navigation';
 import { use, useState } from 'react';
 
 export default function ProductPage({
   params
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ productSlug: string, id: string }>;
 }) {
   const { id } = use(params);
   const router = useRouter();
   const product = mockProducts.find((p) => p.id === id);
+  if (product === undefined) {
+    notFound();
+  }
   const [selectedColor, setSelectedColor] = useState<ColorVariant>(
     product?.colors[0] || {
       colorName: '',
@@ -47,11 +50,11 @@ export default function ProductPage({
                 loading='lazy'
                 style={{ backgroundColor: 'white' }}
                 className='aspect-square h-8 w-8 md:h-16 md:w-16 rounded-full border cursor-pointer peer'
-                onClick={() => router.push(`/brand/${product.brand.id}`)}
+                onClick={() => router.push(`/${product.brand.handle}`)}
               />
               <p
                 className='text-base md:text-xl px-4 hover:underline peer-hover:underline cursor-pointer'
-                onClick={() => router.push(`/brand/${product.brand.id}`)}
+                onClick={() => router.push(`/${product.brand.handle}`)}
               >
                 {product.brand.name}
               </p>

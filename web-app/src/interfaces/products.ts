@@ -5,6 +5,7 @@ import { Brand, mockBrands } from '@/interfaces/brands';
 export interface Product {
   id: string;
   name: string;
+  productSlug: string;
   brand: Brand;
   description?: string;
   shipping?: string;
@@ -45,6 +46,7 @@ export const mockProducts: Product[] = [
   {
     id: '1',
     name: 'LIGHTWEIGHT BUCKLE PUFFER JACKET',
+    productSlug: 'alyx-lightweight-buckle-puffer-jacket',
     brand: mockBrands[0],
     description:
       'Puffer jacket in a lightweight fabric with intergrated buckle collar closure',
@@ -73,6 +75,7 @@ export const mockProducts: Product[] = [
   {
     id: '2',
     name: 'STMT Hoodie',
+    productSlug: 'statement-stmt-hoodie',
     brand: mockBrands[4],
     description: '100% COTTON FLEECE\n PUFFPRINT AND SCREENPRINT COMBO',
     shipping: 'Free shipping on orders over $50',
@@ -149,6 +152,7 @@ export const mockProducts: Product[] = [
   {
     id: '3',
     name: 'Blank Sweatsuit Bundle',
+    productSlug: 'thirteen-studios-blank-sweatsuit-bundle',
     brand: mockBrands[5],
     colors: [
       {
@@ -240,6 +244,7 @@ export const mockProducts: Product[] = [
   {
     id: '4',
     name: 'Perfect T-shirt',
+    productSlug: 'thirteen-studios-perfect-t-shirt',
     brand: mockBrands[5],
     colorNotes: 'Light Gray-ish even though it appears to be white',
     sizeNotes: 'Size up for looser fit',
@@ -259,6 +264,7 @@ export const mockProducts: Product[] = [
   {
     id: '5',
     name: 'Cargo Pants',
+    productSlug: 'boohooman-cargo-pants',
     brand: mockBrands[1],
     colors: [
       {
@@ -277,6 +283,7 @@ export const mockProducts: Product[] = [
   {
     id: '6',
     name: 'Cargo Shorts',
+    productSlug: 'boohooman-cargo-shorts',
     brand: mockBrands[1],
     colors: [
       {
@@ -295,6 +302,7 @@ export const mockProducts: Product[] = [
   {
     id: '7',
     name: 'Runner Heavyweight Hunter Hoodie',
+    productSlug: 'rich-usi-runner-heavyweight-hunter-hoodie',
     brand: mockBrands[3],
     description:
       '- 20 Oz 100% Cotton Fleece\n- Garment Dyed-Vintage Black\n- Seams Flowing Across Hoodie\n- Boxy Fit (Choose your regular size or size up for an oversized fit)\n- Big Ass Hood\n- Two Way YKK Zipper',
@@ -319,6 +327,7 @@ export const mockProducts: Product[] = [
   {
     id: '8',
     name: 'Nike Tech Woven Oversized Pants',
+    productSlug: 'nike-nike-tech-woven-oversized-pants',
     brand: mockBrands[2],
     description:
       'Crafted with stretchy woven material, these Nike Tech pants offer you ease of movement and adjustability. The wide-leg cut is paired with bungee locks at the ankles that let you switch up the fit.',
@@ -370,6 +379,7 @@ export const mockProducts: Product[] = [
   {
     id: '9',
     name: 'Nike Tech Jacket',
+    productSlug: 'nike-nike-tech-jacket',
     brand: mockBrands[2],
     colors: [
       {
@@ -391,6 +401,7 @@ export const mockProducts: Product[] = [
   {
     id: '10',
     name: 'Parachute Pants',
+    productSlug: 'boohooman-parachute-pants',
     brand: mockBrands[1],
     colors: [
       {
