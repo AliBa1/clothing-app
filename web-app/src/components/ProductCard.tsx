@@ -3,6 +3,7 @@ import { discountedPrice } from '@/utils/helperFunctions';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 interface ProductCardProps {
   product: Product;
@@ -13,8 +14,10 @@ interface ProductCardProps {
  */
 export default function ProductCard({ product, showBrand }: ProductCardProps) {
   const router = useRouter();
+  const [image, setImage] = useState(product.colors[0].images.cover);
+  const [color, setColor] = useState(product.colors[0].colorName);
   return (
-    <div className='block rounded-3xl'>
+    <div className='block rounded-3xl text-center'>
       {showBrand && (
         <div className='flex items-center w-full mb-2 text-nowrap'>
           <Image
@@ -36,10 +39,14 @@ export default function ProductCard({ product, showBrand }: ProductCardProps) {
         </div>
       )}
 
-      <Link href={`/product/${product.productSlug}/${product.id}`} className='group'>
+      <Link
+        href={`/product/${product.productSlug}/${product.id}`}
+        className='group'
+      >
         <Image
-          src={product.colors[0].images.cover}
-          alt={product.name}
+          // src={product.colors[0].images.cover}
+          src={image}
+          alt={`${color} ${product.name}`}
           height={1280}
           width={1024}
           style={{ backgroundColor: 'white' }}
@@ -63,11 +70,33 @@ export default function ProductCard({ product, showBrand }: ProductCardProps) {
           ) : (
             <p>${product.colors[0].price}</p>
           )}
-          <p className='text-sm md:text-base'>
+          {/* <p className='text-sm md:text-base'>
             {product?.colors.length > 1 && 'Multiple colors availible'}
-          </p>
+          </p> */}
         </div>
       </Link>
+
+      {product?.colors.length > 1 && (
+        <div className='flex gap-1 justify-center'>
+          {product.colors.map((c) => (
+            <button
+              key={`${product.name}-${c.colorName}`}
+              className='btn-circle h-4 w-4'
+              style={{
+                background: `${
+                  c.primaryColor.broadColor === 'multicolor'
+                    ? 'conic-gradient(red, yellow, green, blue, purple)'
+                    : `rgb(${c.primaryColor.red}, ${c.primaryColor.green}, ${c.primaryColor.blue})`
+                }`
+              }}
+              onClick={() => {
+                setImage(c.images.cover);
+                setColor(c.colorName);
+              }}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

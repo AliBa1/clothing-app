@@ -14,11 +14,40 @@ export interface Product {
   sizeNotes?: string;
   colors: ColorVariant[];
 }
+
+interface Multicolor {
+  broadColor: 'multicolor';
+  red: null;
+  green: null;
+  blue: null;
+}
+
+interface Color {
+  broadColor:
+    | 'black'
+    | 'white'
+    | 'red'
+    | 'blue'
+    | 'green'
+    | 'yellow'
+    | 'purple'
+    | 'brown'
+    | 'grey'
+    | 'orange'
+    | 'pink'
+    | 'burgandy'
+    | 'tan';
+  red: number;
+  green: number;
+  blue: number;
+}
+
 /**
  * Version of a product with a specific color. Each product can have one or many ColorVariants
  */
 export interface ColorVariant {
   colorName: string;
+  primaryColor: Multicolor | Color;
   price: number;
   discount?: Discount;
   images: {
@@ -54,6 +83,12 @@ export const mockProducts: Product[] = [
     colors: [
       {
         colorName: 'Black',
+        primaryColor: {
+          broadColor: 'black',
+          red: 46,
+          green: 50,
+          blue: 49
+        },
         price: 578,
         discount: {
           type: 'percent',
@@ -85,6 +120,12 @@ export const mockProducts: Product[] = [
     colors: [
       {
         colorName: 'Black',
+        primaryColor: {
+          broadColor: 'black',
+          red: 18,
+          green: 18,
+          blue: 18
+        },
         price: 77,
         discount: {
           type: 'percent',
@@ -105,6 +146,12 @@ export const mockProducts: Product[] = [
       },
       {
         colorName: 'Sky Blue',
+        primaryColor: {
+          broadColor: 'blue',
+          red: 91,
+          green: 144,
+          blue: 193
+        },
         price: 77,
         discount: {
           type: 'percent',
@@ -121,6 +168,12 @@ export const mockProducts: Product[] = [
       },
       {
         colorName: 'Grey',
+        primaryColor: {
+          broadColor: 'grey',
+          red: 85,
+          green: 83,
+          blue: 80
+        },
         price: 77,
         discount: {
           type: 'percent',
@@ -135,6 +188,12 @@ export const mockProducts: Product[] = [
       },
       {
         colorName: 'Purple',
+        primaryColor: {
+          broadColor: 'purple',
+          red: 93,
+          green: 70,
+          blue: 160
+        },
         price: 77,
         discount: {
           type: 'percent',
@@ -157,6 +216,12 @@ export const mockProducts: Product[] = [
     colors: [
       {
         colorName: 'Black',
+        primaryColor: {
+          broadColor: 'black',
+          red: 46,
+          green: 46,
+          blue: 49
+        },
         price: 170,
         discount: {
           type: 'fixed',
@@ -171,6 +236,12 @@ export const mockProducts: Product[] = [
       },
       {
         colorName: 'Green',
+        primaryColor: {
+          broadColor: 'black',
+          red: 50,
+          green: 72,
+          blue: 61
+        },
         price: 170,
         discount: {
           type: 'fixed',
@@ -185,6 +256,12 @@ export const mockProducts: Product[] = [
       },
       {
         colorName: 'Brown',
+        primaryColor: {
+          broadColor: 'brown',
+          red: 62,
+          green: 48,
+          blue: 38
+        },
         price: 170,
         discount: {
           type: 'fixed',
@@ -199,6 +276,12 @@ export const mockProducts: Product[] = [
       },
       {
         colorName: 'Charcoal',
+        primaryColor: {
+          broadColor: 'grey',
+          red: 85,
+          green: 91,
+          blue: 109
+        },
         price: 170,
         discount: {
           type: 'fixed',
@@ -213,6 +296,12 @@ export const mockProducts: Product[] = [
       },
       {
         colorName: 'Blue',
+        primaryColor: {
+          broadColor: 'blue',
+          red: 29,
+          green: 75,
+          blue: 182
+        },
         price: 170,
         discount: {
           type: 'fixed',
@@ -227,6 +316,12 @@ export const mockProducts: Product[] = [
       },
       {
         colorName: 'White',
+        primaryColor: {
+          broadColor: 'white',
+          red: 194,
+          green: 191,
+          blue: 183
+        },
         price: 170,
         discount: {
           type: 'fixed',
@@ -251,6 +346,12 @@ export const mockProducts: Product[] = [
     colors: [
       {
         colorName: 'Gray',
+        primaryColor: {
+          broadColor: 'grey',
+          red: 198,
+          green: 198,
+          blue: 196
+        },
         price: 35,
         images: { cover: '/mock/cover/blank_tee.png' },
         sizes: [
@@ -269,6 +370,12 @@ export const mockProducts: Product[] = [
     colors: [
       {
         colorName: 'Black',
+        primaryColor: {
+          broadColor: 'black',
+          red: 46,
+          green: 50,
+          blue: 49
+        },
         price: 50,
         images: { cover: '/mock/cover/cargo_pants.jpg' },
         sizes: [
@@ -288,6 +395,12 @@ export const mockProducts: Product[] = [
     colors: [
       {
         colorName: 'Black',
+        primaryColor: {
+          broadColor: 'black',
+          red: 32,
+          green: 33,
+          blue: 34
+        },
         price: 45,
         images: { cover: '/mock/cover/cargo_shorts.png' },
         sizes: [
@@ -309,6 +422,12 @@ export const mockProducts: Product[] = [
     colors: [
       {
         colorName: 'Black',
+        primaryColor: {
+          broadColor: 'black',
+          red: 46,
+          green: 44,
+          blue: 48
+        },
         price: 195,
         discount: {
           type: 'fixed',
@@ -334,6 +453,12 @@ export const mockProducts: Product[] = [
     colors: [
       {
         colorName: 'Black',
+        primaryColor: {
+          broadColor: 'black',
+          red: 38,
+          green: 34,
+          blue: 33
+        },
         price: 135,
         images: { cover: '/mock/cover/tech-pants-black.png' },
         sizes: [
@@ -348,6 +473,12 @@ export const mockProducts: Product[] = [
       },
       {
         colorName: 'Beige',
+        primaryColor: {
+          broadColor: 'tan',
+          red: 214,
+          green: 187,
+          blue: 149
+        },
         price: 135,
         images: { cover: '/mock/cover/tech-pants-beige.png' },
         sizes: [
@@ -362,6 +493,12 @@ export const mockProducts: Product[] = [
       },
       {
         colorName: 'Iron Ore',
+        primaryColor: {
+          broadColor: 'grey',
+          red: 137,
+          green: 131,
+          blue: 128
+        },
         price: 135,
         images: { cover: '/mock/cover/tech-pants-iron-ore.png' },
         sizes: [
@@ -384,6 +521,12 @@ export const mockProducts: Product[] = [
     colors: [
       {
         colorName: 'Black',
+        primaryColor: {
+          broadColor: 'black',
+          red: 35,
+          green: 34,
+          blue: 39
+        },
         price: 135,
         images: { cover: '/mock/cover/nike_tech_hoodie.png' },
         sizes: [
@@ -406,6 +549,12 @@ export const mockProducts: Product[] = [
     colors: [
       {
         colorName: 'Black',
+        primaryColor: {
+          broadColor: 'black',
+          red: 52,
+          green: 52,
+          blue: 50
+        },
         price: 90,
         images: { cover: '/mock/cover/parachute_pants.png' },
         sizes: [
