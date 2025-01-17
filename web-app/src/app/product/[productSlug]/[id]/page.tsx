@@ -14,10 +14,10 @@ export default function ProductPage({
 }: {
   params: Promise<{ productSlug: string, id: string }>;
 }) {
-  const { id } = use(params);
+  const { productSlug, id } = use(params);
   const router = useRouter();
   const product = mockProducts.find((p) => p.id === id);
-  if (product === undefined) {
+  if (product === undefined || productSlug !== product.productSlug) {
     notFound();
   }
   const [selectedColor, setSelectedColor] = useState<ColorVariant>(

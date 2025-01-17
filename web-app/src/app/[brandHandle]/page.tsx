@@ -28,20 +28,22 @@ export default function BrandPage({
 
   return (
     <main>
-      <div className='mt-8 flex flex-col items-center'>
-        <Image
-          src={brand?.logo || ''}
-          className='aspect-square object-cover h-16 w-16 md:h-32 md:w-32 rounded-full border'
-          style={{ backgroundColor: 'white' }}
-          alt={`${brand?.name} Logo`}
-          height={500}
-          width={500}
-          loading='lazy'
-        />
-        <h3 className='text-xl md:text-3xl'>{brand?.name}</h3>
-        <p className='whitespace-normal text-center text-sm md:text-base w-full md:w-1/2'>
-          {brand?.bio}
-        </p>
+      <div className='mt-8 flex flex-col items-center gap-8'>
+        <div className='flex flex-col items-center'>
+          <Image
+            src={brand?.logo || ''}
+            className='aspect-square object-cover h-16 w-16 md:h-32 md:w-32 rounded-full border'
+            style={{ backgroundColor: 'white' }}
+            alt={`${brand?.name} Logo`}
+            height={500}
+            width={500}
+            loading='lazy'
+          />
+          <h3 className='text-xl md:text-3xl'>{brand?.name}</h3>
+          <p className='whitespace-normal text-center text-sm md:text-base w-full md:w-1/2'>
+            {brand?.bio}
+          </p>
+        </div>
         <div className='flex gap-8'>
           {brand?.links.instagram && (
             <a
@@ -91,7 +93,7 @@ export default function BrandPage({
             </a>
           )}
         </div>
-        <div className='flex gap-4 mt-8'>
+        <div className='flex gap-4'>
           {/* update to match if user is following or not */}
           <button className='secondary-btn flex items-center gap-2'>
             Follow <Icon path={mdiPlus} size={1} />
