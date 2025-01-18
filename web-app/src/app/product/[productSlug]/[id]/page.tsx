@@ -2,37 +2,76 @@
 
 import BrandLink from '@/components/BrandLink';
 import ImageCarousel from '@/components/ImageCarousel';
-import { ColorVariant, mockProducts } from '@/interfaces/products';
+import { ColorVariant, mockProducts, SizeVariant } from '@/interfaces/products';
 import { discountedPrice } from '@/utils/helperFunctions';
 import { mdiHeartOutline } from '@mdi/js';
 import Icon from '@mdi/react';
 import Image from 'next/image';
-import { notFound } from 'next/navigation';
-import { use, useState } from 'react';
+import {
+  notFound,
+  usePathname,
+  useRouter,
+  useSearchParams
+} from 'next/navigation';
+import { use, useCallback, useState } from 'react';
 
 export default function ProductPage({
   params
 }: {
-  params: Promise<{ productSlug: string, id: string }>;
+  params: Promise<{ productSlug: string; id: string }>;
 }) {
   const { productSlug, id } = use(params);
-  // const router = useRouter();
   const product = mockProducts.find((p) => p.id === id);
   if (product === undefined || productSlug !== product.productSlug) {
     notFound();
   }
+
+  const router = useRouter();
+  const pathname = usePathname();
+  const optionsParams = useSearchParams();
+  const colorParam = optionsParams.get('color');
+  const sizeParam = optionsParams.get('size');
   const [selectedColor, setSelectedColor] = useState<ColorVariant>(
-    product?.colors[0] || {
-      colorName: '',
-      price: 1,
-      images: { cover: '' },
-      sizes: []
-    }
+    product.colors.find((c) => c.colorName === colorParam) ||
+      product?.colors[0] || {
+        colorName: '',
+        price: 1,
+        images: { cover: '' },
+        sizes: []
+      }
   );
-  const [selectedSize, setSelectedSize] = useState<string>('');
+  const [selectedSize, setSelectedSize] = useState<string>(
+    selectedColor.sizes.find((s) => s.size === sizeParam)?.size || ''
+  );
   const allImages = selectedColor.images.additional
     ? [selectedColor.images.cover].concat(selectedColor.images.additional)
     : [selectedColor.images.cover];
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(optionsParams.toString());
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [optionsParams]
+  );
+
+  function handleColorSelect(c: ColorVariant) {
+    setSelectedColor(c);
+    router.push(`${pathname}?${createQueryString('color', c.colorName)}`);
+    if (
+      c.sizes.find((s) => selectedSize === s.size)?.quantity === 0 ||
+      !c.sizes.find((s) => selectedSize === s.size)
+    ) {
+      setSelectedSize('');
+    }
+  }
+
+  function handleSizeSelect(s: SizeVariant) {
+    setSelectedSize(s.size);
+    router.push(`${pathname}?${createQueryString('size', s.size)}`);
+  }
 
   return (
     <main className='md:flex-row items-start gap-4 md:gap-0 mt-8'>
@@ -41,27 +80,7 @@ export default function ProductPage({
       </div>
       <div className='flex flex-col w-full md:w-1/2 h-auto md:h-full px-2 md:px-8'>
         <div className='flex items-center justify-center md:justify-normal'>
-          {product && (
-            // <>
-            //   <Image
-            //     src={product.brand.logo}
-            //     alt={product.brand.name}
-            //     height={500}
-            //     width={500}
-            //     loading='lazy'
-            //     style={{ backgroundColor: 'white' }}
-            //     className='aspect-square h-8 w-8 md:h-16 md:w-16 rounded-full border cursor-pointer peer'
-            //     onClick={() => router.push(`/${product.brand.handle}`)}
-            //   />
-            //   <p
-            //     className='text-base md:text-xl px-4 hover:underline peer-hover:underline cursor-pointer'
-            //     onClick={() => router.push(`/${product.brand.handle}`)}
-            //   >
-            //     {product.brand.name}
-            //   </p>
-            // </>
-            <BrandLink brand={product.brand} size={'big'} />
-          )}
+          {product && <BrandLink brand={product.brand} size={'big'} />}
         </div>
         <h3 className='text-center md:text-start text-2xl md:text-3xl'>
           {product?.name}
@@ -89,19 +108,7 @@ export default function ProductPage({
           )}
           <div className='flex flex-wrap gap-4 mt-2'>
             {product?.colors.map((c) => (
-              <button
-                key={c.colorName}
-                onClick={() => {
-                  setSelectedColor(c);
-                  if (
-                    c.sizes.find((s) => selectedSize === s.size)?.quantity ===
-                      0 ||
-                    !c.sizes.find((s) => selectedSize === s.size)
-                  ) {
-                    setSelectedSize('');
-                  }
-                }}
-              >
+              <button key={c.colorName} onClick={() => handleColorSelect(c)}>
                 <Image
                   alt={c.colorName}
                   width={500}
@@ -130,7 +137,7 @@ export default function ProductPage({
                 className={`btn-square text-xl ${
                   selectedSize === s.size && 'bg-primary text-secondary'
                 }`}
-                onClick={() => setSelectedSize(s.size)}
+                onClick={() => handleSizeSelect(s)}
                 disabled={s.quantity === 0 ? true : false}
               >
                 {s.size}

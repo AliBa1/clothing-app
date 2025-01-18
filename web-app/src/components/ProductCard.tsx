@@ -19,12 +19,10 @@ export default function ProductCard({ product, showBrand }: ProductCardProps) {
   const [color, setColor] = useState(product.colors[0].colorName);
   return (
     <div className='block rounded-3xl text-center'>
-      {showBrand && (
-        <BrandLink brand={product.brand} size='normal'/>
-      )}
+      {showBrand && <BrandLink brand={product.brand} size='normal' />}
 
       <Link
-        href={`/product/${product.productSlug}/${product.id}`}
+        href={`/product/${product.productSlug}/${product.id}?color=${color}`}
         className='group'
       >
         <Image

@@ -59,7 +59,7 @@ export interface ColorVariant {
 /**
  * Size and quantity availible for each ColorVariant
  */
-interface SizeVariant {
+export interface SizeVariant {
   size: string;
   quantity: number;
 }
