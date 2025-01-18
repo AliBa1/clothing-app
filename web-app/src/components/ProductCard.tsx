@@ -31,8 +31,7 @@ export default function ProductCard({ product, showBrand }: ProductCardProps) {
           alt={`${color} ${product.name}`}
           height={1280}
           width={1024}
-          style={{ backgroundColor: 'white' }}
-          className='aspect-[4/5] w-96 rounded object-cover object-center'
+          className='aspect-[4/5] w-96 rounded object-cover object-center bg-background dark:bg-white'
           priority
         />
 

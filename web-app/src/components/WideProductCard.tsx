@@ -29,8 +29,7 @@ export default function WideProductCard({ product }: ProductCardProps) {
           alt={`${color} ${product.name}`}
           height={1280}
           width={1024}
-          style={{ backgroundColor: 'white' }}
-          className='aspect-[4/5] w-1/5 h-1/4 rounded object-cover object-center cursor-pointer'
+          className='aspect-[4/5] w-1/5 h-1/4 rounded object-cover object-center cursor-pointer bg-background dark:bg-white'
           onClick={() =>
             router.push(`/product/${product.productSlug}/${product.id}?color=${color}`)
           }

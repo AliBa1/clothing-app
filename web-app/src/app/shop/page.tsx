@@ -109,7 +109,7 @@ export default function Shop() {
       >
         <Form
           action={''}
-          className='w-full md:w-96 flex flex-col h-full'
+          className='w-full md:w-96 flex flex-col h-full text-secondary'
           onSubmit={() => setFilterModalOpen(false)}
         >
           <h4>Filters</h4>
@@ -183,12 +183,12 @@ export default function Shop() {
             }
           />
 
-          <div className='w-full border-t'></div>
+          <div className='w-full border-t border-secondary'></div>
 
-          <div className='w-full flex gap-4 sticky bottom-0 bg-white mt-auto'>
+          <div className='w-full flex gap-4 sticky bottom-0 bg-primary mt-auto'>
             <button
               type='button'
-              className='secondary-btn border-black flex-grow'
+              className='secondary-btn border-secondary dark:border-black flex-grow'
               onClick={() => setFilters(mockDefaultFilters)}
             >
               Clear All
