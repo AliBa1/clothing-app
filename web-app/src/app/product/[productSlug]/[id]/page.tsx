@@ -59,7 +59,9 @@ export default function ProductPage({
 
   function handleColorSelect(c: ColorVariant) {
     setSelectedColor(c);
-    router.push(`${pathname}?${createQueryString('color', c.colorName)}`);
+    router.push(`${pathname}?${createQueryString('color', c.colorName)}`, {
+      scroll: false
+    });
     if (
       c.sizes.find((s) => selectedSize === s.size)?.quantity === 0 ||
       !c.sizes.find((s) => selectedSize === s.size)
@@ -70,7 +72,9 @@ export default function ProductPage({
 
   function handleSizeSelect(s: SizeVariant) {
     setSelectedSize(s.size);
-    router.push(`${pathname}?${createQueryString('size', s.size)}`);
+    router.push(`${pathname}?${createQueryString('size', s.size)}`, {
+      scroll: false
+    });
   }
 
   return (

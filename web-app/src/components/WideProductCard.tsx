@@ -30,7 +30,7 @@ export default function WideProductCard({ product }: ProductCardProps) {
           height={1280}
           width={1024}
           style={{ backgroundColor: 'white' }}
-          className='aspect-[4/5] w-96 rounded object-cover object-center cursor-pointer'
+          className='aspect-[4/5] w-1/5 h-1/4 rounded object-cover object-center cursor-pointer'
           onClick={() =>
             router.push(`/product/${product.productSlug}/${product.id}?color=${color}`)
           }
@@ -40,7 +40,7 @@ export default function WideProductCard({ product }: ProductCardProps) {
         <div>
           <Link
             href={`/product/${product.productSlug}/${product.id}?color=${color}`}
-            className='hover:underline decoration-accent text-sm md:text-xl font-body md:font-heading'
+            className='hover:underline decoration-accent text-base md:text-xl font-heading'
           >
             {/* <div className='group-hover:underline decoration-accent text-sm md:text-xl font-body md:font-heading'> */}
             <p>{product.name}</p>
@@ -86,7 +86,7 @@ export default function WideProductCard({ product }: ProductCardProps) {
             </div>
           )}
 
-          <p className='whitespace-pre-line'>{product.description}</p>
+          <p className='whitespace-pre-line text-sm md:text-base'>{product.description}</p>
         </div>
       </div>
     </div>
