@@ -19,7 +19,10 @@ export default function FeedPage() {
         </div>
       </div>
       {/* Web following section */}
-      <div className='hidden md:flex flex-col gap-4 max-w-1/5 pr-4 sticky top-16 left-0 h-screen overflow-y-scroll' style={{ scrollbarWidth: 'none' }}>
+      <div
+        className='hidden md:flex flex-col gap-4 max-w-1/5 pr-4 sticky top-16 left-0 h-screen overflow-y-scroll'
+        style={{ scrollbarWidth: 'none' }}
+      >
         <h4 className='underline text-xl lg:text-2xl'>Following</h4>
         {mockBrands.map((b) => (
           <BrandLink key={b.id} brand={b} size='normal' />

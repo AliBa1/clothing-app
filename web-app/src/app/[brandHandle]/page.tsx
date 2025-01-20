@@ -40,9 +40,9 @@ export default function BrandPage({
             loading='lazy'
           />
           <h3 className='text-xl md:text-3xl'>{brand?.name}</h3>
-          <p className='whitespace-normal text-center text-sm md:text-base w-full md:w-1/2'>
-            {brand?.bio}
-          </p>
+          {brand.bio && <p className='whitespace-normal text-center text-sm md:text-base w-full md:w-1/2'>
+            {brand.bio}
+          </p>}
         </div>
         <div className='flex gap-8'>
           {brand?.links.instagram && (

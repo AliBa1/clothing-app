@@ -15,7 +15,7 @@ export default function BrandLink({
 }: BrandLinkProps) {
   const router = useRouter();
   return (
-    <div className={`flex items-center w-full mb-2 text-nowrap ${isFlexCol && 'flex-col'}`}>
+    <div className={`flex items-center mb-2 text-nowrap ${isFlexCol && 'flex-col'}`}>
       <Image
         src={brand.logo}
         alt={brand.name}

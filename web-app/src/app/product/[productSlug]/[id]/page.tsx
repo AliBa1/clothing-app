@@ -104,7 +104,7 @@ export default function ProductPage({
         <br></br>
         <div className='text-base md:text-xl mb-4'>
           <p>
-            Color &middot;{' '}
+            Color <span>{selectedColor && '·'}</span>{' '}
             <span className='text-accent'>{selectedColor.colorName}</span>
           </p>
           {product?.colorNotes && (
@@ -129,7 +129,8 @@ export default function ProductPage({
         </div>
         <div className='text-base md:text-xl mb-4'>
           <p>
-            Size &middot; <span className='text-accent'>{selectedSize}</span>
+            Size {selectedSize && '· '}
+            <span className='text-accent'>{selectedSize}</span>
           </p>
           {product?.sizeNotes && (
             <p className='text-base text-gray-400'>{product?.sizeNotes}</p>

@@ -19,7 +19,7 @@ export default function WideProductCard({ product }: ProductCardProps) {
   return (
     <div className='block rounded-3xl'>
       <BrandLink brand={product.brand} size='normal' />
-
+      
       <div
         className='flex gap-4 group'
         // href={`/product/${product.productSlug}/${product.id}`}
