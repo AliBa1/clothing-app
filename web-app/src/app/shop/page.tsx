@@ -80,7 +80,7 @@ export default function Shop() {
           ))}
         </div>
         <button
-          className='secondary-btn border-primary text-base py-2 font-light'
+          className='btn-secondary border-primary text-base py-2 font-light'
           onClick={() => setFilterModalOpen(true)}
         >
           Filters
@@ -188,12 +188,12 @@ export default function Shop() {
           <div className='w-full flex gap-4 sticky bottom-0 bg-primary mt-auto'>
             <button
               type='button'
-              className='secondary-btn border-secondary dark:border-black flex-grow'
+              className='btn-secondary border-secondary dark:border-black flex-grow'
               onClick={() => setFilters(mockDefaultFilters)}
             >
               Clear All
             </button>
-            <button type='submit' className='accent-btn flex-grow'>
+            <button type='submit' className='btn-accent flex-grow'>
               Apply
             </button>
           </div>

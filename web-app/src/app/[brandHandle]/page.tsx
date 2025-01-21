@@ -95,13 +95,13 @@ export default function BrandPage({
         </div>
         <div className='flex gap-4'>
           {/* update to match if user is following or not */}
-          <button className='secondary-btn flex items-center gap-2'>
+          <button className='btn-secondary flex items-center gap-2'>
             Follow <Icon path={mdiPlus} size={1} />
           </button>
-          <button className='primary-btn flex items-center gap-2'>
+          <button className='btn-primary flex items-center gap-2'>
             Following <Icon path={mdiCheck} size={1} />
           </button>
-          <button className='primary-btn'>Contact</button>
+          <button className='btn-primary'>Contact</button>
         </div>
       </div>
       <div className='grid grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8 px-2 my-8'>

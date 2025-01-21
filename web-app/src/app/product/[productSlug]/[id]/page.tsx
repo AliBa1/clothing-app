@@ -152,10 +152,10 @@ export default function ProductPage({
         </div>
         <br></br>
         <div className='flex flex-col gap-4'>
-          <button className='primary-btn h-12 md:h-16 w-full'>
+          <button className='btn-primary h-12 md:h-16 w-full'>
             Add to Cart
           </button>
-          <button className='secondary-btn h-12 md:h-16 w-full flex flex-nowrap items-center justify-center gap-2'>
+          <button className='btn-secondary h-12 md:h-16 w-full flex flex-nowrap items-center justify-center gap-2'>
             Save <Icon path={mdiHeartOutline} size={1.5} />
           </button>
         </div>
