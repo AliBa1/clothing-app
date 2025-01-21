@@ -109,10 +109,10 @@ export default function Shop() {
       >
         <Form
           action={''}
-          className='w-full md:w-96 flex flex-col h-full text-secondary'
+          className='w-full md:w-96 flex flex-col h-full'
           onSubmit={() => setFilterModalOpen(false)}
         >
-          <h4>Filters</h4>
+          <h4 className='sticky top-0 bg-primary'>Filters</h4>
           <AccordionRadio
             name='Sort'
             selected={filters.sort}
@@ -183,7 +183,7 @@ export default function Shop() {
             }
           />
 
-          <div className='w-full border-t border-secondary'></div>
+          <div className='w-full border-t border-secondary py-8'></div>
 
           <div className='w-full flex gap-4 sticky bottom-0 bg-primary mt-auto'>
             <button

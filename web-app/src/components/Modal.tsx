@@ -57,7 +57,7 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
       onClick={onClose}
     >
       <div
-        className={`bg-primary rounded-l-lg md:rounded-lg p-4 w-3/4 md:w-auto h-full md:h-3/4 max-h-full overflow-y-auto flex flex-col ${modalAnimation}`}
+        className={`bg-primary rounded-l-lg md:rounded-lg p-4 w-3/4 md:w-auto h-full md:h-3/4 max-h-full flex flex-col ${modalAnimation}`}
         // className='bg-white rounded-lg p-4 w-full h-full md:h-auto md:w-auto max-h-full overflow-y-auto'
         onClick={(e) => e.stopPropagation()}
       >
@@ -83,7 +83,7 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
             </svg>
           </button>
         </div>
-        <div className='flex-grow m-2'>{children}</div>
+        <div className='flex-grow m-2 overflow-y-scroll text-secondary'>{children}</div>
       </div>
     </dialog>
   );

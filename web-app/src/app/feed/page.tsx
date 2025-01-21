@@ -40,19 +40,19 @@ export default function FeedPage() {
 
     // V2_V2_V2_V2_V2_V2_V2_V2_V2_V2_V2_V2_V2_V2_V2_V2_V2_V2
     <main className='flex-col w-full px-0 md:px-4 gap-4 justify-center'>
-      <div className='hidden md:flex justify-center py-4 bg-background w-screen sticky top-16'>
+      <div className='hidden md:flex gap-4 justify-center py-4 bg-background w-screen sticky top-16 font-light'>
         <button className='btn-accent' onClick={() => setFollowingOpen(true)}>
           Following
         </button>
       </div>
 
-      <div className='flex flex-col gap-8 py-4 md:py-8 px-2 md:px-0 w-full md:w-2/3'>
+      <div className='flex flex-col gap-8 py-4 px-2 md:px-0 w-full md:w-2/3'>
         {mockProducts.map((product) => (
           <WideProductCard key={product.id} product={product} />
         ))}
       </div>
 
-      <div className='md:hidden flex justify-center py-2 bg-background w-screen sticky bottom-0'>
+      <div className='md:hidden flex gap-4 justify-center py-2 bg-background w-screen sticky bottom-0 font-light'>
         <button className='btn-accent' onClick={() => setFollowingOpen(true)}>
           Following
         </button>
@@ -60,7 +60,9 @@ export default function FeedPage() {
 
       {/* Following modal (better than following sitting on the side) */}
       <Modal isOpen={isFollowingOpen} onClose={() => setFollowingOpen(false)}>
-        <h4 className='text-xl lg:text-2xl'>Following</h4>
+        <h4 className='text-xl lg:text-2xl text-center sticky top-0 bg-primary'>
+          Following
+        </h4>
         {mockBrands.map((b) => (
           <BrandLink key={b.id} brand={b} size='big' />
         ))}
