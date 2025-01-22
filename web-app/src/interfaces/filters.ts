@@ -18,7 +18,7 @@ export interface FitOption {
 
 export interface InventoryOption {
   label: string;
-  value: 'any' | 'readyToShip' | 'outOfStock' | 'preOrder' | 'lowStock';
+  value: 'any' | 'readyToShip' | 'outOfStock' | 'preOrder' | 'lowStock' | 'upcoming';
 }
 
 /**
@@ -141,6 +141,10 @@ export const inventoryOptions: InventoryOption[] = [
   {
     label: 'Out of Stock',
     value: 'outOfStock'
+  },
+  {
+    label: 'Upcoming',
+    value: 'upcoming'
   }
 ];
 
