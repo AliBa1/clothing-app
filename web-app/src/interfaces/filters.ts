@@ -18,9 +18,36 @@ export interface FitOption {
 
 export interface InventoryOption {
   label: string;
-  value: 'any' | 'readyToShip' | 'outOfStock' | 'preOrder' | 'lowStock' | 'upcoming';
+  value:
+    | 'any'
+    | 'readyToShip'
+    | 'outOfStock'
+    | 'preOrder'
+    | 'lowStock'
+    | 'upcoming';
 }
 
+export interface ColorOption {
+  // Color or Multicolor interfaces from products
+  broadColor:
+    | 'black'
+    | 'white'
+    | 'red'
+    | 'blue'
+    | 'green'
+    | 'yellow'
+    | 'purple'
+    | 'brown'
+    | 'grey'
+    | 'orange'
+    | 'pink'
+    | 'burgandy'
+    | 'tan'
+    | 'multicolor';
+  red: number;
+  green: number;
+  blue: number;
+}
 /**
  * Filters that can be selected by users to specifiy what they see on shop page
  */
@@ -32,6 +59,7 @@ export interface Filters {
   gender: GenderOption;
   fit: FitOption[];
   inventory: InventoryOption;
+  color: ColorOption[];
   minPrice: number;
   maxPrice: number;
 }
@@ -148,6 +176,93 @@ export const inventoryOptions: InventoryOption[] = [
   }
 ];
 
+export const ColorOptions: ColorOption[] = [
+  {
+    broadColor: 'black',
+    red: 0,
+    green: 0,
+    blue: 0
+  },
+  {
+    broadColor: 'white',
+    red: 255,
+    green: 255,
+    blue: 255
+  },
+  {
+    broadColor: 'red',
+    red: 255,
+    green: 0,
+    blue: 0
+  },
+  {
+    broadColor: 'blue',
+    red: 0,
+    green: 0,
+    blue: 255
+  },
+  {
+    broadColor: 'green',
+    red: 0,
+    green: 255,
+    blue: 0
+  },
+  {
+    broadColor: 'yellow',
+    red: 255,
+    green: 255,
+    blue: 0
+  },
+  {
+    broadColor: 'purple',
+    red: 128,
+    green: 0,
+    blue: 128
+  },
+  {
+    broadColor: 'brown',
+    red: 165,
+    green: 42,
+    blue: 42
+  },
+  {
+    broadColor: 'grey',
+    red: 128,
+    green: 128,
+    blue: 128
+  },
+  {
+    broadColor: 'orange',
+    red: 255,
+    green: 165,
+    blue: 0
+  },
+  {
+    broadColor: 'pink',
+    red: 255,
+    green: 192,
+    blue: 203
+  },
+  {
+    broadColor: 'burgandy',
+    red: 128,
+    green: 0,
+    blue: 32
+  },
+  {
+    broadColor: 'tan',
+    red: 210,
+    green: 180,
+    blue: 140
+  },
+  {
+    broadColor: 'multicolor',
+    red: 255,
+    green: 255,
+    blue: 255
+  }
+];
+
 /**
  * Default filters before changed or when cleared
  */
@@ -159,6 +274,7 @@ export const mockDefaultFilters: Filters = {
   gender: genderOptions[0],
   fit: [],
   inventory: inventoryOptions[0],
+  color: [],
   minPrice: 0,
   maxPrice: 999999
 };

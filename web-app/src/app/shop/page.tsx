@@ -53,6 +53,7 @@ export default function Shop() {
     fit:
       fitOptions.filter((f) => fitParams.includes(f.value)) ||
       mockDefaultFilters.fit,
+    color: mockDefaultFilters.color,
     minPrice: mockDefaultFilters.minPrice,
     maxPrice: mockDefaultFilters.maxPrice
   });

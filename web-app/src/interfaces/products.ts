@@ -15,14 +15,14 @@ export interface Product {
   colors: ColorVariant[];
 }
 
-interface Multicolor {
+export interface Multicolor {
   broadColor: 'multicolor';
   red: null;
   green: null;
   blue: null;
 }
 
-interface Color {
+export interface Color {
   broadColor:
     | 'black'
     | 'white'
