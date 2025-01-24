@@ -45,10 +45,6 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
     return null;
   }
 
-  // if (!isOpen) {
-  //   return null;
-  // }
-
   return (
     <dialog
       aria-modal={true}
@@ -83,7 +79,12 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
             </svg>
           </button>
         </div>
-        <div className='flex-grow m-2 overflow-y-scroll text-secondary'>{children}</div>
+        <div
+          className='flex-grow m-2 overflow-y-scroll text-secondary'
+          style={{ scrollbarWidth: 'none' }}
+        >
+          {children}
+        </div>
       </div>
     </dialog>
   );

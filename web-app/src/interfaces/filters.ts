@@ -29,7 +29,8 @@ export interface InventoryOption {
 
 export interface ColorOption {
   // Color or Multicolor interfaces from products
-  broadColor:
+  label: string;
+  value:
     | 'black'
     | 'white'
     | 'red'
@@ -176,87 +177,101 @@ export const inventoryOptions: InventoryOption[] = [
   }
 ];
 
-export const ColorOptions: ColorOption[] = [
+export const colorOptions: ColorOption[] = [
   {
-    broadColor: 'black',
+    label: 'Black',
+    value: 'black',
     red: 0,
     green: 0,
     blue: 0
   },
   {
-    broadColor: 'white',
+    label: 'White',
+    value: 'white',
     red: 255,
     green: 255,
     blue: 255
   },
   {
-    broadColor: 'red',
+    label: 'Red',
+    value: 'red',
     red: 255,
     green: 0,
     blue: 0
   },
   {
-    broadColor: 'blue',
+    label: 'Blue',
+    value: 'blue',
     red: 0,
     green: 0,
     blue: 255
   },
   {
-    broadColor: 'green',
+    label: 'Green',
+    value: 'green',
     red: 0,
     green: 255,
     blue: 0
   },
   {
-    broadColor: 'yellow',
+    label: 'Yellow',
+    value: 'yellow',
     red: 255,
     green: 255,
     blue: 0
   },
   {
-    broadColor: 'purple',
+    label: 'Purple',
+    value: 'purple',
     red: 128,
     green: 0,
     blue: 128
   },
   {
-    broadColor: 'brown',
+    label: 'Brown',
+    value: 'brown',
     red: 165,
     green: 42,
     blue: 42
   },
   {
-    broadColor: 'grey',
+    label: 'Grey',
+    value: 'grey',
     red: 128,
     green: 128,
     blue: 128
   },
   {
-    broadColor: 'orange',
+    label: 'Orange',
+    value: 'orange',
     red: 255,
     green: 165,
     blue: 0
   },
   {
-    broadColor: 'pink',
+    label: 'Pink',
+    value: 'pink',
     red: 255,
     green: 192,
     blue: 203
   },
   {
-    broadColor: 'burgandy',
+    label: 'Burgandy',
+    value: 'burgandy',
     red: 128,
     green: 0,
     blue: 32
   },
   {
-    broadColor: 'tan',
+    label: 'Tan',
+    value: 'tan',
     red: 210,
     green: 180,
     blue: 140
   },
   {
-    broadColor: 'multicolor',
+    label: 'Multicolor',
+    value: 'multicolor',
     red: 255,
     green: 255,
     blue: 255

@@ -1,3 +1,4 @@
+import { ColorOption } from '@/interfaces/filters';
 import { LabelValue } from '@/interfaces/other';
 import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
 import Icon from '@mdi/react';
@@ -5,7 +6,7 @@ import Icon from '@mdi/react';
 interface AccordionProps {
   name: string;
   selected: LabelValue[];
-  options: LabelValue[];
+  options: LabelValue[] | ColorOption[];
   isOpen: boolean;
   onOpen: () => void;
   onChecked: (o: LabelValue) => void;
@@ -37,6 +38,22 @@ export default function AccordionCheckbox({
       onUnchecked(option);
     }
   }
+
+  /**
+   * Checks if an option is a ColorOption type or not so the rgb can be used if it is
+   *
+   * @param option - The option in question
+   */
+  function isColorOption(
+    option: LabelValue | ColorOption
+  ): option is ColorOption {
+    return (
+      (option as ColorOption).red !== undefined &&
+      (option as ColorOption).green !== undefined &&
+      (option as ColorOption).blue !== undefined
+    );
+  }
+
   return (
     <div>
       <button
@@ -73,9 +90,21 @@ export default function AccordionCheckbox({
               />
               <label
                 htmlFor={`${name.toLowerCase()}-${o.value}`}
-                className='cursor-pointer hover:text-accent'
+                className='cursor-pointer hover:text-accent flex items-center gap-2'
               >
-                {o.label}
+                {o.label}{' '}
+                {isColorOption(o) && (
+                  <span
+                    className='rounded-full border border-black h-4 w-4 inline-block'
+                    style={{
+                      background: `${
+                        o.value === 'multicolor'
+                          ? 'conic-gradient(red, yellow, green, blue, purple)'
+                          : `rgb(${o.red}, ${o.green}, ${o.blue})`
+                      }`
+                    }}
+                  />
+                )}
               </label>
             </div>
           ))}

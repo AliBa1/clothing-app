@@ -2,6 +2,8 @@
 import Modal from '@/components/Modal';
 import ProductCard from '@/components/ProductCard';
 import {
+  ColorOption,
+  colorOptions,
   Filters,
   FitOption,
   fitOptions,
@@ -27,6 +29,7 @@ interface OpenFilters {
   type: boolean;
   fit: boolean;
   inventory: boolean;
+  color: boolean;
   price: boolean;
 }
 
@@ -58,15 +61,18 @@ export default function Shop() {
     maxPrice: mockDefaultFilters.maxPrice
   });
 
-  const [filterModalOpen, setFilterModalOpen] = useState<boolean>(false);
-  const [filtersOpen, setFiltersOpen] = useState<OpenFilters>({
+  const allFiltersClosed: OpenFilters = {
     sort: false,
     gender: false,
     type: false,
     fit: false,
     inventory: false,
+    color: false,
     price: false
-  });
+  };
+
+  const [filterModalOpen, setFilterModalOpen] = useState<boolean>(false);
+  const [filtersOpen, setFiltersOpen] = useState<OpenFilters>(allFiltersClosed);
 
   return (
     <main className='px-0'>
@@ -98,14 +104,7 @@ export default function Shop() {
         isOpen={filterModalOpen}
         onClose={() => {
           setFilterModalOpen(false);
-          setFiltersOpen({
-            sort: false,
-            type: false,
-            gender: false,
-            fit: false,
-            inventory: false,
-            price: false
-          });
+          setFiltersOpen(allFiltersClosed);
         }}
       >
         <Form
@@ -180,6 +179,27 @@ export default function Shop() {
               setFilters({
                 ...filters,
                 fit: filters.fit?.filter((f) => f.value !== o.value) || []
+              })
+            }
+          />
+          <AccordionCheckbox
+            name='Color'
+            selected={filters.color}
+            options={colorOptions}
+            isOpen={filtersOpen.color}
+            onOpen={() =>
+              setFiltersOpen({ ...filtersOpen, color: !filtersOpen.color })
+            }
+            onChecked={(o) =>
+              setFilters({
+                ...filters,
+                color: [...(filters.color || []), o as ColorOption]
+              })
+            }
+            onUnchecked={(o) =>
+              setFilters({
+                ...filters,
+                color: filters.color?.filter((c) => c.value !== o.value) || []
               })
             }
           />
