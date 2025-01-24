@@ -1,4 +1,4 @@
-import { Product } from '@/interfaces/products';
+import { BrandProduct } from '@/interfaces/brandProducts';
 import { discountedPrice } from '@/utils/helperFunctions';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,7 +9,7 @@ import Icon from '@mdi/react';
 import { mdiHeart, mdiHeartOutline } from '@mdi/js';
 
 interface ProductCardProps {
-  product: Product;
+  product: BrandProduct;
 }
 /**
  * Product displayed in feed with brand, description, name, and price. Takes user to product page if clicked.
@@ -22,16 +22,12 @@ export default function WideProductCard({ product }: ProductCardProps) {
     <div className='block rounded-3xl'>
       <BrandLink brand={product.brand} size='big' />
 
-      <div
-        className='flex gap-4 group'
-        // href={`/product/${product.productSlug}/${product.id}`}
-      >
+      <div className='flex gap-4 group'>
         <Image
           src={image}
           alt={`${color} ${product.name}`}
           height={1280}
           width={1024}
-          // className='aspect-[4/5] w-1/5 h-1/4 rounded object-cover object-center cursor-pointer bg-background dark:bg-white'
           className='aspect-[4/5] w-1/2 rounded object-cover object-center cursor-pointer bg-background dark:bg-white'
           onClick={() =>
             router.push(
@@ -47,7 +43,6 @@ export default function WideProductCard({ product }: ProductCardProps) {
               href={`/product/${product.productSlug}/${product.id}?color=${color}`}
               className='hover:underline decoration-accent text-base md:text-2xl font-heading'
             >
-              {/* <div className='group-hover:underline decoration-accent text-sm md:text-xl font-body md:font-heading'> */}
               <p>{product.name}</p>
               {product.colors[0].discount ? (
                 <p>
@@ -67,7 +62,6 @@ export default function WideProductCard({ product }: ProductCardProps) {
                 {product?.colors.length > 1 &&
                   `${product.colors.length} Colors`}
               </p>
-              {/* </div> */}
             </Link>
 
             {product?.colors.length > 1 && (

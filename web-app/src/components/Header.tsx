@@ -17,6 +17,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <header className='sticky top-0 z-10 h-16 bg-background grid grid-cols-2 md:grid-cols-3 items-center px-4 md:px-8 py-2 border-b border-primary'>
+      {/* Web Header */}
       <nav className='hidden md:flex gap-8'>
         <Link
           href='/shop'
@@ -26,14 +27,14 @@ export default function Header() {
         >
           Shop
         </Link>
-        <Link
+        {/* <Link
           href='/'
           className={`md:hover:underline decoration-accent ${
             pathname === '/popular' ? 'text-accent' : ''
           }`}
         >
           Popular
-        </Link>
+        </Link> */}
         <Link
           href='/feed'
           className={`md:hover:underline decoration-accent ${
@@ -52,9 +53,14 @@ export default function Header() {
         <button aria-label='Search' title='Search'>
           <Icon path={mdiMagnify} size={1} />
         </button>
-        <button aria-label='Saved' title='Saved' className='hidden md:block'>
+        <Link
+          href={'/saved'}
+          aria-label='Saved'
+          title='Saved'
+          className='hidden md:block'
+        >
           <Icon path={mdiHeartOutline} size={1} />
-        </button>
+        </Link>
         <button aria-label='Account' title='Account'>
           <Icon path={mdiAccount} size={1} />
         </button>
@@ -88,7 +94,7 @@ export default function Header() {
           >
             Shop
           </Link>
-          <Link
+          {/* <Link
             href='/'
             className={`md:hover:underline decoration-accent ${
               pathname === '/popular' ? 'text-accent' : ''
@@ -96,7 +102,7 @@ export default function Header() {
             onClick={() => setMenuOpen(false)}
           >
             Popular
-          </Link>
+          </Link> */}
           <Link
             href='/feed'
             className={`md:hover:underline decoration-accent ${

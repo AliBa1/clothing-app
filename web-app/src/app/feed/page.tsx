@@ -3,7 +3,7 @@ import BrandLink from '@/components/BrandLink';
 import Modal from '@/components/Modal';
 import WideProductCard from '@/components/WideProductCard';
 import { mockBrands } from '@/interfaces/brands';
-import { mockProducts } from '@/interfaces/products';
+import { mockProducts } from '@/interfaces/brandProducts';
 import { useState } from 'react';
 
 export default function FeedPage() {

@@ -2,7 +2,7 @@
 
 import ProductCard from '@/components/ProductCard';
 import { mockBrands } from '@/interfaces/brands';
-import { mockProducts } from '@/interfaces/products';
+import { mockProducts } from '@/interfaces/brandProducts';
 import { mdiCheck, mdiPlus } from '@mdi/js';
 import Icon from '@mdi/react';
 import Image from 'next/image';
@@ -40,9 +40,11 @@ export default function BrandPage({
             loading='lazy'
           />
           <h3 className='text-xl md:text-3xl'>{brand?.name}</h3>
-          {brand.bio && <p className='whitespace-normal text-center text-sm md:text-base w-full md:w-1/2'>
-            {brand.bio}
-          </p>}
+          {brand.bio && (
+            <p className='whitespace-normal text-center text-sm md:text-base w-full md:w-1/2'>
+              {brand.bio}
+            </p>
+          )}
         </div>
         <div className='flex gap-8'>
           {brand?.links.instagram && (

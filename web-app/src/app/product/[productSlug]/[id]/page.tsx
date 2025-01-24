@@ -2,7 +2,11 @@
 
 import BrandLink from '@/components/BrandLink';
 import ImageCarousel from '@/components/ImageCarousel';
-import { ColorVariant, mockProducts, SizeVariant } from '@/interfaces/products';
+import {
+  ColorVariant,
+  mockProducts,
+  SizeVariant
+} from '@/interfaces/brandProducts';
 import { discountedPrice } from '@/utils/helperFunctions';
 import { mdiHeartOutline } from '@mdi/js';
 import Icon from '@mdi/react';

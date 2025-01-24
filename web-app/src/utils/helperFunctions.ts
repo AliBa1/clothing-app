@@ -1,4 +1,4 @@
-import { Discount } from '@/interfaces/products';
+import { Discount } from '@/interfaces/brandProducts';
 /**
  * Returns the value of the discounted price.
  *

@@ -1,4 +1,4 @@
-import { Product } from '@/interfaces/products';
+import { BrandProduct } from '@/interfaces/brandProducts';
 import { discountedPrice } from '@/utils/helperFunctions';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,7 +7,7 @@ import { useState } from 'react';
 import BrandLink from './BrandLink';
 
 interface ProductCardProps {
-  product: Product;
+  product: BrandProduct;
   showBrand: boolean;
 }
 /**

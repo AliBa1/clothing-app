@@ -15,7 +15,7 @@ import {
   SortOption,
   sortOptions
 } from '@/interfaces/filters';
-import { mockProducts } from '@/interfaces/products';
+import { mockProducts } from '@/interfaces/brandProducts';
 import { useState } from 'react';
 import Form from 'next/form';
 import { useSearchParams } from 'next/navigation';

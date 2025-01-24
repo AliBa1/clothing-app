@@ -2,7 +2,7 @@ import { Brand, mockBrands } from '@/interfaces/brands';
 /**
  * Product object for an item (clothing, accessory, etc.)
  */
-export interface Product {
+export interface BrandProduct {
   id: string;
   name: string;
   productSlug: string;
@@ -46,6 +46,7 @@ export interface Color {
  * Version of a product with a specific color. Each product can have one or many ColorVariants
  */
 export interface ColorVariant {
+  id: string;
   colorName: string;
   primaryColor: Multicolor | Color;
   price: number;
@@ -71,7 +72,7 @@ export interface Discount {
 /**
  * Fake products to develop site with
  */
-export const mockProducts: Product[] = [
+export const mockProducts: BrandProduct[] = [
   {
     id: '1',
     name: 'LIGHTWEIGHT BUCKLE PUFFER JACKET',
@@ -82,6 +83,7 @@ export const mockProducts: Product[] = [
     sizeNotes: 'Size up for oversized fit',
     colors: [
       {
+        id: '1',
         colorName: 'Black',
         primaryColor: {
           broadColor: 'black',
@@ -119,6 +121,7 @@ export const mockProducts: Product[] = [
     sizeNotes: 'Runs small so size down',
     colors: [
       {
+        id: '2',
         colorName: 'Black',
         primaryColor: {
           broadColor: 'black',
@@ -145,6 +148,7 @@ export const mockProducts: Product[] = [
         ]
       },
       {
+        id: '3',
         colorName: 'Sky Blue',
         primaryColor: {
           broadColor: 'blue',
@@ -167,6 +171,7 @@ export const mockProducts: Product[] = [
         ]
       },
       {
+        id: '4',
         colorName: 'Grey',
         primaryColor: {
           broadColor: 'grey',
@@ -187,6 +192,7 @@ export const mockProducts: Product[] = [
         ]
       },
       {
+        id: '5',
         colorName: 'Purple',
         primaryColor: {
           broadColor: 'purple',
@@ -215,6 +221,7 @@ export const mockProducts: Product[] = [
     brand: mockBrands[5],
     colors: [
       {
+        id: '6',
         colorName: 'Black',
         primaryColor: {
           broadColor: 'black',
@@ -235,6 +242,7 @@ export const mockProducts: Product[] = [
         ]
       },
       {
+        id: '7',
         colorName: 'Green',
         primaryColor: {
           broadColor: 'black',
@@ -255,6 +263,7 @@ export const mockProducts: Product[] = [
         ]
       },
       {
+        id: '8',
         colorName: 'Brown',
         primaryColor: {
           broadColor: 'brown',
@@ -275,6 +284,7 @@ export const mockProducts: Product[] = [
         ]
       },
       {
+        id: '9',
         colorName: 'Charcoal',
         primaryColor: {
           broadColor: 'grey',
@@ -295,6 +305,7 @@ export const mockProducts: Product[] = [
         ]
       },
       {
+        id: '10',
         colorName: 'Blue',
         primaryColor: {
           broadColor: 'blue',
@@ -315,6 +326,7 @@ export const mockProducts: Product[] = [
         ]
       },
       {
+        id: '11',
         colorName: 'White',
         primaryColor: {
           broadColor: 'white',
@@ -345,6 +357,7 @@ export const mockProducts: Product[] = [
     sizeNotes: 'Size up for looser fit',
     colors: [
       {
+        id: '12',
         colorName: 'Gray',
         primaryColor: {
           broadColor: 'grey',
@@ -369,6 +382,7 @@ export const mockProducts: Product[] = [
     brand: mockBrands[1],
     colors: [
       {
+        id: '13',
         colorName: 'Black',
         primaryColor: {
           broadColor: 'black',
@@ -394,6 +408,7 @@ export const mockProducts: Product[] = [
     brand: mockBrands[1],
     colors: [
       {
+        id: '15',
         colorName: 'Black',
         primaryColor: {
           broadColor: 'black',
@@ -421,6 +436,7 @@ export const mockProducts: Product[] = [
       '- 20 Oz 100% Cotton Fleece\n- Garment Dyed-Vintage Black\n- Seams Flowing Across Hoodie\n- Boxy Fit (Choose your regular size or size up for an oversized fit)\n- Big Ass Hood\n- Two Way YKK Zipper',
     colors: [
       {
+        id: '16',
         colorName: 'Black',
         primaryColor: {
           broadColor: 'black',
@@ -452,6 +468,7 @@ export const mockProducts: Product[] = [
       'Crafted with stretchy woven material, these Nike Tech pants offer you ease of movement and adjustability. The wide-leg cut is paired with bungee locks at the ankles that let you switch up the fit.',
     colors: [
       {
+        id: '17',
         colorName: 'Black',
         primaryColor: {
           broadColor: 'black',
@@ -472,6 +489,7 @@ export const mockProducts: Product[] = [
         ]
       },
       {
+        id: '18',
         colorName: 'Beige',
         primaryColor: {
           broadColor: 'tan',
@@ -492,6 +510,7 @@ export const mockProducts: Product[] = [
         ]
       },
       {
+        id: '19',
         colorName: 'Iron Ore',
         primaryColor: {
           broadColor: 'grey',
@@ -520,6 +539,7 @@ export const mockProducts: Product[] = [
     brand: mockBrands[2],
     colors: [
       {
+        id: '21',
         colorName: 'Black',
         primaryColor: {
           broadColor: 'black',
@@ -548,6 +568,7 @@ export const mockProducts: Product[] = [
     brand: mockBrands[1],
     colors: [
       {
+        id: '20',
         colorName: 'Black',
         primaryColor: {
           broadColor: 'black',
