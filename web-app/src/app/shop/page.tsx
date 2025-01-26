@@ -94,7 +94,7 @@ export default function Shop() {
         </button>
       </div>
 
-      <div className='grid grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8 px-2'>
+      <div className='products-grid'>
         {mockProducts.map((product) => (
           <ProductCard key={product.id} product={product} showBrand={true} />
         ))}

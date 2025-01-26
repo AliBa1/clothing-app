@@ -1,4 +1,4 @@
-import { BrandProduct } from '@/interfaces/brandProducts';
+import { BrandProduct, ColorVariant } from '@/interfaces/brandProducts';
 import { discountedPrice } from '@/utils/helperFunctions';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -10,16 +10,17 @@ import { mdiHeart, mdiHeartOutline } from '@mdi/js';
 
 interface ProductCardProps {
   product: BrandProduct;
+  colorVariant?: ColorVariant;
 }
 /**
  * Product displayed in feed with brand, description, name, and price. Takes user to product page if clicked.
  */
-export default function WideProductCard({ product }: ProductCardProps) {
+export default function WideProductCard({ product, colorVariant }: ProductCardProps) {
   const router = useRouter();
-  const [image, setImage] = useState(product.colors[0].images.cover);
-  const [color, setColor] = useState(product.colors[0].colorName);
+  const [image, setImage] = useState(colorVariant?.images.cover || product.colors[0].images.cover);
+  const [color, setColor] = useState(colorVariant?.colorName || product.colors[0].colorName);
   return (
-    <div className='block rounded-3xl'>
+    <div className='block rounded-3xl w-full'>
       <BrandLink brand={product.brand} size='big' />
 
       <div className='flex gap-4 group'>

@@ -1,4 +1,4 @@
-import { BrandProduct } from '@/interfaces/brandProducts';
+import { BrandProduct, ColorVariant } from '@/interfaces/brandProducts';
 import { discountedPrice } from '@/utils/helperFunctions';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,14 +9,15 @@ import BrandLink from './BrandLink';
 interface ProductCardProps {
   product: BrandProduct;
   showBrand: boolean;
+  colorVariant?: ColorVariant;  
 }
 /**
  * Product displayed with brand, name, and price. Takes user to product page if clicked.
  */
-export default function ProductCard({ product, showBrand }: ProductCardProps) {
+export default function ProductCard({ product, showBrand, colorVariant }: ProductCardProps) {
   // const router = useRouter();
-  const [image, setImage] = useState(product.colors[0].images.cover);
-  const [color, setColor] = useState(product.colors[0].colorName);
+  const [image, setImage] = useState(colorVariant?.images.cover || product.colors[0].images.cover);
+  const [color, setColor] = useState(colorVariant?.colorName || product.colors[0].colorName);
   return (
     <div className='block rounded-3xl text-center'>
       {showBrand && <BrandLink brand={product.brand} size='normal' />}

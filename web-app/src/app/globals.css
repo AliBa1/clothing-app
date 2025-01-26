@@ -99,6 +99,9 @@ body {
   .img-button {
     @apply rounded h-24 w-24 bg-primary text-text aspect-square object-cover;
   }
+  .products-grid {
+    @apply grid grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8 px-2
+  }
 }
 
 @keyframes slideInFromRight {

@@ -106,7 +106,7 @@ export default function BrandPage({
           <button className='btn-primary'>Contact</button>
         </div>
       </div>
-      <div className='grid grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8 px-2 my-8'>
+      <div className='products-grid my-8'>
         {products.map((product) => (
           <ProductCard key={product.id} product={product} showBrand={false} />
         ))}
