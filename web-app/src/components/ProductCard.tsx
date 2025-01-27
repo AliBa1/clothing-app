@@ -3,21 +3,46 @@ import { discountedPrice } from '@/utils/helperFunctions';
 import Image from 'next/image';
 import Link from 'next/link';
 // import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BrandLink from './BrandLink';
+import Icon from '@mdi/react';
+import { mdiHeart, mdiHeartOutline } from '@mdi/js';
+import { savedProducts } from '@/interfaces/userProducts';
 
 interface ProductCardProps {
   product: BrandProduct;
   showBrand: boolean;
-  colorVariant?: ColorVariant;  
+  colorVariant?: ColorVariant;
 }
 /**
  * Product displayed with brand, name, and price. Takes user to product page if clicked.
  */
-export default function ProductCard({ product, showBrand, colorVariant }: ProductCardProps) {
-  // const router = useRouter();
-  const [image, setImage] = useState(colorVariant?.images.cover || product.colors[0].images.cover);
-  const [color, setColor] = useState(colorVariant?.colorName || product.colors[0].colorName);
+export default function ProductCard({
+  product,
+  showBrand,
+  colorVariant
+}: ProductCardProps) {
+  const [image, setImage] = useState<string>(
+    colorVariant?.images.cover || product.colors[0].images.cover
+  );
+  const [color, setColor] = useState<string>(
+    colorVariant?.colorName || product.colors[0].colorName
+  );
+  const [colorId, setColorId] = useState<string>(
+    colorVariant?.id || product.colors[0].id
+  );
+  const [saved, setSaved] = useState(
+    savedProducts.some((sP) => sP.colorId === colorId)
+  );
+
+  useEffect(() => {
+    if (savedProducts.some((sP) => sP.colorId === colorId)) {
+      setSaved(true);
+    } else {
+      setSaved(false);
+    }
+  }, [color, colorId]);
+
   return (
     <div className='block rounded-3xl text-center'>
       {showBrand && <BrandLink brand={product.brand} size='normal' />}
@@ -26,15 +51,24 @@ export default function ProductCard({ product, showBrand, colorVariant }: Produc
         href={`/product/${product.productSlug}/${product.id}?color=${color}`}
         className='group'
       >
-        <Image
-          // src={product.colors[0].images.cover}
-          src={image}
-          alt={`${color} ${product.name}`}
-          height={1280}
-          width={1024}
-          className='aspect-[4/5] w-96 rounded object-cover object-center bg-background dark:bg-white'
-          priority
-        />
+        <div className='relative'>
+          <Image
+            // src={product.colors[0].images.cover}
+            src={image}
+            alt={`'${color}' ${product.name}`}
+            height={1280}
+            width={1024}
+            className='aspect-[4/5] w-full rounded object-cover object-center bg-background dark:bg-white'
+            priority
+          />
+          <button className='btn-circle bg-slate-200 border-none shadow shadow-black absolute bottom-2 right-2 md:bottom-4 md:right-4'>
+            <Icon
+              path={saved ? mdiHeart : mdiHeartOutline}
+              size={1}
+              color={'black'}
+            />
+          </button>
+        </div>
 
         <div className='group-hover:underline decoration-accent text-sm md:text-xl font-body md:font-heading'>
           <p>{product.name}</p>
@@ -74,6 +108,7 @@ export default function ProductCard({ product, showBrand, colorVariant }: Produc
               onClick={() => {
                 setImage(c.images.cover);
                 setColor(c.colorName);
+                setColorId(c.id);
               }}
             />
           ))}
