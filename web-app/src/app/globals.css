@@ -104,6 +104,34 @@ body {
   }
 }
 
+@keyframes slideInFromTop {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutToTop {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+.search-slide-in {
+  animation: slideInFromTop 0.3s ease-out forwards;
+}
+
+.search-slide-out {
+  animation: slideOutToTop 0.3s ease-in forwards;
+}
+
 @keyframes slideInFromRight {
   from {
     transform: translateX(100%);

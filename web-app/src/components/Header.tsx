@@ -11,10 +11,12 @@ import {
 } from '@mdi/js';
 import { useState } from 'react';
 import Modal from './Modal';
+import SearchModal from './SearchModal';
 
 export default function Header() {
   const pathname = usePathname();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const [searchOpen, setSearchOpen] = useState<boolean>(false);
   return (
     <header className='sticky top-0 z-10 h-16 bg-background grid grid-cols-2 md:grid-cols-3 items-center px-4 md:px-8 py-2 border-b border-primary'>
       {/* Web Header */}
@@ -50,7 +52,7 @@ export default function Header() {
       </Link>
 
       <div className='flex gap-4 md:gap-8 place-content-end'>
-        <button aria-label='Search' title='Search'>
+        <button aria-label='Search' title='Search' onClick={() => setSearchOpen(true)}>
           <Icon path={mdiMagnify} size={1} />
         </button>
         <Link
@@ -83,6 +85,7 @@ export default function Header() {
         </button>
       </div>
 
+      {/* Mobile Side Modal */}
       <Modal isOpen={menuOpen} onClose={() => setMenuOpen(false)}>
         <div className='flex flex-col gap-4'>
           <Link
@@ -124,6 +127,8 @@ export default function Header() {
           </Link>
         </div>
       </Modal>
+
+      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </header>
   );
 }

@@ -5,13 +5,12 @@ import { useEffect, useState } from 'react';
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  children: React.ReactNode;
 }
 
 /**
  * Use to show consistent modal when needed. Resposive for web and mobile.
  */
-export default function Modal({ isOpen, onClose, children }: ModalProps) {
+export default function SearchModal({ isOpen, onClose }: ModalProps) {
   const [isVisible, setIsVisible] = useState<boolean>(isOpen);
   const [modalAnimation, setModalAnimation] = useState<string>('');
   const [modalBgAnimation, setModalBgAnimation] = useState<string>('');
@@ -31,11 +30,11 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
   useEffect(() => {
     if (isOpen) {
       setIsVisible(true);
-      setModalAnimation('modal-slide-in');
-      setModalBgAnimation('modal-fade-in');
+      setModalAnimation('search-slide-in');
+      setModalBgAnimation('search-fade-in');
     } else {
-      setModalAnimation('modal-slide-out');
-      setModalBgAnimation('modal-fade-out');
+      setModalAnimation('search-slide-out');
+      setModalBgAnimation('search-fade-out');
       const timer = setTimeout(() => setIsVisible(false), 300);
       return () => clearTimeout(timer);
     }
@@ -48,19 +47,24 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
   return (
     <dialog
       aria-modal={true}
-      className={`flex items-center justify-end md:justify-center w-full h-full fixed inset-0 z-50 bg-black bg-opacity-50 ${modalBgAnimation}`}
-      // className='flex items-center justify-center w-full h-full fixed inset-0 z-50 bg-black bg-opacity-50'
+      className={`flex items-start justify-end md:justify-center w-full h-full fixed inset-0 z-50 bg-black bg-opacity-50 ${modalBgAnimation}`}
       onClick={onClose}
     >
       <div
-        className={`bg-primary rounded-l-lg md:rounded-lg p-4 w-3/4 md:w-auto h-full md:h-3/4 max-h-full flex flex-col ${modalAnimation}`}
-        // className='bg-white rounded-lg p-4 w-full h-full md:h-auto md:w-auto max-h-full overflow-y-auto'
+        className={`bg-white rounded-lg md:rounded-lg w-full md:w-3/4 h-full md:h-auto max-h-full p-2 md:p-0 mt-0 md:mt-8 flex flex-col ${modalAnimation}`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className='flex justify-end'>
+          <input
+            id='search'
+            name='search'
+            type='text'
+            placeholder='Search...'
+            className='w-full p-4 text-xl md:rounded-lg border-b md:border-none border-black focus:outline-none'
+          />
           <button
             onClick={onClose}
-            className='text-gray-500 hover:text-gray-700'
+            className='text-gray-600 hover:text-gray-800 px-4'
             aria-label='Close Modal'
           >
             <svg
@@ -78,12 +82,6 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
               />
             </svg>
           </button>
-        </div>
-        <div
-          className='flex-grow m-2 overflow-y-scroll text-secondary'
-          style={{ scrollbarWidth: 'none' }}
-        >
-          {children}
         </div>
       </div>
     </dialog>

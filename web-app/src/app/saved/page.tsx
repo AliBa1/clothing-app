@@ -36,7 +36,7 @@ export default function SavedPage() {
   }, []);
   return (
     <main>
-      <h2>Saved</h2>
+      <h3 className='mt-4'>Saved Items</h3>
       <div className='products-grid'>
         {products.map((p) => (
           <ProductCard

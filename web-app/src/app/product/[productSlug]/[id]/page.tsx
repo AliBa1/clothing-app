@@ -49,7 +49,7 @@ export default function ProductPage({
     product.colors.find((c) => c.colorName === colorParam)?.id ||
       product?.colors[0].id
   );
-  const [saved, setSaved] = useState(
+  const [saved, setSaved] = useState<boolean>(
     savedProducts.some((sP) => sP.colorId === colorId)
   );
   const [selectedSize, setSelectedSize] = useState<string>(

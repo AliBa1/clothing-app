@@ -21,16 +21,16 @@ export default function WideProductCard({
   colorVariant
 }: ProductCardProps) {
   const router = useRouter();
-  const [image, setImage] = useState(
+  const [image, setImage] = useState<string>(
     colorVariant?.images.cover || product.colors[0].images.cover
   );
-  const [color, setColor] = useState(
+  const [color, setColor] = useState<string>(
     colorVariant?.colorName || product.colors[0].colorName
   );
   const [colorId, setColorId] = useState<string>(
     colorVariant?.id || product.colors[0].id
   );
-  const [saved, setSaved] = useState(
+  const [saved, setSaved] = useState<boolean>(
     savedProducts.some((sP) => sP.colorId === colorId)
   );
 

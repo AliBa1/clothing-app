@@ -31,7 +31,7 @@ export default function ProductCard({
   const [colorId, setColorId] = useState<string>(
     colorVariant?.id || product.colors[0].id
   );
-  const [saved, setSaved] = useState(
+  const [saved, setSaved] = useState<boolean>(
     savedProducts.some((sP) => sP.colorId === colorId)
   );
 
