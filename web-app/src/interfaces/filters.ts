@@ -18,9 +18,37 @@ export interface FitOption {
 
 export interface InventoryOption {
   label: string;
-  value: 'any' | 'readyToShip' | 'outOfStock' | 'preOrder' | 'lowStock';
+  value:
+    | 'any'
+    | 'readyToShip'
+    | 'outOfStock'
+    | 'preOrder'
+    | 'lowStock'
+    | 'upcoming';
 }
 
+export interface ColorOption {
+  // Color or Multicolor interfaces from products
+  label: string;
+  value:
+    | 'black'
+    | 'white'
+    | 'red'
+    | 'blue'
+    | 'green'
+    | 'yellow'
+    | 'purple'
+    | 'brown'
+    | 'grey'
+    | 'orange'
+    | 'pink'
+    | 'burgandy'
+    | 'tan'
+    | 'multicolor';
+  red: number;
+  green: number;
+  blue: number;
+}
 /**
  * Filters that can be selected by users to specifiy what they see on shop page
  */
@@ -32,6 +60,7 @@ export interface Filters {
   gender: GenderOption;
   fit: FitOption[];
   inventory: InventoryOption;
+  color: ColorOption[];
   minPrice: number;
   maxPrice: number;
 }
@@ -141,6 +170,111 @@ export const inventoryOptions: InventoryOption[] = [
   {
     label: 'Out of Stock',
     value: 'outOfStock'
+  },
+  {
+    label: 'Upcoming',
+    value: 'upcoming'
+  }
+];
+
+export const colorOptions: ColorOption[] = [
+  {
+    label: 'Black',
+    value: 'black',
+    red: 0,
+    green: 0,
+    blue: 0
+  },
+  {
+    label: 'White',
+    value: 'white',
+    red: 255,
+    green: 255,
+    blue: 255
+  },
+  {
+    label: 'Red',
+    value: 'red',
+    red: 255,
+    green: 0,
+    blue: 0
+  },
+  {
+    label: 'Blue',
+    value: 'blue',
+    red: 0,
+    green: 0,
+    blue: 255
+  },
+  {
+    label: 'Green',
+    value: 'green',
+    red: 0,
+    green: 255,
+    blue: 0
+  },
+  {
+    label: 'Yellow',
+    value: 'yellow',
+    red: 255,
+    green: 255,
+    blue: 0
+  },
+  {
+    label: 'Purple',
+    value: 'purple',
+    red: 128,
+    green: 0,
+    blue: 128
+  },
+  {
+    label: 'Brown',
+    value: 'brown',
+    red: 165,
+    green: 42,
+    blue: 42
+  },
+  {
+    label: 'Grey',
+    value: 'grey',
+    red: 128,
+    green: 128,
+    blue: 128
+  },
+  {
+    label: 'Orange',
+    value: 'orange',
+    red: 255,
+    green: 165,
+    blue: 0
+  },
+  {
+    label: 'Pink',
+    value: 'pink',
+    red: 255,
+    green: 192,
+    blue: 203
+  },
+  {
+    label: 'Burgandy',
+    value: 'burgandy',
+    red: 128,
+    green: 0,
+    blue: 32
+  },
+  {
+    label: 'Tan',
+    value: 'tan',
+    red: 210,
+    green: 180,
+    blue: 140
+  },
+  {
+    label: 'Multicolor',
+    value: 'multicolor',
+    red: 255,
+    green: 255,
+    blue: 255
   }
 ];
 
@@ -155,6 +289,7 @@ export const mockDefaultFilters: Filters = {
   gender: genderOptions[0],
   fit: [],
   inventory: inventoryOptions[0],
+  color: [],
   minPrice: 0,
   maxPrice: 999999
 };

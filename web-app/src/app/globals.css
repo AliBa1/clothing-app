@@ -87,18 +87,49 @@ body {
   .btn-circle {
     @apply border border-primary rounded-full bg-secondary text-text p-1 disabled:bg-gray-500 disabled:text-gray-600 disabled:border-gray-600 disabled:border-2;
   }
-  .primary-btn {
+  .btn-primary {
     @apply text-base md:text-xl whitespace-nowrap rounded-xl bg-primary enabled:hover:opacity-90 text-secondary px-2 md:px-8 disabled:opacity-25 py-2 md:py-0;
   }
-  .secondary-btn {
+  .btn-secondary {
     @apply text-base md:text-xl whitespace-nowrap rounded-xl border border-primary enabled:hover:opacity-90 px-2 md:px-8 disabled:opacity-25 py-2 md:py-0;
   }
-  .accent-btn {
+  .btn-accent {
     @apply text-base md:text-xl whitespace-nowrap rounded-xl bg-accent text-black enabled:hover:opacity-90 px-2 md:px-8 disabled:opacity-25 py-2 md:py-0;
   }
   .img-button {
     @apply rounded h-24 w-24 bg-primary text-text aspect-square object-cover;
   }
+  .products-grid {
+    @apply grid grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8 px-2
+  }
+}
+
+@keyframes slideInFromTop {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutToTop {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+.search-slide-in {
+  animation: slideInFromTop 0.3s ease-out forwards;
+}
+
+.search-slide-out {
+  animation: slideOutToTop 0.3s ease-in forwards;
 }
 
 @keyframes slideInFromRight {

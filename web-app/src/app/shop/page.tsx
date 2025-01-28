@@ -2,6 +2,8 @@
 import Modal from '@/components/Modal';
 import ProductCard from '@/components/ProductCard';
 import {
+  ColorOption,
+  colorOptions,
   Filters,
   FitOption,
   fitOptions,
@@ -13,7 +15,7 @@ import {
   SortOption,
   sortOptions
 } from '@/interfaces/filters';
-import { mockProducts } from '@/interfaces/products';
+import { mockProducts } from '@/interfaces/brandProducts';
 import { useState } from 'react';
 import Form from 'next/form';
 import { useSearchParams } from 'next/navigation';
@@ -27,6 +29,7 @@ interface OpenFilters {
   type: boolean;
   fit: boolean;
   inventory: boolean;
+  color: boolean;
   price: boolean;
 }
 
@@ -53,19 +56,23 @@ export default function Shop() {
     fit:
       fitOptions.filter((f) => fitParams.includes(f.value)) ||
       mockDefaultFilters.fit,
+    color: mockDefaultFilters.color,
     minPrice: mockDefaultFilters.minPrice,
     maxPrice: mockDefaultFilters.maxPrice
   });
 
-  const [filterModalOpen, setFilterModalOpen] = useState<boolean>(false);
-  const [filtersOpen, setFiltersOpen] = useState<OpenFilters>({
+  const allFiltersClosed: OpenFilters = {
     sort: false,
     gender: false,
     type: false,
     fit: false,
     inventory: false,
+    color: false,
     price: false
-  });
+  };
+
+  const [filterModalOpen, setFilterModalOpen] = useState<boolean>(false);
+  const [filtersOpen, setFiltersOpen] = useState<OpenFilters>(allFiltersClosed);
 
   return (
     <main className='px-0'>
@@ -80,14 +87,14 @@ export default function Shop() {
           ))}
         </div>
         <button
-          className='secondary-btn border-primary text-base py-2 font-light'
+          className='btn-secondary border-primary text-base py-2 font-light'
           onClick={() => setFilterModalOpen(true)}
         >
           Filters
         </button>
       </div>
 
-      <div className='grid grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8 px-2'>
+      <div className='products-grid'>
         {mockProducts.map((product) => (
           <ProductCard key={product.id} product={product} showBrand={true} />
         ))}
@@ -97,14 +104,7 @@ export default function Shop() {
         isOpen={filterModalOpen}
         onClose={() => {
           setFilterModalOpen(false);
-          setFiltersOpen({
-            sort: false,
-            type: false,
-            gender: false,
-            fit: false,
-            inventory: false,
-            price: false
-          });
+          setFiltersOpen(allFiltersClosed);
         }}
       >
         <Form
@@ -112,7 +112,7 @@ export default function Shop() {
           className='w-full md:w-96 flex flex-col h-full'
           onSubmit={() => setFilterModalOpen(false)}
         >
-          <h4>Filters</h4>
+          <h4 className='sticky top-0 bg-primary'>Filters</h4>
           <AccordionRadio
             name='Sort'
             selected={filters.sort}
@@ -182,18 +182,39 @@ export default function Shop() {
               })
             }
           />
+          <AccordionCheckbox
+            name='Color'
+            selected={filters.color}
+            options={colorOptions}
+            isOpen={filtersOpen.color}
+            onOpen={() =>
+              setFiltersOpen({ ...filtersOpen, color: !filtersOpen.color })
+            }
+            onChecked={(o) =>
+              setFilters({
+                ...filters,
+                color: [...(filters.color || []), o as ColorOption]
+              })
+            }
+            onUnchecked={(o) =>
+              setFilters({
+                ...filters,
+                color: filters.color?.filter((c) => c.value !== o.value) || []
+              })
+            }
+          />
 
-          <div className='w-full border-t'></div>
+          <div className='w-full border-t border-secondary py-8'></div>
 
-          <div className='w-full flex gap-4 sticky bottom-0 bg-white mt-auto'>
+          <div className='w-full flex gap-4 sticky bottom-0 bg-primary mt-auto'>
             <button
               type='button'
-              className='secondary-btn border-black flex-grow'
+              className='btn-secondary border-secondary dark:border-black flex-grow'
               onClick={() => setFilters(mockDefaultFilters)}
             >
               Clear All
             </button>
-            <button type='submit' className='accent-btn flex-grow'>
+            <button type='submit' className='btn-accent flex-grow'>
               Apply
             </button>
           </div>

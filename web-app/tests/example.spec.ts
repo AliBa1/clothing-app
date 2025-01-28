@@ -37,7 +37,7 @@ test.describe('navigation', () => {
     await page.getByRole('link', { name: 'Shop', exact: true }).click();
     await page.getByRole('link', { name: 'LIGHTWEIGHT BUCKLE PUFFER' }).click();
     await expect(page).toHaveURL(
-      '/product/alyx-lightweight-buckle-puffer-jacket/1'
+      '/product/alyx-lightweight-buckle-puffer-jacket/1?color=Black'
     );
   });
 

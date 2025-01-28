@@ -2,32 +2,44 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Icon from '@mdi/react';
-import { mdiAccount, mdiCart, mdiHeartOutline, mdiMagnify, mdiMenu } from '@mdi/js';
+import {
+  mdiAccount,
+  mdiCart,
+  mdiHeartOutline,
+  mdiMagnify,
+  mdiMenu
+} from '@mdi/js';
+import { useState } from 'react';
+import Modal from './Modal';
+import SearchModal from './SearchModal';
 
 export default function Header() {
   const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const [searchOpen, setSearchOpen] = useState<boolean>(false);
   return (
-    <header className='sticky top-0 z-10 h-16 bg-background grid grid-cols-2 md:grid-cols-3 items-center px-4 md:px-8 py-2 border-b shadow-2xl'>
+    <header className='sticky top-0 z-10 h-16 bg-background grid grid-cols-2 md:grid-cols-3 items-center px-4 md:px-8 py-2 border-b border-primary'>
+      {/* Web Header */}
       <nav className='hidden md:flex gap-8'>
         <Link
           href='/shop'
-          className={`hover:underline decoration-accent ${
+          className={`md:hover:underline decoration-accent ${
             pathname === '/shop' ? 'text-accent' : ''
           }`}
         >
           Shop
         </Link>
-        <Link
+        {/* <Link
           href='/'
-          className={`hover:underline decoration-accent ${
+          className={`md:hover:underline decoration-accent ${
             pathname === '/popular' ? 'text-accent' : ''
           }`}
         >
           Popular
-        </Link>
+        </Link> */}
         <Link
-          href='/'
-          className={`hover:underline decoration-accent ${
+          href='/feed'
+          className={`md:hover:underline decoration-accent ${
             pathname === '/feed' ? 'text-accent' : ''
           }`}
         >
@@ -39,13 +51,18 @@ export default function Header() {
         <h6>FLEA</h6>
       </Link>
 
-      <div className='flex gap-2 md:gap-8 place-content-end'>
-        <button aria-label='Search' title='Search'>
+      <div className='flex gap-4 md:gap-8 place-content-end'>
+        <button aria-label='Search' title='Search' onClick={() => setSearchOpen(true)}>
           <Icon path={mdiMagnify} size={1} />
         </button>
-        <button aria-label='Saved' title='Saved' className='hidden md:block'>
+        <Link
+          href={'/saved'}
+          aria-label='Saved'
+          title='Saved'
+          className='hidden md:block'
+        >
           <Icon path={mdiHeartOutline} size={1} />
-        </button>
+        </Link>
         <button aria-label='Account' title='Account'>
           <Icon path={mdiAccount} size={1} />
         </button>
@@ -58,10 +75,60 @@ export default function Header() {
           </div>
         </button>
 
-        <button aria-label='Menu' title='Menu' className='block md:hidden'>
+        <button
+          aria-label='Menu'
+          title='Menu'
+          className='block md:hidden'
+          onClick={() => setMenuOpen(true)}
+        >
           <Icon path={mdiMenu} size={1} />
         </button>
       </div>
+
+      {/* Mobile Side Modal */}
+      <Modal isOpen={menuOpen} onClose={() => setMenuOpen(false)}>
+        <div className='flex flex-col gap-4'>
+          <Link
+            href='/shop'
+            className={`md:hover:underline decoration-accent ${
+              pathname === '/shop' ? 'text-accent' : ''
+            }`}
+            onClick={() => setMenuOpen(false)}
+          >
+            Shop
+          </Link>
+          {/* <Link
+            href='/'
+            className={`md:hover:underline decoration-accent ${
+              pathname === '/popular' ? 'text-accent' : ''
+            }`}
+            onClick={() => setMenuOpen(false)}
+          >
+            Popular
+          </Link> */}
+          <Link
+            href='/feed'
+            className={`md:hover:underline decoration-accent ${
+              pathname === '/feed' ? 'text-accent' : ''
+            }`}
+            onClick={() => setMenuOpen(false)}
+          >
+            Feed
+          </Link>
+
+          <Link
+            href='/saved'
+            className={`md:hover:underline decoration-accent ${
+              pathname === '/saved' ? 'text-accent' : ''
+            }`}
+            onClick={() => setMenuOpen(false)}
+          >
+            Saved
+          </Link>
+        </div>
+      </Modal>
+
+      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </header>
   );
 }

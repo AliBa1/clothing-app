@@ -1,67 +1,113 @@
 'use client';
 
+import BrandLink from '@/components/BrandLink';
 import ImageCarousel from '@/components/ImageCarousel';
-import { ColorVariant, mockProducts } from '@/interfaces/products';
+import {
+  ColorVariant,
+  mockProducts,
+  SizeVariant
+} from '@/interfaces/brandProducts';
+import { savedProducts } from '@/interfaces/userProducts';
 import { discountedPrice } from '@/utils/helperFunctions';
-import { mdiHeartOutline } from '@mdi/js';
+import { mdiHeart, mdiHeartOutline } from '@mdi/js';
 import Icon from '@mdi/react';
 import Image from 'next/image';
-import { notFound, useRouter } from 'next/navigation';
-import { use, useState } from 'react';
+import {
+  notFound,
+  usePathname,
+  useRouter,
+  useSearchParams
+} from 'next/navigation';
+import { use, useCallback, useEffect, useState } from 'react';
 
 export default function ProductPage({
   params
 }: {
-  params: Promise<{ productSlug: string, id: string }>;
+  params: Promise<{ productSlug: string; id: string }>;
 }) {
   const { productSlug, id } = use(params);
-  const router = useRouter();
   const product = mockProducts.find((p) => p.id === id);
   if (product === undefined || productSlug !== product.productSlug) {
     notFound();
   }
+
+  const router = useRouter();
+  const pathname = usePathname();
+  const optionsParams = useSearchParams();
+  const colorParam = optionsParams.get('color');
+  const sizeParam = optionsParams.get('size');
   const [selectedColor, setSelectedColor] = useState<ColorVariant>(
-    product?.colors[0] || {
-      colorName: '',
-      price: 1,
-      images: { cover: '' },
-      sizes: []
-    }
+    product.colors.find((c) => c.colorName === colorParam) ||
+      product?.colors[0] || {
+        colorName: '',
+        price: 1,
+        images: { cover: '' },
+        sizes: []
+      }
   );
-  const [selectedSize, setSelectedSize] = useState<string>('');
+  const [colorId, setColorId] = useState<string>(
+    product.colors.find((c) => c.colorName === colorParam)?.id ||
+      product?.colors[0].id
+  );
+  const [saved, setSaved] = useState<boolean>(
+    savedProducts.some((sP) => sP.colorId === colorId)
+  );
+  const [selectedSize, setSelectedSize] = useState<string>(
+    selectedColor.sizes.find((s) => s.size === sizeParam)?.size || ''
+  );
   const allImages = selectedColor.images.additional
     ? [selectedColor.images.cover].concat(selectedColor.images.additional)
     : [selectedColor.images.cover];
 
+  useEffect(() => {
+    if (savedProducts.some((sP) => sP.colorId === colorId)) {
+      setSaved(true);
+    } else {
+      setSaved(false);
+    }
+  }, [colorId]);
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(optionsParams.toString());
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [optionsParams]
+  );
+
+  function handleColorSelect(c: ColorVariant) {
+    setSelectedColor(c);
+    setColorId(c.id);
+    router.push(`${pathname}?${createQueryString('color', c.colorName)}`, {
+      scroll: false
+    });
+    if (
+      c.sizes.find((s) => selectedSize === s.size)?.quantity === 0 ||
+      !c.sizes.find((s) => selectedSize === s.size)
+    ) {
+      setSelectedSize('');
+    }
+  }
+
+  function handleSizeSelect(s: SizeVariant) {
+    setSelectedSize(s.size);
+    router.push(`${pathname}?${createQueryString('size', s.size)}`, {
+      scroll: false
+    });
+  }
+
   return (
-    <main className='md:flex-row items-start gap-4 md:gap-0 mt-8'>
+    <main className='md:flex-row items-start gap-4 md:gap-0 mt-8 overflow-x-clip'>
       <div className='flex flex-col md:sticky md:top-16 w-full md:w-1/2 px-4 items-center'>
         <ImageCarousel images={allImages} alt={product?.name} />
       </div>
       <div className='flex flex-col w-full md:w-1/2 h-auto md:h-full px-2 md:px-8'>
         <div className='flex items-center justify-center md:justify-normal'>
-          {product && (
-            <>
-              <Image
-                src={product.brand.logo}
-                alt={product.brand.name}
-                height={500}
-                width={500}
-                loading='lazy'
-                style={{ backgroundColor: 'white' }}
-                className='aspect-square h-8 w-8 md:h-16 md:w-16 rounded-full border cursor-pointer peer'
-                onClick={() => router.push(`/${product.brand.handle}`)}
-              />
-              <p
-                className='text-base md:text-xl px-4 hover:underline peer-hover:underline cursor-pointer'
-                onClick={() => router.push(`/${product.brand.handle}`)}
-              >
-                {product.brand.name}
-              </p>
-            </>
-          )}
+          {product && <BrandLink brand={product.brand} size={'big'} />}
         </div>
-        <h3 className='text-center md:text-start text-2xl md:text-3xl'>
+        <h3 className='text-center md:text-start text-2xl lg:text-3xl'>
           {product?.name}
         </h3>
         {selectedColor.discount ? (
@@ -79,7 +125,7 @@ export default function ProductPage({
         <br></br>
         <div className='text-base md:text-xl mb-4'>
           <p>
-            Color &middot;{' '}
+            Color <span>{selectedColor && '·'}</span>{' '}
             <span className='text-accent'>{selectedColor.colorName}</span>
           </p>
           {product?.colorNotes && (
@@ -87,19 +133,7 @@ export default function ProductPage({
           )}
           <div className='flex flex-wrap gap-4 mt-2'>
             {product?.colors.map((c) => (
-              <button
-                key={c.colorName}
-                onClick={() => {
-                  setSelectedColor(c);
-                  if (
-                    c.sizes.find((s) => selectedSize === s.size)?.quantity ===
-                      0 ||
-                    !c.sizes.find((s) => selectedSize === s.size)
-                  ) {
-                    setSelectedSize('');
-                  }
-                }}
-              >
+              <button key={c.colorName} onClick={() => handleColorSelect(c)}>
                 <Image
                   alt={c.colorName}
                   width={500}
@@ -116,7 +150,8 @@ export default function ProductPage({
         </div>
         <div className='text-base md:text-xl mb-4'>
           <p>
-            Size &middot; <span className='text-accent'>{selectedSize}</span>
+            Size {selectedSize && '· '}
+            <span className='text-accent'>{selectedSize}</span>
           </p>
           {product?.sizeNotes && (
             <p className='text-base text-gray-400'>{product?.sizeNotes}</p>
@@ -128,7 +163,7 @@ export default function ProductPage({
                 className={`btn-square text-xl ${
                   selectedSize === s.size && 'bg-primary text-secondary'
                 }`}
-                onClick={() => setSelectedSize(s.size)}
+                onClick={() => handleSizeSelect(s)}
                 disabled={s.quantity === 0 ? true : false}
               >
                 {s.size}
@@ -138,11 +173,12 @@ export default function ProductPage({
         </div>
         <br></br>
         <div className='flex flex-col gap-4'>
-          <button className='primary-btn h-12 md:h-16 w-full'>
+          <button className='btn-primary h-12 md:h-16 w-full'>
             Add to Cart
           </button>
-          <button className='secondary-btn h-12 md:h-16 w-full flex flex-nowrap items-center justify-center gap-2'>
-            Save <Icon path={mdiHeartOutline} size={1.5} />
+          <button className='btn-secondary h-12 md:h-16 w-full flex flex-nowrap items-center justify-center gap-2'>
+            {saved ? 'Saved' : 'Save'}{' '}
+            <Icon path={saved ? mdiHeart : mdiHeartOutline} size={1.5} />
           </button>
         </div>
         <br></br>
