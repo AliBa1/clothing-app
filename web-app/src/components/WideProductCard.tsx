@@ -3,10 +3,11 @@ import { discountedPrice } from '@/utils/helperFunctions';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BrandLink from './BrandLink';
 import Icon from '@mdi/react';
 import { mdiHeart, mdiHeartOutline } from '@mdi/js';
+import { savedProducts } from '@/interfaces/userProducts';
 
 interface ProductCardProps {
   product: BrandProduct;
@@ -15,10 +16,32 @@ interface ProductCardProps {
 /**
  * Product displayed in feed with brand, description, name, and price. Takes user to product page if clicked.
  */
-export default function WideProductCard({ product, colorVariant }: ProductCardProps) {
+export default function WideProductCard({
+  product,
+  colorVariant
+}: ProductCardProps) {
   const router = useRouter();
-  const [image, setImage] = useState(colorVariant?.images.cover || product.colors[0].images.cover);
-  const [color, setColor] = useState(colorVariant?.colorName || product.colors[0].colorName);
+  const [image, setImage] = useState(
+    colorVariant?.images.cover || product.colors[0].images.cover
+  );
+  const [color, setColor] = useState(
+    colorVariant?.colorName || product.colors[0].colorName
+  );
+  const [colorId, setColorId] = useState<string>(
+    colorVariant?.id || product.colors[0].id
+  );
+  const [saved, setSaved] = useState(
+    savedProducts.some((sP) => sP.colorId === colorId)
+  );
+
+  useEffect(() => {
+    if (savedProducts.some((sP) => sP.colorId === colorId)) {
+      setSaved(true);
+    } else {
+      setSaved(false);
+    }
+  }, [color, colorId]);
+
   return (
     <div className='block rounded-3xl w-full'>
       <BrandLink brand={product.brand} size='big' />
@@ -81,6 +104,7 @@ export default function WideProductCard({ product, colorVariant }: ProductCardPr
                     onClick={() => {
                       setImage(c.images.cover);
                       setColor(c.colorName);
+                      setColorId(c.id);
                     }}
                   />
                 ))}
@@ -93,7 +117,8 @@ export default function WideProductCard({ product, colorVariant }: ProductCardPr
           </div>
 
           <button className='btn-secondary md:h-16 w-full flex flex-nowrap items-center justify-center gap-2'>
-            Save <Icon path={mdiHeartOutline} size={1} />
+            {saved ? 'Saved' : 'Save'}{' '}
+            <Icon path={saved ? mdiHeart : mdiHeartOutline} size={1.5} />
           </button>
 
           {/* <button className='btn-primary h-12 md:h-16 w-full flex flex-nowrap items-center justify-center gap-2'>

@@ -7,8 +7,9 @@ import {
   mockProducts,
   SizeVariant
 } from '@/interfaces/brandProducts';
+import { savedProducts } from '@/interfaces/userProducts';
 import { discountedPrice } from '@/utils/helperFunctions';
-import { mdiHeartOutline } from '@mdi/js';
+import { mdiHeart, mdiHeartOutline } from '@mdi/js';
 import Icon from '@mdi/react';
 import Image from 'next/image';
 import {
@@ -17,7 +18,7 @@ import {
   useRouter,
   useSearchParams
 } from 'next/navigation';
-import { use, useCallback, useState } from 'react';
+import { use, useCallback, useEffect, useState } from 'react';
 
 export default function ProductPage({
   params
@@ -44,12 +45,27 @@ export default function ProductPage({
         sizes: []
       }
   );
+  const [colorId, setColorId] = useState<string>(
+    product.colors.find((c) => c.colorName === colorParam)?.id ||
+      product?.colors[0].id
+  );
+  const [saved, setSaved] = useState(
+    savedProducts.some((sP) => sP.colorId === colorId)
+  );
   const [selectedSize, setSelectedSize] = useState<string>(
     selectedColor.sizes.find((s) => s.size === sizeParam)?.size || ''
   );
   const allImages = selectedColor.images.additional
     ? [selectedColor.images.cover].concat(selectedColor.images.additional)
     : [selectedColor.images.cover];
+
+  useEffect(() => {
+    if (savedProducts.some((sP) => sP.colorId === colorId)) {
+      setSaved(true);
+    } else {
+      setSaved(false);
+    }
+  }, [colorId]);
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -63,6 +79,7 @@ export default function ProductPage({
 
   function handleColorSelect(c: ColorVariant) {
     setSelectedColor(c);
+    setColorId(c.id);
     router.push(`${pathname}?${createQueryString('color', c.colorName)}`, {
       scroll: false
     });
@@ -160,7 +177,8 @@ export default function ProductPage({
             Add to Cart
           </button>
           <button className='btn-secondary h-12 md:h-16 w-full flex flex-nowrap items-center justify-center gap-2'>
-            Save <Icon path={mdiHeartOutline} size={1.5} />
+            {saved ? 'Saved' : 'Save'}{' '}
+            <Icon path={saved ? mdiHeart : mdiHeartOutline} size={1.5} />
           </button>
         </div>
         <br></br>
