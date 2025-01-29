@@ -46,7 +46,7 @@ export default function FeedPage() {
         </button>
       </div>
 
-      <div className='flex flex-col gap-8 py-4 px-2 md:px-0 w-full md:w-2/3'>
+      <div className='flex flex-col gap-8 py-4 px-2 md:px-0 w-full lg:w-2/3'>
         {mockProducts.map((product) => (
           <WideProductCard key={product.id} product={product} />
         ))}

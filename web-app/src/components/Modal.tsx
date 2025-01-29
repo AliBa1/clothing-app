@@ -48,13 +48,17 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
   return (
     <dialog
       aria-modal={true}
-      className={`flex items-center justify-end md:justify-center w-full h-full fixed inset-0 z-50 bg-black bg-opacity-50 ${modalBgAnimation}`}
-      // className='flex items-center justify-center w-full h-full fixed inset-0 z-50 bg-black bg-opacity-50'
+      // center modal vvvvvvvvv
+      // className={`flex items-center justify-end md:justify-center w-full h-full fixed inset-0 z-50 bg-black bg-opacity-50 ${modalBgAnimation}`}
+      // side modal vvvvvvvvv
+      className={`flex items-center justify-end w-full h-full fixed inset-0 z-50 bg-black bg-opacity-50 ${modalBgAnimation}`}
       onClick={onClose}
     >
       <div
-        className={`bg-primary rounded-l-lg md:rounded-lg p-4 w-3/4 md:w-auto h-full md:h-3/4 max-h-full flex flex-col ${modalAnimation}`}
-        // className='bg-white rounded-lg p-4 w-full h-full md:h-auto md:w-auto max-h-full overflow-y-auto'
+        // center modal vvvvvvvvv
+        // className={`bg-primary rounded-l-lg md:rounded-lg p-4 w-3/4 md:w-auto h-full md:h-3/4 max-h-full flex flex-col ${modalAnimation}`}
+        // side modal vvvvvvvvv
+        className={`bg-primary rounded-l-lg p-4 w-3/4 md:w-auto h-full max-h-full flex flex-col ${modalAnimation}`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className='flex justify-end'>
