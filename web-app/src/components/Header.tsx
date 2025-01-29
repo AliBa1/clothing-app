@@ -12,11 +12,14 @@ import {
 import { useState } from 'react';
 import Modal from './Modal';
 import SearchModal from './SearchModal';
+import Cart from './Cart';
 
 export default function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [searchOpen, setSearchOpen] = useState<boolean>(false);
+  const [cartOpen, setCartOpen] = useState<boolean>(false);
+
   return (
     <header className='sticky top-0 z-10 h-16 bg-background grid grid-cols-2 md:grid-cols-3 items-center px-4 md:px-8 py-2 border-b border-primary'>
       {/* Web Header */}
@@ -52,7 +55,11 @@ export default function Header() {
       </Link>
 
       <div className='flex gap-4 md:gap-8 place-content-end'>
-        <button aria-label='Search' title='Search' onClick={() => setSearchOpen(true)}>
+        <button
+          aria-label='Search'
+          title='Search'
+          onClick={() => setSearchOpen(true)}
+        >
           <Icon path={mdiMagnify} size={1} />
         </button>
         <Link
@@ -67,7 +74,11 @@ export default function Header() {
           <Icon path={mdiAccount} size={1} />
         </button>
 
-        <button aria-label='Cart' title='Cart'>
+        <button
+          aria-label='Cart'
+          title='Cart'
+          onClick={() => setCartOpen(true)}
+        >
           <div className='relative'>
             <Icon path={mdiCart} size={1} />
             <div className='absolute -top-1 -right-1 bg-accent rounded-full p-1 text-center text-xs' />
@@ -129,6 +140,10 @@ export default function Header() {
       </Modal>
 
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+
+      <Modal isOpen={cartOpen} onClose={() => setCartOpen(false)}>
+        <Cart />
+      </Modal>
     </header>
   );
 }

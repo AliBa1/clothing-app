@@ -12,11 +12,15 @@ interface FetchedSave {
   product: BrandProduct;
   colorVariant: ColorVariant;
 }
+
+// TODO: 
+// - add for saved items empty
+
 export default function SavedPage() {
   const [products, setProducts] = useState<FetchedSave[]>([]);
 
   useEffect(() => {
-    const fetchedProducts = savedProducts
+    const fetchedProducts: FetchedSave[] = savedProducts
       .map((s) => {
         const product = mockProducts.find((p) => p.id === s.productId);
         if (!product) {
