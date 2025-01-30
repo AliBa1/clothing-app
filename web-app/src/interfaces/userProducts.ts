@@ -1,29 +1,29 @@
-import { mockProducts } from './brandProducts';
+import { BrandProduct, ColorVariant, mockProducts } from './brandProducts';
 
 export interface CartProduct {
   // id: string;
-  productId: string;
-  colorId: string;
+  product: BrandProduct;
+  color: ColorVariant;
   size: string;
   quantity: number;
 }
 
 export interface SavedProduct {
   // id: string;
-  productId: string;
-  colorId: string;
+  product: BrandProduct;
+  color: ColorVariant;
 }
 
 export const cartProducts: CartProduct[] = [
   {
-    productId: mockProducts[1].id,
-    colorId: mockProducts[1].colors[2].id,
+    product: mockProducts[1],
+    color: mockProducts[1].colors[2],
     size: mockProducts[1].colors[2].sizes[2].size,
     quantity: 1
   },
   {
-    productId: mockProducts[8].id,
-    colorId: mockProducts[8].colors[0].id,
+    product: mockProducts[8],
+    color: mockProducts[8].colors[0],
     size: mockProducts[8].colors[0].sizes[3].size,
     quantity: 3
   }
@@ -31,19 +31,19 @@ export const cartProducts: CartProduct[] = [
 
 export const savedProducts: SavedProduct[] = [
   {
-    productId: mockProducts[0].id,
-    colorId: mockProducts[0].colors[0].id
+    product: mockProducts[0],
+    color: mockProducts[0].colors[0]
   },
   {
-    productId: mockProducts[1].id,
-    colorId: mockProducts[1].colors[3].id
+    product: mockProducts[1],
+    color: mockProducts[1].colors[3]
   },
   {
-    productId: mockProducts[5].id,
-    colorId: mockProducts[5].colors[0].id
+    product: mockProducts[5],
+    color: mockProducts[5].colors[0]
   },
   {
-    productId: mockProducts[7].id,
-    colorId: mockProducts[7].colors[1].id
+    product: mockProducts[7],
+    color: mockProducts[7].colors[1]
   }
 ];

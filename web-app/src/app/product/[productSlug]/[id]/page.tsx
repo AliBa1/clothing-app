@@ -50,7 +50,7 @@ export default function ProductPage({
       product?.colors[0].id
   );
   const [saved, setSaved] = useState<boolean>(
-    savedProducts.some((sP) => sP.colorId === colorId)
+    savedProducts.some((sP) => sP.color.id === colorId)
   );
   const [selectedSize, setSelectedSize] = useState<string>(
     selectedColor.sizes.find((s) => s.size === sizeParam)?.size || ''
@@ -60,7 +60,7 @@ export default function ProductPage({
     : [selectedColor.images.cover];
 
   useEffect(() => {
-    if (savedProducts.some((sP) => sP.colorId === colorId)) {
+    if (savedProducts.some((sP) => sP.color.id === colorId)) {
       setSaved(true);
     } else {
       setSaved(false);
