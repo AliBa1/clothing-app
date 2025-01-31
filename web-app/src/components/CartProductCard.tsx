@@ -34,17 +34,28 @@ export default function CartProductCard({ cartProduct }: CardProps) {
         priority
       />
 
-      <div className='w-2/3 pr-2'>
-        <h4 className='text-base md:text-2xl'>{cartProduct.product.name}</h4>
-        <p className='whitespace-pre-line text-sm md:text-xl'>
-          Color: {cartProduct.color.colorName}
-        </p>
-        <p className='whitespace-pre-line text-sm md:text-xl'>
-          Size: {cartProduct.size}
-        </p>
+      <div className='w-2/3 p-0 md:p-2 flex flex-col justify-between'>
+        <div>
+          <h4 className='text-base md:text-2xl'>{cartProduct.product.name}</h4>
+          <p className='whitespace-pre-line text-sm md:text-lg'>
+            Color: {cartProduct.color.colorName}
+          </p>
+          <p className='whitespace-pre-line text-sm md:text-lg'>
+            Size: {cartProduct.size}
+          </p>
+        </div>
+        <button className='btn-circle h-8 w-8 md:w-auto md:btn-secondary md:h-12 md:max-w-48'>
+          <span className='hidden md:flex flex-nowrap items-center justify-center gap-2 text-base'>
+            {saved ? 'Saved' : 'Save'}{' '}
+            <Icon path={saved ? mdiHeart : mdiHeartOutline} size={1} />
+          </span>
+          <span className='flex md:hidden items-center'>
+            <Icon path={saved ? mdiHeart : mdiHeartOutline} size={1} />
+          </span>
+        </button>
       </div>
 
-      <div className='flex flex-col justify-between w-1/6 p-2'>
+      <div className='flex flex-col justify-between w-1/3 p-0 md:p-4'>
         <div className='hover:underline decoration-accent text-base md:text-2xl font-heading text-end'>
           {cartProduct.color.discount ? (
             <p>
@@ -52,36 +63,24 @@ export default function CartProductCard({ cartProduct }: CardProps) {
               {discountedPrice(
                 cartProduct.color.price,
                 cartProduct.color.discount
-              )}{' '}
+              ) * cartProduct.quantity}{' '}
               <span className='line-through text-accent'>
-                ${cartProduct.color.price}
+                ${cartProduct.color.price * cartProduct.quantity}
               </span>
             </p>
           ) : (
-            <p>${cartProduct.color.price}</p>
+            <p>${cartProduct.color.price * cartProduct.quantity}</p>
           )}
         </div>
 
-        <div className='flex flex-col gap-4'>
-          <button className='btn-circle md:btn-secondary md:h-16 flex flex-nowrap items-center justify-center gap-0 md:gap-2'>
-            <span className='hidden md:flex'>
-              {saved ? 'Saved' : 'Save'}{' '}
-              <Icon path={saved ? mdiHeart : mdiHeartOutline} size={1.5} />
-            </span>
-            <span className='block md:hidden'>
-              <Icon path={saved ? mdiHeart : mdiHeartOutline} size={1} />
-            </span>
+        <div className='flex btn-secondary md:h-16 items-center justify-between rounded-full border'>
+          <button>
+            <Icon path={mdiTrashCan} size={1} />
           </button>
-
-          <div className='hidden btn-secondary md:h-16 md:flex items-center justify-between rounded-full border'>
-            <button>
-              <Icon path={mdiTrashCan} size={1} />
-            </button>
-            <p>{cartProduct.quantity}</p>
-            <button>
-              <Icon path={mdiPlus} size={1} />
-            </button>
-          </div>
+          <p>{cartProduct.quantity}</p>
+          <button>
+            <Icon path={mdiPlus} size={1} />
+          </button>
         </div>
       </div>
     </div>
