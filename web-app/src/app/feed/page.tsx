@@ -60,7 +60,7 @@ export default function FeedPage() {
 
       {/* Following modal (better than following sitting on the side) */}
       <Modal isOpen={isFollowingOpen} onClose={() => setFollowingOpen(false)}>
-        <h4 className='text-xl lg:text-2xl text-center sticky top-0 bg-primary'>
+        <h4 className='text-xl lg:text-2xl text-center sticky top-0 bg-background'>
           Following
         </h4>
         {mockBrands.map((b) => (

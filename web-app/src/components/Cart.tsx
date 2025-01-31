@@ -1,20 +1,8 @@
-import {
-  BrandProduct,
-  ColorVariant,
-  mockProducts
-} from '@/interfaces/brandProducts';
 import { cartProducts } from '@/interfaces/userProducts';
-import { useEffect, useState } from 'react';
-import WideProductCard from './WideProductCard';
+import CartProductCard from './CartProductCard';
+import { discountedPrice } from '@/utils/helperFunctions';
 
-interface FetchedCart {
-  product: BrandProduct;
-  colorVariant: ColorVariant;
-  size: string;
-  quantity: number;
-}
-
-// TODO: 
+// TODO:
 // - change background colors?
 // - create cart items
 // - make bottom btns and text functional
@@ -22,42 +10,33 @@ interface FetchedCart {
 // - add for cart empty
 
 export default function Cart() {
-  const [products, setProducts] = useState<FetchedCart[]>([]);
-
-  useEffect(() => {
-    const fetchedProducts: FetchedCart[] = cartProducts
-      .map((s) => {
-        const product = mockProducts.find((p) => p.id === s.productId);
-        if (!product) {
-          return null;
-        }
-        const colorVariant = product.colors.find((c) => c.id === s.colorId);
-        if (!colorVariant) {
-          return null;
-        }
-        return {
-          product: product,
-          colorVariant: colorVariant,
-          size: s.size,
-          quantity: s.quantity
-        };
-      })
-      .filter((item): item is FetchedCart => item !== null);
-    setProducts(fetchedProducts);
-  }, []);
-
+  const totalPrice = cartProducts.reduce(
+    (total, p) =>
+      total +
+      (p.color.discount
+        ? discountedPrice(p.color.price, p.color.discount)
+        : p.color.price) *
+        p.quantity,
+    0
+  );
   return (
-    <div className='flex flex-col justify-between'>
-      <div className=''>
-        {products.map((p) => (
-          // replace with cart cards
-          <WideProductCard key={p.product.id} product={p.product} />
+    <div className='flex flex-col gap-4 justify-between'>
+      <div className='flex flex-col gap-8'>
+        {cartProducts.map((p) => (
+          <CartProductCard
+            key={`${p.product.id}-${p.color.id}`}
+            cartProduct={p}
+          />
         ))}
       </div>
-      <div className='sticky bottom-0 bg-primary'>
-        <div className='flex justify-between'>
-          <p>6 Items</p>
-          <p>Total: $4123</p>
+      <div className='sticky bottom-0 bg-background'>
+        <div className='flex justify-between md:text-xl'>
+          {cartProducts.length > 1 ? (
+            <p>{cartProducts.length} Items</p>
+          ) : (
+            <p>1 Item</p>
+          )}
+          <p>Total: ${totalPrice}</p>
         </div>
         <div className='flex flex-col gap-4'>
           <button className='btn-primary h-12 md:h-16 w-full'>Checkout</button>

@@ -58,7 +58,7 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
         // center modal vvvvvvvvv
         // className={`bg-primary rounded-l-lg md:rounded-lg p-4 w-3/4 md:w-auto h-full md:h-3/4 max-h-full flex flex-col ${modalAnimation}`}
         // side modal vvvvvvvvv
-        className={`bg-primary rounded-l-lg p-4 w-3/4 md:w-auto h-full max-h-full flex flex-col ${modalAnimation}`}
+        className={`bg-background rounded-l-lg p-4 w-3/4 md:w-auto h-full max-h-full flex flex-col ${modalAnimation}`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className='flex justify-end'>
@@ -84,7 +84,7 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
           </button>
         </div>
         <div
-          className='flex-grow m-2 overflow-y-scroll text-secondary'
+          className='flex-grow m-2 overflow-y-scroll text-text'
           style={{ scrollbarWidth: 'none' }}
         >
           {children}

@@ -112,7 +112,7 @@ export default function Shop() {
           className='w-full md:w-96 flex flex-col h-full'
           onSubmit={() => setFilterModalOpen(false)}
         >
-          <h4 className='sticky top-0 bg-primary'>Filters</h4>
+          <h4 className='sticky top-0 bg-background'>Filters</h4>
           <AccordionRadio
             name='Sort'
             selected={filters.sort}
@@ -204,12 +204,12 @@ export default function Shop() {
             }
           />
 
-          <div className='w-full border-t border-secondary py-8'></div>
+          <div className='w-full border-t border-primary py-8'></div>
 
-          <div className='w-full flex gap-4 sticky bottom-0 bg-primary mt-auto'>
+          <div className='w-full flex gap-4 sticky bottom-0 bg-background mt-auto'>
             <button
               type='button'
-              className='btn-secondary border-secondary dark:border-black flex-grow'
+              className='btn-secondary flex-grow'
               onClick={() => setFilters(mockDefaultFilters)}
             >
               Clear All
