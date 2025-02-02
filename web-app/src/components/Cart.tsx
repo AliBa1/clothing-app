@@ -21,7 +21,7 @@ export default function Cart() {
   );
   return (
     <div className='flex flex-col gap-4 justify-between'>
-      <div className='flex flex-col gap-8 w-2/3'>
+      <div className='flex flex-col gap-8'>
         {cartProducts.map((p) => (
           <CartProductCard
             key={`${p.product.id}-${p.color.id}`}
@@ -29,8 +29,8 @@ export default function Cart() {
           />
         ))}
       </div>
-      <div className='sticky bottom-0 bg-background'>
-        <div className='flex justify-between md:text-xl'>
+      <div className='sticky bottom-0 bg-background border-t border-primary'>
+        <div className='flex justify-between md:text-xl pb-4'>
           {cartProducts.length > 1 ? (
             <p>{cartProducts.length} Items</p>
           ) : (

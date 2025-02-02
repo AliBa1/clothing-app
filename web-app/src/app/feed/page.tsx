@@ -59,7 +59,7 @@ export default function FeedPage() {
       </div>
 
       {/* Following modal (better than following sitting on the side) */}
-      <Modal isOpen={isFollowingOpen} onClose={() => setFollowingOpen(false)}>
+      <Modal isOpen={isFollowingOpen} onClose={() => setFollowingOpen(false)} lockedWidth={false}>
         <h4 className='text-xl lg:text-2xl text-center sticky top-0 bg-background'>
           Following
         </h4>

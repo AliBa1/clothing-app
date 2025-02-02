@@ -97,7 +97,11 @@ export default function Header() {
       </div>
 
       {/* Mobile Side Modal */}
-      <Modal isOpen={menuOpen} onClose={() => setMenuOpen(false)}>
+      <Modal
+        isOpen={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        lockedWidth={false}
+      >
         <div className='flex flex-col gap-4'>
           <Link
             href='/shop'
@@ -141,7 +145,11 @@ export default function Header() {
 
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
 
-      <Modal isOpen={cartOpen} onClose={() => setCartOpen(false)}>
+      <Modal
+        isOpen={cartOpen}
+        onClose={() => setCartOpen(false)}
+        lockedWidth={true}
+      >
         <Cart />
       </Modal>
     </header>

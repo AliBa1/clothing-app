@@ -106,6 +106,7 @@ export default function Shop() {
           setFilterModalOpen(false);
           setFiltersOpen(allFiltersClosed);
         }}
+        lockedWidth={false}
       >
         <Form
           action={''}
