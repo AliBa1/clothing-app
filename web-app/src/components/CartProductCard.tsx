@@ -19,13 +19,15 @@ export default function CartProductCard({ cartProduct }: CardProps) {
     (sP) => sP.color.id === cartProduct.color.id
   );
   return (
-    <div className='flex gap-1 md:gap-4 rounded border'>
+    // <div className='flex gap-1 md:gap-4 rounded border'>
+    <div className='grid grid-cols-2 md:grid-cols-3 gap-1 md:gap-4 rounded border'>
       <Image
         src={cartProduct.color.images.cover}
         alt={`${cartProduct.color.colorName} ${cartProduct.product.name}`}
         height={1280}
         width={1024}
-        className='aspect-[4/5] w-1/3 md:w-1/6 rounded-l object-cover object-center cursor-pointer bg-background dark:bg-white'
+        // className='aspect-[4/5] w-1/3 md:w-1/6 rounded-l object-cover object-center cursor-pointer bg-background dark:bg-white'
+        className='aspect-[4/5] rounded-l object-cover object-center cursor-pointer bg-background dark:bg-white'
         onClick={() =>
           router.push(
             `/product/${cartProduct.product.productSlug}/${cartProduct.product.id}?color=${cartProduct.color.colorName}`
@@ -34,7 +36,8 @@ export default function CartProductCard({ cartProduct }: CardProps) {
         priority
       />
 
-      <div className='w-2/3 p-0 md:p-2 flex flex-col justify-between'>
+      {/* <div className='w-2/3 p-0 md:p-2 flex flex-col justify-between'> */}
+      <div className='p-0 md:p-2 flex flex-col justify-between'>
         <div>
           <h4 className='text-base md:text-2xl'>{cartProduct.product.name}</h4>
           <p className='whitespace-pre-line text-sm md:text-lg'>
@@ -55,7 +58,8 @@ export default function CartProductCard({ cartProduct }: CardProps) {
         </button>
       </div>
 
-      <div className='flex flex-col justify-between w-1/3 p-0 md:p-4'>
+      {/* <div className='flex flex-col justify-between w-1/3 p-0 md:p-4'> */}
+      <div className='border flex flex-col justify-between w-1/3 p-0 md:p-4 col-span-2 md:col-span-1'>
         <div className='hover:underline decoration-accent text-base md:text-2xl font-heading text-end'>
           {cartProduct.color.discount ? (
             <p>

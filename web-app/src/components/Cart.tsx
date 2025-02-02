@@ -21,7 +21,7 @@ export default function Cart() {
   );
   return (
     <div className='flex flex-col gap-4 justify-between'>
-      <div className='flex flex-col gap-8'>
+      <div className='flex flex-col gap-8 w-2/3'>
         {cartProducts.map((p) => (
           <CartProductCard
             key={`${p.product.id}-${p.color.id}`}
