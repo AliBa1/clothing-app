@@ -150,7 +150,7 @@ export default function Header() {
         onClose={() => setCartOpen(false)}
         lockedWidth={true}
       >
-        <Cart />
+        <Cart onClose={() => setCartOpen(false)} />
       </Modal>
     </header>
   );
