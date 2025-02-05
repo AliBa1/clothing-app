@@ -1,6 +1,7 @@
 import { cartProducts } from '@/interfaces/userProducts';
 import CartProductCard from './CartProductCard';
 import { discountedPrice } from '@/utils/helperFunctions';
+import { useRouter } from 'next/navigation';
 
 interface CartProps {
   onClose: () => void;
@@ -14,6 +15,7 @@ interface CartProps {
 // - add for cart empty
 
 export default function Cart({ onClose }: CartProps) {
+  const router = useRouter();
   const totalPrice = cartProducts.reduce(
     (total, p) =>
       total +
@@ -43,7 +45,15 @@ export default function Cart({ onClose }: CartProps) {
           <p>Total: ${totalPrice}</p>
         </div>
         <div className='flex flex-col gap-4'>
-          <button className='btn-primary h-12 md:h-16 w-full'>Checkout</button>
+          <button
+            className='btn-primary h-12 md:h-16 w-full'
+            onClick={() => {
+              onClose();
+              router.push('/checkout');
+            }}
+          >
+            Checkout
+          </button>
           <button
             className='btn-secondary h-12 md:h-16 w-full flex flex-nowrap items-center justify-center gap-2'
             onClick={onClose}
