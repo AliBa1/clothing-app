@@ -19,13 +19,13 @@ export default function CartProductCard({ cartProduct }: CardProps) {
   );
   return (
     <div className='border-b last:border-none border-primary pb-4'>
-      <div className='flex gap-1 md:gap-4'>
+      <div className='flex gap-2 md:gap-4'>
         <Image
           src={cartProduct.color.images.cover}
           alt={`${cartProduct.color.colorName} ${cartProduct.product.name}`}
           height={1280}
           width={1024}
-          className='aspect-[4/5] w-1/3 md:w-1/6 rounded-l object-cover object-center cursor-pointer bg-background dark:bg-white'
+          className='aspect-[4/5] w-1/3 md:w-1/6 rounded object-cover object-center cursor-pointer bg-background dark:bg-white'
           onClick={() =>
             router.push(
               `/product/${cartProduct.product.productSlug}/${cartProduct.product.id}?color=${cartProduct.color.colorName}`
@@ -57,12 +57,14 @@ export default function CartProductCard({ cartProduct }: CardProps) {
           </button>
         </div>
 
+        {/* PC price and quantity */}
         <div className='hidden md:flex flex-col justify-between w-1/3 p-2'>
           <Price cartProduct={cartProduct} />
           <Quantity cartProduct={cartProduct} />
         </div>
       </div>
 
+      {/* Mobile price and quantity */}
       <div className='md:hidden flex justify-between items-center pt-2'>
         <Price cartProduct={cartProduct} />
         <Quantity cartProduct={cartProduct} />
