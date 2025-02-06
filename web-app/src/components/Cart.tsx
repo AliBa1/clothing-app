@@ -14,7 +14,7 @@ interface CartProps {
 // - add you may also like section
 // - add for cart empty
 
-export default function Cart({ onClose }: CartProps) {
+export default function CartModal({ onClose }: CartProps) {
   const router = useRouter();
   const totalPrice = cartProducts.reduce(
     (total, p) =>
@@ -49,10 +49,10 @@ export default function Cart({ onClose }: CartProps) {
             className='btn-primary h-12 md:h-16 w-full'
             onClick={() => {
               onClose();
-              router.push('/checkout');
+              router.push('/cart');
             }}
           >
-            Checkout
+            View Cart
           </button>
           <button
             className='btn-secondary h-12 md:h-16 w-full flex flex-nowrap items-center justify-center gap-2'

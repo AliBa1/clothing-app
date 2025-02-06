@@ -1,3 +1,4 @@
+'use client';
 import { CartProduct, savedProducts } from '@/interfaces/userProducts';
 import { discountedPrice } from '@/utils/helperFunctions';
 import { mdiHeart, mdiHeartOutline, mdiPlus, mdiTrashCan } from '@mdi/js';

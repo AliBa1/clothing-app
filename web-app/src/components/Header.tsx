@@ -12,7 +12,7 @@ import {
 import { useState } from 'react';
 import Modal from './Modal';
 import SearchModal from './SearchModal';
-import Cart from './Cart';
+import CartModal from './Cart';
 
 export default function Header() {
   const pathname = usePathname();
@@ -150,7 +150,7 @@ export default function Header() {
         onClose={() => setCartOpen(false)}
         lockedWidth={true}
       >
-        <Cart onClose={() => setCartOpen(false)} />
+        <CartModal onClose={() => setCartOpen(false)} />
       </Modal>
     </header>
   );
