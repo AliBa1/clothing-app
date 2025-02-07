@@ -16,7 +16,8 @@ export default function CartPage() {
         </div>
 
         <div className='sticky top-16 right-0'>
-          
+          <p>Total: $123.12</p>
+          <button className='btn-primary'>Checkout</button>
         </div>
       </div>
     </main>
