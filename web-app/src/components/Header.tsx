@@ -12,7 +12,7 @@ import {
 import { useState } from 'react';
 import Modal from './Modal';
 import SearchModal from './SearchModal';
-import CartModal from './Cart';
+import CartModal from './CartModal';
 
 export default function Header() {
   const pathname = usePathname();
