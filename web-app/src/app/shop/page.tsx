@@ -76,7 +76,7 @@ export default function Shop() {
 
   return (
     <main className='px-0'>
-      <div className='sticky top-16 mb-4 flex flex-col md:flex-row justify-between gap-2 md:gap-8 py-2 px-4 md:px-8 bg-background shadow w-full'>
+      <div className='z-[1] sticky top-16 mb-4 flex flex-col md:flex-row justify-between gap-2 md:gap-8 py-2 px-4 md:px-8 bg-background shadow w-full'>
         <div
           className='flex overflow-x-scroll items-center gap-8 text-nowrap pb-2 font-light'
           style={{ scrollbarWidth: 'none' }}
