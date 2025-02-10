@@ -32,11 +32,11 @@ export default function ProductCard({
     colorVariant?.id || product.colors[0].id
   );
   const [saved, setSaved] = useState<boolean>(
-    savedProducts.some((sP) => sP.colorId === colorId)
+    savedProducts.some((sP) => sP.color.id === colorId)
   );
 
   useEffect(() => {
-    if (savedProducts.some((sP) => sP.colorId === colorId)) {
+    if (savedProducts.some((sP) => sP.color.id === colorId)) {
       setSaved(true);
     } else {
       setSaved(false);

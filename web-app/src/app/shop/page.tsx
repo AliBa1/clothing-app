@@ -76,7 +76,7 @@ export default function Shop() {
 
   return (
     <main className='px-0'>
-      <div className='sticky top-16 mb-4 flex flex-col md:flex-row justify-between gap-2 md:gap-8 py-2 px-4 md:px-8 bg-background shadow w-full'>
+      <div className='z-[1] sticky top-16 mb-4 flex flex-col md:flex-row justify-between gap-2 md:gap-8 py-2 px-4 md:px-8 bg-background shadow w-full'>
         <div
           className='flex overflow-x-scroll items-center gap-8 text-nowrap pb-2 font-light'
           style={{ scrollbarWidth: 'none' }}
@@ -106,13 +106,14 @@ export default function Shop() {
           setFilterModalOpen(false);
           setFiltersOpen(allFiltersClosed);
         }}
+        lockedWidth={false}
       >
         <Form
           action={''}
           className='w-full md:w-96 flex flex-col h-full'
           onSubmit={() => setFilterModalOpen(false)}
         >
-          <h4 className='sticky top-0 bg-primary'>Filters</h4>
+          <h4 className='sticky top-0 bg-background'>Filters</h4>
           <AccordionRadio
             name='Sort'
             selected={filters.sort}
@@ -204,12 +205,12 @@ export default function Shop() {
             }
           />
 
-          <div className='w-full border-t border-secondary py-8'></div>
+          <div className='w-full border-t border-primary py-8'></div>
 
-          <div className='w-full flex gap-4 sticky bottom-0 bg-primary mt-auto'>
+          <div className='w-full flex gap-4 sticky bottom-0 bg-background mt-auto'>
             <button
               type='button'
-              className='btn-secondary border-secondary dark:border-black flex-grow'
+              className='btn-secondary flex-grow'
               onClick={() => setFilters(mockDefaultFilters)}
             >
               Clear All

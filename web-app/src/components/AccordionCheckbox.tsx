@@ -58,7 +58,7 @@ export default function AccordionCheckbox({
     <div>
       <button
         type='button'
-        className='w-full flex justify-between p-4 border-t border-secondary'
+        className='w-full flex justify-between p-4 border-t border-primary'
         onClick={onOpen}
       >
         <p className='text-nowrap truncate'>

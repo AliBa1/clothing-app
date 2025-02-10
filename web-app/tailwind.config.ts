@@ -30,7 +30,11 @@ export default {
         background: 'var(--background)',
         primary: 'var(--primary)',
         secondary: 'var(--secondary)',
-        accent: 'var(--accent)'
+        accent: 'var(--accent)',
+        warning: 'var(--warning)',
+        success: 'var(--success)',
+        error: 'var(--error)',
+        info: 'var(--info)', 
       }
     }
   },

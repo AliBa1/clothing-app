@@ -28,6 +28,10 @@
   --primary: #464f51;
   --secondary: #ffffff;
   --accent: #d68fd6;
+  --warning: #efcf32;
+  --success: #08680d;
+  --error: #af182f;
+  --info: #2bb4f4;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -37,6 +41,10 @@
     --primary: #e6efe9;
     --secondary: #000000;
     --accent: #d68fd6;
+    --warning: #efcf32;
+    --success: #2dc835;
+    --error: #eb6f82;
+    --info: #2bb4f4;
   }
 }
 
@@ -100,7 +108,7 @@ body {
     @apply rounded h-24 w-24 bg-primary text-text aspect-square object-cover;
   }
   .products-grid {
-    @apply grid grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8 px-2
+    @apply grid grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8 px-2;
   }
 }
 
