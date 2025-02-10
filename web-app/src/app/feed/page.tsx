@@ -39,7 +39,7 @@ export default function FeedPage() {
     // </main>
 
     // V2_V2_V2_V2_V2_V2_V2_V2_V2_V2_V2_V2_V2_V2_V2_V2_V2_V2
-    <main className='flex-col w-full px-0 md:px-4 gap-4 justify-center'>
+    <main className='flex-col w-full px-0 md:px-4 gap-4 justify-center overflow-x-clip'>
       <div className='hidden md:flex gap-4 justify-center py-4 bg-background w-screen sticky top-16 font-light'>
         <button className='btn-accent' onClick={() => setFollowingOpen(true)}>
           Following
