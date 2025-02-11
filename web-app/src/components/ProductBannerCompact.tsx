@@ -15,7 +15,7 @@ export default function ProductBannerCompact({
     colorVariant?.images.cover || product.colors[0].images.cover;
   const color: string = colorVariant?.colorName || product.colors[0].colorName;
   return (
-    <div className='w-full lg:w-1/2 flex flex-col justify-between p-4 bg-white border border-accent'>
+    <div className='w-full lg:w-1/2 flex flex-col justify-between p-4 bg-white border-x border-accent'>
       <div className='mx-auto flex flex-col items-center'>
         <Image
           // src={product.colors[0].images.cover}
@@ -52,7 +52,9 @@ export default function ProductBannerCompact({
       </div>
 
       <div className='flex flex-col md:flex-row justify-between items-center md:gap-8 text-secondary'>
-        <h4 className='text-xl md:text-2xl text-center md:text-start'>{product.name}</h4>
+        <h4 className='text-xl md:text-2xl text-center md:text-start'>
+          {product.name}
+        </h4>
         <div className='flex md:flex-col gap-4 items-center'>
           <Link
             href={`/product/${product.productSlug}/${product.id}?color=${color}`}

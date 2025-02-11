@@ -11,7 +11,7 @@ import { savedProducts } from '@/interfaces/userProducts';
 
 interface ProductCardProps {
   product: BrandProduct;
-  showBrand: boolean;
+  showBrand?: boolean;
   colorVariant?: ColorVariant;
 }
 /**
@@ -19,7 +19,7 @@ interface ProductCardProps {
  */
 export default function ProductCard({
   product,
-  showBrand,
+  showBrand = true,
   colorVariant
 }: ProductCardProps) {
   const [image, setImage] = useState<string>(
@@ -58,7 +58,7 @@ export default function ProductCard({
             alt={`'${color}' ${product.name}`}
             height={1280}
             width={1024}
-            className='aspect-[4/5] w-full rounded object-cover object-center bg-background dark:bg-white'
+            className='aspect-[4/5] rounded object-cover object-center bg-background dark:bg-white'
             priority
           />
           <button className='btn-circle bg-slate-200 border-none shadow shadow-black absolute bottom-2 right-2 md:bottom-4 md:right-4'>
@@ -70,7 +70,7 @@ export default function ProductCard({
           </button>
         </div>
 
-        <div className='group-hover:underline decoration-accent text-sm md:text-xl font-body md:font-heading'>
+        <div className='group-hover:underline decoration-accent text-base md:text-xl font-body md:font-heading'>
           <p>{product.name}</p>
           {product.colors[0].discount ? (
             <p>

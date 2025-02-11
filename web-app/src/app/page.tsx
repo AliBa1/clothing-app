@@ -1,3 +1,4 @@
+import FeaturedBannerWide from '@/components/FeaturedBanner';
 import ProductBannerCompact from '@/components/ProductBannerCompact';
 import ProductBannerWide from '@/components/ProductBannerWide';
 import { mockProducts } from '@/interfaces/brandProducts';
@@ -13,6 +14,16 @@ export default function Home() {
         <ProductBannerCompact product={mockProducts[0]} />
       </div>
 
+      <FeaturedBannerWide
+        name='Hoodies'
+        route='/shop'
+        products={[
+          mockProducts[0],
+          mockProducts[1],
+          mockProducts[2]
+        ]}
+      />
+
       <div className='flex flex-col lg:flex-row w-full'>
         <ProductBannerCompact
           product={mockProducts[1]}
@@ -23,6 +34,16 @@ export default function Home() {
           colorVariant={mockProducts[2].colors[4]}
         />
       </div>
+
+      <FeaturedBannerWide
+        name='Bottoms'
+        route='/shop'
+        products={[
+          mockProducts[4],
+          mockProducts[5],
+          mockProducts[7]
+        ]}
+      />
     </main>
   );
 }
