@@ -55,7 +55,7 @@ export default function ProductBannerCompact({
         <h4 className='text-xl md:text-2xl text-center md:text-start'>
           {product.name}
         </h4>
-        <div className='flex md:flex-col gap-4 items-center'>
+        <div className='flex md:flex-col gap-4 items-center self-end'>
           <Link
             href={`/product/${product.productSlug}/${product.id}?color=${color}`}
             className='btn-accent w-full text-center'
