@@ -64,7 +64,7 @@ export default function ProductBannerCompact({
           </Link>
           <Link
             href={`/${product.brand.handle}`}
-            className='btn-primary dark:btn-secondary border-secondary w-full text-center'
+            className='btn-primary dark:btn-secondary dark:border-secondary w-full text-center'
           >
             Shop {product.brand.name}
           </Link>

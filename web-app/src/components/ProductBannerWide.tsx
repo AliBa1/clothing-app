@@ -24,7 +24,7 @@ export default function ProductBannerWide({
           </Link>
           <Link
             href={`/${product.brand.handle}`}
-            className='btn-primary dark:btn-secondary border-secondary text-center'
+            className='btn-primary dark:btn-secondary dark:border-secondary text-center'
           >
             Shop {product.brand.name}
           </Link>
