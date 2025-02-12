@@ -9,9 +9,40 @@ test.describe('navigation', () => {
     await expect(page).toHaveURL('/');
   });
 
-  test('shop on header goes to shop', async ({ page }) => {
+  test('clicking shop goes to shop page', async ({ page }) => {
     await page.getByRole('link', { name: 'Shop', exact: true }).click();
     await expect(page).toHaveURL('/shop');
+  });
+
+  test('clicking feed goes to feed page', async ({ page }) => {
+    await page.getByRole('link', { name: 'Feed', exact: true }).click();
+    await expect(page).toHaveURL('/feed');
+  });
+
+  test('clicking site title goes to home page', async ({ page }) => {
+    await page.getByRole('link', { name: 'FLEA', exact: true }).click();
+    await expect(page).toHaveURL('/');
+  });
+
+  test('clicking saved goes to saved page', async ({ page }) => {
+    await page.getByLabel('Saved').click();
+    await expect(page).toHaveURL('/saved');
+  });
+
+  test('view cart goes to cart page', async ({ page }) => {  
+    await page.getByLabel('Cart').click();
+    await page.getByRole('button', { name: 'View Cart' }).click();
+    await expect(page).toHaveURL('/cart');
+  });
+
+  test('home page view item goes to product page', async ({ page }) => {
+    await page.getByRole('link', { name: 'View Item' }).first().click();
+    await expect(page).toHaveURL('/product/alyx-lightweight-buckle-puffer-jacket/1?color=Black');
+  });
+
+  test('home page shop brand goes to brand page', async ({ page }) => {
+    await page.getByRole('link', { name: 'Shop 1017 ALYX 9SM' }).click();
+    await expect(page).toHaveURL('/Alyx');
   });
 
   test('product click goes to product', async ({ page }) => {
@@ -24,8 +55,8 @@ test.describe('navigation', () => {
 
   test('brand click on shop goes to brand page', async ({ page }) => {
     await page.getByRole('link', { name: 'Shop', exact: true }).click();
-    await page.getByText('ALYX 9SM').click();
-    await expect(page).toHaveURL('/Alyx');
+    await page.getByText('Statment').click();
+    await expect(page).toHaveURL('/Statment');
   });
 
   test('brand click on product page goes to brand page', async ({ page }) => {
@@ -90,9 +121,10 @@ test.describe('product color', () => {
     await page.getByRole('link', { name: 'Shop', exact: true }).click();
     await page.getByRole('link', { name: 'STMT Hoodie $58 $' }).click();
 
-    await page.getByRole('img', { name: 'Grey' }).click();
+    // await page.getByRole('img', { name: 'Grey' }).click();
+    await page.getByRole('button', { name: 'Grey' }).click();
 
-    const selectedColorText = await page.locator('p:text("Color ·")');
+    const selectedColorText = page.locator('p:text("Color ·")');
     await expect(selectedColorText).toBeVisible();
     await expect(selectedColorText).toHaveText('Color · Grey');
   });
