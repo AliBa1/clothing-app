@@ -16,7 +16,7 @@ export default function ProductBannerWide({
   const color: string = colorVariant?.colorName || product.colors[0].colorName;
   return (
     <div className='w-full flex justify-between px-8 bg-white'>
-      <div className='flex flex-col justify-evenly text-secondary'>
+      <div className='flex flex-col justify-evenly text-text dark:text-secondary'>
         <h4>{product.name}</h4>
         <div className='flex flex-col lg:flex-row gap-4'>
           <Link href={`/product/${product.productSlug}/${product.id}?color=${color}`} className='btn-accent text-center'>
@@ -24,7 +24,7 @@ export default function ProductBannerWide({
           </Link>
           <Link
             href={`/${product.brand.handle}`}
-            className='btn-secondary border-secondary text-center'
+            className='btn-primary dark:btn-secondary border-secondary text-center'
           >
             Shop {product.brand.name}
           </Link>

@@ -51,7 +51,7 @@ export default function ProductBannerCompact({
         )} */}
       </div>
 
-      <div className='flex flex-col md:flex-row justify-between items-center md:gap-8 text-secondary'>
+      <div className='flex flex-col md:flex-row justify-between items-center md:gap-8 text-text dark:text-secondary'>
         <h4 className='text-xl md:text-2xl text-center md:text-start'>
           {product.name}
         </h4>
@@ -64,7 +64,7 @@ export default function ProductBannerCompact({
           </Link>
           <Link
             href={`/${product.brand.handle}`}
-            className='btn-secondary border-secondary w-full text-center'
+            className='btn-primary dark:btn-secondary border-secondary w-full text-center'
           >
             Shop {product.brand.name}
           </Link>
