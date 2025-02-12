@@ -29,7 +29,7 @@ test.describe('navigation', () => {
     await expect(page).toHaveURL('/saved');
   });
 
-  test('view cart goes to cart page', async ({ page }) => {  
+  test('view cart goes to cart page', async ({ page }) => {
     await page.getByLabel('Cart').click();
     await page.getByRole('button', { name: 'View Cart' }).click();
     await expect(page).toHaveURL('/cart');
@@ -37,7 +37,9 @@ test.describe('navigation', () => {
 
   test('home page view item goes to product page', async ({ page }) => {
     await page.getByRole('link', { name: 'View Item' }).first().click();
-    await expect(page).toHaveURL('/product/alyx-lightweight-buckle-puffer-jacket/1?color=Black');
+    await expect(page).toHaveURL(
+      '/product/alyx-lightweight-buckle-puffer-jacket/1?color=Black'
+    );
   });
 
   test('home page shop brand goes to brand page', async ({ page }) => {
@@ -519,5 +521,25 @@ test.describe('filters', () => {
       - button "Clear All"
       - button "Apply"
       `);
+  });
+});
+
+test.describe('modals', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
+  });
+
+  test('search modal opens', async ({ page }) => {
+    await page.getByLabel('Search').click();
+    await expect(page.getByPlaceholder('Search...')).toBeVisible();
+  });
+
+  test('cart modal opens', async ({ page }) => {
+    await page.getByLabel('Cart').click();
+    await expect(page.locator('.flex > div > div').first()).toBeVisible();
+    await expect(page.getByRole('button', { name: 'View Cart' })).toBeVisible();
+    await expect(
+      page.getByRole('button', { name: 'Keep Shopping' })
+    ).toBeVisible();
   });
 });
