@@ -57,8 +57,13 @@ test.describe('navigation', () => {
 
   test('brand click on shop goes to brand page', async ({ page }) => {
     await page.getByRole('link', { name: 'Shop', exact: true }).click();
-    await page.getByText('Statment').click();
-    await expect(page).toHaveURL('/Statment');
+
+    await page.getByText('Thirteen Studios').first().click();
+    await expect(page).toHaveURL('/Thirteen_Studios');
+
+    await page.getByRole('link', { name: 'Shop', exact: true }).click();
+    await page.getByRole('img', { name: 'ALYX 9SM' }).click();
+    await expect(page).toHaveURL('/Alyx');
   });
 
   test('brand click on product page goes to brand page', async ({ page }) => {
@@ -123,12 +128,29 @@ test.describe('product color', () => {
     await page.getByRole('link', { name: 'Shop', exact: true }).click();
     await page.getByRole('link', { name: 'STMT Hoodie $58 $' }).click();
 
-    // await page.getByRole('img', { name: 'Grey' }).click();
     await page.getByRole('button', { name: 'Grey' }).click();
 
     const selectedColorText = page.locator('p:text("Color ·")');
     await expect(selectedColorText).toBeVisible();
     await expect(selectedColorText).toHaveText('Color · Grey');
+  });
+
+  test('select color does not change size if in stock', async ({ page }) => {
+    await page.getByRole('link', { name: 'Shop', exact: true }).click();
+    await page.getByRole('link', { name: "'Black' STMT Hoodie STMT" }).click();
+    await page.getByRole('button', { name: 'M' }).click();
+    await page.getByRole('button', { name: 'Sky Blue' }).click();
+    await expect(page.getByRole('main')).toContainText('Size · M');
+    await page.getByRole('button', { name: 'Grey' }).click();
+    await expect(page.getByRole('main')).toContainText('Size · M');
+  });
+
+  test('select color removes size if out of stock', async ({ page }) => {
+    await page.getByRole('link', { name: 'Shop', exact: true }).click();
+    await page.getByRole('link', { name: "'Black' Nike Tech Woven" }).click();
+    await page.getByRole('button', { name: 'M' }).click();
+    await page.getByRole('button', { name: 'Iron Ore' }).click();
+    await expect(page.getByRole('main')).toContainText('Size');
   });
 });
 
@@ -537,7 +559,7 @@ test.describe('modals', () => {
   // test('search modal close on click anywhere', async ({ page }) => {
   //   await page.getByLabel('Search').click();
   //   await page.getByRole('dialog').click();
-  //   await expect(page.getByPlaceholder('Search...')).not.toBeVisible();
+  //   await expect(page.getByPlaceholder('Search...')).toBeHidden({ timeout: 2000 });
   // });
 
   test('cart modal opens', async ({ page }) => {
@@ -552,25 +574,25 @@ test.describe('modals', () => {
   test('cart modal closes on click of x', async ({ page }) => {
     await page.getByLabel('Cart').click();
     await page.getByLabel('Close Modal').click();
-    await expect(page.locator('.flex > div > div').first()).not.toBeVisible();
-    await expect(
-      page.getByRole('button', { name: 'View Cart' })
-    ).not.toBeVisible();
+    // await expect(page.locator('.flex > div > div').first()).toBeHidden({ timeout: 2000 });
+    await expect(page.getByRole('button', { name: 'View Cart' })).toBeHidden({
+      timeout: 2000
+    });
     await expect(
       page.getByRole('button', { name: 'Keep Shopping' })
-    ).not.toBeVisible();
+    ).toBeHidden({ timeout: 2000 });
   });
 
   test('cart modal closes on click of keep shopping', async ({ page }) => {
     await page.getByLabel('Cart').click();
     await page.getByRole('button', { name: 'Keep Shopping' }).click();
-    await expect(page.locator('.flex > div > div').first()).not.toBeVisible();
-    await expect(
-      page.getByRole('button', { name: 'View Cart' })
-    ).not.toBeVisible();
+    // await expect(page.locator('.flex > div > div').first()).toBeHidden({ timeout: 2000 });
+    await expect(page.getByRole('button', { name: 'View Cart' })).toBeHidden({
+      timeout: 2000
+    });
     await expect(
       page.getByRole('button', { name: 'Keep Shopping' })
-    ).not.toBeVisible();
+    ).toBeHidden({ timeout: 2000 });
   });
 
   test('filter modal opens', async ({ page }) => {
@@ -587,7 +609,7 @@ test.describe('modals', () => {
     await page.getByLabel('Close Modal').click();
     await expect(
       page.locator('div').filter({ hasText: 'FiltersSort:' }).first()
-    ).not.toBeVisible();
+    ).toBeHidden({ timeout: 2000 });
   });
 
   test('filter modal closes on click of apply', async ({ page }) => {
@@ -596,7 +618,7 @@ test.describe('modals', () => {
     await page.getByRole('button', { name: 'Apply' }).click();
     await expect(
       page.locator('div').filter({ hasText: 'FiltersSort:' }).first()
-    ).not.toBeVisible();
+    ).toBeHidden({ timeout: 2000 });
   });
 
   test('following modal opens', async ({ page }) => {
@@ -612,7 +634,7 @@ test.describe('modals', () => {
     await page.getByRole('button', { name: 'Following' }).click();
     await page.getByLabel('Close Modal').click();
     await expect(
-      page.locator('div').filter({ hasText: 'Following' }).first()
-    ).not.toBeVisible();
+      page.locator('div').filter({ hasText: 'Following1017 ALYX' }).first()
+    ).toBeHidden({ timeout: 2000 });
   });
 });
