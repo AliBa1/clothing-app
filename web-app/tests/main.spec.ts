@@ -534,6 +534,12 @@ test.describe('modals', () => {
     await expect(page.getByPlaceholder('Search...')).toBeVisible();
   });
 
+  // test('search modal close on click anywhere', async ({ page }) => {
+  //   await page.getByLabel('Search').click();
+  //   await page.getByRole('dialog').click();
+  //   await expect(page.getByPlaceholder('Search...')).not.toBeVisible();
+  // });
+
   test('cart modal opens', async ({ page }) => {
     await page.getByLabel('Cart').click();
     await expect(page.locator('.flex > div > div').first()).toBeVisible();
@@ -541,5 +547,72 @@ test.describe('modals', () => {
     await expect(
       page.getByRole('button', { name: 'Keep Shopping' })
     ).toBeVisible();
+  });
+
+  test('cart modal closes on click of x', async ({ page }) => {
+    await page.getByLabel('Cart').click();
+    await page.getByLabel('Close Modal').click();
+    await expect(page.locator('.flex > div > div').first()).not.toBeVisible();
+    await expect(
+      page.getByRole('button', { name: 'View Cart' })
+    ).not.toBeVisible();
+    await expect(
+      page.getByRole('button', { name: 'Keep Shopping' })
+    ).not.toBeVisible();
+  });
+
+  test('cart modal closes on click of keep shopping', async ({ page }) => {
+    await page.getByLabel('Cart').click();
+    await page.getByRole('button', { name: 'Keep Shopping' }).click();
+    await expect(page.locator('.flex > div > div').first()).not.toBeVisible();
+    await expect(
+      page.getByRole('button', { name: 'View Cart' })
+    ).not.toBeVisible();
+    await expect(
+      page.getByRole('button', { name: 'Keep Shopping' })
+    ).not.toBeVisible();
+  });
+
+  test('filter modal opens', async ({ page }) => {
+    await page.getByRole('link', { name: 'Shop', exact: true }).click();
+    await page.getByRole('button', { name: 'Filters' }).click();
+    await expect(
+      page.locator('div').filter({ hasText: 'FiltersSort:' }).first()
+    ).toBeVisible();
+  });
+
+  test('filter modal closes on click x', async ({ page }) => {
+    await page.getByRole('link', { name: 'Shop', exact: true }).click();
+    await page.getByRole('button', { name: 'Filters' }).click();
+    await page.getByLabel('Close Modal').click();
+    await expect(
+      page.locator('div').filter({ hasText: 'FiltersSort:' }).first()
+    ).not.toBeVisible();
+  });
+
+  test('filter modal closes on click of apply', async ({ page }) => {
+    await page.getByRole('link', { name: 'Shop', exact: true }).click();
+    await page.getByRole('button', { name: 'Filters' }).click();
+    await page.getByRole('button', { name: 'Apply' }).click();
+    await expect(
+      page.locator('div').filter({ hasText: 'FiltersSort:' }).first()
+    ).not.toBeVisible();
+  });
+
+  test('following modal opens', async ({ page }) => {
+    await page.getByRole('link', { name: 'Feed', exact: true }).click();
+    await page.getByRole('button', { name: 'Following' }).click();
+    await expect(
+      page.locator('div').filter({ hasText: 'Following' }).first()
+    ).toBeVisible();
+  });
+
+  test('following modal closes on x click', async ({ page }) => {
+    await page.getByRole('link', { name: 'Feed', exact: true }).click();
+    await page.getByRole('button', { name: 'Following' }).click();
+    await page.getByLabel('Close Modal').click();
+    await expect(
+      page.locator('div').filter({ hasText: 'Following' }).first()
+    ).not.toBeVisible();
   });
 });
