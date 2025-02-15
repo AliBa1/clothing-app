@@ -1,37 +1,61 @@
+# What is this?
+
+This is the mock frontend for the clothing app. Right now it lays out what it could look like so that all of the functional requiurements could be solidified before starting on the backend.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+## Tech Stack
+
+- Next.js (frontend framework)
+- React
+- Tailwind CSS
+- Playwright (testing)
 
 ## To Run (locally)
 
 Make sure you have yarn installed if not installed it here [Yarn installation](https://classic.yarnpkg.com/en/docs/install)
 
 Install all dependencys using this:
-```bash 
+
+```bash
 yarn install
 ```
 
 To run development server:
+
 ```bash
 yarn dev
 ```
 
-# Run tests
+## Run tests
 
 Run tests in terminal:
+
 ```bash
 yarn test
 ```
 
 Run tests with UI:
+
 ```bash
 yarn test:ui
 ```
 
 Create a test using the UI:
+
 ```bash
 yarn test:create
 ```
 
+Run failed tests:
+
+```bash
+yarn test:failed
+```
+
 Open http://localhost:3000 with your browser to see the result.
+
+# Next.js Stuff
 
 ## Learn More
 
