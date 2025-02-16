@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function Footer() {
   return (
-    <footer className='w-full flex border-t border-primary justify-between items-center px-4 text-sm md:text-base min-h-16 mt-24'>
+    <footer className='w-full flex border-t border-primary justify-between items-center px-4 text-sm md:text-base min-h-16'>
       <Image
         src={'/logos/flea-temp-logo.png'}
         alt='Flea Logo'

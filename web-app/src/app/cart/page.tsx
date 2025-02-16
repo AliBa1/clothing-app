@@ -12,7 +12,7 @@ export default function CartPage() {
           <Link href={'/shop'} className='btn-primary py-4 rounded-full'>Shop</Link>
         </div>
       ) : (
-        <main className='md:flex-row items-start justify-center'>
+        <main className='md:flex-row items-start justify-center pb-8'>
           <div
             className='flex flex-col gap-4 rounded p-2'
             style={{ scrollbarWidth: 'none' }}
