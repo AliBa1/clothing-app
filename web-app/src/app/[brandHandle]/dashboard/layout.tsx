@@ -1,3 +1,4 @@
+'use client';
 import {
   mdiChartBox,
   mdiCreditCardOutline,
@@ -7,18 +8,35 @@ import {
   mdiViewDashboard
 } from '@mdi/js';
 import Icon from '@mdi/react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-function SidebarButton({ text, icon }: { text: string; icon: string }) {
+function SidebarButton({
+  text,
+  icon,
+  route
+}: {
+  text: string;
+  icon: string;
+  route: string;
+}) {
+  const brandHandle = usePathname().split('/')[1];
   return (
     <>
-      <button className='hidden md:btn-sidebar'>
+      <Link
+        href={`/${brandHandle}/dashboard/${route}`}
+        className='hidden md:btn-sidebar'
+      >
         <Icon path={icon} size={1} />
         {text}
-      </button>
+      </Link>
 
-      <button className='flex gap-2 items-center hover:text-accent md:hidden'>
+      <Link
+        href={`/${brandHandle}/dashboard/${route}`}
+        className='flex gap-2 items-center hover:text-accent md:hidden'
+      >
         {text}
-      </button>
+      </Link>
     </>
   );
 }
@@ -39,12 +57,16 @@ export default function BrandDashboardLayout({
       {/* Both */}
       <div className='sticky top-0 md:top-16 md:left-0 flex flex-row md:flex-col gap-8 md:gap-4 md:h-screen w-full md:w-1/4 md:max-w-xs md:border-r shadow p-4 md:pt-4 md:pr-4 overflow-x-scroll md:overflow-x-auto'>
         {/* if route matches button update styling to reflect that */}
-        <SidebarButton text='Dashboard' icon={mdiViewDashboard} />
-        <SidebarButton text='Products' icon={mdiTshirtCrew} />
-        <SidebarButton text='Orders' icon={mdiListBox} />
-        <SidebarButton text='Analytics' icon={mdiChartBox} />
-        <SidebarButton text='Payment' icon={mdiCreditCardOutline} />
-        <SidebarButton text='Brand' icon={mdiStore} />
+        <SidebarButton text='Dashboard' icon={mdiViewDashboard} route='' />
+        <SidebarButton text='Products' icon={mdiTshirtCrew} route='products' />
+        <SidebarButton text='Orders' icon={mdiListBox} route='orders' />
+        <SidebarButton text='Analytics' icon={mdiChartBox} route='analytics' />
+        <SidebarButton
+          text='Payment'
+          icon={mdiCreditCardOutline}
+          route='payment'
+        />
+        <SidebarButton text='Brand' icon={mdiStore} route='brand' />
       </div>
 
       <main className='border'>
