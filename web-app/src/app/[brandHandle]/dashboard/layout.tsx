@@ -1,6 +1,8 @@
 'use client';
+import { Brand, mockBrands } from '@/interfaces/brands';
 import {
   mdiChartBox,
+  mdiChevronRight,
   mdiCreditCardOutline,
   mdiListBox,
   mdiStore,
@@ -8,8 +10,10 @@ import {
   mdiViewDashboard
 } from '@mdi/js';
 import Icon from '@mdi/react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 
 function SidebarButton({
   text,
@@ -46,6 +50,10 @@ export default function BrandDashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const brandHandle = usePathname().split('/')[1];
+  const [brand, setBrand] = useState<Brand>(
+    mockBrands.find((b) => b.handle === brandHandle) || mockBrands[0]
+  );
   return (
     <div className='flex flex-col md:flex-row'>
       {/* Computer sidebar */}
@@ -56,6 +64,23 @@ export default function BrandDashboardLayout({
 
       {/* Both */}
       <div className='sticky top-0 md:top-16 md:left-0 flex flex-row md:flex-col gap-8 md:gap-4 md:h-screen w-full md:w-1/4 md:max-w-xs md:border-r shadow p-4 md:pt-4 md:pr-4 overflow-x-scroll md:overflow-x-auto'>
+        <Image
+          src={brand.logo}
+          alt={brand.name}
+          height={100}
+          width={100}
+          loading='lazy'
+          style={{ backgroundColor: 'white' }}
+          className='hidden md:block aspect-square rounded-full border mx-auto'
+        />
+        {/* Open brand switcher modal */}
+        <button className='btn-sidebar justify-between'>
+          <p className='truncate'>{brand.name}</p>
+          <Icon path={mdiChevronRight} size={1} />
+        </button>
+
+        <div className='border-r md:border-b'></div>
+
         {/* if route matches button update styling to reflect that */}
         <SidebarButton text='Dashboard' icon={mdiViewDashboard} route='' />
         <SidebarButton text='Products' icon={mdiTshirtCrew} route='products' />
