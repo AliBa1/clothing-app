@@ -84,7 +84,7 @@ export default function BrandDashboardLayout({
           <Icon path={mdiChevronRight} size={1} />
         </button>
 
-        <div className='border-r md:border-b'></div>
+        <div className='border-r md:border-b border-primary'></div>
 
         {/* if route matches button update styling to reflect that */}
         <SidebarButton text='Dashboard' icon={mdiViewDashboard} route='' />
