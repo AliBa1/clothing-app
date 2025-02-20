@@ -1,4 +1,5 @@
 'use client';
+import Modal from '@/components/Modal';
 import { Brand, mockBrands } from '@/interfaces/brands';
 import {
   mdiChartBox,
@@ -50,10 +51,11 @@ export default function BrandDashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const brandHandle = usePathname().split('/')[1];
+  const brandHandle: string = usePathname().split('/')[1];
   const [brand, setBrand] = useState<Brand>(
     mockBrands.find((b) => b.handle === brandHandle) || mockBrands[0]
   );
+  const [isSwitcherOpen, setIsSwitcherOpen] = useState<boolean>(false);
   return (
     <div className='flex flex-col md:flex-row'>
       {/* Computer sidebar */}
@@ -74,7 +76,10 @@ export default function BrandDashboardLayout({
           className='hidden md:block aspect-square rounded-full border mx-auto'
         />
         {/* Open brand switcher modal */}
-        <button className='btn-sidebar justify-between'>
+        <button
+          className='btn-sidebar justify-between'
+          onClick={() => setIsSwitcherOpen(true)}
+        >
           <p className='truncate'>{brand.name}</p>
           <Icon path={mdiChevronRight} size={1} />
         </button>
@@ -108,6 +113,26 @@ export default function BrandDashboardLayout({
         <p className='pb-52'>hhhhhhh</p>
         {children}
       </main>
+
+      <Modal
+        isOpen={isSwitcherOpen}
+        onClose={() => setIsSwitcherOpen(false)}
+        lockedWidth={false}
+      >
+        <h6 className='mb-2'>Select a Brand</h6>
+        <div className='flex flex-col gap-4'>
+          {mockBrands.map((b) => (
+            <Link
+              key={b.id}
+              href={`/${b.handle}/dashboard`}
+              className='btn-sidebar'
+            >
+              {b.name}
+              <Icon path={mdiChevronRight} size={1} />
+            </Link>
+          ))}
+        </div>
+      </Modal>
     </div>
   );
 }
