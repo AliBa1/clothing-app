@@ -52,9 +52,11 @@ export default function BrandDashboardLayout({
   children: React.ReactNode;
 }) {
   const brandHandle: string = usePathname().split('/')[1];
-  const [brand, setBrand] = useState<Brand>(
-    mockBrands.find((b) => b.handle === brandHandle) || mockBrands[0]
-  );
+  const brand: Brand =
+    mockBrands.find((b) => b.handle === brandHandle) || mockBrands[0];
+  // const [brand, setBrand] = useState<Brand>(
+  //   mockBrands.find((b) => b.handle === brandHandle) || mockBrands[0]
+  // );
   const [isSwitcherOpen, setIsSwitcherOpen] = useState<boolean>(false);
   return (
     <div className='flex flex-col md:flex-row'>
@@ -99,9 +101,7 @@ export default function BrandDashboardLayout({
         <SidebarButton text='Brand' icon={mdiStore} route='brand' />
       </div>
 
-      <main className='p-4'>
-        {children}
-      </main>
+      <main className='p-4 w-full'>{children}</main>
 
       <Modal
         isOpen={isSwitcherOpen}
