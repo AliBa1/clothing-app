@@ -99,18 +99,7 @@ export default function BrandDashboardLayout({
         <SidebarButton text='Brand' icon={mdiStore} route='brand' />
       </div>
 
-      <main className='border'>
-        <p className='pb-52'>hhhhhhh</p>
-        <p className='pb-52'>hhhhhhh</p>
-        <p className='pb-52'>hhhhhhh</p>
-        <p className='pb-52'>hhhhhhh</p>
-        <p className='pb-52'>hhhhhhh</p>
-        <p className='pb-52'>hhhhhhh</p>
-        <p className='pb-52'>hhhhhhh</p>
-        <p className='pb-52'>hhhhhhh</p>
-        <p className='pb-52'>hhhhhhh</p>
-        <p className='pb-52'>hhhhhhh</p>
-        <p className='pb-52'>hhhhhhh</p>
+      <main className='p-4'>
         {children}
       </main>
 

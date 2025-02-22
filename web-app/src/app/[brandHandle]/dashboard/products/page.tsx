@@ -10,7 +10,7 @@ export default function DashboardProductsPage() {
   return (
     <div>
       <table>
-        <thead>
+        <thead className='bg-secondary'>
           <tr>
             <th>Name</th>
             <th>Color</th>
@@ -20,7 +20,7 @@ export default function DashboardProductsPage() {
         <tbody>
           {brandProducts.map((p) =>
             p.colors.map((cV) => (
-              <tr key={cV.id}>
+              <tr key={cV.id} className='border-b'>
                 <td>{p.name}</td>
                 <td>{cV.colorName}</td>
                 <td>{cV.price}</td>
