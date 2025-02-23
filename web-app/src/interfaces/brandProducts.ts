@@ -1,4 +1,6 @@
 import { Brand, mockBrands } from '@/interfaces/brands';
+import { categories, subCategories } from './categories';
+import { LabelValue } from './other';
 /**
  * Product object for an item (clothing, accessory, etc.)
  */
@@ -7,6 +9,9 @@ export interface BrandProduct {
   name: string;
   productSlug: string;
   brand: Brand;
+  categories: LabelValue[];
+  subCategories: LabelValue[];
+  types: LabelValue[];
   description?: string;
   shipping?: string;
   returns?: string;
@@ -78,6 +83,11 @@ export const mockProducts: BrandProduct[] = [
     name: 'LIGHTWEIGHT BUCKLE PUFFER JACKET',
     productSlug: 'alyx-lightweight-buckle-puffer-jacket',
     brand: mockBrands[0],
+    categories: [categories.tops.category],
+    subCategories: [subCategories.outerwear.subcategory],
+    types: [subCategories.outerwear.types.puffer_jackets].filter(
+      (type): type is LabelValue => type !== undefined
+    ),
     description:
       'Puffer jacket in a lightweight fabric with intergrated buckle collar closure',
     sizeNotes: 'Size up for oversized fit',
@@ -114,6 +124,12 @@ export const mockProducts: BrandProduct[] = [
     name: 'STMT Hoodie',
     productSlug: 'statement-stmt-hoodie',
     brand: mockBrands[4],
+    categories: [categories.tops.category],
+    subCategories: [subCategories.outerwear.subcategory],
+    types: [
+      subCategories.outerwear.types.hoodies_jackets,
+      subCategories.outerwear.types.sweatshirts
+    ].filter((type): type is LabelValue => type !== undefined),
     description: '100% COTTON FLEECE\n PUFFPRINT AND SCREENPRINT COMBO',
     shipping: 'Free shipping on orders over $50',
     returns:
@@ -219,6 +235,16 @@ export const mockProducts: BrandProduct[] = [
     name: 'Blank Sweatsuit Bundle',
     productSlug: 'thirteen-studios-blank-sweatsuit-bundle',
     brand: mockBrands[5],
+    categories: [categories.tops.category, categories.bottoms.category],
+    subCategories: [
+      subCategories.outerwear.subcategory,
+      subCategories.pants.subcategory
+    ],
+    types: [
+      subCategories.outerwear.types.hoodies_jackets,
+      subCategories.outerwear.types.sweatshirts,
+      subCategories.outerwear.types.sweatpants_joggers
+    ].filter((type): type is LabelValue => type !== undefined),
     colors: [
       {
         id: '6',
@@ -353,6 +379,11 @@ export const mockProducts: BrandProduct[] = [
     name: 'Perfect T-shirt',
     productSlug: 'thirteen-studios-perfect-t-shirt',
     brand: mockBrands[5],
+    categories: [categories.tops.category],
+    subCategories: [subCategories.tShirt.subcategory],
+    types: [subCategories.tShirt.types.short_sleeve_tees].filter(
+      (type): type is LabelValue => type !== undefined
+    ),
     colorNotes: 'Light Gray-ish even though it appears to be white',
     sizeNotes: 'Size up for looser fit',
     colors: [
@@ -380,6 +411,11 @@ export const mockProducts: BrandProduct[] = [
     name: 'Cargo Pants',
     productSlug: 'boohooman-cargo-pants',
     brand: mockBrands[1],
+    categories: [categories.bottoms.category],
+    subCategories: [subCategories.pants.subcategory],
+    types: [subCategories.pants.types.cargo_pants].filter(
+      (type): type is LabelValue => type !== undefined
+    ),
     colors: [
       {
         id: '13',
@@ -406,6 +442,11 @@ export const mockProducts: BrandProduct[] = [
     name: 'Cargo Shorts',
     productSlug: 'boohooman-cargo-shorts',
     brand: mockBrands[1],
+    categories: [categories.bottoms.category],
+    subCategories: [subCategories.shorts.subcategory],
+    types: [subCategories.shorts.types.cargo_shorts].filter(
+      (type): type is LabelValue => type !== undefined
+    ),
     colors: [
       {
         id: '15',
@@ -432,6 +473,11 @@ export const mockProducts: BrandProduct[] = [
     name: 'Runner Heavyweight Hunter Hoodie',
     productSlug: 'rich-usi-runner-heavyweight-hunter-hoodie',
     brand: mockBrands[3],
+    categories: [categories.tops.category],
+    subCategories: [subCategories.outerwear.subcategory],
+    types: [subCategories.outerwear.types.hoodies_jackets].filter(
+      (type): type is LabelValue => type !== undefined
+    ),
     description:
       '- 20 Oz 100% Cotton Fleece\n- Garment Dyed-Vintage Black\n- Seams Flowing Across Hoodie\n- Boxy Fit (Choose your regular size or size up for an oversized fit)\n- Big Ass Hood\n- Two Way YKK Zipper',
     colors: [
@@ -464,6 +510,11 @@ export const mockProducts: BrandProduct[] = [
     name: 'Nike Tech Woven Oversized Pants',
     productSlug: 'nike-nike-tech-woven-oversized-pants',
     brand: mockBrands[2],
+    categories: [categories.bottoms.category],
+    subCategories: [subCategories.pants.subcategory],
+    types: [subCategories.pants.types.track_pants].filter(
+      (type): type is LabelValue => type !== undefined
+    ),
     description:
       'Crafted with stretchy woven material, these Nike Tech pants offer you ease of movement and adjustability. The wide-leg cut is paired with bungee locks at the ankles that let you switch up the fit.',
     colors: [
@@ -537,6 +588,11 @@ export const mockProducts: BrandProduct[] = [
     name: 'Nike Tech Jacket',
     productSlug: 'nike-nike-tech-jacket',
     brand: mockBrands[2],
+    categories: [categories.tops.category],
+    subCategories: [subCategories.outerwear.subcategory],
+    types: [subCategories.outerwear.types.hoodies_jackets].filter(
+      (type): type is LabelValue => type !== undefined
+    ),
     colors: [
       {
         id: '21',
@@ -566,6 +622,11 @@ export const mockProducts: BrandProduct[] = [
     name: 'Parachute Pants',
     productSlug: 'boohooman-parachute-pants',
     brand: mockBrands[1],
+    categories: [categories.bottoms.category],
+    subCategories: [subCategories.pants.subcategory],
+    types: [subCategories.pants.types.track_pants].filter(
+      (type): type is LabelValue => type !== undefined
+    ),
     colors: [
       {
         id: '20',

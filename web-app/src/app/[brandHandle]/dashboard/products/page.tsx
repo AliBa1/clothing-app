@@ -19,7 +19,11 @@ export default function DashboardProductsPage() {
       <table className='border rounded'>
         <thead className='bg-slate-600'>
           <tr>
+            <th className='text-start px-4 py-2'>ID</th>
             <th className='text-start px-4 py-2'>Name</th>
+            <th className='text-start px-4 py-2'>Categories</th>
+            <th className='text-start px-4 py-2'>SubCategories</th>
+            <th className='text-start px-4 py-2'>Types</th>
             <th className='text-start px-4 py-2'>Color</th>
             <th className='text-start px-4 py-2'>Price</th>
             <th className='text-start px-4 py-2'>Discount</th>
@@ -29,7 +33,11 @@ export default function DashboardProductsPage() {
           {brandProducts.map((p) =>
             p.colors.map((cV) => (
               <tr key={cV.id} className='border-b last:border-none'>
+                <td className='px-4 py-2'>{cV.id}</td>
                 <td className='px-4 py-2'>{p.name}</td>
+                <td className='px-4 py-2'>{p.categories.map((c) => c.label).join(', ')}</td>
+                <td className='px-4 py-2'>{p.subCategories.map((sC) => sC.label).join(', ')}</td>
+                <td className='px-4 py-2'>{p.types.map((t) => t.label).join(', ')}</td>
                 <td className='px-4 py-2'>{cV.colorName}</td>
                 <td className='px-4 py-2'>${cV.price}</td>
                 <td className='px-4 py-2'>
