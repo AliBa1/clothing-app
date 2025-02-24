@@ -26,19 +26,26 @@ function SidebarButton({
   route: string;
 }) {
   const brandHandle = usePathname().split('/')[1];
+  const currentRoute = usePathname().split('/')[3] || '';
   return (
     <>
+      {/* Computer link */}
       <Link
         href={`/${brandHandle}/dashboard/${route}`}
-        className='hidden md:btn-sidebar'
+        className={`hidden md:btn-sidebar ${
+          currentRoute === route && 'bg-secondary'
+        }`}
       >
         <Icon path={icon} size={1} />
         {text}
       </Link>
 
+      {/* Mobile link */}
       <Link
         href={`/${brandHandle}/dashboard/${route}`}
-        className='flex gap-2 items-center hover:text-accent md:hidden'
+        className={`flex gap-2 items-center md:hidden ${
+          currentRoute === route && 'text-accent'
+        }`}
       >
         {text}
       </Link>
@@ -101,7 +108,9 @@ export default function BrandDashboardLayout({
         <SidebarButton text='Brand' icon={mdiStore} route='brand' />
       </div>
 
-      <main className='p-4 w-full'>{children}</main>
+      <main className='p-4 w-full md:w-3/4 overflow-x-clip'>
+        {children}
+      </main>
 
       <Modal
         isOpen={isSwitcherOpen}
