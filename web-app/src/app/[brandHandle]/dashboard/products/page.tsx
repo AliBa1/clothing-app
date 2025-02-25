@@ -110,7 +110,7 @@ export default function DashboardProductsPage() {
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        lockedWidth={false}
+        lockedWidth={true}
       >
         <div className='flex flex-col items-center'>
           <ImageCarousel images={allImages} sizeDivisor={4} />
@@ -134,13 +134,13 @@ export default function DashboardProductsPage() {
             <h6>${selectedColor.price}</h6>
           )}
           <div className='border-b w-full py-4'>
-            <div className='flex justify-between'>
+            <div className='flex justify-between gap-8'>
               <p className=''>Color</p>
-              <p className='font-bold'>{selectedColor.colorName}</p>
+              <p className='font-bold text-end'>{selectedColor.colorName}</p>
             </div>
-            <div className='flex justify-between'>
+            <div className='flex justify-between gap-8'>
               <p className=''>Discount</p>
-              <p className='font-bold'>
+              <p className='font-bold text-end'>
                 {selectedColor.discount
                   ? selectedColor.discount.type === 'percent'
                     ? `${selectedColor.discount.amount}% Off`
@@ -150,60 +150,60 @@ export default function DashboardProductsPage() {
             </div>
           </div>
           <div className='border-b w-full py-4'>
-            <div className='flex justify-between'>
+            <div className='flex justify-between gap-8'>
               <p className=''>Categories</p>
-              <p className='font-bold'>
+              <p className='font-bold text-end'>
                 {selectedProduct.categories.map((c) => c.label).join(', ')}
               </p>
             </div>
-            <div className='flex justify-between'>
+            <div className='flex justify-between gap-8'>
               <p className=''>Subcategories</p>
-              <p className='font-bold'>
+              <p className='font-bold text-end'>
                 {selectedProduct.subCategories.map((s) => s.label).join(', ')}
               </p>
             </div>
-            <div className='flex justify-between'>
+            <div className='flex justify-between gap-8'>
               <p className=''>Types</p>
-              <p className='font-bold'>
+              <p className='font-bold text-end'>
                 {selectedProduct.types.map((t) => t.label).join(', ')}
               </p>
             </div>
           </div>
           <div className='border-b w-full py-2'>
-            <div className='flex justify-between'>
+            <div className='flex justify-between gap-8'>
               <p className=''>Sizes</p>
-              <p className='font-bold'>
+              <p className='font-bold text-end'>
                 {selectedColor.sizes.map((s) => s.size).join(', ')}
               </p>
             </div>
-            <div className='flex justify-between'>
+            <div className='flex justify-between gap-8'>
               <p className=''>Quantity (by size)</p>
-              <p className='font-bold'>
+              <p className='font-bold text-end'>
                 {selectedColor.sizes.map((s) => s.quantity).join(', ')}
               </p>
             </div>
           </div>
 
           <div className='w-full py-2'>
-            <div className='flex justify-between'>
+            <div className='flex justify-between gap-8'>
               <p className=''>Descripton</p>
-              <p className='font-bold'>{selectedProduct.description}</p>
+              <p className='font-bold text-end'>{selectedProduct.description}</p>
             </div>
-            <div className='flex justify-between'>
+            <div className='flex justify-between gap-8'>
               <p className=''>Shipping</p>
-              <p className='font-bold'>{selectedProduct.shipping}</p>
+              <p className='font-bold text-end'>{selectedProduct.shipping}</p>
             </div>
-            <div className='flex justify-between'>
+            <div className='flex justify-between gap-8'>
               <p className=''>Returns</p>
-              <p className='font-bold'>{selectedProduct.returns}</p>
+              <p className='font-bold text-end'>{selectedProduct.returns}</p>
             </div>
-            <div className='flex justify-between'>
+            <div className='flex justify-between gap-8'>
               <p className=''>Color Notes</p>
-              <p className='font-bold'>{selectedProduct.colorNotes}</p>
+              <p className='font-bold text-end'>{selectedProduct.colorNotes}</p>
             </div>
-            <div className='flex justify-between'>
+            <div className='flex justify-between gap-8'>
               <p className=''>Size Notes</p>
-              <p className='font-bold'>{selectedProduct.sizeNotes}</p>
+              <p className='font-bold text-end'>{selectedProduct.sizeNotes}</p>
             </div>
           </div>
 
