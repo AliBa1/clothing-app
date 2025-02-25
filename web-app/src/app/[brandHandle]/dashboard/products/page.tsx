@@ -8,8 +8,7 @@ import {
   ColorVariant,
   mockProducts
 } from '@/interfaces/brandProducts';
-import { mdiDotsHorizontal } from '@mdi/js';
-import Icon from '@mdi/react';
+import { discountedPrice } from '@/utils/helperFunctions';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
@@ -113,7 +112,7 @@ export default function DashboardProductsPage() {
         onClose={() => setIsModalOpen(false)}
         lockedWidth={false}
       >
-        <div className='flex flex-col'>
+        <div className='flex flex-col items-center'>
           <ImageCarousel images={allImages} sizeDivisor={4} />
           {/* <Image
             src={selectedColor.images.cover}
@@ -123,32 +122,92 @@ export default function DashboardProductsPage() {
             className='aspect-[4/5] rounded object-cover object-center bg-background dark:bg-white mx-auto'
             loading='lazy'
           /> */}
-          <p>Name: {selectedProduct.name}</p>
-          <p>Categories: {selectedProduct.categories.join(', ')}</p>
-          <p>Subcategories: {selectedProduct.subCategories.join(', ')}</p>
-          <p>Types: {selectedProduct.types.join(', ')}</p>
-          <p>Price: {selectedColor.price}</p>
-          <p>
-            Discount:{' '}
-            {selectedColor.discount
-              ? selectedColor.discount.type === 'percent'
-                ? `${selectedColor.discount.amount}% Off`
-                : `$${selectedColor.discount.amount} Off`
-              : 'None'}
-          </p>
-          <p>Sizes: {selectedColor.sizes.map((s) => s.size).join(', ')}</p>
-          <p>
-            Quantity (by size):{' '}
-            {selectedColor.sizes.map((s) => s.quantity).join(', ')}
-          </p>
-          <p>Color: {selectedColor.colorName}</p>
-          <p>Descripton: {selectedProduct.description}</p>
-          <p>Shipping: {selectedProduct.shipping}</p>
-          <p>Returns: {selectedProduct.returns}</p>
-          <p>Color Notes: {selectedProduct.colorNotes}</p>
-          <p>Size Notes: {selectedProduct.sizeNotes}</p>
+          <h4>{selectedProduct.name}</h4>
+          {selectedColor.discount ? (
+            <h6>
+              ${discountedPrice(selectedColor.price, selectedColor.discount)}{' '}
+              <span className='line-through text-accent'>
+                ${selectedColor.price}
+              </span>
+            </h6>
+          ) : (
+            <h6>${selectedColor.price}</h6>
+          )}
+          <div className='border-b w-full py-4'>
+            <div className='flex justify-between'>
+              <p className=''>Color</p>
+              <p className='font-bold'>{selectedColor.colorName}</p>
+            </div>
+            <div className='flex justify-between'>
+              <p className=''>Discount</p>
+              <p className='font-bold'>
+                {selectedColor.discount
+                  ? selectedColor.discount.type === 'percent'
+                    ? `${selectedColor.discount.amount}% Off`
+                    : `$${selectedColor.discount.amount} Off`
+                  : 'None'}
+              </p>
+            </div>
+          </div>
+          <div className='border-b w-full py-4'>
+            <div className='flex justify-between'>
+              <p className=''>Categories</p>
+              <p className='font-bold'>
+                {selectedProduct.categories.map((c) => c.label).join(', ')}
+              </p>
+            </div>
+            <div className='flex justify-between'>
+              <p className=''>Subcategories</p>
+              <p className='font-bold'>
+                {selectedProduct.subCategories.map((s) => s.label).join(', ')}
+              </p>
+            </div>
+            <div className='flex justify-between'>
+              <p className=''>Types</p>
+              <p className='font-bold'>
+                {selectedProduct.types.map((t) => t.label).join(', ')}
+              </p>
+            </div>
+          </div>
+          <div className='border-b w-full py-2'>
+            <div className='flex justify-between'>
+              <p className=''>Sizes</p>
+              <p className='font-bold'>
+                {selectedColor.sizes.map((s) => s.size).join(', ')}
+              </p>
+            </div>
+            <div className='flex justify-between'>
+              <p className=''>Quantity (by size)</p>
+              <p className='font-bold'>
+                {selectedColor.sizes.map((s) => s.quantity).join(', ')}
+              </p>
+            </div>
+          </div>
 
-          <div className='flex gap-4 sticky bottom-0 mx-auto py-4'>
+          <div className='w-full py-2'>
+            <div className='flex justify-between'>
+              <p className=''>Descripton</p>
+              <p className='font-bold'>{selectedProduct.description}</p>
+            </div>
+            <div className='flex justify-between'>
+              <p className=''>Shipping</p>
+              <p className='font-bold'>{selectedProduct.shipping}</p>
+            </div>
+            <div className='flex justify-between'>
+              <p className=''>Returns</p>
+              <p className='font-bold'>{selectedProduct.returns}</p>
+            </div>
+            <div className='flex justify-between'>
+              <p className=''>Color Notes</p>
+              <p className='font-bold'>{selectedProduct.colorNotes}</p>
+            </div>
+            <div className='flex justify-between'>
+              <p className=''>Size Notes</p>
+              <p className='font-bold'>{selectedProduct.sizeNotes}</p>
+            </div>
+          </div>
+
+          <div className='flex gap-4 sticky bottom-0 py-4 bg-background w-full justify-center'>
             <button className='btn-accent bg-info text-base min-h-8 md:px-4'>
               Analytics
             </button>
