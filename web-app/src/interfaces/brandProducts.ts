@@ -649,3 +649,37 @@ export const mockProducts: BrandProduct[] = [
     ]
   }
 ];
+
+export const blankProduct: BrandProduct = {
+  id: '',
+  name: '',
+  productSlug: '',
+  brand: {
+    id: '',
+    name: '',
+    handle: '',
+    logo: '',
+    bio: '',
+    links: {}
+  },
+  categories: [],
+  subCategories: [],
+  types: [],
+  colors: []
+};
+
+export const blankColorVariant: ColorVariant = {
+  id: '',
+  colorName: '',
+  primaryColor: {
+    broadColor: 'black',
+    red: 0,
+    green: 0,
+    blue: 0
+  },
+  price: 0,
+  images: {
+    cover: ''
+  },
+  sizes: []
+};
