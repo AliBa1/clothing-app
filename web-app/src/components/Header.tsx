@@ -10,7 +10,7 @@ import {
   mdiMenu
 } from '@mdi/js';
 import { useState } from 'react';
-import Modal from './Modal';
+import SlideoverModal from './SlideoverModal';
 import SearchModal from './SearchModal';
 import CartModal from './CartModal';
 
@@ -97,7 +97,7 @@ export default function Header() {
       </div>
 
       {/* Mobile Side Modal */}
-      <Modal
+      <SlideoverModal
         isOpen={menuOpen}
         onClose={() => setMenuOpen(false)}
         lockedWidth={false}
@@ -141,17 +141,17 @@ export default function Header() {
             Saved
           </Link>
         </div>
-      </Modal>
+      </SlideoverModal>
 
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
 
-      <Modal
+      <SlideoverModal
         isOpen={cartOpen}
         onClose={() => setCartOpen(false)}
         lockedWidth={true}
       >
         <CartModal onClose={() => setCartOpen(false)} />
-      </Modal>
+      </SlideoverModal>
     </header>
   );
 }

@@ -1,5 +1,5 @@
 'use client';
-import Modal from '@/components/Modal';
+import SlideoverModal from '@/components/SlideoverModal';
 import ProductCard from '@/components/ProductCard';
 import {
   ColorOption,
@@ -101,7 +101,7 @@ export default function Shop() {
         ))}
       </div>
 
-      <Modal
+      <SlideoverModal
         isOpen={filterModalOpen}
         onClose={() => {
           setFilterModalOpen(false);
@@ -221,7 +221,7 @@ export default function Shop() {
             </button>
           </div>
         </Form>
-      </Modal>
+      </SlideoverModal>
     </main>
   );
 }

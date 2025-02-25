@@ -1,5 +1,5 @@
 'use client';
-import Modal from '@/components/Modal';
+import SlideoverModal from '@/components/SlideoverModal';
 import { Brand, mockBrands } from '@/interfaces/brands';
 import {
   mdiChartBox,
@@ -108,11 +108,9 @@ export default function BrandDashboardLayout({
         <SidebarButton text='Brand' icon={mdiStore} route='brand' />
       </div>
 
-      <main className='p-4 w-full md:w-3/4 overflow-x-clip'>
-        {children}
-      </main>
+      <main className='p-4 w-full md:w-3/4 overflow-x-clip'>{children}</main>
 
-      <Modal
+      <SlideoverModal
         isOpen={isSwitcherOpen}
         onClose={() => setIsSwitcherOpen(false)}
         lockedWidth={false}
@@ -130,7 +128,7 @@ export default function BrandDashboardLayout({
             </Link>
           ))}
         </div>
-      </Modal>
+      </SlideoverModal>
     </div>
   );
 }

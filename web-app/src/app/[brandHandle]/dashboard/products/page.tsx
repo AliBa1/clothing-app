@@ -1,6 +1,6 @@
 'use client';
 import ImageCarousel from '@/components/ImageCarousel';
-import Modal from '@/components/Modal';
+import SlideoverModal from '@/components/SlideoverModal';
 import {
   blankColorVariant,
   blankProduct,
@@ -12,6 +12,11 @@ import { discountedPrice } from '@/utils/helperFunctions';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+
+// To do:
+// Confirm delete
+// Share links
+// Bottom buttons functionality
 
 export default function DashboardProductsPage() {
   const brandHandle = usePathname().split('/')[1];
@@ -107,7 +112,7 @@ export default function DashboardProductsPage() {
         </table>
       </div>
 
-      <Modal
+      <SlideoverModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         lockedWidth={true}
@@ -187,7 +192,9 @@ export default function DashboardProductsPage() {
           <div className='w-full py-2'>
             <div className='flex justify-between gap-8'>
               <p className=''>Descripton</p>
-              <p className='font-bold text-end'>{selectedProduct.description}</p>
+              <p className='font-bold text-end'>
+                {selectedProduct.description}
+              </p>
             </div>
             <div className='flex justify-between gap-8'>
               <p className=''>Shipping</p>
@@ -222,7 +229,7 @@ export default function DashboardProductsPage() {
             </button>
           </div>
         </div>
-      </Modal>
+      </SlideoverModal>
     </div>
   );
 }

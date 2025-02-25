@@ -1,6 +1,6 @@
 'use client';
 import BrandLink from '@/components/BrandLink';
-import Modal from '@/components/Modal';
+import SlideoverModal from '@/components/SlideoverModal';
 import WideProductCard from '@/components/WideProductCard';
 import { mockBrands } from '@/interfaces/brands';
 import { mockProducts } from '@/interfaces/brandProducts';
@@ -59,14 +59,18 @@ export default function FeedPage() {
       </div>
 
       {/* Following modal (better than following sitting on the side) */}
-      <Modal isOpen={isFollowingOpen} onClose={() => setFollowingOpen(false)} lockedWidth={false}>
+      <SlideoverModal
+        isOpen={isFollowingOpen}
+        onClose={() => setFollowingOpen(false)}
+        lockedWidth={false}
+      >
         <h4 className='text-xl lg:text-2xl text-center sticky top-0 bg-background'>
           Following
         </h4>
         {mockBrands.map((b) => (
           <BrandLink key={b.id} brand={b} size='big' />
         ))}
-      </Modal>
+      </SlideoverModal>
     </main>
   );
 }
