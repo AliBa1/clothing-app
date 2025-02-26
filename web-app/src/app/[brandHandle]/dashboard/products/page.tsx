@@ -9,6 +9,15 @@ import {
   mockProducts
 } from '@/interfaces/brandProducts';
 import { discountedPrice } from '@/utils/helperFunctions';
+import {
+  sortStringsAsc,
+  sortStringsDes,
+  sortNumbersAsc,
+  sortNumbersDes,
+  SortType
+} from '@/utils/sortingProducts';
+import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
+import Icon from '@mdi/react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
@@ -31,6 +40,38 @@ export default function DashboardProductsPage() {
   const allImages = selectedColor.images.additional
     ? [selectedColor.images.cover].concat(selectedColor.images.additional)
     : [selectedColor.images.cover];
+
+  const [sortName, setSortName] = useState<SortType>({
+    sort: false,
+    ascending: false
+  });
+
+  const [sortPrice, setSortPrice] = useState<SortType>({
+    sort: false,
+    ascending: false
+  });
+
+  const [sortColor, setSortColor] = useState<SortType>({
+    sort: false,
+    ascending: false
+  });
+
+  function resetSorts() {
+    setSortName({
+      sort: false,
+      ascending: false
+    });
+
+    setSortPrice({
+      sort: false,
+      ascending: false
+    });
+
+    setSortColor({
+      sort: false,
+      ascending: false
+    });
+  }
   return (
     <div className='flex flex-col w-full'>
       <div className='flex w-full items-center justify-between'>
@@ -46,13 +87,83 @@ export default function DashboardProductsPage() {
       </div>
       <div className='rounded overflow-x-scroll'>
         <table className='table table-auto w-full'>
-          <thead className='bg-slate-600'>
+          <thead className='bg-accent text-secondary'>
             <tr>
               {/* <th className='px-4 py-2'>ID</th> */}
               <th className='px-4 py-2'>Image</th>
-              <th className='px-4 py-2'>Name</th>
-              <th className='px-4 py-2'>Price</th>
-              <th className='px-4 py-2'>Color</th>
+              <th className='px-4 py-2'>
+                <button
+                  className='flex justify-center w-full'
+                  onClick={() => {
+                    if (sortName.sort && sortName.ascending) {
+                      resetSorts();
+                      setSortName({ sort: true, ascending: false });
+                    } else if (sortName.sort && !sortName.ascending) {
+                      setSortName({ sort: false, ascending: true });
+                    } else {
+                      resetSorts();
+                      setSortName({ sort: true, ascending: true });
+                    }
+                  }}
+                >
+                  Name{' '}
+                  {sortName.sort && (
+                    <Icon
+                      path={sortName.ascending ? mdiChevronDown : mdiChevronUp}
+                      size={1}
+                    />
+                  )}
+                </button>
+              </th>
+              <th className='px-4 py-2'>
+                <button
+                  className='flex justify-center w-full'
+                  onClick={() => {
+                    if (sortPrice.sort && sortPrice.ascending) {
+                      resetSorts();
+                      setSortPrice({ sort: true, ascending: false });
+                    } else if (sortPrice.sort && !sortPrice.ascending) {
+                      setSortPrice({ sort: false, ascending: true });
+                    } else {
+                      resetSorts();
+                      setSortPrice({ sort: true, ascending: true });
+                    }
+                  }}
+                >
+                  Price{' '}
+                  {sortPrice.sort && (
+                    <Icon
+                      path={sortPrice.ascending ? mdiChevronDown : mdiChevronUp}
+                      size={1}
+                    />
+                  )}
+                </button>
+              </th>
+              <th className='px-4 py-2'>
+                <button
+                  className='flex justify-center w-full'
+                  onClick={() => {
+                    if (sortColor.sort && sortColor.ascending) {
+                      resetSorts();
+                      setSortColor({ sort: true, ascending: false });
+                    } else if (sortColor.sort && !sortColor.ascending) {
+                      setSortColor({ sort: false, ascending: true });
+                    } else {
+                      resetSorts();
+                      setSortColor({ sort: true, ascending: true });
+                      // console.log('Sort color');
+                    }
+                  }}
+                >
+                  Color{' '}
+                  {sortColor.sort && (
+                    <Icon
+                      path={sortColor.ascending ? mdiChevronDown : mdiChevronUp}
+                      size={1}
+                    />
+                  )}
+                </button>
+              </th>
               {/* <th className='px-4 py-2'>Category</th> */}
               {/* <th className='px-4 py-2'>Subcategory</th> */}
               {/* <th className='px-4 py-2'>Types</th> */}
@@ -61,53 +172,92 @@ export default function DashboardProductsPage() {
             </tr>
           </thead>
           <tbody>
-            {brandProducts.map((p) =>
-              p.colors.map((cV) => (
-                <tr
-                  key={cV.id}
-                  className='text-center border-b border-x hover:bg-secondary cursor-pointer'
-                  onClick={() => {
-                    setIsModalOpen(true);
-                    setSelectedProduct(p);
-                    setSelectedColor(cV);
-                  }}
-                >
-                  {/* <td className='px-4 py-2'>{cV.id}</td> */}
-                  <td className='px-4 py-2'>
-                    <Image
-                      src={cV.images.cover}
-                      alt={`${p.name} Cover Image`}
-                      height={1280 / 8}
-                      width={1024 / 8}
-                      className='aspect-[4/5] rounded object-cover object-center bg-background dark:bg-white mx-auto'
-                      loading='lazy'
-                    />
-                  </td>
-                  <td className='px-4 py-2'>{p.name}</td>
-                  <td className='px-4 py-2'>${cV.price}</td>
-                  <td className='px-4 py-2'>{cV.colorName}</td>
-                  {/* <td className='px-4 py-2'>
+            {brandProducts
+              .sort((a, b) => {
+                // if (sortName.sort && sortName.ascending) {
+                //   return sortStringsAsc(a.name, b.name);
+                // } else if (sortName.sort && !sortName.ascending) {
+                //   return sortStringsDes(a.name, b.name);
+                // } else if (sortPrice.sort && sortPrice.ascending) {
+                //   return sortNumbersAsc(
+                //     a.colors.find((cV) => cV.price)?.price || 0,
+                //     b.colors.find((cV) => cV.price)?.price || 0
+                //   );
+                // } else if (sortPrice.sort && !sortPrice.ascending) {
+                //   return sortNumbersDes(
+                //     a.colors.find((cV) => cV.price)?.price || 0,
+                //     b.colors.find((cV) => cV.price)?.price || 0
+                //   );
+                // } else if (sortColor.sort && sortColor.ascending) {
+                //   // console.log('Sort color asc');
+                //   return sortStringsAsc(
+                //     a.colors.find((cV) => cV.colorName)?.colorName || '',
+                //     b.colors.find((cV) => cV.colorName)?.colorName || ''
+                //   );
+                // } else if (sortColor.sort && !sortColor.ascending) {
+                //   return sortStringsDes(
+                //     a.colors.find((cV) => cV.colorName)?.colorName || '',
+                //     b.colors.find((cV) => cV.colorName)?.colorName || ''
+                //   );
+                // } else {
+                //   return 0;
+                // }
+
+                if (sortName.sort && sortName.ascending) {
+                  return sortStringsAsc(a.name, b.name);
+                } else if (sortName.sort && !sortName.ascending) {
+                  return sortStringsDes(a.name, b.name);
+                } else {
+                  return 0;
+                }
+              })
+              .map((p) =>
+                p.colors.map((cV) => (
+                  <tr
+                    key={cV.id}
+                    className='text-center border-b border-x hover:bg-secondary cursor-pointer'
+                    onClick={() => {
+                      setIsModalOpen(true);
+                      setSelectedProduct(p);
+                      setSelectedColor(cV);
+                    }}
+                  >
+                    {/* <td className='px-4 py-2'>{cV.id}</td> */}
+                    <td className='px-4 py-2'>
+                      <Image
+                        src={cV.images.cover}
+                        alt={`${p.name} Cover Image`}
+                        height={1280 / 8}
+                        width={1024 / 8}
+                        className='aspect-[4/5] rounded object-cover object-center bg-background dark:bg-white mx-auto'
+                        priority
+                      />
+                    </td>
+                    <td className='px-4 py-2'>{p.name}</td>
+                    <td className='px-4 py-2'>${cV.price}</td>
+                    <td className='px-4 py-2'>{cV.colorName}</td>
+                    {/* <td className='px-4 py-2'>
                   {p.categories.map((c) => c.label).join(', ')}
                 </td> */}
-                  {/* <td className='px-4 py-2'>
+                    {/* <td className='px-4 py-2'>
                   {p.subCategories.map((sC) => sC.label).join(', ')}
                 </td> */}
-                  {/* <td className='px-4 py-2'>{p.types.map((t) => t.label).join(', ')}</td> */}
-                  <td className='px-4 py-2'>
-                    {cV.discount
-                      ? cV.discount.type === 'percent'
-                        ? `${cV.discount.amount}% Off`
-                        : `$${cV.discount.amount} Off`
-                      : 'None'}
-                  </td>
-                  {/* <td className='px-4 py-2'>
+                    {/* <td className='px-4 py-2'>{p.types.map((t) => t.label).join(', ')}</td> */}
+                    <td className='px-4 py-2'>
+                      {cV.discount
+                        ? cV.discount.type === 'percent'
+                          ? `${cV.discount.amount}% Off`
+                          : `$${cV.discount.amount} Off`
+                        : 'None'}
+                    </td>
+                    {/* <td className='px-4 py-2'>
                     <button>
                       <Icon path={mdiDotsHorizontal} size={1} />
                     </button>
                   </td> */}
-                </tr>
-              ))
-            )}
+                  </tr>
+                ))
+              )}
           </tbody>
         </table>
       </div>
