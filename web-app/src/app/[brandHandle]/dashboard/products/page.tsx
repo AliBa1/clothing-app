@@ -56,6 +56,27 @@ export default function DashboardProductsPage() {
     ascending: false
   });
 
+  const sortedColorVariants = brandProducts
+    .flatMap((product) =>
+      product.colors.map((color) => ({ ...color, product: product }))
+    )
+    .sort((a, b) => {
+      if (sortName.sort) {
+        return sortName.ascending
+          ? sortStringsAsc(a.product.name, b.product.name)
+          : sortStringsDes(a.product.name, b.product.name);
+      } else if (sortPrice.sort) {
+        return sortPrice.ascending
+          ? sortNumbersAsc(a.price, b.price)
+          : sortNumbersDes(a.price, b.price);
+      } else if (sortColor.sort) {
+        return sortColor.ascending
+          ? sortStringsAsc(a.colorName, b.colorName)
+          : sortStringsDes(a.colorName, b.colorName);
+      }
+      return 0;
+    });
+
   function resetSorts() {
     setSortName({
       sort: false,
@@ -89,7 +110,6 @@ export default function DashboardProductsPage() {
         <table className='table table-auto w-full'>
           <thead className='bg-accent text-secondary'>
             <tr>
-              {/* <th className='px-4 py-2'>ID</th> */}
               <th className='px-4 py-2'>Image</th>
               <th className='px-4 py-2'>
                 <button
@@ -151,7 +171,6 @@ export default function DashboardProductsPage() {
                     } else {
                       resetSorts();
                       setSortColor({ sort: true, ascending: true });
-                      // console.log('Sort color');
                     }
                   }}
                 >
@@ -172,92 +191,53 @@ export default function DashboardProductsPage() {
             </tr>
           </thead>
           <tbody>
-            {brandProducts
-              .sort((a, b) => {
-                // if (sortName.sort && sortName.ascending) {
-                //   return sortStringsAsc(a.name, b.name);
-                // } else if (sortName.sort && !sortName.ascending) {
-                //   return sortStringsDes(a.name, b.name);
-                // } else if (sortPrice.sort && sortPrice.ascending) {
-                //   return sortNumbersAsc(
-                //     a.colors.find((cV) => cV.price)?.price || 0,
-                //     b.colors.find((cV) => cV.price)?.price || 0
-                //   );
-                // } else if (sortPrice.sort && !sortPrice.ascending) {
-                //   return sortNumbersDes(
-                //     a.colors.find((cV) => cV.price)?.price || 0,
-                //     b.colors.find((cV) => cV.price)?.price || 0
-                //   );
-                // } else if (sortColor.sort && sortColor.ascending) {
-                //   // console.log('Sort color asc');
-                //   return sortStringsAsc(
-                //     a.colors.find((cV) => cV.colorName)?.colorName || '',
-                //     b.colors.find((cV) => cV.colorName)?.colorName || ''
-                //   );
-                // } else if (sortColor.sort && !sortColor.ascending) {
-                //   return sortStringsDes(
-                //     a.colors.find((cV) => cV.colorName)?.colorName || '',
-                //     b.colors.find((cV) => cV.colorName)?.colorName || ''
-                //   );
-                // } else {
-                //   return 0;
-                // }
-
-                if (sortName.sort && sortName.ascending) {
-                  return sortStringsAsc(a.name, b.name);
-                } else if (sortName.sort && !sortName.ascending) {
-                  return sortStringsDes(a.name, b.name);
-                } else {
-                  return 0;
-                }
-              })
-              .map((p) =>
-                p.colors.map((cV) => (
-                  <tr
-                    key={cV.id}
-                    className='text-center border-b border-x hover:bg-secondary cursor-pointer'
-                    onClick={() => {
-                      setIsModalOpen(true);
-                      setSelectedProduct(p);
-                      setSelectedColor(cV);
-                    }}
-                  >
-                    {/* <td className='px-4 py-2'>{cV.id}</td> */}
-                    <td className='px-4 py-2'>
-                      <Image
-                        src={cV.images.cover}
-                        alt={`${p.name} Cover Image`}
-                        height={1280 / 8}
-                        width={1024 / 8}
-                        className='aspect-[4/5] rounded object-cover object-center bg-background dark:bg-white mx-auto'
-                        priority
-                      />
-                    </td>
-                    <td className='px-4 py-2'>{p.name}</td>
-                    <td className='px-4 py-2'>${cV.price}</td>
-                    <td className='px-4 py-2'>{cV.colorName}</td>
-                    {/* <td className='px-4 py-2'>
+            {sortedColorVariants.map((cV) => (
+              <tr
+                key={cV.id}
+                className='text-center border-b border-x hover:bg-secondary cursor-pointer'
+                onClick={() => {
+                  setIsModalOpen(true);
+                  // setSelectedProduct(p);
+                  setSelectedProduct(cV.product);
+                  setSelectedColor(cV);
+                }}
+              >
+                <td className='px-4 py-2'>
+                  <Image
+                    src={cV.images.cover}
+                    // alt={`${p.name} Cover Image`}
+                    alt={`${cV.product.name} Cover Image`}
+                    height={1280 / 8}
+                    width={1024 / 8}
+                    className='aspect-[4/5] rounded object-cover object-center bg-background dark:bg-white mx-auto'
+                    priority
+                  />
+                </td>
+                {/* <td className='px-4 py-2'>{p.name}</td> */}
+                <td className='px-4 py-2'>{cV.product.name}</td>
+                <td className='px-4 py-2'>${cV.price}</td>
+                <td className='px-4 py-2'>{cV.colorName}</td>
+                {/* <td className='px-4 py-2'>
                   {p.categories.map((c) => c.label).join(', ')}
                 </td> */}
-                    {/* <td className='px-4 py-2'>
+                {/* <td className='px-4 py-2'>
                   {p.subCategories.map((sC) => sC.label).join(', ')}
                 </td> */}
-                    {/* <td className='px-4 py-2'>{p.types.map((t) => t.label).join(', ')}</td> */}
-                    <td className='px-4 py-2'>
-                      {cV.discount
-                        ? cV.discount.type === 'percent'
-                          ? `${cV.discount.amount}% Off`
-                          : `$${cV.discount.amount} Off`
-                        : 'None'}
-                    </td>
-                    {/* <td className='px-4 py-2'>
+                {/* <td className='px-4 py-2'>{p.types.map((t) => t.label).join(', ')}</td> */}
+                <td className='px-4 py-2'>
+                  {cV.discount
+                    ? cV.discount.type === 'percent'
+                      ? `${cV.discount.amount}% Off`
+                      : `$${cV.discount.amount} Off`
+                    : 'None'}
+                </td>
+                {/* <td className='px-4 py-2'>
                     <button>
                       <Icon path={mdiDotsHorizontal} size={1} />
                     </button>
                   </td> */}
-                  </tr>
-                ))
-              )}
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
@@ -269,14 +249,6 @@ export default function DashboardProductsPage() {
       >
         <div className='flex flex-col items-center'>
           <ImageCarousel images={allImages} sizeDivisor={4} />
-          {/* <Image
-            src={selectedColor.images.cover}
-            alt={`${selectedProduct?.name} Cover Image`}
-            height={1280 / 8}
-            width={1024 / 8}
-            className='aspect-[4/5] rounded object-cover object-center bg-background dark:bg-white mx-auto'
-            loading='lazy'
-          /> */}
           <h4>{selectedProduct.name}</h4>
           {selectedColor.discount ? (
             <h6>

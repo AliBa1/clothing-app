@@ -3,35 +3,9 @@ export interface SortType {
   ascending: boolean;
 }
 
-// export function sortNameAsc(a: BrandProduct, b: BrandProduct): number {
-//   const aLower = a.name.toLowerCase();
-//   const bLower = b.name.toLowerCase();
-//   if (aLower < bLower) {
-//     return -1;
-//   }
-//   if (aLower > bLower) {
-//     return 1;
-//   }
-//   return 0;
-// }
-
-// export function sortNameDes(a: BrandProduct, b: BrandProduct): number {
-//   const aLower = a.name.toLowerCase();
-//   const bLower = b.name.toLowerCase();
-//   if (aLower < bLower) {
-//     return 1;
-//   }
-//   if (aLower > bLower) {
-//     return -1;
-//   }
-//   return 0;
-// }
-
-// Change name to sort alphabetically
 export function sortStringsAsc(a: string, b: string): number {
   const aLower = a.toLowerCase();
   const bLower = b.toLowerCase();
-  console.log('Colors: ', aLower, bLower);
   if (aLower < bLower) {
     return -1;
   }
