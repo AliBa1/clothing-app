@@ -106,7 +106,7 @@ export default function DashboardProductsPage() {
       </div>
       <div className='rounded overflow-x-auto'>
         <table className='table table-auto w-full'>
-          <thead className='bg-accent text-secondary'>
+          <thead className='bg-accent text-secondary text-lg md:text-xl'>
             <tr>
               <th className='px-4 py-2'>Image</th>
               <th className='px-4 py-2'>
@@ -207,7 +207,7 @@ export default function DashboardProductsPage() {
             {sortedColorVariants.map((cV) => (
               <tr
                 key={cV.id}
-                className='text-center border-b border-x hover:bg-secondary cursor-pointer'
+                className='text-center border-b border-x md:hover:bg-secondary cursor-pointer text-lg md:text-xl'
                 onClick={() => {
                   setIsModalOpen(true);
                   // setSelectedProduct(p);
