@@ -74,7 +74,7 @@ export default function BrandDashboardLayout({
       {/* <div className='sticky top-0 flex flex-row gap-4 w-full border-b shadow p-2 overflow-x-scroll'> */}
 
       {/* Both */}
-      <div className='sticky top-0 md:top-16 md:left-0 flex flex-row md:flex-col gap-8 md:gap-4 md:h-screen w-full md:w-1/4 md:max-w-xs md:border-r shadow p-4 md:pt-4 md:pr-4 overflow-x-scroll md:overflow-x-auto'>
+      <div className='sticky top-0 md:top-16 md:left-0 flex flex-row md:flex-col gap-8 md:gap-4 md:h-screen w-full md:w-1/4 md:max-w-xs md:border-r border-primary shadow p-4 md:pt-4 md:pr-4 overflow-x-scroll md:overflow-x-auto'>
         <Image
           src={brand.logo}
           alt={brand.name}

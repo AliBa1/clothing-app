@@ -61,6 +61,11 @@ export default function DashboardProductsPage() {
     ascending: false
   });
 
+  const [sortRevenue, setSortRevenue] = useState<SortType>({
+    sort: false,
+    ascending: false
+  });
+
   const sortedColorVariants = brandProducts
     .flatMap((product) =>
       product.colors.map((color) => ({ ...color, product: product }))
@@ -88,6 +93,16 @@ export default function DashboardProductsPage() {
               a.salesData?.totalSold || 0,
               b.salesData?.totalSold || 0
             );
+      } else if (sortRevenue.sort) {
+        return sortRevenue.ascending
+          ? sortNumbersAsc(
+              a.salesData?.totalRevenue || 0,
+              b.salesData?.totalRevenue || 0
+            )
+          : sortNumbersDes(
+              a.salesData?.totalRevenue || 0,
+              b.salesData?.totalRevenue || 0
+            );
       }
       return 0;
     });
@@ -109,6 +124,11 @@ export default function DashboardProductsPage() {
     });
 
     setSortSales({
+      sort: false,
+      ascending: false
+    });
+
+    setSortRevenue({
       sort: false,
       ascending: false
     });
@@ -251,6 +271,35 @@ export default function DashboardProductsPage() {
                   />
                 </button>
               </th>
+              <th className='px-4 py-2'>
+                <button
+                  className='flex justify-center w-full'
+                  onClick={() => {
+                    if (sortRevenue.sort && sortRevenue.ascending) {
+                      resetSorts();
+                      setSortRevenue({ sort: true, ascending: false });
+                    } else if (sortRevenue.sort && !sortRevenue.ascending) {
+                      setSortRevenue({ sort: false, ascending: true });
+                    } else {
+                      resetSorts();
+                      setSortRevenue({ sort: true, ascending: true });
+                    }
+                  }}
+                >
+                  {/* to keep header centered */}
+                  <Icon
+                    className='invisible'
+                    path={sortRevenue.ascending ? mdiChevronDown : mdiChevronUp}
+                    size={1}
+                  />
+                  Revenue
+                  <Icon
+                    className={`${!sortRevenue.sort && 'invisible'}`}
+                    path={sortRevenue.ascending ? mdiChevronDown : mdiChevronUp}
+                    size={1}
+                  />
+                </button>
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -302,6 +351,11 @@ export default function DashboardProductsPage() {
                 <td className='px-4 py-2'>
                   {cV.salesData?.totalSold ? cV.salesData?.totalSold : '-'}
                 </td>
+                <td className='px-4 py-2'>
+                  {cV.salesData?.totalRevenue
+                    ? cV.salesData?.totalRevenue
+                    : '-'}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -330,7 +384,7 @@ export default function DashboardProductsPage() {
               ${selectedColor.price}
             </h4>
           )}
-          <div className='border-b w-full py-4'>
+          <div className='border-b border-primary w-full py-4'>
             <div className='flex justify-between gap-8'>
               <p className=''>Color</p>
               <p className='font-bold text-end'>{selectedColor.colorName}</p>
@@ -346,7 +400,7 @@ export default function DashboardProductsPage() {
               </p>
             </div>
           </div>
-          <div className='border-b w-full py-4'>
+          <div className='border-b border-primary w-full py-4'>
             <div className='flex justify-between gap-8'>
               <p className=''>Categories</p>
               <p className='font-bold text-end'>
@@ -366,7 +420,7 @@ export default function DashboardProductsPage() {
               </p>
             </div>
           </div>
-          <div className='border-b w-full py-2'>
+          <div className='border-b border-primary w-full py-2'>
             <div className='flex justify-between gap-8'>
               <p className=''>Sizes</p>
               <p className='font-bold text-end'>
@@ -381,7 +435,7 @@ export default function DashboardProductsPage() {
             </div>
           </div>
 
-          <div className='w-full py-2 pb-24'>
+          <div className='border-b border-primary w-full py-2'>
             <div className='flex justify-between gap-8'>
               <p className=''>Descripton</p>
               <p className='font-bold text-end'>
@@ -403,6 +457,52 @@ export default function DashboardProductsPage() {
             <div className='flex justify-between gap-8'>
               <p className=''>Size Notes</p>
               <p className='font-bold text-end'>{selectedProduct.sizeNotes}</p>
+            </div>
+          </div>
+
+          <div className='border-b border-primary w-full py-2'>
+            <div className='flex justify-between gap-8'>
+              <p className=''>Total Sold</p>
+              <p className='font-bold text-end'>
+                {selectedProduct.salesData?.totalSold
+                  ? selectedProduct.salesData?.totalSold
+                  : '-'}
+              </p>
+            </div>
+            <div className='flex justify-between gap-8'>
+              <p className=''>Total Revenue</p>
+              <p className='font-bold text-end'>
+                {selectedProduct.salesData?.totalRevenue
+                  ? selectedProduct.salesData?.totalRevenue
+                  : '-'}
+              </p>
+            </div>
+          </div>
+
+          <div className='w-full py-2 pb-24'>
+            <div className='flex justify-between gap-8'>
+              <p className=''>Views</p>
+              <p className='font-bold text-end'>
+                {selectedProduct.engagementData?.views
+                  ? selectedProduct.engagementData?.views
+                  : '-'}
+              </p>
+            </div>
+            <div className='flex justify-between gap-8'>
+              <p className=''>Saved</p>
+              <p className='font-bold text-end'>
+                {selectedProduct.engagementData?.saved
+                  ? selectedProduct.engagementData?.saved
+                  : '-'}
+              </p>
+            </div>
+            <div className='flex justify-between gap-8'>
+              <p className=''>Shared</p>
+              <p className='font-bold text-end'>
+                {selectedProduct.engagementData?.shared
+                  ? selectedProduct.engagementData?.shared
+                  : '-'}
+              </p>
             </div>
           </div>
 

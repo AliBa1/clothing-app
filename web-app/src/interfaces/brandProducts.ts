@@ -81,7 +81,7 @@ export interface Discount {
 
 export interface SalesData {
   totalSold: number;
-  revenueGenerated: number;
+  totalRevenue: number;
 }
 
 export interface EngagementData {
@@ -89,7 +89,6 @@ export interface EngagementData {
   saved: number;
   shared: number;
 }
-
 
 /**
  * Fake products to develop site with
