@@ -108,7 +108,8 @@ export default function BrandDashboardLayout({
         <SidebarButton text='Brand' icon={mdiStore} route='brand' />
       </div>
 
-      <main className='p-4 w-full md:w-3/4 overflow-x-clip'>{children}</main>
+      {/* <main className='p-4 w-full md:w-3/4 overflow-x-clip'>{children}</main> */}
+      <main className='p-4 w-full'>{children}</main>
 
       <SlideoverModal
         isOpen={isSwitcherOpen}

@@ -94,19 +94,17 @@ export default function DashboardProductsPage() {
     });
   }
   return (
-    <div className='flex flex-col w-full'>
+    <div className='flex flex-col w-full gap-4'>
       <div className='flex w-full items-center justify-between'>
-        <h4>Products</h4>
-        <div className='flex gap-4'>
-          <button className='btn-primary text-base min-h-8 md:px-4'>
-            New Product
-          </button>
-          <button className='btn-secondary text-base min-h-8 md:px-4'>
+        <h4 className='text-xl md:text-2xl'>Products</h4>
+        <div className='flex gap-4 text-base'>
+          <button className='btn-primary min-h-8 md:px-4'>New Product</button>
+          {/* <button className='btn-secondary min-h-8 md:px-4'>
             New Colorway
-          </button>
+          </button> */}
         </div>
       </div>
-      <div className='rounded overflow-x-scroll'>
+      <div className='rounded overflow-x-auto'>
         <table className='table table-auto w-full'>
           <thead className='bg-accent text-secondary'>
             <tr>
@@ -126,13 +124,18 @@ export default function DashboardProductsPage() {
                     }
                   }}
                 >
-                  Name{' '}
-                  {sortName.sort && (
-                    <Icon
-                      path={sortName.ascending ? mdiChevronDown : mdiChevronUp}
-                      size={1}
-                    />
-                  )}
+                  {/* to keep header centered */}
+                  <Icon
+                    className='invisible'
+                    path={sortName.ascending ? mdiChevronDown : mdiChevronUp}
+                    size={1}
+                  />
+                  Name
+                  <Icon
+                    className={`${!sortName.sort && 'invisible'}`}
+                    path={sortName.ascending ? mdiChevronDown : mdiChevronUp}
+                    size={1}
+                  />
                 </button>
               </th>
               <th className='px-4 py-2'>
@@ -150,13 +153,18 @@ export default function DashboardProductsPage() {
                     }
                   }}
                 >
-                  Price{' '}
-                  {sortPrice.sort && (
-                    <Icon
-                      path={sortPrice.ascending ? mdiChevronDown : mdiChevronUp}
-                      size={1}
-                    />
-                  )}
+                  {/* to keep header centered */}
+                  <Icon
+                    className='invisible'
+                    path={sortPrice.ascending ? mdiChevronDown : mdiChevronUp}
+                    size={1}
+                  />
+                  Price
+                  <Icon
+                    className={`${!sortPrice.sort && 'invisible'}`}
+                    path={sortPrice.ascending ? mdiChevronDown : mdiChevronUp}
+                    size={1}
+                  />
                 </button>
               </th>
               <th className='px-4 py-2'>
@@ -174,13 +182,18 @@ export default function DashboardProductsPage() {
                     }
                   }}
                 >
-                  Color{' '}
-                  {sortColor.sort && (
-                    <Icon
-                      path={sortColor.ascending ? mdiChevronDown : mdiChevronUp}
-                      size={1}
-                    />
-                  )}
+                  {/* to keep header centered */}
+                  <Icon
+                    className='invisible'
+                    path={sortColor.ascending ? mdiChevronDown : mdiChevronUp}
+                    size={1}
+                  />
+                  Color
+                  <Icon
+                    className={`${!sortColor.sort && 'invisible'}`}
+                    path={sortColor.ascending ? mdiChevronDown : mdiChevronUp}
+                    size={1}
+                  />
                 </button>
               </th>
               {/* <th className='px-4 py-2'>Category</th> */}
@@ -247,18 +260,22 @@ export default function DashboardProductsPage() {
         onClose={() => setIsModalOpen(false)}
         lockedWidth={true}
       >
-        <div className='flex flex-col items-center'>
+        <div className='flex flex-col items-center h-full'>
           <ImageCarousel images={allImages} sizeDivisor={4} />
-          <h4>{selectedProduct.name}</h4>
+          <h4 className='text-center text-lg md:text-2xl'>
+            {selectedProduct.name}
+          </h4>
           {selectedColor.discount ? (
-            <h6>
+            <h4 className='text-center text-lg md:text-2xl'>
               ${discountedPrice(selectedColor.price, selectedColor.discount)}{' '}
               <span className='line-through text-accent'>
                 ${selectedColor.price}
               </span>
-            </h6>
+            </h4>
           ) : (
-            <h6>${selectedColor.price}</h6>
+            <h4 className='text-center text-lg md:text-2xl'>
+              ${selectedColor.price}
+            </h4>
           )}
           <div className='border-b w-full py-4'>
             <div className='flex justify-between gap-8'>
@@ -311,7 +328,7 @@ export default function DashboardProductsPage() {
             </div>
           </div>
 
-          <div className='w-full py-2'>
+          <div className='w-full py-2 pb-24'>
             <div className='flex justify-between gap-8'>
               <p className=''>Descripton</p>
               <p className='font-bold text-end'>
@@ -336,17 +353,17 @@ export default function DashboardProductsPage() {
             </div>
           </div>
 
-          <div className='flex gap-4 sticky bottom-0 py-4 bg-background w-full justify-center'>
-            <button className='btn-accent bg-info text-base min-h-8 md:px-4'>
+          <div className='flex gap-4 fixed bottom-0 py-4 bg-background w-full justify-center'>
+            <button className='btn-accent bg-info text-sm md:text-base min-h-8 px-2 md:px-4'>
               Analytics
             </button>
-            <button className='btn-primary text-base min-h-8 md:px-4'>
+            <button className='btn-primary text-sm md:text-base min-h-8 px-2 md:px-4'>
               Share
             </button>
-            <button className='btn-secondary text-base min-h-8 md:px-4'>
+            <button className='btn-secondary text-sm md:text-base min-h-8 px-2 md:px-4'>
               Edit
             </button>
-            <button className='btn-primary bg-error text-base min-h-8 md:px-4'>
+            <button className='btn-primary bg-error text-sm md:text-base min-h-8 px-2 md:px-4'>
               Delete
             </button>
           </div>
