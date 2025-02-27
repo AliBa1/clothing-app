@@ -56,6 +56,11 @@ export default function DashboardProductsPage() {
     ascending: false
   });
 
+  const [sortSales, setSortSales] = useState<SortType>({
+    sort: false,
+    ascending: false
+  });
+
   const sortedColorVariants = brandProducts
     .flatMap((product) =>
       product.colors.map((color) => ({ ...color, product: product }))
@@ -73,6 +78,16 @@ export default function DashboardProductsPage() {
         return sortColor.ascending
           ? sortStringsAsc(a.colorName, b.colorName)
           : sortStringsDes(a.colorName, b.colorName);
+      } else if (sortSales.sort) {
+        return sortSales.ascending
+          ? sortNumbersAsc(
+              a.salesData?.totalSold || 0,
+              b.salesData?.totalSold || 0
+            )
+          : sortNumbersDes(
+              a.salesData?.totalSold || 0,
+              b.salesData?.totalSold || 0
+            );
       }
       return 0;
     });
@@ -89,6 +104,11 @@ export default function DashboardProductsPage() {
     });
 
     setSortColor({
+      sort: false,
+      ascending: false
+    });
+
+    setSortSales({
       sort: false,
       ascending: false
     });
@@ -142,35 +162,6 @@ export default function DashboardProductsPage() {
                 <button
                   className='flex justify-center w-full'
                   onClick={() => {
-                    if (sortPrice.sort && sortPrice.ascending) {
-                      resetSorts();
-                      setSortPrice({ sort: true, ascending: false });
-                    } else if (sortPrice.sort && !sortPrice.ascending) {
-                      setSortPrice({ sort: false, ascending: true });
-                    } else {
-                      resetSorts();
-                      setSortPrice({ sort: true, ascending: true });
-                    }
-                  }}
-                >
-                  {/* to keep header centered */}
-                  <Icon
-                    className='invisible'
-                    path={sortPrice.ascending ? mdiChevronDown : mdiChevronUp}
-                    size={1}
-                  />
-                  Price
-                  <Icon
-                    className={`${!sortPrice.sort && 'invisible'}`}
-                    path={sortPrice.ascending ? mdiChevronDown : mdiChevronUp}
-                    size={1}
-                  />
-                </button>
-              </th>
-              <th className='px-4 py-2'>
-                <button
-                  className='flex justify-center w-full'
-                  onClick={() => {
                     if (sortColor.sort && sortColor.ascending) {
                       resetSorts();
                       setSortColor({ sort: true, ascending: false });
@@ -196,18 +187,77 @@ export default function DashboardProductsPage() {
                   />
                 </button>
               </th>
+              <th className='px-4 py-2'>
+                <button
+                  className='flex justify-center w-full'
+                  onClick={() => {
+                    if (sortPrice.sort && sortPrice.ascending) {
+                      resetSorts();
+                      setSortPrice({ sort: true, ascending: false });
+                    } else if (sortPrice.sort && !sortPrice.ascending) {
+                      setSortPrice({ sort: false, ascending: true });
+                    } else {
+                      resetSorts();
+                      setSortPrice({ sort: true, ascending: true });
+                    }
+                  }}
+                >
+                  {/* to keep header centered */}
+                  <Icon
+                    className='invisible'
+                    path={sortPrice.ascending ? mdiChevronDown : mdiChevronUp}
+                    size={1}
+                  />
+                  Price
+                  <Icon
+                    className={`${!sortPrice.sort && 'invisible'}`}
+                    path={sortPrice.ascending ? mdiChevronDown : mdiChevronUp}
+                    size={1}
+                  />
+                </button>
+              </th>
+
               {/* <th className='px-4 py-2'>Category</th> */}
               {/* <th className='px-4 py-2'>Subcategory</th> */}
               {/* <th className='px-4 py-2'>Types</th> */}
               <th className='px-4 py-2'>Discount</th>
               {/* <th className='px-4 py-2'></th> */}
+              <th className='px-4 py-2'>
+                <button
+                  className='flex justify-center w-full'
+                  onClick={() => {
+                    if (sortSales.sort && sortSales.ascending) {
+                      resetSorts();
+                      setSortSales({ sort: true, ascending: false });
+                    } else if (sortSales.sort && !sortSales.ascending) {
+                      setSortSales({ sort: false, ascending: true });
+                    } else {
+                      resetSorts();
+                      setSortSales({ sort: true, ascending: true });
+                    }
+                  }}
+                >
+                  {/* to keep header centered */}
+                  <Icon
+                    className='invisible'
+                    path={sortSales.ascending ? mdiChevronDown : mdiChevronUp}
+                    size={1}
+                  />
+                  Sales
+                  <Icon
+                    className={`${!sortSales.sort && 'invisible'}`}
+                    path={sortSales.ascending ? mdiChevronDown : mdiChevronUp}
+                    size={1}
+                  />
+                </button>
+              </th>
             </tr>
           </thead>
           <tbody>
             {sortedColorVariants.map((cV) => (
               <tr
                 key={cV.id}
-                className='text-center border-b border-x md:hover:bg-secondary cursor-pointer text-lg md:text-xl'
+                className='text-center md:hover:bg-secondary cursor-pointer text-lg md:text-xl'
                 onClick={() => {
                   setIsModalOpen(true);
                   // setSelectedProduct(p);
@@ -228,8 +278,8 @@ export default function DashboardProductsPage() {
                 </td>
                 {/* <td className='px-4 py-2'>{p.name}</td> */}
                 <td className='px-4 py-2'>{cV.product.name}</td>
-                <td className='px-4 py-2'>${cV.price}</td>
                 <td className='px-4 py-2'>{cV.colorName}</td>
+                <td className='px-4 py-2'>${cV.price}</td>
                 {/* <td className='px-4 py-2'>
                   {p.categories.map((c) => c.label).join(', ')}
                 </td> */}
@@ -249,6 +299,9 @@ export default function DashboardProductsPage() {
                       <Icon path={mdiDotsHorizontal} size={1} />
                     </button>
                   </td> */}
+                <td className='px-4 py-2'>
+                  {cV.salesData?.totalSold ? cV.salesData?.totalSold : '-'}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -262,18 +315,18 @@ export default function DashboardProductsPage() {
       >
         <div className='flex flex-col items-center h-full'>
           <ImageCarousel images={allImages} sizeDivisor={4} />
-          <h4 className='text-center text-lg md:text-2xl'>
+          <h4 className='text-center text-lg md:text-2xl py-4'>
             {selectedProduct.name}
           </h4>
           {selectedColor.discount ? (
-            <h4 className='text-center text-lg md:text-2xl'>
+            <h4 className='text-center text-lg md:text-2xl py-4'>
               ${discountedPrice(selectedColor.price, selectedColor.discount)}{' '}
               <span className='line-through text-accent'>
                 ${selectedColor.price}
               </span>
             </h4>
           ) : (
-            <h4 className='text-center text-lg md:text-2xl'>
+            <h4 className='text-center text-lg md:text-2xl py-4'>
               ${selectedColor.price}
             </h4>
           )}

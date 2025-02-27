@@ -18,6 +18,8 @@ export interface BrandProduct {
   colorNotes?: string;
   sizeNotes?: string;
   colors: ColorVariant[];
+  salesData?: SalesData;
+  engagementData?: EngagementData;
 }
 
 export interface Multicolor {
@@ -61,6 +63,8 @@ export interface ColorVariant {
     additional?: string[];
   };
   sizes: SizeVariant[];
+  salesData?: SalesData;
+  engagementData?: EngagementData;
 }
 /**
  * Size and quantity availible for each ColorVariant
@@ -74,6 +78,19 @@ export interface Discount {
   type: 'fixed' | 'percent';
   amount: number;
 }
+
+export interface SalesData {
+  totalSold: number;
+  revenueGenerated: number;
+}
+
+export interface EngagementData {
+  views: number;
+  saved: number;
+  shared: number;
+}
+
+
 /**
  * Fake products to develop site with
  */
