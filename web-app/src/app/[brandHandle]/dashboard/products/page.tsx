@@ -19,6 +19,7 @@ import {
 import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
 import Icon from '@mdi/react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
@@ -138,7 +139,7 @@ export default function DashboardProductsPage() {
       <div className='flex w-full items-center justify-between'>
         <h4 className='text-xl md:text-2xl'>Products</h4>
         <div className='flex gap-4 text-base'>
-          <button className='btn-primary min-h-8 md:px-4'>New Product</button>
+          <Link href={`${usePathname()}/manage`} className='btn-primary min-h-8 md:px-4'>New Product</Link>
           {/* <button className='btn-secondary min-h-8 md:px-4'>
             New Colorway
           </button> */}
