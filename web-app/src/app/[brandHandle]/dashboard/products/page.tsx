@@ -439,7 +439,7 @@ export default function DashboardProductsPage() {
           <div className='border-b border-primary w-full py-2'>
             <div className='flex justify-between gap-8'>
               <p className=''>Descripton</p>
-              <p className='font-bold text-end'>
+              <p className='font-bold text-end whitespace-pre-line'>
                 {selectedProduct.description}
               </p>
             </div>
