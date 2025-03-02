@@ -20,6 +20,7 @@ export interface BrandProduct {
   colors: ColorVariant[];
   salesData?: SalesData;
   engagementData?: EngagementData;
+  reviews?: Review[];
 }
 
 export interface Multicolor {
@@ -64,8 +65,41 @@ export interface ColorVariant {
   };
   sizes: SizeVariant[];
   salesData?: SalesData;
-  engagementData?: EngagementData;
+  // engagementData?: EngagementData;
+  availability?: Availability;
+  visibility?: Visibility;
+  releaseDate?: Date;
+  releaseEndDate?: Date;
 }
+
+export const AVAILABILITY_OPTIONS = {
+  preOrder: 'Pre Order',
+  readyToShip: 'Ready to Ship'
+};
+
+export type Availability = keyof typeof AVAILABILITY_OPTIONS;
+
+export const VISIBILITY_OPTIONS = {
+  draft: 'Draft',
+  private: 'Private',
+  public: 'Public',
+  archived: 'Archived'
+};
+
+export type Visibility = keyof typeof VISIBILITY_OPTIONS;
+
+export interface Review {
+  id: string;
+  userId: string;
+  rating: number;
+  quality: number;
+  fit: number;
+  comment?: string;
+  createdAt: Date;
+  images?: string[];
+  likes: number;
+}
+
 /**
  * Size and quantity availible for each ColorVariant
  */
