@@ -1,213 +1,185 @@
-import { LabelValue } from './other';
-import { TypesKey } from './typesEnum';
-
 export interface Category {
-  category: LabelValue;
+  category: keyof typeof categoryLabels;
   subCategories: Subcategory[];
 }
 
 export interface Subcategory {
-  subcategory: LabelValue;
-  // types: LabelValue[];
-  types: Partial<Record<TypesKey, LabelValue>>;
+  subcategory: keyof typeof subcategoryLabels;
+  types: (keyof typeof typeLabels)[];
 }
 
 const tShirtSubcategory: Subcategory = {
-  subcategory: { label: 'T-Shirts', value: 't_shirts' },
-  types: {
-    [TypesKey.GraphicTees]: { label: 'Graphic Tees', value: TypesKey.GraphicTees },
-    [TypesKey.PoloTees]: { label: 'Polo Tees', value: TypesKey.PoloTees },
-    [TypesKey.TankTops]: { label: 'Tank Tops', value: TypesKey.TankTops },
-    [TypesKey.ShortSleeveTees]: { label: 'Short Sleeve Tees', value: TypesKey.ShortSleeveTees },
-    [TypesKey.LongSleeveTees]: { label: 'Long Sleeve Tees', value: TypesKey.LongSleeveTees },
-    [TypesKey.ButtonUps]: { label: 'Button Ups', value: TypesKey.ButtonUps },
-    [TypesKey.CroppedTees]: { label: 'Cropped Tees', value: TypesKey.CroppedTees }
-  }
+  subcategory: 'tShirt',
+  types: [
+    'graphicTees',
+    'poloTees',
+    'tankTops',
+    'shortSleeveTees',
+    'longSleeveTees',
+    'buttonUps',
+    'croppedTees'
+  ]
 };
 
 const jerseySubcategory: Subcategory = {
-  subcategory: { label: 'Jerseys', value: 'jerseys' },
-  types: {
-    [TypesKey.BasketballJerseys]: { label: 'Basketball', value: TypesKey.BasketballJerseys },
-    [TypesKey.FootballJerseys]: { label: 'Football', value: TypesKey.FootballJerseys },
-    [TypesKey.BaseballJerseys]: { label: 'Baseball', value: TypesKey.BaseballJerseys },
-    [TypesKey.HockeyJerseys]: { label: 'Hockey', value: TypesKey.HockeyJerseys },
-    [TypesKey.SoccerJerseys]: { label: 'Soccer', value: TypesKey.SoccerJerseys },
-    [TypesKey.RugbyJerseys]: { label: 'Rugby', value: TypesKey.RugbyJerseys }
-  }
+  subcategory: 'jersey',
+  types: [
+    'basketballJerseys',
+    'footballJerseys',
+    'baseballJerseys',
+    'hockeyJerseys',
+    'soccerJerseys',
+    'rugbyJerseys'
+  ]
 };
 
 const outerwearSubcategory: Subcategory = {
-  subcategory: { label: 'Outerwear', value: 'outerwear' },
-  types: {
-    [TypesKey.HoodiesJackets]: { label: 'Hoodies & Jackets', value: TypesKey.HoodiesJackets },
-    [TypesKey.Sweatshirts]: { label: 'Sweatshirts', value: TypesKey.Sweatshirts },
-    [TypesKey.Coats]: { label: 'Coats', value: TypesKey.Coats },
-    [TypesKey.Vests]: { label: 'Vests', value: TypesKey.Vests },
-    [TypesKey.PufferJackets]: { label: 'Puffer Jackets', value: TypesKey.PufferJackets },
-    [TypesKey.BomberJackets]: { label: 'Bomber Jackets', value: TypesKey.BomberJackets },
-    [TypesKey.Windbreakers]: { label: 'Windbreakers', value: TypesKey.Windbreakers },
-    [TypesKey.Fur]: { label: 'Fur', value: TypesKey.Fur },
-    [TypesKey.Leather]: { label: 'Leather', value: TypesKey.Leather }
-  }
+  subcategory: 'outerwear',
+  types: [
+    'hoodiesJackets',
+    'sweatshirts',
+    'coats',
+    'vests',
+    'pufferJackets',
+    'bomberJackets',
+    'windbreakers',
+    'fur',
+    'leather'
+  ]
 };
 
 const topsCategory: Category = {
-  category: { label: 'Tops', value: 'tops' },
+  category: 'tops',
   subCategories: [tShirtSubcategory, jerseySubcategory, outerwearSubcategory]
 };
 
 const shortsSubcategory: Subcategory = {
-  subcategory: { label: 'Shorts', value: 'shorts' },
-  types: {
-    [TypesKey.DenimShorts]: { label: 'Denim Shorts', value: TypesKey.DenimShorts },
-    [TypesKey.AthleticShorts]: { label: 'Athletic Shorts', value: TypesKey.AthleticShorts },
-    [TypesKey.RegularShorts]: { label: 'Regular Shorts', value: TypesKey.RegularShorts },
-    [TypesKey.ShortShorts]: { label: 'Short Shorts', value: TypesKey.ShortShorts },
-    [TypesKey.CargoShorts]: { label: 'Cargo Shorts', value: TypesKey.CargoShorts }
-  }
+  subcategory: 'shorts',
+  types: [
+    'denimShorts',
+    'athleticShorts',
+    'regularShorts',
+    'shortShorts',
+    'cargoShorts'
+  ]
 };
 
 const pantsSubcategory: Subcategory = {
-  subcategory: { label: 'Pants', value: 'pants' },
-  types: {
-    [TypesKey.CargoPants]: { label: 'Cargo Pants', value: TypesKey.CargoPants },
-    [TypesKey.SweatpantsJoggers]: { label: 'Sweatpants & Joggers', value: TypesKey.SweatpantsJoggers },
-    [TypesKey.TrackPants]: { label: 'Track Pants', value: TypesKey.TrackPants }
-  }
+  subcategory: 'pants',
+  types: ['cargoPants', 'sweatpantsJoggers', 'trackPants']
 };
 
 const jeansSubcategory: Subcategory = {
-  subcategory: { label: 'Jeans', value: 'jeans' },
-  types: {
-    [TypesKey.BaggyJeans]: { label: 'Baggy Jeans', value: TypesKey.BaggyJeans },
-    [TypesKey.FlareJeans]: { label: 'Flare Jeans', value: TypesKey.FlareJeans },
-    [TypesKey.RippedJeans]: { label: 'Ripped Jeans', value: TypesKey.RippedJeans },
-    [TypesKey.StackedJeans]: { label: 'Stacked Jeans', value: TypesKey.StackedJeans },
-    [TypesKey.SkinnyJeans]: { label: 'Skinny Jeans', value: TypesKey.SkinnyJeans }
-  }
+  subcategory: 'jeans',
+  types: [
+    'baggyJeans',
+    'flareJeans',
+    'rippedJeans',
+    'stackedJeans',
+    'skinnyJeans'
+  ]
 };
 
-// Maybe pantsCategory?
 const bottomsCategory: Category = {
-  category: { label: 'Bottoms', value: 'bottoms' },
+  category: 'bottoms',
   subCategories: [shortsSubcategory, pantsSubcategory, jeansSubcategory]
 };
 
-const sneakersCategory: Subcategory = {
-  subcategory: { label: 'Sneakers', value: 'sneakers' },
-  types: {
-    [TypesKey.LowTops]: { label: 'Low-Top Sneakers', value: TypesKey.LowTops },
-    [TypesKey.MidTops]: { label: 'High-Top Sneakers', value: TypesKey.MidTops },
-    [TypesKey.HighTops]: { label: 'High-Top Sneakers', value: TypesKey.HighTops },
-    [TypesKey.RunningShoes]: { label: 'Running Shoes', value: TypesKey.RunningShoes },
-    [TypesKey.BasketballShoes]: { label: 'Basketball Shoes', value: TypesKey.BasketballShoes },
-    [TypesKey.SkateShoes]: { label: 'Skate Shoes', value: TypesKey.SkateShoes },
-    [TypesKey.DesignerSneakers]: { label: 'Designer Sneakers', value: TypesKey.DesignerSneakers }
-  }
+const sneakersSubcategory: Subcategory = {
+  subcategory: 'sneakers',
+  types: [
+    'lowTops',
+    'midTops',
+    'highTops',
+    'runningShoes',
+    'basketballShoes',
+    'skateShoes',
+    'designerSneakers'
+  ]
 };
 
-const bootsCategory: Subcategory = {
-  subcategory: { label: 'Boots', value: 'boots' },
-  types: {
-    [TypesKey.WesternBoots]: { label: 'Chelsea Boots', value: TypesKey.WesternBoots },
-    [TypesKey.BikerBoots]: { label: 'Chelsea Boots', value: TypesKey.BikerBoots },
-    [TypesKey.ChelseaBoots]: { label: 'Chelsea Boots', value: TypesKey.ChelseaBoots },
-    [TypesKey.DesertBoots]: { label: 'Chelsea Boots', value: TypesKey.DesertBoots },
-    [TypesKey.CombatBoots]: { label: 'Chelsea Boots', value: TypesKey.CombatBoots },
-  }
+const bootsSubcategory: Subcategory = {
+  subcategory: 'boots',
+  types: [
+    'westernBoots',
+    'bikerBoots',
+    'chelseaBoots',
+    'desertBoots',
+    'combatBoots'
+  ]
 };
 
-const slidesSlippersCategory: Subcategory = {
-  subcategory: { label: 'Slides & Slippers', value: 'slides_slippers' },
-  types: {
-    [TypesKey.Slides]: { label: 'Slides', value: TypesKey.Slides },
-    [TypesKey.Sandals]: { label: 'Slides', value: TypesKey.Sandals },
-    [TypesKey.Mules]: { label: 'Slides', value: TypesKey.Mules },
-    [TypesKey.Clogs]: { label: 'Slides', value: TypesKey.Clogs },
-  }
+const slidesSlippersSubcategory: Subcategory = {
+  subcategory: 'slides',
+  types: ['slides', 'sandals', 'mules', 'clogs']
 };
 
 const shoesCategory: Category = {
-  category: { label: 'Shoes', value: 'shoes' },
-  subCategories: [sneakersCategory, bootsCategory, slidesSlippersCategory]
+  category: 'shoes',
+  subCategories: [
+    sneakersSubcategory,
+    bootsSubcategory,
+    slidesSlippersSubcategory
+  ]
 };
 
 const hatsSubcategory: Subcategory = {
-  subcategory: { label: 'Hats', value: 'hats' },
-  types: {
-    [TypesKey.FittedHats]: { label: 'Fitted Hats', value: TypesKey.FittedHats },
-    [TypesKey.BaseballHats]: { label: 'Baseball Hats', value: TypesKey.BaseballHats },
-    [TypesKey.Snapbacks]: { label: 'Snapbacks', value: TypesKey.Snapbacks },
-    [TypesKey.BucketHats]: { label: 'Bucket Hats', value: TypesKey.BucketHats },
-    [TypesKey.TruckerHats]: { label: 'Trucker Hats', value: TypesKey.TruckerHats }
-  }
+  subcategory: 'hats',
+  types: [
+    'fittedHats',
+    'baseballHats',
+    'snapbacks',
+    'bucketHats',
+    'truckerHats'
+  ]
 };
 
 const headwearSubcategory: Subcategory = {
-  subcategory: { label: 'Headwear', value: 'headwear' },
-  types: {
-    [TypesKey.Durags]: { label: 'Durags', value: TypesKey.Durags },
-    [TypesKey.Beanies]: { label: 'Beanies', value: TypesKey.Beanies },
-    [TypesKey.SkiMasks]: { label: 'Ski Masks', value: TypesKey.SkiMasks },
-    [TypesKey.Knitted]: { label: 'Knitted', value: TypesKey.Knitted },
-    [TypesKey.Bandanas]: { label: 'Bandanas', value: TypesKey.Bandanas },
-    [TypesKey.Headbands]: { label: 'Headbands', value: TypesKey.Headbands }
-  }
+  subcategory: 'headwear',
+  types: ['durags', 'beanies', 'skiMasks', 'knitted', 'bandanas', 'headbands']
 };
 
 const bagsSubcategory: Subcategory = {
-  subcategory: { label: 'Bags', value: 'bags' },
-  types: {
-    [TypesKey.Backpacks]: { label: 'Backpacks', value: TypesKey.Backpacks },
-    [TypesKey.DuffleBags]: { label: 'Duffle Bags', value: TypesKey.DuffleBags },
-    [TypesKey.TravelBags]: { label: 'Travel Bags', value: TypesKey.TravelBags },
-    [TypesKey.ToteBags]: { label: 'Tote Bags', value: TypesKey.ToteBags },
-    [TypesKey.FannyPacks]: { label: 'Fanny Packs', value: TypesKey.FannyPacks },
-    [TypesKey.DrawstringBags]: { label: 'Drawstring Bags', value: TypesKey.DrawstringBags }
-  }
+  subcategory: 'bags',
+  types: [
+    'backpacks',
+    'duffleBags',
+    'travelBags',
+    'toteBags',
+    'fannyPacks',
+    'drawstringBags'
+  ]
 };
 
 const jewelrySubcategory: Subcategory = {
-  subcategory: { label: 'Jewelry', value: 'jewelry' },
-  types: {
-    [TypesKey.ChainsNecklaces]: { label: 'Chains & Necklaces', value: TypesKey.ChainsNecklaces },
-    [TypesKey.Pendants]: { label: 'Pendants', value: TypesKey.Pendants },
-    [TypesKey.Bracelets]: { label: 'Bracelets', value: TypesKey.Bracelets },
-    [TypesKey.Rings]: { label: 'Rings', value: TypesKey.Rings },
-    [TypesKey.Earrings]: { label: 'Earrings', value: TypesKey.Earrings },
-    [TypesKey.BeltChains]: { label: 'Belt Chains', value: TypesKey.BeltChains }
-  }
+  subcategory: 'jewelry',
+  types: [
+    'chainsNecklaces',
+    'pendants',
+    'bracelets',
+    'rings',
+    'earrings',
+    'beltChains'
+  ]
 };
+
 const socksSubcategory: Subcategory = {
-  subcategory: { label: 'Socks', value: 'socks' },
-  types: {
-    [TypesKey.NoShowSocks]: { label: 'No Show Socks', value: TypesKey.NoShowSocks },
-    [TypesKey.AnkleSocks]: { label: 'Ankle Socks', value: TypesKey.AnkleSocks },
-    [TypesKey.CrewSocks]: { label: 'Crew Socks', value: TypesKey.CrewSocks },
-    [TypesKey.HighSocks]: { label: 'High Socks', value: TypesKey.HighSocks }
-  }
+  subcategory: 'socks',
+  types: ['noShowSocks', 'ankleSocks', 'crewSocks', 'highSocks']
 };
 
 const glassesSubcategory: Subcategory = {
-  subcategory: { label: 'Glasses', value: 'glasses' },
-  types: {
-    [TypesKey.Sunglasses]: { label: 'Sunglasses', value: TypesKey.Sunglasses },
-    [TypesKey.Eyeglasses]: { label: 'Eyeglasses', value: TypesKey.Eyeglasses }
-  }
+  subcategory: 'glasses',
+  types: ['sunglasses', 'eyeglasses']
 };
 
 const otherAccessoriesSubcategory: Subcategory = {
-  subcategory: { label: 'Other', value: 'other' },
-  types: {
-    [TypesKey.Gloves]: { label: 'Gloves', value: TypesKey.Gloves },
-    [TypesKey.Sleeves]: { label: 'Sleeves', value: TypesKey.Sleeves },
-    [TypesKey.Belts]: { label: 'Belts', value: TypesKey.Belts }
-  }
+  subcategory: 'other',
+  types: ['gloves', 'sleeves', 'belts']
 };
 
 const accessoriesCategory: Category = {
-  category: { label: 'Accessories', value: 'accessories' },
+  category: 'accessories',
   subCategories: [
     hatsSubcategory,
     headwearSubcategory,
@@ -219,64 +191,174 @@ const accessoriesCategory: Category = {
   ]
 };
 
-/**
- * System to categoize items on the site.
- */
-// export const categories: Category[] = [
-//   topsCategory,
-//   bottomsCategory,
-//   shoesCategory,
-//   accessoriesCategory
-// ];
-
-export enum CategoryKey {
-  Tops = 'tops',
-  Bottoms = 'bottoms',
-  Shoes = 'shoes',
-  Accessories = 'accessories'
-}
-
-export const categories: Record<CategoryKey, Category> = {
-  [CategoryKey.Tops]: topsCategory,
-  [CategoryKey.Bottoms]: bottomsCategory,
-  [CategoryKey.Shoes]: shoesCategory,
-  [CategoryKey.Accessories]: accessoriesCategory
+export const categoryLabels = {
+  tops: 'Tops',
+  bottoms: 'Bottoms',
+  shoes: 'Shoes',
+  accessories: 'Accessories'
 };
 
-export enum SubcategoryKey {
-  TShirt = 'tShirt',
-  Jersey = 'jersey',
-  Outerwear = 'outerwear',
-  Shorts = 'shorts',
-  Pants = 'pants',
-  Jeans = 'jeans',
-  Sneakers = 'sneakers',
-  Boots = 'boots',
-  Slides = 'slides',
-  Hats = 'hats',
-  Headwear = 'headwear',
-  Bags = 'bags',
-  Jewelry = 'jewelry',
-  Socks = 'socks',
-  Glasses = 'glasses',
-  Other = 'other'
-}
+export const categories: Record<keyof typeof categoryLabels, Category> = {
+  tops: topsCategory,
+  bottoms: bottomsCategory,
+  shoes: shoesCategory,
+  accessories: accessoriesCategory
+};
 
-export const subCategories: Record<SubcategoryKey, Subcategory> = {
-  [SubcategoryKey.TShirt]: tShirtSubcategory,
-  [SubcategoryKey.Jersey]: jerseySubcategory,
-  [SubcategoryKey.Outerwear]: outerwearSubcategory,
-  [SubcategoryKey.Shorts]: shortsSubcategory,
-  [SubcategoryKey.Pants]: pantsSubcategory,
-  [SubcategoryKey.Jeans]: jeansSubcategory,
-  [SubcategoryKey.Sneakers]: sneakersCategory,
-  [SubcategoryKey.Boots]: bootsCategory,
-  [SubcategoryKey.Slides]: slidesSlippersCategory,
-  [SubcategoryKey.Hats]: hatsSubcategory,
-  [SubcategoryKey.Headwear]: headwearSubcategory,
-  [SubcategoryKey.Bags]: bagsSubcategory,
-  [SubcategoryKey.Jewelry]: jewelrySubcategory,
-  [SubcategoryKey.Socks]: socksSubcategory,
-  [SubcategoryKey.Glasses]: glassesSubcategory,
-  [SubcategoryKey.Other]: otherAccessoriesSubcategory
+export const subcategoryLabels = {
+  tShirt: 'T-Shirt',
+  jersey: 'Jersey',
+  outerwear: 'Outerwear',
+  shorts: 'Shorts',
+  pants: 'Pants',
+  jeans: 'Jeans',
+  sneakers: 'Sneakers',
+  boots: 'Boots',
+  slides: 'Slides',
+  hats: 'Hats',
+  headwear: 'Headwear',
+  bags: 'Bags',
+  jewelry: 'Jewelry',
+  socks: 'Socks',
+  glasses: 'Glasses',
+  other: 'Other'
+};
+
+export const subCategories: Record<
+  keyof typeof subcategoryLabels,
+  Subcategory
+> = {
+  tShirt: tShirtSubcategory,
+  jersey: jerseySubcategory,
+  outerwear: outerwearSubcategory,
+  shorts: shortsSubcategory,
+  pants: pantsSubcategory,
+  jeans: jeansSubcategory,
+  sneakers: sneakersSubcategory,
+  boots: bootsSubcategory,
+  slides: slidesSlippersSubcategory,
+  hats: hatsSubcategory,
+  headwear: headwearSubcategory,
+  bags: bagsSubcategory,
+  jewelry: jewelrySubcategory,
+  socks: socksSubcategory,
+  glasses: glassesSubcategory,
+  other: otherAccessoriesSubcategory
+};
+
+export const typeLabels = {
+  // T-Shirts
+  graphicTees: 'Graphic Tees',
+  poloTees: 'Polo Tees',
+  tankTops: 'Tank Tops',
+  shortSleeveTees: 'Short Sleeve Tees',
+  longSleeveTees: 'Long Sleeve Tees',
+  buttonUps: 'Button Ups',
+  croppedTees: 'Cropped Tees',
+
+  // Jerseys
+  basketballJerseys: 'Basketball Jerseys',
+  footballJerseys: 'Football Jerseys',
+  baseballJerseys: 'Baseball Jerseys',
+  hockeyJerseys: 'Hockey Jerseys',
+  soccerJerseys: 'Soccer Jerseys',
+  rugbyJerseys: 'Rugby Jerseys',
+
+  // Outerwear
+  hoodiesJackets: 'Hoodies & Jackets',
+  sweatshirts: 'Sweatshirts',
+  coats: 'Coats',
+  vests: 'Vests',
+  pufferJackets: 'Puffer Jackets',
+  bomberJackets: 'Bomber Jackets',
+  windbreakers: 'Windbreakers',
+  fur: 'Fur',
+  leather: 'Leather',
+
+  // Shorts
+  denimShorts: 'Denim Shorts',
+  athleticShorts: 'Athletic Shorts',
+  regularShorts: 'Regular Shorts',
+  shortShorts: 'Short Shorts',
+  cargoShorts: 'Cargo Shorts',
+
+  // Pants
+  cargoPants: 'Cargo Pants',
+  sweatpantsJoggers: 'Sweatpants & Joggers',
+  trackPants: 'Track Pants',
+
+  // Jeans
+  baggyJeans: 'Baggy Jeans',
+  flareJeans: 'Flare Jeans',
+  rippedJeans: 'Ripped Jeans',
+  stackedJeans: 'Stacked Jeans',
+  skinnyJeans: 'Skinny Jeans',
+
+  // Sneakers
+  lowTops: 'Low Tops',
+  midTops: 'Mid Tops',
+  highTops: 'High Tops',
+  runningShoes: 'Running Shoes',
+  basketballShoes: 'Basketball Shoes',
+  skateShoes: 'Skate Shoes',
+  designerSneakers: 'Designer Sneakers',
+
+  // Boots
+  westernBoots: 'Western Boots',
+  bikerBoots: 'Biker Boots',
+  chelseaBoots: 'Chelsea Boots',
+  desertBoots: 'Desert Boots',
+  combatBoots: 'Combat Boots',
+
+  // Slides & Slippers
+  slides: 'Slides',
+  sandals: 'Sandals',
+  mules: 'Mules',
+  clogs: 'Clogs',
+
+  // Hats
+  fittedHats: 'Fitted Hats',
+  baseballHats: 'Baseball Hats',
+  snapbacks: 'Snapbacks',
+  bucketHats: 'Bucket Hats',
+  truckerHats: 'Trucker Hats',
+
+  // Headwear
+  durags: 'Durags',
+  beanies: 'Beanies',
+  skiMasks: 'Ski Masks',
+  knitted: 'Knitted',
+  bandanas: 'Bandanas',
+  headbands: 'Headbands',
+
+  // Bags
+  backpacks: 'Backpacks',
+  duffleBags: 'Duffle Bags',
+  travelBags: 'Travel Bags',
+  toteBags: 'Tote Bags',
+  fannyPacks: 'Fanny Packs',
+  drawstringBags: 'Drawstring Bags',
+
+  // Jewelry
+  chainsNecklaces: 'Chains & Necklaces',
+  pendants: 'Pendants',
+  bracelets: 'Bracelets',
+  rings: 'Rings',
+  earrings: 'Earrings',
+  beltChains: 'Belt Chains',
+
+  // Socks
+  noShowSocks: 'No Show Socks',
+  ankleSocks: 'Ankle Socks',
+  crewSocks: 'Crew Socks',
+  highSocks: 'High Socks',
+
+  // Glasses
+  sunglasses: 'Sunglasses',
+  eyeglasses: 'Eyeglasses',
+
+  // Other Accessories
+  gloves: 'Gloves',
+  sleeves: 'Sleeves',
+  belts: 'Belts'
 };

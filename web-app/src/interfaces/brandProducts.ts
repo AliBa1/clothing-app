@@ -1,6 +1,11 @@
 import { Brand, mockBrands } from '@/interfaces/brands';
-import { categories, subCategories } from './categories';
-import { LabelValue } from './other';
+import {
+  categories,
+  categoryLabels,
+  subCategories,
+  subcategoryLabels,
+  typeLabels
+} from './categories';
 /**
  * Product object for an item (clothing, accessory, etc.)
  */
@@ -9,9 +14,20 @@ export interface BrandProduct {
   name: string;
   productSlug: string;
   brand: Brand;
-  categories: LabelValue[];
-  subCategories: LabelValue[];
-  types: LabelValue[];
+  /* 
+    Old way of storing categories
+    Bad since only need values for frontend so make in key value and retrieve
+    Also bad since storing more than needed in backend
+  */
+  // categories: LabelValue[];
+  // subCategories: LabelValue[];
+  // types: LabelValue[];
+
+  // New Method
+  categories: (keyof typeof categoryLabels)[];
+  subCategories: (keyof typeof subcategoryLabels)[];
+  types: (keyof typeof typeLabels)[];
+
   description?: string;
   shipping?: string;
   returns?: string;
@@ -135,9 +151,7 @@ export const mockProducts: BrandProduct[] = [
     brand: mockBrands[0],
     categories: [categories.tops.category],
     subCategories: [subCategories.outerwear.subcategory],
-    types: [subCategories.outerwear.types.puffer_jackets].filter(
-      (type): type is LabelValue => type !== undefined
-    ),
+    types: ['pufferJackets'],
     description:
       'Puffer jacket in a lightweight fabric with intergrated buckle collar closure',
     sizeNotes: 'Size up for oversized fit',
@@ -176,10 +190,7 @@ export const mockProducts: BrandProduct[] = [
     brand: mockBrands[4],
     categories: [categories.tops.category],
     subCategories: [subCategories.outerwear.subcategory],
-    types: [
-      subCategories.outerwear.types.hoodies_jackets,
-      subCategories.outerwear.types.sweatshirts
-    ].filter((type): type is LabelValue => type !== undefined),
+    types: ['hoodiesJackets', 'sweatshirts'],
     description: '100% COTTON FLEECE\n PUFFPRINT AND SCREENPRINT COMBO',
     shipping: 'Free shipping on orders over $50',
     returns:
@@ -290,11 +301,7 @@ export const mockProducts: BrandProduct[] = [
       subCategories.outerwear.subcategory,
       subCategories.pants.subcategory
     ],
-    types: [
-      subCategories.outerwear.types.hoodies_jackets,
-      subCategories.outerwear.types.sweatshirts,
-      subCategories.outerwear.types.sweatpants_joggers
-    ].filter((type): type is LabelValue => type !== undefined),
+    types: ['hoodiesJackets', 'sweatshirts', 'sweatpantsJoggers'],
     colors: [
       {
         id: '6',
@@ -431,9 +438,7 @@ export const mockProducts: BrandProduct[] = [
     brand: mockBrands[5],
     categories: [categories.tops.category],
     subCategories: [subCategories.tShirt.subcategory],
-    types: [subCategories.tShirt.types.short_sleeve_tees].filter(
-      (type): type is LabelValue => type !== undefined
-    ),
+    types: ['shortSleeveTees'],
     colorNotes: 'Light Gray-ish even though it appears to be white',
     sizeNotes: 'Size up for looser fit',
     colors: [
@@ -463,9 +468,7 @@ export const mockProducts: BrandProduct[] = [
     brand: mockBrands[1],
     categories: [categories.bottoms.category],
     subCategories: [subCategories.pants.subcategory],
-    types: [subCategories.pants.types.cargo_pants].filter(
-      (type): type is LabelValue => type !== undefined
-    ),
+    types: ['cargoPants'],
     colors: [
       {
         id: '13',
@@ -494,9 +497,7 @@ export const mockProducts: BrandProduct[] = [
     brand: mockBrands[1],
     categories: [categories.bottoms.category],
     subCategories: [subCategories.shorts.subcategory],
-    types: [subCategories.shorts.types.cargo_shorts].filter(
-      (type): type is LabelValue => type !== undefined
-    ),
+    types: ['cargoShorts'],
     colors: [
       {
         id: '15',
@@ -525,9 +526,7 @@ export const mockProducts: BrandProduct[] = [
     brand: mockBrands[3],
     categories: [categories.tops.category],
     subCategories: [subCategories.outerwear.subcategory],
-    types: [subCategories.outerwear.types.hoodies_jackets].filter(
-      (type): type is LabelValue => type !== undefined
-    ),
+    types: ['hoodiesJackets'],
     description:
       '- 20 Oz 100% Cotton Fleece\n- Garment Dyed-Vintage Black\n- Seams Flowing Across Hoodie\n- Boxy Fit (Choose your regular size or size up for an oversized fit)\n- Big Ass Hood\n- Two Way YKK Zipper',
     colors: [
@@ -562,9 +561,7 @@ export const mockProducts: BrandProduct[] = [
     brand: mockBrands[2],
     categories: [categories.bottoms.category],
     subCategories: [subCategories.pants.subcategory],
-    types: [subCategories.pants.types.track_pants].filter(
-      (type): type is LabelValue => type !== undefined
-    ),
+    types: ['trackPants'],
     description:
       'Crafted with stretchy woven material, these Nike Tech pants offer you ease of movement and adjustability. The wide-leg cut is paired with bungee locks at the ankles that let you switch up the fit.',
     colors: [
@@ -640,9 +637,7 @@ export const mockProducts: BrandProduct[] = [
     brand: mockBrands[2],
     categories: [categories.tops.category],
     subCategories: [subCategories.outerwear.subcategory],
-    types: [subCategories.outerwear.types.hoodies_jackets].filter(
-      (type): type is LabelValue => type !== undefined
-    ),
+    types: ['hoodiesJackets'],
     colors: [
       {
         id: '21',
@@ -674,9 +669,7 @@ export const mockProducts: BrandProduct[] = [
     brand: mockBrands[1],
     categories: [categories.bottoms.category],
     subCategories: [subCategories.pants.subcategory],
-    types: [subCategories.pants.types.track_pants].filter(
-      (type): type is LabelValue => type !== undefined
-    ),
+    types: ['trackPants'],
     colors: [
       {
         id: '20',

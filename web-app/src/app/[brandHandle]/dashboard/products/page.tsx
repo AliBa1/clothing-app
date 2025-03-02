@@ -8,6 +8,7 @@ import {
   ColorVariant,
   mockProducts
 } from '@/interfaces/brandProducts';
+import { categoryLabels, subcategoryLabels, typeLabels } from '@/interfaces/categories';
 import { discountedPrice } from '@/utils/helperFunctions';
 import {
   sortStringsAsc,
@@ -405,19 +406,19 @@ export default function DashboardProductsPage() {
             <div className='flex justify-between gap-8'>
               <p className=''>Categories</p>
               <p className='font-bold text-end'>
-                {selectedProduct.categories.map((c) => c.label).join(', ')}
+                {selectedProduct.categories.map((c) => categoryLabels[c]).join(', ')}
               </p>
             </div>
             <div className='flex justify-between gap-8'>
               <p className=''>Subcategories</p>
               <p className='font-bold text-end'>
-                {selectedProduct.subCategories.map((s) => s.label).join(', ')}
+                {selectedProduct.subCategories.map((s) => subcategoryLabels[s]).join(', ')}
               </p>
             </div>
             <div className='flex justify-between gap-8'>
               <p className=''>Types</p>
               <p className='font-bold text-end'>
-                {selectedProduct.types.map((t) => t.label).join(', ')}
+                {selectedProduct.types.map((t) => typeLabels[t]).join(', ')}
               </p>
             </div>
           </div>
