@@ -1,5 +1,5 @@
 'use client';
-import Modal from '@/components/Modal';
+import SlideoverModal from '@/components/SlideoverModal';
 import ProductCard from '@/components/ProductCard';
 import {
   ColorOption,
@@ -21,7 +21,7 @@ import Form from 'next/form';
 import { useSearchParams } from 'next/navigation';
 import AccordionRadio from '@/components/AccordionRadio';
 import AccordionCheckbox from '@/components/AccordionCheckbox';
-import { categories } from '@/interfaces/categories';
+import { categories, categoryLabels } from '@/interfaces/categories';
 
 interface OpenFilters {
   sort: boolean;
@@ -82,8 +82,10 @@ export default function Shop() {
           style={{ scrollbarWidth: 'none' }}
         >
           <button className='text-accent'>All</button>
-          {categories.map((c) => (
-            <button key={c.category.value}>{c.category.label}</button>
+          {Object.keys(categories).map((c) => (
+            <button key={c}>
+              {categoryLabels[c as keyof typeof categoryLabels]}
+            </button>
           ))}
         </div>
         <button
@@ -94,13 +96,13 @@ export default function Shop() {
         </button>
       </div>
 
-      <div className='products-grid'>
+      <div className='products-grid pb-8'>
         {mockProducts.map((product) => (
           <ProductCard key={product.id} product={product} showBrand={true} />
         ))}
       </div>
 
-      <Modal
+      <SlideoverModal
         isOpen={filterModalOpen}
         onClose={() => {
           setFilterModalOpen(false);
@@ -220,7 +222,7 @@ export default function Shop() {
             </button>
           </div>
         </Form>
-      </Modal>
+      </SlideoverModal>
     </main>
   );
 }

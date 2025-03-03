@@ -1,4 +1,11 @@
 import { Brand, mockBrands } from '@/interfaces/brands';
+import {
+  categories,
+  categoryLabels,
+  subCategories,
+  subcategoryLabels,
+  typeLabels
+} from './categories';
 /**
  * Product object for an item (clothing, accessory, etc.)
  */
@@ -7,12 +14,29 @@ export interface BrandProduct {
   name: string;
   productSlug: string;
   brand: Brand;
+  /* 
+    Old way of storing categories
+    Bad since only need values for frontend so make in key value and retrieve
+    Also bad since storing more than needed in backend
+  */
+  // categories: LabelValue[];
+  // subCategories: LabelValue[];
+  // types: LabelValue[];
+
+  // New Method
+  categories: (keyof typeof categoryLabels)[];
+  subCategories: (keyof typeof subcategoryLabels)[];
+  types: (keyof typeof typeLabels)[];
+
   description?: string;
   shipping?: string;
   returns?: string;
   colorNotes?: string;
   sizeNotes?: string;
   colors: ColorVariant[];
+  salesData?: SalesData;
+  engagementData?: EngagementData;
+  reviews?: Review[];
 }
 
 export interface Multicolor {
@@ -56,7 +80,42 @@ export interface ColorVariant {
     additional?: string[];
   };
   sizes: SizeVariant[];
+  salesData?: SalesData;
+  // engagementData?: EngagementData;
+  availability?: Availability;
+  visibility?: Visibility;
+  releaseDate?: Date;
+  releaseEndDate?: Date;
 }
+
+export const AVAILABILITY_OPTIONS = {
+  preOrder: 'Pre Order',
+  readyToShip: 'Ready to Ship'
+};
+
+export type Availability = keyof typeof AVAILABILITY_OPTIONS;
+
+export const VISIBILITY_OPTIONS = {
+  draft: 'Draft',
+  private: 'Private',
+  public: 'Public',
+  archived: 'Archived'
+};
+
+export type Visibility = keyof typeof VISIBILITY_OPTIONS;
+
+export interface Review {
+  id: string;
+  userId: string;
+  rating: number;
+  quality: number;
+  fit: number;
+  comment?: string;
+  createdAt: Date;
+  images?: string[];
+  likes: number;
+}
+
 /**
  * Size and quantity availible for each ColorVariant
  */
@@ -69,6 +128,18 @@ export interface Discount {
   type: 'fixed' | 'percent';
   amount: number;
 }
+
+export interface SalesData {
+  totalSold: number;
+  totalRevenue: number;
+}
+
+export interface EngagementData {
+  views: number;
+  saved: number;
+  shared: number;
+}
+
 /**
  * Fake products to develop site with
  */
@@ -78,6 +149,9 @@ export const mockProducts: BrandProduct[] = [
     name: 'LIGHTWEIGHT BUCKLE PUFFER JACKET',
     productSlug: 'alyx-lightweight-buckle-puffer-jacket',
     brand: mockBrands[0],
+    categories: [categories.tops.category],
+    subCategories: [subCategories.outerwear.subcategory],
+    types: ['pufferJackets'],
     description:
       'Puffer jacket in a lightweight fabric with intergrated buckle collar closure',
     sizeNotes: 'Size up for oversized fit',
@@ -114,6 +188,9 @@ export const mockProducts: BrandProduct[] = [
     name: 'STMT Hoodie',
     productSlug: 'statement-stmt-hoodie',
     brand: mockBrands[4],
+    categories: [categories.tops.category],
+    subCategories: [subCategories.outerwear.subcategory],
+    types: ['hoodiesJackets', 'sweatshirts'],
     description: '100% COTTON FLEECE\n PUFFPRINT AND SCREENPRINT COMBO',
     shipping: 'Free shipping on orders over $50',
     returns:
@@ -219,6 +296,12 @@ export const mockProducts: BrandProduct[] = [
     name: 'Blank Sweatsuit Bundle',
     productSlug: 'thirteen-studios-blank-sweatsuit-bundle',
     brand: mockBrands[5],
+    categories: [categories.tops.category, categories.bottoms.category],
+    subCategories: [
+      subCategories.outerwear.subcategory,
+      subCategories.pants.subcategory
+    ],
+    types: ['hoodiesJackets', 'sweatshirts', 'sweatpantsJoggers'],
     colors: [
       {
         id: '6',
@@ -353,6 +436,9 @@ export const mockProducts: BrandProduct[] = [
     name: 'Perfect T-shirt',
     productSlug: 'thirteen-studios-perfect-t-shirt',
     brand: mockBrands[5],
+    categories: [categories.tops.category],
+    subCategories: [subCategories.tShirt.subcategory],
+    types: ['shortSleeveTees'],
     colorNotes: 'Light Gray-ish even though it appears to be white',
     sizeNotes: 'Size up for looser fit',
     colors: [
@@ -380,6 +466,9 @@ export const mockProducts: BrandProduct[] = [
     name: 'Cargo Pants',
     productSlug: 'boohooman-cargo-pants',
     brand: mockBrands[1],
+    categories: [categories.bottoms.category],
+    subCategories: [subCategories.pants.subcategory],
+    types: ['cargoPants'],
     colors: [
       {
         id: '13',
@@ -406,6 +495,9 @@ export const mockProducts: BrandProduct[] = [
     name: 'Cargo Shorts',
     productSlug: 'boohooman-cargo-shorts',
     brand: mockBrands[1],
+    categories: [categories.bottoms.category],
+    subCategories: [subCategories.shorts.subcategory],
+    types: ['cargoShorts'],
     colors: [
       {
         id: '15',
@@ -432,6 +524,9 @@ export const mockProducts: BrandProduct[] = [
     name: 'Runner Heavyweight Hunter Hoodie',
     productSlug: 'rich-usi-runner-heavyweight-hunter-hoodie',
     brand: mockBrands[3],
+    categories: [categories.tops.category],
+    subCategories: [subCategories.outerwear.subcategory],
+    types: ['hoodiesJackets'],
     description:
       '- 20 Oz 100% Cotton Fleece\n- Garment Dyed-Vintage Black\n- Seams Flowing Across Hoodie\n- Boxy Fit (Choose your regular size or size up for an oversized fit)\n- Big Ass Hood\n- Two Way YKK Zipper',
     colors: [
@@ -464,6 +559,9 @@ export const mockProducts: BrandProduct[] = [
     name: 'Nike Tech Woven Oversized Pants',
     productSlug: 'nike-nike-tech-woven-oversized-pants',
     brand: mockBrands[2],
+    categories: [categories.bottoms.category],
+    subCategories: [subCategories.pants.subcategory],
+    types: ['trackPants'],
     description:
       'Crafted with stretchy woven material, these Nike Tech pants offer you ease of movement and adjustability. The wide-leg cut is paired with bungee locks at the ankles that let you switch up the fit.',
     colors: [
@@ -537,6 +635,9 @@ export const mockProducts: BrandProduct[] = [
     name: 'Nike Tech Jacket',
     productSlug: 'nike-nike-tech-jacket',
     brand: mockBrands[2],
+    categories: [categories.tops.category],
+    subCategories: [subCategories.outerwear.subcategory],
+    types: ['hoodiesJackets'],
     colors: [
       {
         id: '21',
@@ -566,6 +667,9 @@ export const mockProducts: BrandProduct[] = [
     name: 'Parachute Pants',
     productSlug: 'boohooman-parachute-pants',
     brand: mockBrands[1],
+    categories: [categories.bottoms.category],
+    subCategories: [subCategories.pants.subcategory],
+    types: ['trackPants'],
     colors: [
       {
         id: '20',
@@ -588,3 +692,37 @@ export const mockProducts: BrandProduct[] = [
     ]
   }
 ];
+
+export const blankProduct: BrandProduct = {
+  id: '',
+  name: '',
+  productSlug: '',
+  brand: {
+    id: '',
+    name: '',
+    handle: '',
+    logo: '',
+    bio: '',
+    links: {}
+  },
+  categories: [],
+  subCategories: [],
+  types: [],
+  colors: []
+};
+
+export const blankColorVariant: ColorVariant = {
+  id: '',
+  colorName: '',
+  primaryColor: {
+    broadColor: 'black',
+    red: 0,
+    green: 0,
+    blue: 0
+  },
+  price: 0,
+  images: {
+    cover: ''
+  },
+  sizes: []
+};

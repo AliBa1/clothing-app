@@ -4,7 +4,7 @@ import { discountedPrice } from '@/utils/helperFunctions';
 import { mdiHeart, mdiHeartOutline, mdiPlus, mdiTrashCan } from '@mdi/js';
 import Icon from '@mdi/react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 
 interface CardProps {
   cartProduct: CartProduct;
@@ -14,7 +14,7 @@ interface CardProps {
 // - button functionality
 
 export default function CartProductCard({ cartProduct }: CardProps) {
-  const router = useRouter();
+  // const router = useRouter();
   const saved: boolean = savedProducts.some(
     (sP) => sP.color.id === cartProduct.color.id
   );
@@ -26,12 +26,12 @@ export default function CartProductCard({ cartProduct }: CardProps) {
           alt={`${cartProduct.color.colorName} ${cartProduct.product.name}`}
           height={1280}
           width={1024}
-          className='aspect-[4/5] w-1/3 md:w-1/6 rounded object-cover object-center cursor-pointer bg-background dark:bg-white'
-          onClick={() =>
-            router.push(
-              `/product/${cartProduct.product.productSlug}/${cartProduct.product.id}?color=${cartProduct.color.colorName}`
-            )
-          }
+          className='aspect-[4/5] w-1/3 md:w-1/6 rounded object-cover object-center bg-background dark:bg-white'
+          // onClick={() =>
+          //   router.push(
+          //     `/product/${cartProduct.product.productSlug}/${cartProduct.product.id}?color=${cartProduct.color.colorName}`
+          //   )
+          // }
           priority
         />
 
@@ -59,7 +59,7 @@ export default function CartProductCard({ cartProduct }: CardProps) {
         </div>
 
         {/* PC price and quantity */}
-        <div className='hidden md:flex flex-col justify-between w-1/3 p-2'>
+        <div className='hidden md:flex flex-col justify-between w-1/3 p-2 max-w-64'>
           <Price cartProduct={cartProduct} />
           <Quantity cartProduct={cartProduct} />
         </div>
@@ -76,7 +76,7 @@ export default function CartProductCard({ cartProduct }: CardProps) {
 
 function Price({ cartProduct }: CardProps) {
   return (
-    <div className='hover:underline decoration-accent text-lg md:text-xl lg:text-2xl font-heading text-end'>
+    <div className='decoration-accent text-lg md:text-xl lg:text-2xl font-heading text-end'>
       {cartProduct.color.discount ? (
         <p>
           $

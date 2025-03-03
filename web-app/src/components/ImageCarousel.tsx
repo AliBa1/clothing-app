@@ -11,24 +11,29 @@ import { useEffect, useState } from 'react';
 interface CarouselProps {
   images: string[];
   alt?: string;
+  sizeDivisor?: number;
 }
 
-export default function ImageCarousel({ images, alt }: CarouselProps) {
+export default function ImageCarousel({
+  images,
+  alt,
+  sizeDivisor = 1
+}: CarouselProps) {
   const [imgIndex, setImgIndex] = useState<number>(0);
   useEffect(() => {
     setImgIndex(0);
   }, [images]);
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col pb-4'>
       {
         <Image
           src={images[imgIndex] || '/gray-img.jpg'}
           alt={alt || 'Loading Product'}
-          height={1280}
-          width={1024}
+          height={1280 / sizeDivisor}
+          width={1024 / sizeDivisor}
           style={{ backgroundColor: 'white' }}
-          className={`aspect-[4/5] rounded object-contain object-center ${
+          className={`aspect-[4/5] rounded object-contain object-center mx-auto ${
             !images[imgIndex] && 'object-fill'
           }`}
           priority

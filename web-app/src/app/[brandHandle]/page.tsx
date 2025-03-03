@@ -8,6 +8,7 @@ import Icon from '@mdi/react';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { use } from 'react';
+import Link from 'next/link';
 
 export default function BrandPage({
   params
@@ -104,6 +105,9 @@ export default function BrandPage({
             Following <Icon path={mdiCheck} size={1} />
           </button>
           <button className='btn-primary'>Contact</button>
+          <Link href={`/${brandHandle}/dashboard`} className='btn-primary'>
+            Dashboard
+          </Link>
         </div>
       </div>
       <div className='products-grid my-8'>

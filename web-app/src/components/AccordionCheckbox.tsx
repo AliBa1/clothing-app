@@ -81,7 +81,7 @@ export default function AccordionCheckbox({
             <div key={o.value} className='flex items-center'>
               <input
                 type='checkbox'
-                className='appearance-none h-4 mr-2 w-4 border border-secondary rounded checked:bg-accent checked:border-secondary focus:outline-none focus:ring-2 focus:ring-blue-300'
+                className='appearance-none h-4 mr-2 w-4 border border-primary rounded checked:bg-accent checked:border-primary'
                 id={`${name.toLowerCase()}-${o.value}`}
                 name={`${name.toLowerCase()}`}
                 value={o.value}

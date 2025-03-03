@@ -1,6 +1,6 @@
 'use client';
 import BrandLink from '@/components/BrandLink';
-import Modal from '@/components/Modal';
+import SlideoverModal from '@/components/SlideoverModal';
 import WideProductCard from '@/components/WideProductCard';
 import { mockBrands } from '@/interfaces/brands';
 import { mockProducts } from '@/interfaces/brandProducts';
@@ -39,14 +39,14 @@ export default function FeedPage() {
     // </main>
 
     // V2_V2_V2_V2_V2_V2_V2_V2_V2_V2_V2_V2_V2_V2_V2_V2_V2_V2
-    <main className='flex-col w-full px-0 md:px-4 gap-4 justify-center'>
+    <main className='flex-col w-full px-0 md:px-4 gap-4 justify-center overflow-x-clip'>
       <div className='hidden md:flex gap-4 justify-center py-4 bg-background w-screen sticky top-16 font-light'>
         <button className='btn-accent' onClick={() => setFollowingOpen(true)}>
           Following
         </button>
       </div>
 
-      <div className='flex flex-col gap-8 py-4 px-2 md:px-0 w-full lg:w-2/3'>
+      <div className='flex flex-col gap-8 py-4 px-2 md:px-0 w-full lg:w-2/3 pb-8'>
         {mockProducts.map((product) => (
           <WideProductCard key={product.id} product={product} />
         ))}
@@ -59,14 +59,18 @@ export default function FeedPage() {
       </div>
 
       {/* Following modal (better than following sitting on the side) */}
-      <Modal isOpen={isFollowingOpen} onClose={() => setFollowingOpen(false)} lockedWidth={false}>
+      <SlideoverModal
+        isOpen={isFollowingOpen}
+        onClose={() => setFollowingOpen(false)}
+        lockedWidth={false}
+      >
         <h4 className='text-xl lg:text-2xl text-center sticky top-0 bg-background'>
           Following
         </h4>
         {mockBrands.map((b) => (
           <BrandLink key={b.id} brand={b} size='big' />
         ))}
-      </Modal>
+      </SlideoverModal>
     </main>
   );
 }

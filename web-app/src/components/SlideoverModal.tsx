@@ -12,7 +12,12 @@ interface ModalProps {
 /**
  * Use to show consistent modal when needed. Resposive for web and mobile.
  */
-export default function Modal({ isOpen, onClose, children, lockedWidth }: ModalProps) {
+export default function SlideoverModal({
+  isOpen,
+  onClose,
+  children,
+  lockedWidth
+}: ModalProps) {
   const [isVisible, setIsVisible] = useState<boolean>(isOpen);
   const [modalAnimation, setModalAnimation] = useState<string>('');
   const [modalBgAnimation, setModalBgAnimation] = useState<string>('');
@@ -59,7 +64,9 @@ export default function Modal({ isOpen, onClose, children, lockedWidth }: ModalP
         // center modal vvvvvvvvv
         // className={`bg-primary rounded-l-lg md:rounded-lg p-4 w-3/4 md:w-auto h-full md:h-3/4 max-h-full flex flex-col ${modalAnimation}`}
         // side modal vvvvvvvvv
-        className={`bg-background rounded-l-lg p-4 w-3/4 ${!lockedWidth && 'md:w-auto'} h-full max-h-full flex flex-col ${modalAnimation}`}
+        className={`bg-background rounded-l-lg p-4 w-3/4 ${
+          !lockedWidth && 'md:w-auto'
+        } h-full max-h-full flex flex-col ${modalAnimation}`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className='flex justify-end'>

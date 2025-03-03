@@ -2,8 +2,8 @@ export interface Brand {
   id: string;
   name: string;
   /**
-  * Alphanumeric, dashes (-), and underscores (_) ONLY
-  */
+   * Alphanumeric, dashes (-), and underscores (_) ONLY
+   */
   handle: string;
   logo: string;
   bio: string;
@@ -15,6 +15,15 @@ interface Links {
   tiktok?: string;
   youtube?: string;
 }
+
+export const emptyBrand: Brand = {
+  id: '',
+  name: '',
+  handle: '',
+  logo: '',
+  bio: '',
+  links: {}
+};
 
 export const mockBrands: Brand[] = [
   {
@@ -46,9 +55,7 @@ export const mockBrands: Brand[] = [
     handle: 'Nike',
     logo: '/mock/logos/nike_logo.jpg',
     bio: 'NIKE, Inc. is a team comprised of the Nike, Jordan and Converse brands driven by a shared purpose to leave an enduring impact.',
-    links: {
-
-    }
+    links: {}
   },
   {
     id: '4',

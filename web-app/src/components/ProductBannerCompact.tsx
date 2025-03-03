@@ -7,7 +7,7 @@ interface BannerProps {
   colorVariant?: ColorVariant;
 }
 
-export default function ProductBannerWide({
+export default function ProductBannerCompact({
   product,
   colorVariant
 }: BannerProps) {
@@ -15,22 +15,7 @@ export default function ProductBannerWide({
     colorVariant?.images.cover || product.colors[0].images.cover;
   const color: string = colorVariant?.colorName || product.colors[0].colorName;
   return (
-    <div className='w-full flex justify-between px-8 bg-white'>
-      <div className='flex flex-col justify-evenly text-text dark:text-secondary'>
-        <h4>{product.name}</h4>
-        <div className='flex flex-col lg:flex-row gap-4'>
-          <Link href={`/product/${product.productSlug}/${product.id}?color=${color}`} className='btn-accent text-center'>
-            View Item
-          </Link>
-          <Link
-            href={`/${product.brand.handle}`}
-            className='btn-primary dark:btn-secondary dark:border-secondary text-center'
-          >
-            Shop {product.brand.name}
-          </Link>
-        </div>
-      </div>
-
+    <div className='w-full lg:w-1/2 flex flex-col justify-between p-4 bg-white border-x border-accent'>
       <div className='mx-auto flex flex-col items-center'>
         <Image
           // src={product.colors[0].images.cover}
@@ -64,6 +49,26 @@ export default function ProductBannerWide({
             ))}
           </div>
         )} */}
+      </div>
+
+      <div className='flex flex-col md:flex-row justify-between items-center md:gap-8 text-text dark:text-secondary'>
+        <h4 className='text-xl md:text-2xl text-center md:text-start'>
+          {product.name}
+        </h4>
+        <div className='flex md:flex-col gap-4 items-center self-end'>
+          <Link
+            href={`/product/${product.productSlug}/${product.id}?color=${color}`}
+            className='btn-accent w-full text-center'
+          >
+            View Item
+          </Link>
+          <Link
+            href={`/${product.brand.handle}`}
+            className='btn-primary dark:btn-secondary dark:border-secondary w-full text-center'
+          >
+            Shop {product.brand.name}
+          </Link>
+        </div>
       </div>
     </div>
   );

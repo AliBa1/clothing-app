@@ -15,7 +15,11 @@ export default function BrandLink({
 }: BrandLinkProps) {
   const router = useRouter();
   return (
-    <div className={`flex items-center mb-2 text-nowrap ${isFlexCol && 'flex-col'}`}>
+    <div
+      className={`flex items-center mb-2 text-nowrap ${
+        isFlexCol && 'flex-col'
+      }`}
+    >
       <Image
         src={brand.logo}
         alt={brand.name}
@@ -32,7 +36,7 @@ export default function BrandLink({
         onClick={() => router.push(`/${brand.handle}`)}
       />
       <p
-        className={`${size === 'normal' && 'text-sm md:text-base px-2'} ${
+        className={`${size === 'normal' && 'text-base px-2'} ${
           size === 'big' && 'text-base md:text-xl px-4'
         } truncate hover:underline cursor-pointer peer-hover:underline`}
         onClick={() => router.push(`/${brand.handle}`)}

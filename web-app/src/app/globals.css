@@ -104,11 +104,14 @@ body {
   .btn-accent {
     @apply text-base md:text-xl whitespace-nowrap rounded-xl bg-accent text-black enabled:hover:opacity-90 px-2 md:px-8 disabled:opacity-25 py-2 md:py-0;
   }
+  .btn-sidebar {
+    @apply flex items-center gap-2 text-base lg:text-xl whitespace-nowrap rounded-xl hover:bg-secondary px-4 disabled:opacity-25 py-2 md:py-0
+  }
   .img-button {
     @apply rounded h-24 w-24 bg-primary text-text aspect-square object-cover;
   }
   .products-grid {
-    @apply grid grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8 px-2;
+    @apply grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8 px-2;
   }
 }
 
