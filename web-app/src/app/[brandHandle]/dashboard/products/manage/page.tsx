@@ -3,7 +3,8 @@ import { BrandProduct } from '@/interfaces/brandProducts';
 import { Brand, emptyBrand, mockBrands } from '@/interfaces/brands';
 import { categories, categoryLabels } from '@/interfaces/categories';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { MultiSelect } from 'react-multi-select-component';
 
 export default function ManageProductPage() {
   const brandHandle = usePathname().split('/')[1];
@@ -38,6 +39,15 @@ export default function ManageProductPage() {
     }));
   }
 
+  useEffect(() => {
+    const mappedCategories = Object.keys(categories).map((c) => ({
+      label: c,
+      value: categoryLabels[c as keyof typeof categoryLabels]
+    }));
+    console.log('Categories: ', categories);
+    console.log('Mapped Categories: ', mappedCategories);
+  }, []);
+
   return (
     <form className='flex flex-col w-full gap-4'>
       <h4 className='text-xl md:text-2xl'>Manage Product</h4>
@@ -58,48 +68,37 @@ export default function ManageProductPage() {
           <div className='flex gap-4'>
             <div className='w-1/2 flex flex-col'>
               <p className='font-bold text-lg'>Categories</p>
-              <fieldset>
-                {Object.keys(categories).map((c) => (
-                  <div key={c} className='flex items-center'>
-                    <input
-                      type='checkbox'
-                      className='appearance-none h-4 mr-2 w-4 border border-primary rounded checked:bg-accent checked:border-primary'
-                      id={`${c}-checkbox`}
-                      name={'categories'}
-                      value={c}
-                      checked={formData.categories.includes(
-                        c as keyof typeof categoryLabels
-                      )}
-                      onChange={(e) => {
-                        if (e.target.checked) {
-                          setFormData((prevState) => ({
-                            ...prevState,
-                            categories: [
-                              ...formData.categories,
-                              e.target.value as keyof typeof categoryLabels
-                            ]
-                          }));
-                        } else {
-                          setFormData((prevState) => ({
-                            ...prevState,
-                            categories: formData.categories.filter(
-                              (c) =>
-                                c !==
-                                (e.target.value as keyof typeof categoryLabels)
-                            )
-                          }));
-                        }
-                      }}
-                    />
-                    <label
-                      htmlFor={`${c}-checkbox`}
-                      className='cursor-pointer hover:text-accent flex items-center gap-2'
-                    >
-                      {categoryLabels[c as keyof typeof categoryLabels]}
-                    </label>
-                  </div>
-                ))}
-              </fieldset>
+              <MultiSelect
+                options={Object.keys(categories).map((c) => ({
+                  label: categoryLabels[c as keyof typeof categoryLabels],
+                  value: c as string
+                }))}
+                value={formData.categories.map((c) => ({
+                  label: categoryLabels[c as keyof typeof categoryLabels],
+                  value: c as string
+                }))}
+                hasSelectAll={false}
+                disableSearch={true}
+                labelledBy='Select Categories'
+                className='text-secondary w-full max-w-full'
+                onChange={(selected: { label: string; value: string }[]) => {
+                  const selectedValues = selected.map(
+                    (item) => item.value as keyof typeof categoryLabels
+                  );
+                  setFormData((prev) => ({
+                    ...prev,
+                    categories: selectedValues
+                  }));
+                }}
+                overrideStrings={{
+                  allItemsAreSelected: formData.categories
+                    .map((c) => categoryLabels[c])
+                    .join(', '),
+                  selectSomeItems: 'Select',
+                  clearSearch: 'Clear',
+                  noOptions: 'No categories available'
+                }}
+              />
             </div>
 
             <label className='w-1/2 font-bold flex flex-col text-lg'>
