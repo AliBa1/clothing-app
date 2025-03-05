@@ -1,11 +1,11 @@
 export interface Category {
-  category: keyof typeof categoryLabels;
+  category: CategoryKeys;
   subCategories: Subcategory[];
 }
 
 export interface Subcategory {
-  subcategory: keyof typeof subcategoryLabels;
-  types: (keyof typeof typeLabels)[];
+  subcategory: SubcategoryKeys;
+  types: TypeKeys[];
 }
 
 const tShirtSubcategory: Subcategory = {
@@ -198,7 +198,9 @@ export const categoryLabels = {
   accessories: 'Accessories'
 };
 
-export const categories: Record<keyof typeof categoryLabels, Category> = {
+export type CategoryKeys = keyof typeof categoryLabels;
+
+export const categories: Record<CategoryKeys, Category> = {
   tops: topsCategory,
   bottoms: bottomsCategory,
   shoes: shoesCategory,
@@ -224,10 +226,9 @@ export const subcategoryLabels = {
   other: 'Other'
 };
 
-export const subCategories: Record<
-  keyof typeof subcategoryLabels,
-  Subcategory
-> = {
+export type SubcategoryKeys = keyof typeof subcategoryLabels;
+
+export const subCategories: Record<SubcategoryKeys, Subcategory> = {
   tShirt: tShirtSubcategory,
   jersey: jerseySubcategory,
   outerwear: outerwearSubcategory,
@@ -245,6 +246,8 @@ export const subCategories: Record<
   glasses: glassesSubcategory,
   other: otherAccessoriesSubcategory
 };
+
+export type TypeKeys = keyof typeof typeLabels;
 
 export const typeLabels = {
   // T-Shirts

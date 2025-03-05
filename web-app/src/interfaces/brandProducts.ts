@@ -1,10 +1,10 @@
 import { Brand, mockBrands } from '@/interfaces/brands';
 import {
   categories,
-  categoryLabels,
+  CategoryKeys,
   subCategories,
-  subcategoryLabels,
-  typeLabels
+  SubcategoryKeys,
+  TypeKeys
 } from './categories';
 /**
  * Product object for an item (clothing, accessory, etc.)
@@ -24,9 +24,9 @@ export interface BrandProduct {
   // types: LabelValue[];
 
   // New Method
-  categories: (keyof typeof categoryLabels)[];
-  subCategories: (keyof typeof subcategoryLabels)[];
-  types: (keyof typeof typeLabels)[];
+  categories: CategoryKeys[];
+  subCategories: SubcategoryKeys[];
+  types: TypeKeys[];
 
   description?: string;
   shipping?: string;
