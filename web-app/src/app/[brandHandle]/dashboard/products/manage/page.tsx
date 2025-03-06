@@ -13,7 +13,7 @@ import {
 } from '@/interfaces/categories';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { MultiSelect } from 'react-multi-select-component';
+import MultiSelect from '@/components/MultiSelect';
 
 export default function ManageProductPage() {
   const brandHandle = usePathname().split('/')[1];
@@ -95,10 +95,10 @@ export default function ManageProductPage() {
         )
         .map((s) => s.types)
         .flat();
-      console.log('Types: ', updatedTypeOptions);
+      // console.log('Types: ', updatedTypeOptions);
       setTypeOptions(updatedTypeOptions);
 
-      // filter out invalid type values (in case category gets unselected)
+      // filter out invalid type values (in case subcategory gets unselected)
       const filteredTypes: TypeKeys[] = formData.types.filter((t) =>
         updatedTypeOptions.includes(t)
       );
@@ -111,6 +111,7 @@ export default function ManageProductPage() {
         }));
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData.subCategories, subcategoryOptions]);
 
   return (
@@ -130,38 +131,34 @@ export default function ManageProductPage() {
             />
           </label>
 
-          <div className='flex gap-4'>
+          <div className='flex w-full gap-4'>
             <div className='w-1/2 flex flex-col'>
               <p className='font-bold text-lg'>Categories</p>
               <MultiSelect
-                className='text-black w-full max-w-full text-wrap'
                 options={Object.keys(categories).map((c) => ({
                   label: categoryLabels[c as CategoryKeys],
                   value: c as string
                 }))}
-                value={formData.categories.map((c) => ({
+                selected={formData.categories.map((c) => ({
                   label: categoryLabels[c as CategoryKeys],
                   value: c as string
                 }))}
-                hasSelectAll={false}
-                disableSearch={true}
-                labelledBy='Select Categories'
-                onChange={(selected: { label: string; value: string }[]) => {
-                  const selectedValues = selected.map(
-                    (item) => item.value as CategoryKeys
-                  );
-                  setFormData((prev) => ({
-                    ...prev,
-                    categories: selectedValues
-                  }));
-                }}
-                overrideStrings={{
-                  allItemsAreSelected: formData.categories
-                    .map((c) => categoryLabels[c])
-                    .join(', '),
-                  selectSomeItems: 'Select',
-                  clearSearch: 'Clear',
-                  noOptions: 'No categories available'
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    setFormData((prev) => ({
+                      ...prev,
+                      categories: prev.categories.concat(
+                        e.target.value as CategoryKeys
+                      )
+                    }));
+                  } else {
+                    setFormData((prev) => ({
+                      ...prev,
+                      categories: prev.categories.filter(
+                        (pC) => pC !== e.target.value
+                      )
+                    }));
+                  }
                 }}
               />
             </div>
@@ -169,36 +166,33 @@ export default function ManageProductPage() {
             <div className='w-1/2 flex flex-col'>
               <p className='font-bold text-lg'>Subcategories</p>
               <MultiSelect
-                className='text-black w-full max-w-full text-wrap'
                 options={subcategoryOptions.map((s) => ({
                   label: subcategoryLabels[s.subcategory],
                   value: s.subcategory
                 }))}
-                value={formData.subCategories.map((s) => ({
+                selected={formData.subCategories.map((s) => ({
                   label: subcategoryLabels[s],
                   value: s
                 }))}
-                hasSelectAll={false}
-                disableSearch={true}
-                labelledBy='Select Subcategories'
-                onChange={(selected: { label: string; value: string }[]) => {
-                  const selectedValues = selected.map(
-                    (item) => item.value as SubcategoryKeys
-                  );
-                  setFormData((prev) => ({
-                    ...prev,
-                    subCategories: selectedValues
-                  }));
-                }}
-                overrideStrings={{
-                  allItemsAreSelected: formData.subCategories
-                    .map((s) => subcategoryLabels[s])
-                    .join(', '),
-                  selectSomeItems: 'Select',
-                  clearSearch: 'Clear',
-                  noOptions: 'Select a Category First'
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    setFormData((prev) => ({
+                      ...prev,
+                      subCategories: prev.subCategories.concat(
+                        e.target.value as SubcategoryKeys
+                      )
+                    }));
+                  } else {
+                    setFormData((prev) => ({
+                      ...prev,
+                      subCategories: prev.subCategories.filter(
+                        (pS) => pS !== e.target.value
+                      )
+                    }));
+                  }
                 }}
                 disabled={subcategoryOptions.length < 1}
+                disabledPlaceholder='Select a Category'
               />
             </div>
           </div>
@@ -206,36 +200,29 @@ export default function ManageProductPage() {
           <div className='w-full'>
             <p className='font-bold text-lg'>Types</p>
             <MultiSelect
-              className='text-black w-full max-w-full'
               options={typeOptions.map((t) => ({
                 label: typeLabels[t],
                 value: t
               }))}
-              value={formData.types.map((t) => ({
+              selected={formData.types.map((t) => ({
                 label: typeLabels[t],
                 value: t
               }))}
-              hasSelectAll={false}
-              disableSearch={true}
-              labelledBy='Select Types'
-              onChange={(selected: { label: string; value: string }[]) => {
-                const selectedValues = selected.map(
-                  (item) => item.value as TypeKeys
-                );
-                setFormData((prev) => ({
-                  ...prev,
-                  types: selectedValues
-                }));
-              }}
-              overrideStrings={{
-                allItemsAreSelected: formData.types
-                  .map((t) => typeLabels[t])
-                  .join(', '),
-                selectSomeItems: 'Select',
-                clearSearch: 'Clear',
-                noOptions: 'Select a Subcategory First'
+              onChange={(e) => {
+                if (e.target.checked) {
+                  setFormData((prev) => ({
+                    ...prev,
+                    types: prev.types.concat(e.target.value as TypeKeys)
+                  }));
+                } else {
+                  setFormData((prev) => ({
+                    ...prev,
+                    types: prev.types.filter((pT) => pT !== e.target.value)
+                  }));
+                }
               }}
               disabled={typeOptions.length < 1}
+              disabledPlaceholder='Select a Subcategory'
             />
           </div>
         </div>
