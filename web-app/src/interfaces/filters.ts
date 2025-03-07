@@ -293,3 +293,45 @@ export const mockDefaultFilters: Filters = {
   minPrice: 0,
   maxPrice: 999999
 };
+
+export type SortKeys = keyof typeof sortLabels;
+export const sortLabels = {
+  default: 'Default',
+  popular: 'Popular',
+  new: 'New'
+};
+
+export type GenderKeys = keyof typeof genderLabels;
+export const genderLabels = {
+  any: 'Any',
+  men: 'Men',
+  women: 'Women'
+};
+
+export type FitKeys = keyof typeof fitLabels;
+export const fitLabels = {
+  regular: 'Regular',
+  oversized: 'Oversized',
+  skinny: 'Skinny',
+  slim: 'Slim',
+  relaxed: 'Relaxed',
+  boxy: 'Boxy'
+};
+
+export type ColorKeys = keyof typeof colorLabels;
+export const colorLabels = {
+  black: 'Black',
+  white: 'White',
+  red: 'Red',
+  blue: 'Blue',
+  green: 'Green',
+  yellow: 'Yellow',
+  purple: 'Purple',
+  brown: 'Brown',
+  grey: 'Grey',
+  orange: 'Orange',
+  pink: 'Pink',
+  burgandy: 'Burgandy',
+  tan: 'Tan',
+  multicolor: 'Multicolor'
+};
