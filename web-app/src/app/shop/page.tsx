@@ -21,7 +21,7 @@ import Form from 'next/form';
 import { useSearchParams } from 'next/navigation';
 import AccordionRadio from '@/components/AccordionRadio';
 import AccordionCheckbox from '@/components/AccordionCheckbox';
-import { categories, categoryLabels } from '@/interfaces/categories';
+import { categories, CategoryKeys, categoryLabels } from '@/interfaces/categories';
 
 interface OpenFilters {
   sort: boolean;
@@ -84,7 +84,7 @@ export default function Shop() {
           <button className='text-accent'>All</button>
           {Object.keys(categories).map((c) => (
             <button key={c}>
-              {categoryLabels[c as keyof typeof categoryLabels]}
+              {categoryLabels[c as CategoryKeys]}
             </button>
           ))}
         </div>
