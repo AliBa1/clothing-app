@@ -84,7 +84,7 @@ export default function AccordionCheckbox({
                 id={`${name.toLowerCase()}-${o.value}`}
                 name={`${name.toLowerCase()}`}
                 value={o.value}
-                checked={selected.includes(o)}
+                checked={selected.some((s) => s.value === o.value)}
                 onChange={(e) => onCheckboxChange(o, e.target.checked)}
               />
               <label
