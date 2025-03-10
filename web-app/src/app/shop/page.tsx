@@ -2,18 +2,19 @@
 import SlideoverModal from '@/components/SlideoverModal';
 import ProductCard from '@/components/ProductCard';
 import {
-  ColorOption,
+  AvailabilityKeys,
+  availabilityLabels,
+  ColorKeys,
+  colorLabels,
   colorOptions,
   Filters,
-  FitOption,
-  fitOptions,
-  GenderOption,
-  genderOptions,
-  InventoryOption,
-  inventoryOptions,
+  FitKeys,
+  fitLabels,
+  GenderKeys,
+  genderLabels,
   mockDefaultFilters,
-  SortOption,
-  sortOptions
+  SortKeys,
+  sortLabels
 } from '@/interfaces/filters';
 import { mockProducts } from '@/interfaces/brandProducts';
 import { useState } from 'react';
@@ -21,14 +22,19 @@ import Form from 'next/form';
 import { useSearchParams } from 'next/navigation';
 import AccordionRadio from '@/components/AccordionRadio';
 import AccordionCheckbox from '@/components/AccordionCheckbox';
-import { categories, CategoryKeys, categoryLabels } from '@/interfaces/categories';
+import {
+  categories,
+  CategoryKeys,
+  categoryLabels
+} from '@/interfaces/categories';
 
 interface OpenFilters {
   sort: boolean;
   gender: boolean;
   type: boolean;
   fit: boolean;
-  inventory: boolean;
+  // inventory: boolean;
+  availability: boolean;
   color: boolean;
   price: boolean;
 }
@@ -37,25 +43,20 @@ export default function Shop() {
   const filterParams = useSearchParams();
   const sortParams = filterParams.get('sort');
   const genderParams = filterParams.get('gender');
-  const inventoryParams = filterParams.get('inventory');
+  // const inventoryParams = filterParams.get('inventory');
+  const availabilityParams = filterParams.get('availability');
   const fitParams = filterParams.getAll('fit');
 
   const [filters, setFilters] = useState<Filters>({
     category: mockDefaultFilters.category,
     subCategory: mockDefaultFilters.subCategory,
     types: mockDefaultFilters.types,
-    sort:
-      sortOptions.find((s) => s.value === sortParams) ||
-      mockDefaultFilters.sort,
-    gender:
-      genderOptions.find((g) => g.value === genderParams) ||
-      mockDefaultFilters.gender,
-    inventory:
-      inventoryOptions.find((g) => g.value === inventoryParams) ||
-      mockDefaultFilters.inventory,
-    fit:
-      fitOptions.filter((f) => fitParams.includes(f.value)) ||
-      mockDefaultFilters.fit,
+    sort: (sortParams as SortKeys) || mockDefaultFilters.sort,
+    gender: (genderParams as GenderKeys) || mockDefaultFilters.gender,
+    availability:
+      (availabilityParams as AvailabilityKeys) ||
+      mockDefaultFilters.availability,
+    fit: (fitParams as FitKeys[]) || mockDefaultFilters.fit,
     color: mockDefaultFilters.color,
     minPrice: mockDefaultFilters.minPrice,
     maxPrice: mockDefaultFilters.maxPrice
@@ -66,7 +67,8 @@ export default function Shop() {
     gender: false,
     type: false,
     fit: false,
-    inventory: false,
+    // inventory: false,
+    availability: false,
     color: false,
     price: false
   };
@@ -83,9 +85,7 @@ export default function Shop() {
         >
           <button className='text-accent'>All</button>
           {Object.keys(categories).map((c) => (
-            <button key={c}>
-              {categoryLabels[c as CategoryKeys]}
-            </button>
+            <button key={c}>{categoryLabels[c as CategoryKeys]}</button>
           ))}
         </div>
         <button
@@ -118,8 +118,14 @@ export default function Shop() {
           <h4 className='sticky top-0 bg-background'>Filters</h4>
           <AccordionRadio
             name='Sort'
-            selected={filters.sort}
-            options={sortOptions}
+            selected={{
+              label: sortLabels[filters.sort],
+              value: filters.sort
+            }}
+            options={Object.keys(sortLabels).map((s) => ({
+              label: sortLabels[s as SortKeys],
+              value: s
+            }))}
             isOpen={filtersOpen.sort}
             onOpen={() =>
               setFiltersOpen({ ...filtersOpen, sort: !filtersOpen.sort })
@@ -128,13 +134,19 @@ export default function Shop() {
               setFiltersOpen({ ...filtersOpen, sort: false });
             }}
             onSelect={(s) => {
-              setFilters({ ...filters, sort: s as SortOption });
+              setFilters({ ...filters, sort: s.value as SortKeys });
             }}
           />
           <AccordionRadio
             name='Gender'
-            selected={filters.gender}
-            options={genderOptions}
+            selected={{
+              label: genderLabels[filters.gender],
+              value: filters.gender
+            }}
+            options={Object.keys(genderLabels).map((g) => ({
+              label: genderLabels[g as GenderKeys],
+              value: g
+            }))}
             isOpen={filtersOpen.gender}
             onOpen={() =>
               setFiltersOpen({ ...filtersOpen, gender: !filtersOpen.gender })
@@ -143,10 +155,10 @@ export default function Shop() {
               setFiltersOpen({ ...filtersOpen, gender: false });
             }}
             onSelect={(g) => {
-              setFilters({ ...filters, gender: g as GenderOption });
+              setFilters({ ...filters, gender: g.value as GenderKeys });
             }}
           />
-          <AccordionRadio
+          {/* <AccordionRadio
             name='Inventory'
             selected={filters.inventory}
             options={inventoryOptions}
@@ -163,46 +175,85 @@ export default function Shop() {
             onSelect={(i) => {
               setFilters({ ...filters, inventory: i as InventoryOption });
             }}
+          /> */}
+          <AccordionRadio
+            name='Availability'
+            selected={{
+              label: availabilityLabels[filters.availability],
+              value: filters.availability
+            }}
+            options={Object.keys(availabilityLabels).map((a) => ({
+              label: availabilityLabels[a as AvailabilityKeys],
+              value: a
+            }))}
+            isOpen={filtersOpen.availability}
+            onOpen={() =>
+              setFiltersOpen({
+                ...filtersOpen,
+                availability: !filtersOpen.availability
+              })
+            }
+            onClose={() => {
+              setFiltersOpen({ ...filtersOpen, availability: false });
+            }}
+            onSelect={(a) => {
+              setFilters({ ...filters, availability: a.value as AvailabilityKeys });
+            }}
           />
           <AccordionCheckbox
             name='Fit'
-            selected={filters.fit}
-            options={fitOptions}
+            selected={filters.fit.map((f) => ({
+              label: fitLabels[f],
+              value: f
+            }))}
+            options={Object.keys(fitLabels).map((f) => ({
+              label: fitLabels[f as FitKeys],
+              value: f
+            }))}
             isOpen={filtersOpen.fit}
             onOpen={() =>
               setFiltersOpen({ ...filtersOpen, fit: !filtersOpen.fit })
             }
-            onChecked={(o) =>
+            onChecked={(f) =>
               setFilters({
                 ...filters,
-                fit: [...(filters.fit || []), o as FitOption]
+                fit: [...(filters.fit || []), f.value as FitKeys]
               })
             }
             onUnchecked={(o) =>
               setFilters({
                 ...filters,
-                fit: filters.fit?.filter((f) => f.value !== o.value) || []
+                fit: filters.fit?.filter((f) => f !== o.value) || []
               })
             }
           />
           <AccordionCheckbox
             name='Color'
-            selected={filters.color}
-            options={colorOptions}
+            selected={filters.color.map((c) => ({
+              label: colorLabels[c],
+              value: c
+            }))}
+            options={Object.keys(colorLabels).map((c) => ({
+              label: colorLabels[c as ColorKeys],
+              value: c,
+              red: colorOptions.find((o) => o.color === c)?.red,
+              green: colorOptions.find((o) => o.color === c)?.green,
+              blue: colorOptions.find((o) => o.color === c)?.blue,
+            }))}
             isOpen={filtersOpen.color}
             onOpen={() =>
               setFiltersOpen({ ...filtersOpen, color: !filtersOpen.color })
             }
-            onChecked={(o) =>
+            onChecked={(c) =>
               setFilters({
                 ...filters,
-                color: [...(filters.color || []), o as ColorOption]
+                color: [...(filters.color || []), c.value as ColorKeys]
               })
             }
             onUnchecked={(o) =>
               setFilters({
                 ...filters,
-                color: filters.color?.filter((c) => c.value !== o.value) || []
+                color: filters.color?.filter((c) => c !== o.value) || []
               })
             }
           />
