@@ -142,7 +142,7 @@ export default function ManageProductPage() {
             />
           </label>
 
-          <div className='flex w-full gap-4'>
+          <div className='flex w-full gap-4 text-black'>
             <div className='w-1/2 flex flex-col'>
               <label htmlFor='gender-select' className='font-bold text-lg'>
                 Gender
