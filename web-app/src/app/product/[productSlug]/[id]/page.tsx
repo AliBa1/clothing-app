@@ -128,9 +128,6 @@ export default function ProductPage({
             Color <span>{selectedColor && '·'}</span>{' '}
             <span className='text-accent'>{selectedColor.colorName}</span>
           </p>
-          {product?.colorNotes && (
-            <p className='text-base text-gray-400'>{product?.colorNotes}</p>
-          )}
           <div className='flex flex-wrap gap-4 mt-2'>
             {product?.colors.map((c) => (
               <button key={c.colorName} onClick={() => handleColorSelect(c)}>

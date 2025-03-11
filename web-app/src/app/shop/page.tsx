@@ -8,14 +8,16 @@ import {
   colorLabels,
   colorOptions,
   Filters,
-  FitKeys,
-  fitLabels,
-  GenderKeys,
-  genderLabels,
   mockDefaultFilters,
   SortKeys,
   sortLabels
 } from '@/interfaces/filters';
+import {
+  FitKeys,
+  fitLabels,
+  GenderKeys,
+  genderLabels
+} from '@/interfaces/brandProducts';
 import { mockProducts } from '@/interfaces/brandProducts';
 import { useState } from 'react';
 import Form from 'next/form';
@@ -197,7 +199,10 @@ export default function Shop() {
               setFiltersOpen({ ...filtersOpen, availability: false });
             }}
             onSelect={(a) => {
-              setFilters({ ...filters, availability: a.value as AvailabilityKeys });
+              setFilters({
+                ...filters,
+                availability: a.value as AvailabilityKeys
+              });
             }}
           />
           <AccordionCheckbox
@@ -238,7 +243,7 @@ export default function Shop() {
               value: c,
               red: colorOptions.find((o) => o.color === c)?.red,
               green: colorOptions.find((o) => o.color === c)?.green,
-              blue: colorOptions.find((o) => o.color === c)?.blue,
+              blue: colorOptions.find((o) => o.color === c)?.blue
             }))}
             isOpen={filtersOpen.color}
             onOpen={() =>

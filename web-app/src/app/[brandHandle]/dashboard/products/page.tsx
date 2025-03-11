@@ -453,10 +453,6 @@ export default function DashboardProductsPage() {
               <p className='font-bold text-end'>{selectedProduct.returns}</p>
             </div>
             <div className='flex justify-between gap-8'>
-              <p className=''>Color Notes</p>
-              <p className='font-bold text-end'>{selectedProduct.colorNotes}</p>
-            </div>
-            <div className='flex justify-between gap-8'>
               <p className=''>Size Notes</p>
               <p className='font-bold text-end'>{selectedProduct.sizeNotes}</p>
             </div>

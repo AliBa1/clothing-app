@@ -1,5 +1,11 @@
 'use client';
-import { BrandProduct } from '@/interfaces/brandProducts';
+import {
+  BrandProduct,
+  FitKeys,
+  fitLabels,
+  GenderKeys,
+  genderLabels
+} from '@/interfaces/brandProducts';
 import { Brand, emptyBrand, mockBrands } from '@/interfaces/brands';
 import {
   categories,
@@ -14,6 +20,12 @@ import {
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import MultiSelect from '@/components/MultiSelect';
+
+// TODO:
+// add min/max to all
+// protect from SQL injections and XSS
+// validate
+// change p to label if possible
 
 export default function ManageProductPage() {
   const brandHandle = usePathname().split('/')[1];
@@ -36,7 +48,6 @@ export default function ManageProductPage() {
     description: '',
     shipping: '',
     returns: '',
-    colorNotes: '',
     sizeNotes: '',
     colors: []
   });
@@ -133,6 +144,42 @@ export default function ManageProductPage() {
 
           <div className='flex w-full gap-4'>
             <div className='w-1/2 flex flex-col'>
+              <label htmlFor='gender-select' className='font-bold text-lg'>
+                Gender
+              </label>
+              <select
+                className='flex justify-between w-full p-2 bg-white disabled:opacity-25 rounded'
+                name='gender'
+                id='gender-select'
+              >
+                {Object.keys(genderLabels).map((g) => (
+                  <option key={g} value={g}>
+                    {genderLabels[g as GenderKeys]}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className='w-1/2 flex flex-col'>
+              <label htmlFor='fit-select' className='font-bold text-lg'>
+                Fit
+              </label>
+              <select
+                className='flex justify-between w-full p-2 bg-white disabled:opacity-25 rounded'
+                name='fit'
+                id='fit-select'
+              >
+                {Object.keys(fitLabels).map((f) => (
+                  <option key={f} value={f}>
+                    {fitLabels[f as FitKeys]}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          <div className='flex w-full gap-4'>
+            <div className='w-1/2 flex flex-col'>
               <p className='font-bold text-lg'>Categories</p>
               <MultiSelect
                 options={Object.keys(categories).map((c) => ({
@@ -225,7 +272,36 @@ export default function ManageProductPage() {
               disabledPlaceholder='Select a Subcategory'
             />
           </div>
+
+          <div className='w-full'>
+            <p className='font-bold text-lg'>Description</p>
+            {/* Add maxLength vvvvvvv */}
+            <textarea
+              className='w-full rounded p-2 resize-none'
+              rows={8}
+            ></textarea>
+          </div>
+
+          <div className='w-full'>
+            <p className='font-bold text-lg'>Shipping Notes</p>
+            {/* Add maxLength vvvvvvv */}
+            <textarea
+              className='w-full rounded p-2 resize-none'
+              rows={4}
+            ></textarea>
+          </div>
+
+          <div className='w-full'>
+            <p className='font-bold text-lg'>Return Policy</p>
+            {/* Add maxLength vvvvvvv */}
+            <textarea
+              className='w-full rounded p-2 resize-none'
+              rows={4}
+            ></textarea>
+          </div>
         </div>
+
+        {/* Other half */}
         <div className='w-1/2'>
           <label className='font-bold flex flex-col text-lg'>
             Product Name

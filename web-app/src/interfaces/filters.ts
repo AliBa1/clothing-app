@@ -1,15 +1,14 @@
-import { Category, Subcategory } from './categories';
-import { LabelValue } from './other';
+import { GenderKeys, FitKeys } from './brandProducts';
+import { CategoryKeys, SubcategoryKeys, TypeKeys } from './categories';
 
 /**
  * Filters that can be selected by users to specifiy what they see on shop page
  */
 export interface Filters {
-  category?: Category;
-  subCategory?: Subcategory;
-  types?: LabelValue[];
-
   // Old method
+  // category?: Category;
+  // subCategory?: Subcategory;
+  // types?: LabelValue[];
   // sort: SortOption;
   // gender: GenderOption;
   // fit: FitOption[];
@@ -17,10 +16,12 @@ export interface Filters {
   // color: ColorOption[];
 
   // New method
+  categories?: CategoryKeys[];
+  subCategories?: SubcategoryKeys[];
+  types?: TypeKeys[];
   sort: SortKeys;
   gender: GenderKeys;
   fit: FitKeys[];
-  // inventory: Inventory;
   availability: AvailabilityKeys;
   color: ColorKeys[];
 
@@ -35,23 +36,6 @@ export const sortLabels = {
   new: 'New',
   lowToHighPrice: 'Price: Low to High',
   highToLowPrice: 'Price: High to Low'
-};
-
-export type GenderKeys = keyof typeof genderLabels;
-export const genderLabels = {
-  any: 'Any',
-  men: 'Men',
-  women: 'Women'
-};
-
-export type FitKeys = keyof typeof fitLabels;
-export const fitLabels = {
-  regular: 'Regular',
-  oversized: 'Oversized',
-  skinny: 'Skinny',
-  slim: 'Slim',
-  relaxed: 'Relaxed',
-  boxy: 'Boxy'
 };
 
 export type AvailabilityKeys = keyof typeof availabilityLabels;
@@ -177,8 +161,8 @@ export const colorOptions: ColorOption[] = [
  * Default filters before changed or when cleared
  */
 export const mockDefaultFilters: Filters = {
-  category: undefined,
-  subCategory: undefined,
+  categories: [],
+  subCategories: [],
   types: [],
   sort: 'default',
   gender: 'any',
