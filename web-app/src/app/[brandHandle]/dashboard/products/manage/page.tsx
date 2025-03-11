@@ -134,7 +134,7 @@ export default function ManageProductPage() {
           <label className='font-bold flex flex-col text-lg'>
             Product Name
             <input
-              className='rounded-lg p-2 text-black'
+              className='rounded-lg p-2 text-black font-normal'
               type='text'
               name='name'
               value={formData.name}
