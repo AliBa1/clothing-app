@@ -20,6 +20,9 @@ import {
 } from 'next/navigation';
 import { use, useCallback, useEffect, useState } from 'react';
 
+// To do:
+// working buttons
+
 export default function ProductPage({
   params
 }: {

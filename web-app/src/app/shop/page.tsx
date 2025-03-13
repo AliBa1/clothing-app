@@ -50,8 +50,8 @@ export default function Shop() {
   const fitParams = filterParams.getAll('fit');
 
   const [filters, setFilters] = useState<Filters>({
-    category: mockDefaultFilters.category,
-    subCategory: mockDefaultFilters.subCategory,
+    categories: mockDefaultFilters.categories,
+    subCategories: mockDefaultFilters.subCategories,
     types: mockDefaultFilters.types,
     sort: (sortParams as SortKeys) || mockDefaultFilters.sort,
     gender: (genderParams as GenderKeys) || mockDefaultFilters.gender,

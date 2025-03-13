@@ -2,6 +2,10 @@ import CartProductCard from '@/components/CartProductCard';
 import { cartProducts } from '@/interfaces/userProducts';
 import Link from 'next/link';
 
+// To do:
+// make buttons work
+// add shipping details?
+
 export default function CartPage() {
   const cartEmpty = false;
   return (

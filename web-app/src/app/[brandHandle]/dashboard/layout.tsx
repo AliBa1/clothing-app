@@ -16,6 +16,10 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
+// To do:
+// Client/server components
+// fix collapse when width is smaller but
+
 function SidebarButton({
   text,
   icon,

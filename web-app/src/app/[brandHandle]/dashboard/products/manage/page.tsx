@@ -26,6 +26,9 @@ import MultiSelect from '@/components/MultiSelect';
 // protect from SQL injections and XSS
 // validate
 // change p to label if possible
+// add color varient section
+// description section new lines
+// client/server components
 
 export default function ManageProductPage() {
   const brandHandle = usePathname().split('/')[1];

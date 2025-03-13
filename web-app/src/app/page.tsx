@@ -3,6 +3,10 @@ import ProductBannerCompact from '@/components/ProductBannerCompact';
 import ProductBannerWide from '@/components/ProductBannerWide';
 import { mockProducts } from '@/interfaces/brandProducts';
 
+// To do:
+// Banners need to be dynamic (colors are messed up)
+// fix brand not fitting on button (text wrap?)
+
 export default function Home() {
   return (
     <main className='p-0'>

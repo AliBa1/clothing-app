@@ -28,6 +28,7 @@ import { useState } from 'react';
 // Confirm delete
 // Share links
 // Bottom buttons functionality
+// Client/server components
 
 export default function DashboardProductsPage() {
   const brandHandle = usePathname().split('/')[1];

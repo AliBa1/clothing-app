@@ -10,6 +10,11 @@ import { notFound } from 'next/navigation';
 import { use } from 'react';
 import Link from 'next/link';
 
+// TO DO:
+// remove dashboard button
+// update follow/following button
+// add pagnation
+
 export default function BrandPage({
   params
 }: {
