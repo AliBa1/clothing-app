@@ -3,7 +3,7 @@
 import ProductCard from '@/components/ProductCard';
 import { mockBrands } from '@/interfaces/brands';
 import { mockProducts } from '@/interfaces/brandProducts';
-import { mdiCheck, mdiPlus } from '@mdi/js';
+import { mdiPlus } from '@mdi/js';
 import Icon from '@mdi/react';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
