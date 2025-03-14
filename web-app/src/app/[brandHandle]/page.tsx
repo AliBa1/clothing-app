@@ -101,14 +101,14 @@ export default function BrandPage({
             </a>
           )}
         </div>
-        <div className='flex gap-4'>
+        <div className='flex gap-4 flex-wrap'>
           {/* update to match if user is following or not */}
           <button className='btn-secondary flex items-center gap-2'>
             Follow <Icon path={mdiPlus} size={1} />
           </button>
-          <button className='btn-primary flex items-center gap-2'>
+          {/* <button className='btn-primary flex items-center gap-2'>
             Following <Icon path={mdiCheck} size={1} />
-          </button>
+          </button> */}
           <button className='btn-primary'>Contact</button>
           <Link href={`/${brandHandle}/dashboard`} className='btn-primary'>
             Dashboard
