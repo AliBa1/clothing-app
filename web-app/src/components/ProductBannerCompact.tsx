@@ -58,13 +58,13 @@ export default function ProductBannerCompact({
         <div className='flex md:flex-col w-full gap-4 items-center self-end'>
           <Link
             href={`/product/${product.productSlug}/${product.id}?color=${color}`}
-            className='btn-accent w-1/2 text-center'
+            className='btn-accent w-full lg:w-1/2 text-center'
           >
             View Item
           </Link>
           <Link
             href={`/${product.brand.handle}`}
-            className='btn-primary dark:btn-secondary dark:border-secondary w-1/2 text-center'
+            className='btn-primary dark:btn-secondary dark:border-secondary w-full lg:w-1/2 text-center'
           >
             {product.brand.name}
           </Link>
