@@ -17,9 +17,11 @@ import {
   TypeKeys,
   typeLabels
 } from '@/interfaces/categories';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import MultiSelect from '@/components/MultiSelect';
+import Icon from '@mdi/react';
+import { mdiChevronLeft } from '@mdi/js';
 
 // TODO:
 // add min/max to all
@@ -31,6 +33,7 @@ import MultiSelect from '@/components/MultiSelect';
 // client/server components
 
 export default function ManageProductPage() {
+  const router = useRouter();
   const brandHandle = usePathname().split('/')[1];
   const brand: Brand =
     mockBrands.find(
@@ -130,6 +133,16 @@ export default function ManageProductPage() {
 
   return (
     <form className='flex flex-col w-full gap-4'>
+      <button
+        type='button'
+        className='btn-primary w-40 items-center flex'
+        onClick={() => {
+          router.back();
+        }}
+      >
+        <Icon path={mdiChevronLeft} size={1}/>
+        Back
+      </button>
       <h4 className='text-xl md:text-2xl'>Manage Product</h4>
 
       <div className='flex w-full gap-4'>
