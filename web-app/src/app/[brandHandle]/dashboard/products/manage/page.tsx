@@ -140,7 +140,7 @@ export default function ManageProductPage() {
           router.back();
         }}
       >
-        <Icon path={mdiChevronLeft} size={1}/>
+        <Icon path={mdiChevronLeft} size={1} />
         Back
       </button>
       <h4 className='text-xl md:text-2xl'>Manage Product</h4>
@@ -319,16 +319,53 @@ export default function ManageProductPage() {
 
         {/* Other half */}
         <div className='w-1/2'>
+          <p>
+            Maybe add a table/chart here that shows all color varients and some
+            options
+          </p>
+          <br></br>
           <label className='font-bold flex flex-col text-lg'>
-            Product Name
-            <input
-              className='rounded p-2 text-black'
-              type='text'
-              name='name'
-              value={formData.name}
-              onChange={handleInput}
-            />
+            Color: Select a Color Varient to Edit
+            <select className='rounded p-2 text-black' name='color'>
+              <option value='any'>Any</option>
+            </select>
           </label>
+
+          <div className='flex w-full gap-4'>
+            <label className='w-1/2 font-bold flex flex-col text-lg'>
+              Price
+              <div className='flex items-center border rounded-md'>
+                <input
+                  type='text'
+                  value='$'
+                  readOnly={true}
+                  className='w-8 h-full text-center bg-gray-100 border-r rounded-l-md'
+                />
+                <input
+                  className='flex-1 p-2 rounded-r-md'
+                  type='text'
+                  name='price'
+                ></input>
+              </div>
+            </label>
+
+            <label className='w-1/2 font-bold flex flex-col text-lg'>
+              Discount
+              <div className='flex items-center border rounded-md'>
+                <input
+                  type='text'
+                  value='$'
+                  readOnly={true}
+                  className='w-8 h-full text-center bg-gray-100 border-r rounded-l-md'
+                />
+                <input
+                  className='flex-1 p-2 rounded-r-md'
+                  type='text'
+                  name='price'
+                ></input>
+              </div>
+            </label>
+          </div>
         </div>
       </div>
     </form>
