@@ -332,7 +332,7 @@ export default function ManageProductPage() {
           </label>
 
           <div className='flex w-full gap-4'>
-            <label className='w-1/2 font-bold flex flex-col text-lg'>
+            <label className='w-1/3 font-bold flex flex-col text-lg'>
               Price
               <div className='flex items-center border rounded-md'>
                 <input
@@ -342,27 +342,38 @@ export default function ManageProductPage() {
                   className='w-8 h-full text-center bg-gray-100 border-r rounded-l-md'
                 />
                 <input
-                  className='flex-1 p-2 rounded-r-md'
+                  className='w-full p-2 rounded-r-md'
                   type='text'
                   name='price'
                 ></input>
               </div>
             </label>
 
-            <label className='w-1/2 font-bold flex flex-col text-lg'>
+            <label className='w-2/3 font-bold flex flex-col text-lg'>
               Discount
-              <div className='flex items-center border rounded-md'>
-                <input
-                  type='text'
-                  value='$'
-                  readOnly={true}
-                  className='w-8 h-full text-center bg-gray-100 border-r rounded-l-md'
-                />
-                <input
-                  className='flex-1 p-2 rounded-r-md'
-                  type='text'
-                  name='price'
-                ></input>
+              <div className='flex items-center gap-2 border rounded-md'>
+                <div className='flex w-full h-full'>
+                  <input
+                    type='text'
+                    value='-'
+                    readOnly={true}
+                    className='w-8 h-full text-center bg-gray-100 border-r rounded-l-md'
+                  />
+                  <input
+                    className='w-full p-2 rounded-r-md'
+                    type='text'
+                    name='price'
+                    placeholder='Amount'
+                    min={5}
+                    // change based on % or $
+                    max={100}
+                  />
+                </div>
+                <select className='p-2 text-black' name='color'>
+                  <option disabled>Type</option>
+                  <option value='% Off'>%</option>
+                  <option value='$ Off'>$</option>
+                </select>
               </div>
             </label>
           </div>
