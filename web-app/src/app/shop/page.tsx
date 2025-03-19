@@ -21,7 +21,7 @@ import {
 import { mockProducts } from '@/interfaces/brandProducts';
 import { useState } from 'react';
 import Form from 'next/form';
-import { useSearchParams } from 'next/navigation';
+// import { useSearchParams } from 'next/navigation';
 import AccordionRadio from '@/components/AccordionRadio';
 import AccordionCheckbox from '@/components/AccordionCheckbox';
 import {
@@ -42,23 +42,37 @@ interface OpenFilters {
 }
 
 export default function Shop() {
-  const filterParams = useSearchParams();
-  const sortParams = filterParams.get('sort');
-  const genderParams = filterParams.get('gender');
-  // const inventoryParams = filterParams.get('inventory');
-  const availabilityParams = filterParams.get('availability');
-  const fitParams = filterParams.getAll('fit');
+  // SAVE FOR WHEN I IMPLEMENT FILTERS vvvvvvv
+
+  // const filterParams = useSearchParams();
+  // const sortParams = filterParams.get('sort');
+  // const genderParams = filterParams.get('gender');
+  // const availabilityParams = filterParams.get('availability');
+  // const fitParams = filterParams.getAll('fit');
+
+  // const [filters, setFilters] = useState<Filters>({
+  //   categories: mockDefaultFilters.categories,
+  //   subCategories: mockDefaultFilters.subCategories,
+  //   types: mockDefaultFilters.types,
+  //   sort: (sortParams as SortKeys) || mockDefaultFilters.sort,
+  //   gender: (genderParams as GenderKeys) || mockDefaultFilters.gender,
+  //   availability:
+  //     (availabilityParams as AvailabilityKeys) ||
+  //     mockDefaultFilters.availability,
+  //   fit: (fitParams as FitKeys[]) || mockDefaultFilters.fit,
+  //   color: mockDefaultFilters.color,
+  //   minPrice: mockDefaultFilters.minPrice,
+  //   maxPrice: mockDefaultFilters.maxPrice
+  // });
 
   const [filters, setFilters] = useState<Filters>({
     categories: mockDefaultFilters.categories,
     subCategories: mockDefaultFilters.subCategories,
     types: mockDefaultFilters.types,
-    sort: (sortParams as SortKeys) || mockDefaultFilters.sort,
-    gender: (genderParams as GenderKeys) || mockDefaultFilters.gender,
-    availability:
-      (availabilityParams as AvailabilityKeys) ||
-      mockDefaultFilters.availability,
-    fit: (fitParams as FitKeys[]) || mockDefaultFilters.fit,
+    sort: mockDefaultFilters.sort,
+    gender: mockDefaultFilters.gender,
+    availability: mockDefaultFilters.availability,
+    fit: mockDefaultFilters.fit,
     color: mockDefaultFilters.color,
     minPrice: mockDefaultFilters.minPrice,
     maxPrice: mockDefaultFilters.maxPrice
