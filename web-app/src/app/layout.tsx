@@ -45,7 +45,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${schoolbell.variable} ${lexend.variable} antialiased`}
       >
-        <div className='sticky top-0 bg-warning flex justify-center text-center font-heading text-xl'>
+        <div className='sticky top-0 bg-warning flex justify-center text-center font-heading text-xl text-black'>
           This is a MOCK version of site. Full functionality is NOT complete.
         </div>
         <Header />
