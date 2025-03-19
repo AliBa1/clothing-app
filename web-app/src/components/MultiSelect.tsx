@@ -19,13 +19,16 @@ export default function MultiSelect({
   onChange
 }: MultiSelectProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const fieldsetRef = useRef<HTMLFieldSetElement>(null);
 
   useEffect(() => {
     const handleOutsideClick = (e: MouseEvent) => {
       if (
         fieldsetRef.current &&
-        !fieldsetRef.current?.contains(e.target as Node)
+        !fieldsetRef.current.contains(e.target as Node) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(e.target as Node)
       ) {
         setIsOpen(false);
       }
@@ -36,7 +39,7 @@ export default function MultiSelect({
     return () => {
       window.removeEventListener('mousedown', handleOutsideClick);
     };
-  }, [fieldsetRef]);
+  }, []);
 
   return (
     <div className='text-black relative'>
@@ -47,6 +50,7 @@ export default function MultiSelect({
         }`}
         onClick={() => setIsOpen(!isOpen)}
         disabled={disabled}
+        ref={buttonRef}
       >
         <p className='truncate'>
           {/* {selected.length < 1

@@ -2,8 +2,6 @@
 
 This is the mock frontend for the clothing app. Right now it lays out what it could look like so that all of the functional requiurements could be solidified before starting on the backend.
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
 ## Tech Stack
 
 - Next.js (frontend framework)
@@ -59,6 +57,8 @@ Open http://localhost:3000 with your browser to see the result.
 <br></br>
 
 # Next.js Stuff
+
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Learn More
 

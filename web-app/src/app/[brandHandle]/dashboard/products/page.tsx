@@ -28,6 +28,7 @@ import { useState } from 'react';
 // Confirm delete
 // Share links
 // Bottom buttons functionality
+// Client/server components
 
 export default function DashboardProductsPage() {
   const brandHandle = usePathname().split('/')[1];
@@ -451,10 +452,6 @@ export default function DashboardProductsPage() {
             <div className='flex justify-between gap-8'>
               <p className=''>Returns</p>
               <p className='font-bold text-end'>{selectedProduct.returns}</p>
-            </div>
-            <div className='flex justify-between gap-8'>
-              <p className=''>Color Notes</p>
-              <p className='font-bold text-end'>{selectedProduct.colorNotes}</p>
             </div>
             <div className='flex justify-between gap-8'>
               <p className=''>Size Notes</p>

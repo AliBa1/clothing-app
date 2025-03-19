@@ -1,12 +1,11 @@
-import { ColorOption } from '@/interfaces/filters';
-import { LabelValue } from '@/interfaces/other';
+import { ColorLabelValue, LabelValue } from '@/interfaces/other';
 import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
 import Icon from '@mdi/react';
 
 interface AccordionProps {
   name: string;
   selected: LabelValue[];
-  options: LabelValue[] | ColorOption[];
+  options: LabelValue[] | ColorLabelValue[];
   isOpen: boolean;
   onOpen: () => void;
   onChecked: (o: LabelValue) => void;
@@ -45,12 +44,12 @@ export default function AccordionCheckbox({
    * @param option - The option in question
    */
   function isColorOption(
-    option: LabelValue | ColorOption
-  ): option is ColorOption {
+    option: LabelValue | ColorLabelValue
+  ): option is ColorLabelValue {
     return (
-      (option as ColorOption).red !== undefined &&
-      (option as ColorOption).green !== undefined &&
-      (option as ColorOption).blue !== undefined
+      (option as ColorLabelValue).red !== undefined &&
+      (option as ColorLabelValue).green !== undefined &&
+      (option as ColorLabelValue).blue !== undefined
     );
   }
 
@@ -85,7 +84,7 @@ export default function AccordionCheckbox({
                 id={`${name.toLowerCase()}-${o.value}`}
                 name={`${name.toLowerCase()}`}
                 value={o.value}
-                checked={selected.includes(o)}
+                checked={selected.some((s) => s.value === o.value)}
                 onChange={(e) => onCheckboxChange(o, e.target.checked)}
               />
               <label

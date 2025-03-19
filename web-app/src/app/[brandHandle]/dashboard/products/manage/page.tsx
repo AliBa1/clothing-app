@@ -1,5 +1,11 @@
 'use client';
-import { BrandProduct } from '@/interfaces/brandProducts';
+import {
+  BrandProduct,
+  FitKeys,
+  fitLabels,
+  GenderKeys,
+  genderLabels
+} from '@/interfaces/brandProducts';
 import { Brand, emptyBrand, mockBrands } from '@/interfaces/brands';
 import {
   categories,
@@ -11,11 +17,23 @@ import {
   TypeKeys,
   typeLabels
 } from '@/interfaces/categories';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import MultiSelect from '@/components/MultiSelect';
+import Icon from '@mdi/react';
+import { mdiChevronLeft } from '@mdi/js';
+
+// TODO:
+// add min/max to all
+// protect from SQL injections and XSS
+// validate
+// change p to label if possible
+// add color varient section
+// description section new lines
+// client/server components
 
 export default function ManageProductPage() {
+  const router = useRouter();
   const brandHandle = usePathname().split('/')[1];
   const brand: Brand =
     mockBrands.find(
@@ -36,7 +54,6 @@ export default function ManageProductPage() {
     description: '',
     shipping: '',
     returns: '',
-    colorNotes: '',
     sizeNotes: '',
     colors: []
   });
@@ -116,6 +133,16 @@ export default function ManageProductPage() {
 
   return (
     <form className='flex flex-col w-full gap-4'>
+      <button
+        type='button'
+        className='btn-primary w-40 items-center flex'
+        onClick={() => {
+          router.back();
+        }}
+      >
+        <Icon path={mdiChevronLeft} size={1} />
+        Back
+      </button>
       <h4 className='text-xl md:text-2xl'>Manage Product</h4>
 
       <div className='flex w-full gap-4'>
@@ -123,13 +150,49 @@ export default function ManageProductPage() {
           <label className='font-bold flex flex-col text-lg'>
             Product Name
             <input
-              className='rounded-lg p-2 text-black'
+              className='rounded-lg p-2 text-black font-normal'
               type='text'
               name='name'
               value={formData.name}
               onChange={handleInput}
             />
           </label>
+
+          <div className='flex w-full gap-4 text-black'>
+            <div className='w-1/2 flex flex-col'>
+              <label htmlFor='gender-select' className='font-bold text-lg'>
+                Gender
+              </label>
+              <select
+                className='flex justify-between w-full p-2 bg-white disabled:opacity-25 rounded'
+                name='gender'
+                id='gender-select'
+              >
+                {Object.keys(genderLabels).map((g) => (
+                  <option key={g} value={g}>
+                    {genderLabels[g as GenderKeys]}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className='w-1/2 flex flex-col'>
+              <label htmlFor='fit-select' className='font-bold text-lg'>
+                Fit
+              </label>
+              <select
+                className='flex justify-between w-full p-2 bg-white disabled:opacity-25 rounded'
+                name='fit'
+                id='fit-select'
+              >
+                {Object.keys(fitLabels).map((f) => (
+                  <option key={f} value={f}>
+                    {fitLabels[f as FitKeys]}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
 
           <div className='flex w-full gap-4'>
             <div className='w-1/2 flex flex-col'>
@@ -225,18 +288,84 @@ export default function ManageProductPage() {
               disabledPlaceholder='Select a Subcategory'
             />
           </div>
+
+          <div className='w-full'>
+            <p className='font-bold text-lg'>Description</p>
+            {/* Add maxLength vvvvvvv */}
+            <textarea
+              className='w-full rounded p-2 resize-none'
+              rows={8}
+            ></textarea>
+          </div>
+
+          <div className='w-full'>
+            <p className='font-bold text-lg'>Shipping Notes</p>
+            {/* Add maxLength vvvvvvv */}
+            <textarea
+              className='w-full rounded p-2 resize-none'
+              rows={4}
+            ></textarea>
+          </div>
+
+          <div className='w-full'>
+            <p className='font-bold text-lg'>Return Policy</p>
+            {/* Add maxLength vvvvvvv */}
+            <textarea
+              className='w-full rounded p-2 resize-none'
+              rows={4}
+            ></textarea>
+          </div>
         </div>
+
+        {/* Other half */}
         <div className='w-1/2'>
+          <p>
+            Maybe add a table/chart here that shows all color varients and some
+            options
+          </p>
+          <br></br>
           <label className='font-bold flex flex-col text-lg'>
-            Product Name
-            <input
-              className='rounded p-2 text-black'
-              type='text'
-              name='name'
-              value={formData.name}
-              onChange={handleInput}
-            />
+            Color: Select a Color Varient to Edit
+            <select className='rounded p-2 text-black' name='color'>
+              <option value='any'>Any</option>
+            </select>
           </label>
+
+          <div className='flex w-full gap-4'>
+            <label className='w-1/2 font-bold flex flex-col text-lg'>
+              Price
+              <div className='flex items-center border rounded-md'>
+                <input
+                  type='text'
+                  value='$'
+                  readOnly={true}
+                  className='w-8 h-full text-center bg-gray-100 border-r rounded-l-md'
+                />
+                <input
+                  className='flex-1 p-2 rounded-r-md'
+                  type='text'
+                  name='price'
+                ></input>
+              </div>
+            </label>
+
+            <label className='w-1/2 font-bold flex flex-col text-lg'>
+              Discount
+              <div className='flex items-center border rounded-md'>
+                <input
+                  type='text'
+                  value='$'
+                  readOnly={true}
+                  className='w-8 h-full text-center bg-gray-100 border-r rounded-l-md'
+                />
+                <input
+                  className='flex-1 p-2 rounded-r-md'
+                  type='text'
+                  name='price'
+                ></input>
+              </div>
+            </label>
+          </div>
         </div>
       </div>
     </form>

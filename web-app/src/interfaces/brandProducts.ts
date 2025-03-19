@@ -14,16 +14,10 @@ export interface BrandProduct {
   name: string;
   productSlug: string;
   brand: Brand;
-  /* 
-    Old way of storing categories
-    Bad since only need values for frontend so make in key value and retrieve
-    Also bad since storing more than needed in backend
-  */
-  // categories: LabelValue[];
-  // subCategories: LabelValue[];
-  // types: LabelValue[];
 
-  // New Method
+  gender?: GenderKeys;
+  fit?: FitKeys;
+
   categories: CategoryKeys[];
   subCategories: SubcategoryKeys[];
   types: TypeKeys[];
@@ -31,13 +25,31 @@ export interface BrandProduct {
   description?: string;
   shipping?: string;
   returns?: string;
-  colorNotes?: string;
   sizeNotes?: string;
+
   colors: ColorVariant[];
+
   salesData?: SalesData;
   engagementData?: EngagementData;
   reviews?: Review[];
 }
+
+export type GenderKeys = keyof typeof genderLabels;
+export const genderLabels = {
+  any: 'Any',
+  men: 'Men',
+  women: 'Women'
+};
+
+export type FitKeys = keyof typeof fitLabels;
+export const fitLabels = {
+  regular: 'Regular',
+  oversized: 'Oversized',
+  skinny: 'Skinny',
+  slim: 'Slim',
+  relaxed: 'Relaxed',
+  boxy: 'Boxy'
+};
 
 export interface Multicolor {
   broadColor: 'multicolor';
@@ -439,7 +451,6 @@ export const mockProducts: BrandProduct[] = [
     categories: [categories.tops.category],
     subCategories: [subCategories.tShirt.subcategory],
     types: ['shortSleeveTees'],
-    colorNotes: 'Light Gray-ish even though it appears to be white',
     sizeNotes: 'Size up for looser fit',
     colors: [
       {

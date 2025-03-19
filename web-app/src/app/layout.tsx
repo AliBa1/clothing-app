@@ -8,26 +8,26 @@ import Footer from '@/components/Footer';
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
-  preload: true,
+  preload: true
 });
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
-  preload: true,
+  preload: true
 });
 
 const schoolbell = Schoolbell({
   weight: '400',
   variable: '--font-schoolbell',
   subsets: ['latin'],
-  preload: true,
+  preload: true
 });
 
 const lexend = Lexend({
   variable: '--font-lexend',
   subsets: ['latin'],
-  preload: true,
+  preload: true
 });
 
 export const metadata: Metadata = {
@@ -45,6 +45,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${schoolbell.variable} ${lexend.variable} antialiased`}
       >
+        <div className='sticky top-0 bg-warning flex justify-center text-center font-heading text-xl'>
+          This is a MOCK version of site. Full functionality is NOT complete.
+        </div>
         <Header />
         {children}
         <Footer />

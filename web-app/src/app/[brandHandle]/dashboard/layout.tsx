@@ -2,48 +2,25 @@
 import SlideoverModal from '@/components/SlideoverModal';
 import { Brand, mockBrands } from '@/interfaces/brands';
 import {
-  mdiChartBox,
-  mdiChevronRight,
-  mdiCreditCardOutline,
-  mdiListBox,
-  mdiStore,
-  mdiTshirtCrew,
-  mdiViewDashboard
+  mdiChevronRight
 } from '@mdi/js';
 import Icon from '@mdi/react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
-function SidebarButton({
-  text,
-  icon,
-  route
-}: {
-  text: string;
-  icon: string;
-  route: string;
-}) {
+// To do:
+// Client/server components
+
+function SidebarButton({ text, route }: { text: string; route: string }) {
   const brandHandle = usePathname().split('/')[1];
   const currentRoute = usePathname().split('/')[3] || '';
+
   return (
     <>
-      {/* Computer link */}
       <Link
         href={`/${brandHandle}/dashboard/${route}`}
-        className={`hidden md:btn-sidebar ${
-          currentRoute === route && 'bg-secondary'
-        }`}
-      >
-        <Icon path={icon} size={1} />
-        {text}
-      </Link>
-
-      {/* Mobile link */}
-      <Link
-        href={`/${brandHandle}/dashboard/${route}`}
-        className={`flex gap-2 items-center md:hidden ${
+        className={`flex gap-2 items-center ${
           currentRoute === route && 'text-accent'
         }`}
       >
@@ -66,24 +43,8 @@ export default function BrandDashboardLayout({
   // );
   const [isSwitcherOpen, setIsSwitcherOpen] = useState<boolean>(false);
   return (
-    <div className='flex flex-col md:flex-row'>
-      {/* Computer sidebar */}
-      {/* <div className='sticky top-16 left-0 flex flex-col gap-2 h-screen w-1/4 border-r shadow max-w-xs pt-4 pr-4'> */}
-
-      {/* Mobile sidebar */}
-      {/* <div className='sticky top-0 flex flex-row gap-4 w-full border-b shadow p-2 overflow-x-scroll'> */}
-
-      {/* Both */}
-      <div className='sticky top-0 md:top-16 md:left-0 flex flex-row md:flex-col gap-8 md:gap-4 md:h-screen w-full md:w-1/4 md:max-w-xs md:border-r border-primary shadow p-4 md:pt-4 md:pr-4 overflow-x-scroll md:overflow-x-auto'>
-        <Image
-          src={brand.logo}
-          alt={brand.name}
-          height={100}
-          width={100}
-          loading='lazy'
-          style={{ backgroundColor: 'white' }}
-          className='hidden md:block aspect-square rounded-full border mx-auto'
-        />
+    <div className='flex flex-col'>
+      <div className='md:sticky top-16 bg-background flex gap-8 border-primary shadow p-4 overflow-x-auto'>
         {/* Open brand switcher modal */}
         <button
           className='btn-sidebar justify-between'
@@ -96,16 +57,12 @@ export default function BrandDashboardLayout({
         <div className='border-r md:border-b border-primary'></div>
 
         {/* if route matches button update styling to reflect that */}
-        <SidebarButton text='Dashboard' icon={mdiViewDashboard} route='' />
-        <SidebarButton text='Products' icon={mdiTshirtCrew} route='products' />
-        <SidebarButton text='Orders' icon={mdiListBox} route='orders' />
-        <SidebarButton text='Analytics' icon={mdiChartBox} route='analytics' />
-        <SidebarButton
-          text='Payment'
-          icon={mdiCreditCardOutline}
-          route='payment'
-        />
-        <SidebarButton text='Brand' icon={mdiStore} route='brand' />
+        <SidebarButton text='Dashboard' route='' />
+        <SidebarButton text='Products' route='products' />
+        <SidebarButton text='Orders' route='orders' />
+        <SidebarButton text='Analytics' route='analytics' />
+        <SidebarButton text='Payment' route='payment' />
+        <SidebarButton text='Brand' route='brand' />
       </div>
 
       {/* <main className='p-4 w-full md:w-3/4 overflow-x-clip'>{children}</main> */}

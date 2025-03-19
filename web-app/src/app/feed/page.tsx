@@ -6,6 +6,11 @@ import { mockBrands } from '@/interfaces/brands';
 import { mockProducts } from '@/interfaces/brandProducts';
 import { useState } from 'react';
 
+// To do:
+// add pagnation
+// filters?
+// working save button
+
 export default function FeedPage() {
   const [isFollowingOpen, setFollowingOpen] = useState<boolean>(false);
   // user context
