@@ -96,7 +96,7 @@ export default function WideProductCard({
                     className='btn-circle h-8 w-8'
                     style={{
                       background: `${
-                        c.primaryColor.broadColor === 'multicolor'
+                        c.primaryColor.color === 'multicolor'
                           ? 'conic-gradient(red, yellow, green, blue, purple)'
                           : `rgb(${c.primaryColor.red}, ${c.primaryColor.green}, ${c.primaryColor.blue})`
                       }`

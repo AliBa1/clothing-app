@@ -369,7 +369,7 @@ export default function ManageProductPage() {
                     max={100}
                   />
                 </div>
-                <select className='p-2 text-black' name='color'>
+                <select className='p-2 text-black rounded' name='color'>
                   <option disabled>Type</option>
                   <option value='% Off'>%</option>
                   <option value='$ Off'>$</option>
@@ -377,6 +377,10 @@ export default function ManageProductPage() {
               </div>
             </label>
           </div>
+
+          <p>Images</p>
+
+          
         </div>
       </div>
     </form>

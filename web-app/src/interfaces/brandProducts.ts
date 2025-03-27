@@ -6,6 +6,7 @@ import {
   SubcategoryKeys,
   TypeKeys
 } from './categories';
+import { ColorOption } from './filters';
 /**
  * Product object for an item (clothing, accessory, etc.)
  */
@@ -51,40 +52,13 @@ export const fitLabels = {
   boxy: 'Boxy'
 };
 
-export interface Multicolor {
-  broadColor: 'multicolor';
-  red: null;
-  green: null;
-  blue: null;
-}
-
-export interface Color {
-  broadColor:
-    | 'black'
-    | 'white'
-    | 'red'
-    | 'blue'
-    | 'green'
-    | 'yellow'
-    | 'purple'
-    | 'brown'
-    | 'grey'
-    | 'orange'
-    | 'pink'
-    | 'burgandy'
-    | 'tan';
-  red: number;
-  green: number;
-  blue: number;
-}
-
 /**
  * Version of a product with a specific color. Each product can have one or many ColorVariants
  */
 export interface ColorVariant {
   id: string;
   colorName: string;
-  primaryColor: Multicolor | Color;
+  primaryColor: ColorOption;
   price: number;
   discount?: Discount;
   images: {
@@ -172,7 +146,7 @@ export const mockProducts: BrandProduct[] = [
         id: '1',
         colorName: 'Black',
         primaryColor: {
-          broadColor: 'black',
+          color: 'black',
           red: 46,
           green: 50,
           blue: 49
@@ -213,7 +187,7 @@ export const mockProducts: BrandProduct[] = [
         id: '2',
         colorName: 'Black',
         primaryColor: {
-          broadColor: 'black',
+          color: 'black',
           red: 18,
           green: 18,
           blue: 18
@@ -240,7 +214,7 @@ export const mockProducts: BrandProduct[] = [
         id: '3',
         colorName: 'Sky Blue',
         primaryColor: {
-          broadColor: 'blue',
+          color: 'blue',
           red: 91,
           green: 144,
           blue: 193
@@ -263,7 +237,7 @@ export const mockProducts: BrandProduct[] = [
         id: '4',
         colorName: 'Grey',
         primaryColor: {
-          broadColor: 'grey',
+          color: 'grey',
           red: 85,
           green: 83,
           blue: 80
@@ -284,7 +258,7 @@ export const mockProducts: BrandProduct[] = [
         id: '5',
         colorName: 'Purple',
         primaryColor: {
-          broadColor: 'purple',
+          color: 'purple',
           red: 93,
           green: 70,
           blue: 160
@@ -319,7 +293,7 @@ export const mockProducts: BrandProduct[] = [
         id: '6',
         colorName: 'Black',
         primaryColor: {
-          broadColor: 'black',
+          color: 'black',
           red: 46,
           green: 46,
           blue: 49
@@ -340,7 +314,7 @@ export const mockProducts: BrandProduct[] = [
         id: '7',
         colorName: 'Green',
         primaryColor: {
-          broadColor: 'black',
+          color: 'black',
           red: 50,
           green: 72,
           blue: 61
@@ -361,7 +335,7 @@ export const mockProducts: BrandProduct[] = [
         id: '8',
         colorName: 'Brown',
         primaryColor: {
-          broadColor: 'brown',
+          color: 'brown',
           red: 62,
           green: 48,
           blue: 38
@@ -382,7 +356,7 @@ export const mockProducts: BrandProduct[] = [
         id: '9',
         colorName: 'Charcoal',
         primaryColor: {
-          broadColor: 'grey',
+          color: 'grey',
           red: 85,
           green: 91,
           blue: 109
@@ -403,7 +377,7 @@ export const mockProducts: BrandProduct[] = [
         id: '10',
         colorName: 'Blue',
         primaryColor: {
-          broadColor: 'blue',
+          color: 'blue',
           red: 29,
           green: 75,
           blue: 182
@@ -424,7 +398,7 @@ export const mockProducts: BrandProduct[] = [
         id: '11',
         colorName: 'White',
         primaryColor: {
-          broadColor: 'white',
+          color: 'white',
           red: 194,
           green: 191,
           blue: 183
@@ -457,7 +431,7 @@ export const mockProducts: BrandProduct[] = [
         id: '12',
         colorName: 'Gray',
         primaryColor: {
-          broadColor: 'grey',
+          color: 'grey',
           red: 198,
           green: 198,
           blue: 196
@@ -485,7 +459,7 @@ export const mockProducts: BrandProduct[] = [
         id: '13',
         colorName: 'Black',
         primaryColor: {
-          broadColor: 'black',
+          color: 'black',
           red: 46,
           green: 50,
           blue: 49
@@ -514,7 +488,7 @@ export const mockProducts: BrandProduct[] = [
         id: '15',
         colorName: 'Black',
         primaryColor: {
-          broadColor: 'black',
+          color: 'black',
           red: 32,
           green: 33,
           blue: 34
@@ -545,7 +519,7 @@ export const mockProducts: BrandProduct[] = [
         id: '16',
         colorName: 'Black',
         primaryColor: {
-          broadColor: 'black',
+          color: 'black',
           red: 46,
           green: 44,
           blue: 48
@@ -580,7 +554,7 @@ export const mockProducts: BrandProduct[] = [
         id: '17',
         colorName: 'Black',
         primaryColor: {
-          broadColor: 'black',
+          color: 'black',
           red: 38,
           green: 34,
           blue: 33
@@ -601,7 +575,7 @@ export const mockProducts: BrandProduct[] = [
         id: '18',
         colorName: 'Beige',
         primaryColor: {
-          broadColor: 'tan',
+          color: 'tan',
           red: 214,
           green: 187,
           blue: 149
@@ -622,7 +596,7 @@ export const mockProducts: BrandProduct[] = [
         id: '19',
         colorName: 'Iron Ore',
         primaryColor: {
-          broadColor: 'grey',
+          color: 'grey',
           red: 137,
           green: 131,
           blue: 128
@@ -654,7 +628,7 @@ export const mockProducts: BrandProduct[] = [
         id: '21',
         colorName: 'Black',
         primaryColor: {
-          broadColor: 'black',
+          color: 'black',
           red: 35,
           green: 34,
           blue: 39
@@ -686,7 +660,7 @@ export const mockProducts: BrandProduct[] = [
         id: '20',
         colorName: 'Black',
         primaryColor: {
-          broadColor: 'black',
+          color: 'black',
           red: 52,
           green: 52,
           blue: 50
@@ -726,7 +700,7 @@ export const blankColorVariant: ColorVariant = {
   id: '',
   colorName: '',
   primaryColor: {
-    broadColor: 'black',
+    color: 'black',
     red: 0,
     green: 0,
     blue: 0
