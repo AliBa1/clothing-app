@@ -22,6 +22,8 @@ import { use, useCallback, useEffect, useState } from 'react';
 
 // To do:
 // working buttons
+// user server components for SEO
+// make size and color in client components
 
 export default function ProductPage({
   params

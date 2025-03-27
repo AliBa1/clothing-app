@@ -1,3 +1,4 @@
+'use client';
 import { BrandProduct, ColorVariant } from '@/interfaces/brandProducts';
 import { discountedPrice } from '@/utils/helperFunctions';
 import Image from 'next/image';
