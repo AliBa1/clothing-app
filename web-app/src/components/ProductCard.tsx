@@ -1,3 +1,4 @@
+'use client';
 import { BrandProduct, ColorVariant } from '@/interfaces/brandProducts';
 import { discountedPrice } from '@/utils/helperFunctions';
 import Image from 'next/image';
@@ -100,7 +101,7 @@ export default function ProductCard({
               className='btn-circle h-4 w-4'
               style={{
                 background: `${
-                  c.primaryColor.broadColor === 'multicolor'
+                  c.primaryColor.color === 'multicolor'
                     ? 'conic-gradient(red, yellow, green, blue, purple)'
                     : `rgb(${c.primaryColor.red}, ${c.primaryColor.green}, ${c.primaryColor.blue})`
                 }`
