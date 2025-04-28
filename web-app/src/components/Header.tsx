@@ -50,7 +50,7 @@ export default function Header() {
         </Link>
       </nav>
 
-      <Link href='/' className='md:place-items-center'>
+      <Link href='/' className='flex md:mx-auto'>
         <h6>FLEA</h6>
       </Link>
 
